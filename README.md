@@ -17,9 +17,9 @@ npm i
 npm run dev
 ```
 
-### Host
+## Virtual Host
 
-We recommend to setup a `sandbox.test` virtual host for your shiny new sandbox. Otherwise you will need to add an .env file to /kirby/panel and change your host setup there.
+We recommend to setup a `sandbox.test` virtual host for your shiny new sandbox and point it to the `/public` folder. Otherwise you will need to add an .env file to /kirby/panel and change your host setup there.
 
 ## Switching environments
 
