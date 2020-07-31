@@ -1,0 +1,8 @@
+[submodule "kirby"]
+	path = kirby
+[submodule "environments/starterkit"]
+	path = environments/starterkit
+[submodule "environments/plainkit"]
+	path = environments/plainkit
+[submodule "environments/demokit"]
+	path = environments/demokit
