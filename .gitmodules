@@ -1,8 +1,12 @@
 [submodule "kirby"]
 	path = kirby
+	url = git@github.com:getkirby/kirby.git
 [submodule "environments/starterkit"]
 	path = environments/starterkit
+	url = git@github.com:getkirby/starterkit.git
 [submodule "environments/plainkit"]
 	path = environments/plainkit
+	url = git@github.com:getkirby/plainkit.git
 [submodule "environments/demokit"]
 	path = environments/demokit
+	url = git@github.com:getkirby/demokit.git
