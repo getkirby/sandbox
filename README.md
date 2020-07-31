@@ -12,7 +12,7 @@ cd sandbox
 # initialize all submodules
 git submodule update --init --recursive
 # get the panel up and running
-cd panel
+cd kirby/panel
 npm i
 npm run dev
 ```
