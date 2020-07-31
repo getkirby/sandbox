@@ -19,4 +19,26 @@ npm run dev
 
 ### Host
 
-We recommend to setup a `sandbox.test` virtual host for your shiny new sandbox
+We recommend to setup a `sandbox.test` virtual host for your shiny new sandbox. Otherwise you will need to add an .env file to /kirby/panel and change your host setup there.
+
+## Switching environments
+
+You can switch between the following environments:
+
+- demokit
+- starterkit
+- plainkit
+
+(There are more environments in /environments, but they are used for testing only and often don't have any usable site setup)
+
+To switch to a new environment visit `http://sandbox.test?env=demokit` for example.
+
+**ATTENTION: switching environments will delete all existing content, accounts and sessions in your sandbox!**
+
+### Switching environments in Cypress
+
+Cypress does not allow visiting URLs on different domains in the same test setup. That's why there's a little proxy route to switch environments in Cypress:
+
+```js
+cy.visit('http//localhost:8080/env/demokit);
+```
