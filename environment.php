@@ -3,10 +3,20 @@
 class Environment
 {
 
-    public static function install($environment)
+    public static function auth(string $username): bool
+    {
+        if ($user = kirby()->user($username)) {
+            $user->loginPasswordless();
+            return true;
+        }
+
+        throw new Exception('The user could not be found');
+    }
+
+    public static function install(string $environment): bool
     {
         if (static::exists($environment) !== true) {
-            die('The environment could not be found');
+            throw new Exception('The environment could not be found');
         }
 
         $root   = static::root($environment);
@@ -26,6 +36,13 @@ class Environment
                 Dir::copy($root . '/' . $directory, $public . '/' . $directory);
             }
         }
+
+        // remove pre-installed users
+        if (is_dir($public . '/site/accounts') === true) {
+            Dir::remove($public . '/site/accounts');
+        }
+
+        return true;
     }
 
     public static function exists(string $environment): bool
@@ -46,6 +63,29 @@ class Environment
     public static function root(string $environment): string
     {
         return __DIR__ . '/environments/' . $environment;
+    }
+
+    public static function user(string $username): bool
+    {
+        $accounts = __DIR__ . '/accounts';
+        $account  = $accounts . '/' . $username;
+        $public   = __DIR__ . '/public';
+        $dest     = $public . '/site/accounts/' . $username;
+
+        if (is_dir($account) === false) {
+            throw new Exception('The user does not exist');
+        }
+
+        // remove previous versions of the user
+        Dir::remove($dest);
+
+        // create the account folder if it does not exist
+        Dir::make(dirname($dest));
+
+        // copy the account
+        Dir::copy($account, $dest);
+
+        return true;
     }
 
 }

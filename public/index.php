@@ -7,7 +7,8 @@ require $root . '/environment.php';
 
 if ($env = get('env')) {
     Environment::install($env);
-    go();
+    sleep(1);
+    go('/', 307);
 }
 
 $kirby = new Kirby([
@@ -22,10 +23,24 @@ $kirby = new Kirby([
     ],
     'routes' => [
         [
-            'pattern' => '/env/(:any)',
+            'pattern' => '/env/auth/(:any)',
+            'action'  => function ($username) {
+                Environment::auth($username);
+                die('The user has been authenticated');
+            }
+        ],
+        [
+            'pattern' => '/env/install/(:any)',
             'action'  => function (string $env) {
                 Environment::install($env);
-                die('The new environment has been installed');
+                die('The environment has been installed');
+            }
+        ],
+        [
+            'pattern' => '/env/user/(:any)',
+            'action'  => function (string $username) {
+                Environment::user($username);
+                die('The user has been created');
             }
         ]
     ]
