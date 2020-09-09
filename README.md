@@ -6,7 +6,7 @@ The Kirby Sandbox is our local test environment. We use this to work on Kirby an
 
 ```console
 # clone the repo
-git clone git@github.com:getkirby/sandbox.git
+git clone https://github.com/getkirby/sandbox.git
 # step into the sandbox
 cd sandbox
 # initialize all submodules
