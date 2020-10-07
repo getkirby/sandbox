@@ -1,0 +1,12 @@
+title: Page Type A
+
+tabs:
+  content:
+    fields:
+      textarea: true
+  seo:
+    fields:
+      seoTitle:
+        type: text
+      seoDescription:
+        type: textarea

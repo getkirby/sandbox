@@ -1,0 +1,11 @@
+title: User
+
+tabs:
+  info:
+    fields:
+      bio:
+        type: textarea
+  social:
+    fields:
+      twitter:
+        type: text

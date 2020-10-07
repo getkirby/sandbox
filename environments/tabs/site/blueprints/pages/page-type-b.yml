@@ -1,0 +1,21 @@
+title: Page Type B
+
+tabs:
+  info:
+    fields:
+      heading:
+        type: text
+      text:
+        type: textarea
+  seo:
+    fields:
+      seoTitle:
+        type: text
+      seoDescription:
+        type: textarea
+  settings:
+    fields:
+      background:
+        type: text
+      padding:
+        type: text

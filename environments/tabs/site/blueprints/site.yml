@@ -1,0 +1,10 @@
+title: Site
+
+tabs:
+  content:
+    sections:
+      pages: true
+  settings:
+    fields:
+      twitter:
+        type: text

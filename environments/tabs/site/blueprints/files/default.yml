@@ -1,0 +1,11 @@
+title: File
+
+tabs:
+  info:
+    fields:
+      alt:
+        type: text
+  settings:
+    fields:
+      margin:
+        type: text

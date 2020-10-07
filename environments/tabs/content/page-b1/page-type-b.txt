@@ -1,0 +1,25 @@
+Title: Page B1
+
+----
+
+Heading: Page B1
+
+----
+
+Text: 
+
+----
+
+Seotitle: Page B1 SEO title
+
+----
+
+Seodescription: 
+
+----
+
+Background: 
+
+----
+
+Padding: 
