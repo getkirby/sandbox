@@ -9,3 +9,7 @@ tabs:
     fields:
       twitter:
         type: text
+  pages:
+    sections:
+      pages:
+        parent: site

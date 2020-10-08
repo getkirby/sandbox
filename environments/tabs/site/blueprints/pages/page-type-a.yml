@@ -10,3 +10,7 @@ tabs:
         type: text
       seoDescription:
         type: textarea
+  pages:
+    sections:
+      pages:
+        parent: site

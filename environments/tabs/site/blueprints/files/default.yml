@@ -5,6 +5,10 @@ tabs:
     fields:
       alt:
         type: text
+  pages:
+    sections:
+      pages:
+        parent: site
   settings:
     fields:
       margin:
