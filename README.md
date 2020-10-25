@@ -21,6 +21,12 @@ npm run dev
 
 We recommend to setup a `sandbox.test` virtual host for your shiny new sandbox and point it to the `/public` folder. Otherwise you will need to add an .env file to /kirby/panel and change your host setup there.
 
+## Accounts
+
+The sandbox comes with an admin account with the email `test@getkirby.com` and the password `12345678`.
+
+You can manually log in with the user or use the route `http://sandbox.test/env/auth/test@getkirby.com` to get logged in automatically.
+
 ## Switching environments
 
 You can switch between the following environments:
