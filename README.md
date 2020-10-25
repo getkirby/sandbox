@@ -41,10 +41,33 @@ To switch to a new environment visit `http://sandbox.test?env=demokit` for examp
 
 **ATTENTION: switching environments will delete all existing content, accounts and sessions in your sandbox!**
 
+### Installing accounts when switching envionments
+
+If you switch the environment using the `?env=...` route, the `test@getkirby.com` is automatically installed to the site.
+
+You can disable this behavior with the `?user=false` param:
+
+```
+http://sandbox.test?env=demokit&user=false
+```
+
+You can also pass a different user:
+
+```
+http://sandbox.test?env=demokit&user=yourusername
+```
+
 ### Switching environments in Cypress
 
 Cypress does not allow visiting URLs on different domains in the same test setup. That's why there's a little proxy route to switch environments in Cypress:
 
 ```js
-cy.visit('http//localhost:8080/env/demokit);
+cy.visit('http://localhost:8080/env/install/demokit);
+```
+
+For Cypress user handling there are these two routes:
+
+```js
+cy.visit('http://localhost:8080/env/user/test); // installs the test user
+cy.visit('http://localhost:8080/env/auth/test@getkirby.com); // automatic login
 ```

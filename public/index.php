@@ -7,6 +7,11 @@ require $root . '/environment.php';
 
 if ($env = get('env')) {
     Environment::install($env);
+
+    if (get('user') !== 'false') {
+        Environment::user(get('user', 'test'));
+    }
+
     sleep(1);
     go('/', 307);
 }
