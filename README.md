@@ -39,7 +39,7 @@ You can switch between the following environments:
 
 To switch to a new environment visit `http://sandbox.test?env=demokit` for example.
 
-**ATTENTION: switching environments will delete all existing content, accounts and sessions in your sandbox!**
+**ATTENTION: switching environments will delete all existing content, accounts and sessions in your sandbox (see below for storing changes)!**
 
 ### Installing accounts when switching envionments
 
@@ -55,6 +55,26 @@ You can also pass a different user:
 
 ```
 http://sandbox.test?env=demokit&user=yourusername
+```
+
+### Storing the current state
+
+If you want to store the changes inside the environment, you can use the `?store` param:
+
+```
+http://sandbox.test?store
+```
+
+This will store the changes to the current environment. If you want to create a new environment or store the changes to another environment, you can pass the name:
+
+```
+http://sandbox.test?store=yourenvironment
+```
+
+You can store the changes when switching the environment:
+
+```
+http://sandbox.test?env=new&store=old
 ```
 
 ### Switching environments in Cypress

@@ -42,6 +42,9 @@ class Environment
             Dir::remove($public . '/site/accounts');
         }
 
+        // store the name of the environment for switching later
+        F::write($public . '/.environment', $environment);
+
         return true;
     }
 
@@ -63,6 +66,44 @@ class Environment
     public static function root(string $environment): string
     {
         return __DIR__ . '/environments/' . $environment;
+    }
+
+    public static function store(?string $environment): bool
+    {
+        $public      = __DIR__ . '/public';
+        $environment = $environment ?? F::read($public . '/.environment');
+        if (!$environment) {
+            return false;
+        }
+
+        $root = static::root($environment);
+
+        // remove the previous state
+        Dir::remove($root);
+        Dir::make($root);
+        touch($root . '/.gitkeep');
+
+        $directories = [
+            'assets',
+            'content',
+            'site'
+        ];
+
+        foreach ($directories as $directory) {
+            if (is_dir($public . '/' . $directory)) {
+                Dir::copy($public . '/' . $directory, $root . '/' . $directory);
+            }
+        }
+
+        // remove current users
+        if (is_dir($root . '/site/accounts') === true) {
+            Dir::remove($root . '/site/accounts');
+        }
+
+        // store the name of the environment for switching later
+        F::write($public . '/.environment', $environment);
+
+        return true;
     }
 
     public static function user(string $username): bool

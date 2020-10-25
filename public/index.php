@@ -5,6 +5,16 @@ $root = dirname(__DIR__);
 require $root . '/kirby/bootstrap.php';
 require $root . '/environment.php';
 
+if (($store = get('store')) !== null) {
+    if ($store === '') {
+        $store = null;
+    }
+
+    Environment::store($store);
+
+    go('/', 307);
+}
+
 if ($env = get('env')) {
     Environment::install($env);
 
