@@ -99,7 +99,6 @@ class Environment
         // remove the previous state
         Dir::remove($root);
         Dir::make($root);
-        touch($root . '/.gitkeep');
 
         $directories = [
             'assets',
