@@ -37,45 +37,31 @@ You can switch between the following environments:
 
 (There are more environments in /environments, but they are used for testing only and often don't have any usable site setup)
 
-To switch to a new environment visit `http://sandbox.test?env=demokit` for example.
+You can switch between environments via the environment UI at `http://sandbox.test/?env`.
 
-**ATTENTION: switching environments will delete all existing content, accounts and sessions in your sandbox (see below for storing changes)!**
+**ATTENTION: Switching environments will delete all existing content, accounts and sessions in your sandbox (unless you use the "Store" feature, see below)!**
 
 ### Installing accounts when switching envionments
 
-If you switch the environment using the `?env=...` route, the `test@getkirby.com` is automatically installed to the site.
+If you switch the environment using the `?env` UI, the `test@getkirby.com` account is automatically installed to the site.
 
-You can disable this behavior with the `?user=false` param:
-
-```
-http://sandbox.test?env=demokit&user=false
-```
-
-You can also pass a different user:
+Other accounts can be installed using the following route:
 
 ```
-http://sandbox.test?env=demokit&user=yourusername
+http://sandbox.test/env/user/yourusername
 ```
 
 ### Storing the current state
 
-If you want to store the changes inside the environment, you can use the `?store` param:
+If you want to store the changes inside the environment, you can use the "Store" buttons in the environment UI.
 
-```
-http://sandbox.test?store
-```
+Clicking just "Store" will store the changes to the selected environment.
 
-This will store the changes to the current environment. If you want to create a new environment or store the changes to another environment, you can pass the name:
+**ATTENTION: The whole environment will be overwritten!**
 
-```
-http://sandbox.test?store=yourenvironment
-```
+Clicking "Store & Switch" will first store the changes in the *current* environment and then switch to the selected new environment.
 
-You can store the changes when switching the environment:
-
-```
-http://sandbox.test?env=new&store=old
-```
+If you want to create an entirely new environment, enter the name in the text field and click "Store".
 
 ### Switching environments in Cypress
 

@@ -13,6 +13,24 @@ class Environment
         throw new Exception('The user could not be found');
     }
 
+    public static function envs(): array
+    {
+        $envs = [];
+
+        $activeEnv = F::read(__DIR__ . '/public/.environment');
+
+        foreach (Dir::read(__DIR__ . '/environments') as $env) {
+            $root = static::root($env);
+
+            $envs[] = [
+                'name'   => $env,
+                'active' => $env === $activeEnv
+            ];
+        }
+
+        return $envs;
+    }
+
     public static function install(string $environment): bool
     {
         if (static::exists($environment) !== true) {
@@ -68,7 +86,7 @@ class Environment
         return __DIR__ . '/environments/' . $environment;
     }
 
-    public static function store(?string $environment): bool
+    public static function store(?string $environment = null): bool
     {
         $public      = __DIR__ . '/public';
         $environment = $environment ?? F::read($public . '/.environment');
