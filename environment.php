@@ -13,6 +13,15 @@ class Environment
         throw new Exception('The user could not be found');
     }
 
+    public static function delete(string $environment): void
+    {
+        if (static::exists($environment) !== true) {
+            throw new Exception('The environment could not be found');
+        }
+
+        Dir::remove(static::root($environment));
+    }
+
     public static function envs(): array
     {
         $envs = [];

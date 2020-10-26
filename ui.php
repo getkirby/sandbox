@@ -14,6 +14,9 @@ if (kirby()->request()->method() === 'POST') {
       Environment::install(get('environment'));
       Environment::user('test');
       break;
+    case 'delete':
+      Environment::delete(get('environment'));
+      break;
   }
 }
 
@@ -55,6 +58,7 @@ if (kirby()->request()->method() === 'POST') {
           <button type="submit" name="action" value="store">Store</button>
           <button type="submit" name="action" value="switch">Switch</button>
           <button type="submit" name="action" value="store-switch">Store &amp; Switch</button>
+          <button type="submit" name="action" value="delete">Delete</button>
         </form>
       </td>
     </tr>
