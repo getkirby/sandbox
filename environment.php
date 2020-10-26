@@ -92,7 +92,7 @@ class Environment
 
     public static function root(string $environment): string
     {
-        return __DIR__ . '/environments/' . $environment;
+        return __DIR__ . '/environments/' . basename($environment);
     }
 
     public static function store(?string $environment = null): bool
@@ -135,9 +135,9 @@ class Environment
     public static function user(string $username): bool
     {
         $accounts = __DIR__ . '/accounts';
-        $account  = $accounts . '/' . $username;
+        $account  = $accounts . '/' . basename($username);
         $public   = __DIR__ . '/public';
-        $dest     = $public . '/site/accounts/' . $username;
+        $dest     = $public . '/site/accounts/' . basename($username);
 
         if (is_dir($account) === false) {
             throw new Exception('The user does not exist');
