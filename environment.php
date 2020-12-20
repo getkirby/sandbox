@@ -3,6 +3,11 @@
 class Environment
 {
 
+    public static function active(): string
+    {
+        return F::read(__DIR__ . '/public/.environment');
+    }
+
     public static function auth(string $username): bool
     {
         if ($user = kirby()->user($username)) {
@@ -26,7 +31,7 @@ class Environment
     {
         $envs = [];
 
-        $activeEnv = F::read(__DIR__ . '/public/.environment');
+        $activeEnv = static::active();
 
         foreach (Dir::read(__DIR__ . '/environments') as $env) {
             $root = static::root($env);

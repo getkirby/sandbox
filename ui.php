@@ -20,6 +20,8 @@ if (kirby()->request()->method() === 'POST') {
   }
 }
 
+$active = Environment::active();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,7 +59,9 @@ if (kirby()->request()->method() === 'POST') {
           <input type="hidden" name="environment" value="<?= html($env['name']) ?>">
           <button type="submit" name="action" value="store">Store</button>
           <button type="submit" name="action" value="switch">Switch</button>
-          <button type="submit" name="action" value="store-switch">Store &amp; Switch</button>
+          <button type="submit" name="action" value="store-switch"<?php if ($env['active']): ?> disabled<?php endif ?>>
+            Store to "<?= html($active) ?>" &amp; Switch
+          </button>
           <button type="submit" name="action" value="delete">Delete</button>
         </form>
       </td>
