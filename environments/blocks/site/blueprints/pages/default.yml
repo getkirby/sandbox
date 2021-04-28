@@ -1,0 +1,7 @@
+title: Default Page
+preset: page
+fields:
+  blocks:
+    label: Blocks
+    type: blocks
+
