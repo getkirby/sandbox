@@ -23,6 +23,9 @@ $kirby = new Kirby([
                 'port' => 1025,
                 'security' => false
             ]
+        ],
+        'panel' => [
+            'dev' => true
         ]
     ],
     'roots' => [
