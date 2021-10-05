@@ -1,0 +1,167 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+  font-family: "Input", "Courier", monospace;
+}
+
+:root {
+  --color-background: #2d2e36;
+  --color-white: hsla(0,0%,100%,.75);
+  --color-black: #16181a;
+}
+
+html {
+  background: var(--color-background);
+  color: var(--color-white);
+}
+
+a {
+  color: inherit;
+}
+
+.p {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  color: var(--color-white);
+}
+
+.p-topbar {
+  display: grid;
+  grid-template-columns: repeat(3, 33.33%);
+  flex-shrink: 0;
+  background: var(--color-black);
+  align-items: center;
+  color: #fff;
+  height: 2.5rem;
+}
+
+.p-topbar > div {
+  padding: 0 .75rem;
+  height: 100%;
+  display: flex;
+  place-items: center;
+  border-right: 1px solid rgba(255,255,255, .15);
+}
+
+.p-panels {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 33.33%);
+}
+
+.p-panel {
+  position: relative;
+  border-right: 1px solid rgba(255,255,255, .1);
+}
+
+.p textarea {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border: 0;
+  resize: none;
+  background: none;
+  padding: 1rem;
+  font: inherit;
+  color: var(--color-white);
+}
+
+.p textarea:focus {
+  outline: 0;
+}
+
+.p input {
+  font: inherit;
+  background: none;
+  border: 0;
+  padding: 1rem;
+  background: #0ccf85;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.p-json {
+  overflow: auto;
+  color: var(--color-white);
+}
+
+.p-blocks {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  padding: 1rem;
+}
+
+.p-json details {
+  margin-bottom: 1rem;
+  background: var(--color-black);
+}
+
+.p-json summary {
+  padding: .5rem 1rem;
+  border-bottom: 1px solid var(--color-background);
+  color: #ff7262;
+}
+
+.p-json summary:focus {
+  outline: 0;
+}
+
+.p-json details > div {
+  overflow: hidden;
+}
+
+.p-json details > div > div {
+  padding: 1rem;
+}
+
+.p-json details > div > div:first-child {
+  border-right: 1px solid var(--color-background);
+}
+
+.p-json details pre {
+    white-space: pre-wrap;
+    overflow: auto;
+}
+
+.p-json details dt {
+    color: #0ccf85;
+    display: inline-block;
+    padding: .1rem .5rem;
+    border-radius: 3px;
+    border: 1px solid #333;
+    margin-bottom: .75rem;
+}
+
+.p-json details dd {
+    overflow: auto;
+    margin-bottom: 1.25rem;
+}
+
+.p-json h2 {
+    font-size: 1em;
+    font-weight: 400;
+    color: Highlight;
+    margin-bottom: .75rem;
+}
+
+.p-markdown {
+  overflow: auto;
+}
+
+
+.p-html textarea {
+  white-space: pre;
+}

@@ -1,0 +1,5 @@
+{
+    "require": {
+        "gajus/dindent": "^2.0"
+    }
+}
