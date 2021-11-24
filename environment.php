@@ -69,6 +69,9 @@ class Environment
             }
         }
 
+        // copy the global ray plugin
+        Dir::copy(__DIR__ . '/plugins/ray', $public . '/site/plugins/ray');
+
         // remove pre-installed users
         if (is_dir($public . '/site/accounts') === true) {
             Dir::remove($public . '/site/accounts');
