@@ -1,0 +1,4 @@
+title: Headline
+extends: pages/default
+fields:
+  headline: true

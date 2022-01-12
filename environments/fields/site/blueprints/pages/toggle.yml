@@ -1,0 +1,4 @@
+title: Toggle
+extends: pages/default
+fields:
+  toggle: true

@@ -1,0 +1,4 @@
+title: URL
+extends: pages/default
+fields:
+  url: true

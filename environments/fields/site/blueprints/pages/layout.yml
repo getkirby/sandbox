@@ -1,0 +1,4 @@
+title: Layout
+extends: pages/default
+fields:
+  layout: true

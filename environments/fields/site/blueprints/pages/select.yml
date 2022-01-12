@@ -1,0 +1,4 @@
+title: Select
+extends: pages/default
+fields:
+  select: true

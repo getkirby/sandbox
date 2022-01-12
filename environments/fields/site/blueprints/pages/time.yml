@@ -1,0 +1,4 @@
+title: Time
+extends: pages/default
+fields:
+  time: true

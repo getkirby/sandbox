@@ -1,0 +1,4 @@
+title: Tags
+extends: pages/default
+fields:
+  tags: true

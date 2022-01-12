@@ -1,0 +1,4 @@
+title: Radio
+extends: pages/default
+fields:
+  radio: true

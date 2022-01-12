@@ -1,0 +1,4 @@
+title: Tel
+extends: pages/default
+fields:
+  tel: true

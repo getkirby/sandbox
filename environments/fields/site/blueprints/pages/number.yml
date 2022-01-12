@@ -1,0 +1,4 @@
+title: Number
+extends: pages/default
+fields:
+  number: true

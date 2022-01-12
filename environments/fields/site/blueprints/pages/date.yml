@@ -1,0 +1,4 @@
+title: Date
+extends: pages/default
+fields:
+  date: true

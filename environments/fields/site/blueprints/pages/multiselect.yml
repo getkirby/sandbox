@@ -1,0 +1,4 @@
+title: Multiselect
+extends: pages/default
+fields:
+  multiselect: true

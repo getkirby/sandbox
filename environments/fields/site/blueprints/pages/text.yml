@@ -1,0 +1,4 @@
+title: Text
+extends: pages/default
+fields:
+  text: true

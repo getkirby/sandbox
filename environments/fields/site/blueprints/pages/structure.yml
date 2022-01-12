@@ -1,0 +1,4 @@
+title: Structure
+extends: pages/default
+fields:
+  structure: true

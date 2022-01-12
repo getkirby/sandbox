@@ -1,0 +1,4 @@
+title: Checkboxes
+extends: pages/default
+fields:
+  checkboxes: true

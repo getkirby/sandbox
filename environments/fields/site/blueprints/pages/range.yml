@@ -1,0 +1,4 @@
+title: Range
+extends: pages/default
+fields:
+  range: true

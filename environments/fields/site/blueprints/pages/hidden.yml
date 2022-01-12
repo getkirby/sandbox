@@ -1,0 +1,4 @@
+title: Hidden
+extends: pages/default
+fields:
+  hidden: true

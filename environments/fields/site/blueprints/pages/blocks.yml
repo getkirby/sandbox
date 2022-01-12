@@ -1,0 +1,4 @@
+title: Blocks
+extends: pages/default
+fields:
+  blocks: true
