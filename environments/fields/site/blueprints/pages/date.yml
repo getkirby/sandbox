@@ -1,4 +1,51 @@
 title: Date
 extends: pages/default
-fields:
-  date: true
+
+columns:
+  - width: 1/2
+    fields:
+      date: true
+      display:
+        type: date
+        display: DD.MM.YYYY
+      dateStep:
+        type: date
+        label: Date Step
+        step:
+          unit: year
+          step: 10
+      yearOnly:
+        type: date
+        label: Year only
+        display: YYYY
+        step: year
+      disabledCalendar:
+        type: date
+        label: Disabled calendar
+        calendar: false
+  - width: 1/2
+    fields:
+      datetime:
+        type: date
+        label: Date & Time
+        time: true
+      timeNotation:
+        type: date
+        label: Time notation
+        time:
+          notation: 12
+      timeStep:
+        type: date
+        label: Time step
+        time:
+          step:
+            unit: minute
+            size: 2
+      seconds:
+        type: date
+        label: Seconds
+        time:
+          display: HH:mm:ss
+          step:
+            unit: second
+            size: 1
