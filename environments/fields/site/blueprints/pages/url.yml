@@ -1,4 +1,47 @@
 title: URL
 extends: pages/default
-fields:
-  url: true
+columns:
+  - width: 1/2
+    fields:
+      url: true
+      placeholder:
+        type: url
+        placeholder: Contact me …
+      icon:
+        type: url
+        icon: text
+      before:
+        type: url
+        before: Before
+      after:
+        type: url
+        before: After
+      beforeAndAfter:
+        type: url
+        before: Before
+        after: After
+      beforeAndAfterAndIcon:
+        type: url
+        before: Before
+        after: After
+        icon: edit
+  - width: 1/2
+    fields:
+      required:
+        type: url
+        required: true
+      maxlength:
+        type: url
+        maxlength: 10
+      minlength:
+        type: url
+        maxlength: 10
+      disabled:
+        type: url
+        disabled: true
+      disabledCounter:
+        type: url
+        counter: false
+      help:
+        type: url
+        help: Some help text

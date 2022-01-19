@@ -1,4 +1,47 @@
 title: Number
 extends: pages/default
-fields:
-  number: true
+columns:
+  - width: 1/2
+    fields:
+      number: true
+      placeholder:
+        type: number
+        placeholder: Some number …
+      icon:
+        type: number
+        icon: text
+      before:
+        type: number
+        before: Before
+      after:
+        type: number
+        before: After
+      beforeAndAfter:
+        type: number
+        before: Before
+        after: After
+      beforeAndAfterAndIcon:
+        type: number
+        before: Before
+        after: After
+        icon: edit
+  - width: 1/2
+    fields:
+      required:
+        type: number
+        required: true
+      max:
+        type: number
+        max: 10
+      min:
+        type: number
+        min: 10
+      step:
+        type: number
+        step: 0.1
+      disabled:
+        type: number
+        disabled: true
+      help:
+        type: number
+        help: Some help text

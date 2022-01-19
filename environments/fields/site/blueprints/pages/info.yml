@@ -2,3 +2,31 @@ title: Info
 extends: pages/default
 fields:
   info: true
+  text:
+    type: info
+    text: This is some text
+  positive:
+    type: info
+    text: This is some text
+    theme: positive
+  negative:
+    type: info
+    text: This is some text
+    theme: negative
+  notice:
+    type: info
+    text: This is some text
+    theme: notice
+  plain:
+    type: info
+    text: This is some text
+    theme: plain
+  none:
+    type: info
+    text: This is some text
+    theme: none
+    help: Some help text …
+  help:
+    type: info
+    text: This is some text
+    help: Some help text …

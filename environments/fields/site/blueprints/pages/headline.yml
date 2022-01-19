@@ -2,3 +2,14 @@ title: Headline
 extends: pages/default
 fields:
   headline: true
+  label:
+    type: headline
+    label: Some Text
+  notNumbered:
+    type: headline
+    label: Without number
+    numbered: false
+  help:
+    type: headline
+    label: With help
+    help: Some help text …

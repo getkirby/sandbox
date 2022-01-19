@@ -1,4 +1,29 @@
 title: Tags
 extends: pages/default
-fields:
-  tags: true
+columns:
+  - width: 1/2
+    fields:
+      tags: true
+      icon:
+        type: tags
+        icon: edit
+      layout:
+        type: tags
+        layout: list
+  - width: 1/2
+    fields:
+      required:
+        type: tags
+        required: true
+      max:
+        type: tags
+        max: 10
+      min:
+        type: tags
+        min: 10
+      disabled:
+        type: tags
+        disabled: true
+      help:
+        type: tags
+        help: Some help text

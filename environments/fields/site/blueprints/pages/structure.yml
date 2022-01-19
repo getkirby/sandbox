@@ -2,3 +2,14 @@ title: Structure
 extends: pages/default
 fields:
   structure: true
+  simple:
+    type: structure
+    fields:
+      text: true
+  customColumns:
+    type: structure
+    columns:
+      text: true
+    fields:
+      text: true
+      number: true

@@ -1,4 +1,47 @@
 title: Tel
 extends: pages/default
-fields:
-  tel: true
+columns:
+  - width: 1/2
+    fields:
+      tel: true
+      placeholder:
+        type: tel
+        placeholder: Call me …
+      icon:
+        type: tel
+        icon: text
+      before:
+        type: tel
+        before: Before
+      after:
+        type: tel
+        before: After
+      beforeAndAfter:
+        type: tel
+        before: Before
+        after: After
+      beforeAndAfterAndIcon:
+        type: tel
+        before: Before
+        after: After
+        icon: edit
+  - width: 1/2
+    fields:
+      required:
+        type: tel
+        required: true
+      maxlength:
+        type: tel
+        maxlength: 10
+      minlength:
+        type: tel
+        maxlength: 10
+      disabled:
+        type: tel
+        disabled: true
+      disabledCounter:
+        type: tel
+        counter: false
+      help:
+        type: tel
+        help: Some help text

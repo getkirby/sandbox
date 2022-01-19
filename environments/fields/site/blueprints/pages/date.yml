@@ -40,6 +40,10 @@ columns:
         label: Before & After
         before: Published
         after: Date
+      help:
+        type: date
+        label: Help
+        help: Some help text …
       narrow:
         type: date
         label: Narrow example
@@ -98,6 +102,11 @@ columns:
         time: true
         before: Published
         after: Date
+      timeHelp:
+        type: date
+        time: true
+        label: Help
+        help: Some help text …
       timeNarrow:
         type: date
         label: Narrow example
