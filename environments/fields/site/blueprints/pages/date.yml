@@ -23,17 +23,33 @@ columns:
         type: date
         label: Disabled calendar
         calendar: false
+      before:
+        type: date
+        label: Before
+        before: Published
+      after:
+        type: date
+        label: After
+        after: Published
+      before:
+        type: date
+        label: Before
+        before: Published
+      beforeAndAfter:
+        type: date
+        label: Before & After
+        before: Published
+        after: Date
+      narrow:
+        type: date
+        label: Narrow example
+        width: 1/4
   - width: 1/2
     fields:
       datetime:
         type: date
         label: Date & Time
         time: true
-      timeNotation:
-        type: date
-        label: Time notation
-        time:
-          notation: 12
       timeStep:
         type: date
         label: Time step
@@ -41,7 +57,12 @@ columns:
           step:
             unit: minute
             size: 2
-      seconds:
+      timeNotation:
+        type: date
+        label: Time notation
+        time:
+          notation: 12
+      timesSeconds:
         type: date
         label: Seconds
         time:
@@ -49,3 +70,36 @@ columns:
           step:
             unit: second
             size: 1
+      timeSeconds12:
+        type: date
+        label: Seconds (am/pm)
+        time:
+          display: hh:mm:ss a
+          notation: 12
+      disabledTimes:
+        type: date
+        label: Disabled calendare & times
+        time: true
+        calendar: false
+        times: false
+      timeBefore:
+        type: date
+        label: Before
+        time: true
+        before: Published
+      timeAfter:
+        type: date
+        label: After
+        time: true
+        after: Published
+      timeBeforeAndAfter:
+        type: date
+        label: Before & After
+        time: true
+        before: Published
+        after: Date
+      timeNarrow:
+        type: date
+        label: Narrow example
+        width: 1/4
+        time: true
