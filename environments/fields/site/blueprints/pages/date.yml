@@ -10,15 +10,37 @@ columns:
         display: DD.MM.YYYY
       dateStep:
         type: date
-        label: Date Step
-        step:
-          unit: year
-          step: 10
+        label: Date Step (Year)
+        step: year
+      dateRequired:
+        type: date
+        label: Date required
+        required: true
+      dateMin:
+        type: date
+        label: Date min
+        min: "2022-01-01"
+        help: "min: 2022-01-01"
+      dateMax:
+        type: date
+        label: Date max
+        max: "2022-01-01"
+        help: "max: 2022-01-01"
+      dateMinMax:
+        type: date
+        label: Date min & max
+        min: "2022-01-01"
+        max: "2022-02-01"
+        help: "min: 2022-01-01 max: 2022-02-01"
       yearOnly:
         type: date
         label: Year only
         display: YYYY
         step: year
+      dateWithMonthname:
+        type: date
+        label: Date with month name
+        display: DD. MMMM YYYY
       disabledCalendar:
         type: date
         label: Disabled calendar
@@ -44,6 +66,18 @@ columns:
         type: date
         label: Help
         help: Some help text …
+      dateDisabled:
+        type: date
+        disabled: true
+        label: Disabled date field
+      dateReferenceText:
+        label: Reference text field
+        type: text
+        width: 1/2
+      dateReference:
+        label: Date field
+        type: date
+        width: 1/2
       narrow:
         type: date
         label: Narrow example
@@ -60,7 +94,7 @@ columns:
         time:
           step:
             unit: minute
-            size: 2
+            size: 1
       timeNotation:
         type: date
         label: Time notation
@@ -107,6 +141,20 @@ columns:
         time: true
         label: Help
         help: Some help text …
+      timeDisabled:
+        type: date
+        time: true
+        disabled: true
+        label: Disabled date&time field
+      timeReferenceText:
+        label: Reference time field
+        type: text
+        width: 1/2
+      timeReference:
+        label: Time field
+        type: date
+        time: true
+        width: 1/2
       timeNarrow:
         type: date
         label: Narrow example
