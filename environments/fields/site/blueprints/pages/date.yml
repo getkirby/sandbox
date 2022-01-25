@@ -70,6 +70,13 @@ columns:
         type: date
         disabled: true
         label: Disabled date field
+      dateStructure:
+        type: structure
+        fields:
+          date: true
+          dateDisplay:
+            type: date
+            display: DD.MM.YYYY
       dateReferenceText:
         label: Reference text field
         type: text
@@ -146,6 +153,17 @@ columns:
         time: true
         disabled: true
         label: Disabled date&time field
+      timeStructure:
+        type: structure
+        fields:
+          date:
+            type: date
+            time: true
+          dateDisplay:
+            type: date
+            display: MM/DD/YYYY
+            time:
+              display: hh:mm a
       timeReferenceText:
         label: Reference time field
         type: text

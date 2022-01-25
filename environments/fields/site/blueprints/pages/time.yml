@@ -38,6 +38,14 @@ columns:
         type: time
         disabled: true
         label: Disabled time field
+      timeStructure:
+        type: structure
+        fields:
+          time:
+            type: time
+          timeDisplay:
+            type: time
+            display: hh:mm a
   - width: 1/2
     fields:
       timeBefore:
