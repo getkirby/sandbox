@@ -13,3 +13,56 @@ fields:
     fields:
       text: true
       number: true
+  columnPreviewsA:
+    type: structure
+    fields:
+      date: true
+      email: true
+      files: true
+      list: true
+      pages: true
+      tags: true
+  columnPreviewsB:
+    type: structure
+    fields:
+      time: true
+      toggle: true
+      url: true
+      users: true
+      writer: true
+  columnPreviewsC:
+    type: structure
+    fields:
+      multiselect:
+        type: multiselect
+        options:
+          - design
+          - architecture
+          - photography
+      select:
+        type: select
+        options:
+          - design
+          - architecture
+          - photography
+      radio:
+        type: radio
+        options:
+          - design
+          - architecture
+          - photography
+      checkboxes:
+        type: checkboxes
+        options:
+          - design
+          - architecture
+          - photography
+  columnPreviewsD:
+    type: structure
+    fields:
+      blocks: true
+      layout: true
+      structure:
+        type: structure
+        fields:
+          text: true
