@@ -52,6 +52,13 @@ columns:
           query: site.children.limit(3)
           text: "{{ page.title }}"
           value: "{{ page.id }}"
+      acceptOnlyOptions:
+        type: tags
+        accept: options
+        options:
+          - a
+          - b
+          - c
   - width: 1/2
     fields:
       required:
