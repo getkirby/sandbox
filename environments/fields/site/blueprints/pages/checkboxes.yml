@@ -52,7 +52,7 @@ columns:
           type: query
           query: site.children
           text: "{{ page.title }}"
-          value: "{{ page.uuid }}"
+          value: "{{ page.id }}"
   - width: 1/2
     fields:
       columns:
