@@ -11,6 +11,10 @@
 		{
 			"name": "Kirby",
 			"short": "KBY"
+		},
+		{
+			"name": "<img src=\"x\" onerror=\"alert('xss')\">",
+			"short": "xss"
 		}
 	]
 }
