@@ -1,4 +1,85 @@
 title: Checkboxes
 extends: pages/default
-fields:
-  checkboxes: true
+
+columns:
+  - width: 1/2
+    fields:
+      checkboxes: true
+      manualOptions:
+        type: checkboxes
+        options:
+          - a
+          - b
+          - c
+      manualOptionsWithLabel:
+        type: checkboxes
+        options:
+          a: Option A
+          b: Option B
+          c: Option C
+      manualOptionsWithTranslatedLabel:
+        type: checkboxes
+        options:
+          a:
+            en: Option A
+            de: Variante A
+          b:
+            en: Option B
+            de: Variante B
+          c:
+            en: Option C
+            de: Variante C
+      manualOptionsWithTranslatedLabelI18nKey:
+        type: checkboxes
+        options:
+          a:
+            *: option.a
+          b:
+            *: option.b
+          c:
+            *: option.c
+      optionsFromApi:
+        type: checkboxes
+        options:
+          type: api
+          url: "{{ site.url }}/options.json"
+          query: Companies
+          text: "{{ item.name }}"
+          value: "{{ item.short }}"
+      optionsFromQuery:
+        type: checkboxes
+        options:
+          type: query
+          query: site.children
+          text: "{{ page.title }}"
+          value: "{{ page.uuid }}"
+  - width: 1/2
+    fields:
+      columns:
+        type: checkboxes
+        options:
+          - a
+          - b
+          - c
+        columns: 2
+      min:
+        type: checkboxes
+        options:
+          - a
+          - b
+          - c
+        min: 2
+      max:
+        type: checkboxes
+        options:
+          - a
+          - b
+          - c
+        max: 2
+      disabled:
+        type: checkboxes
+        options:
+          - a
+          - b
+          - c
+        disabled: true

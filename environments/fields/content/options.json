@@ -1,0 +1,16 @@
+{
+	"Companies": [
+		{
+			"name": "Apple",
+			"short": "APPL"
+		},
+		{
+			"name": "Microsoft",
+			"short": "MST"
+		},
+		{
+			"name": "Kirby",
+			"short": "KBY"
+		}
+	]
+}
