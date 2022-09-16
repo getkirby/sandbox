@@ -1,5 +1,8 @@
 <?php
 
+use Kirby\Filesystem\Dir;
+use Kirby\Filesystem\F;
+
 class Environment
 {
 
@@ -129,21 +132,11 @@ class Environment
             }
         }
 
-        // remove current users
-        if (is_dir($root . '/site/accounts') === true) {
-            Dir::remove($root . '/site/accounts');
-        }
-
-        // remove sessions
-        if (is_dir($root . '/site/sessions') === true) {
-            Dir::remove($root . '/site/sessions');
-        }
-
-        // remove global ray plugin
-        if (is_dir($root . '/site/plugins/ray') === true) {
-            Dir::remove($root . '/site/plugins/ray');
-        }
-
+        // remove directories that should not be stored
+        Dir::remove($root . '/site/accounts');
+        Dir::remove($root . '/site/cache');
+        Dir::remove($root . '/site/plugins/ray');
+        Dir::remove($root . '/site/sessions');
 
         // store the name of the environment for switching later
         F::write($public . '/.environment', $environment);

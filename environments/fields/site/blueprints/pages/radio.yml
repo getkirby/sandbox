@@ -1,4 +1,71 @@
 title: Radio
 extends: pages/default
-fields:
-  radio: true
+
+columns:
+  - width: 1/2
+    fields:
+      radio: true
+      manualOptions:
+        type: radio
+        options:
+          - a
+          - b
+          - c
+      manualOptionsWithLabel:
+        type: radio
+        options:
+          a: Option A
+          b: Option B
+          c: Option C
+      manualOptionsWithTranslatedLabel:
+        type: radio
+        options:
+          a:
+            en: Option A
+            de: Variante A
+          b:
+            en: Option B
+            de: Variante B
+          c:
+            en: Option C
+            de: Variante C
+      manualOptionsWithTranslatedLabelI18nKey:
+        type: radio
+        options:
+          a:
+            *: option.a
+          b:
+            *: option.b
+          c:
+            *: option.c
+      optionsFromApi:
+        type: radio
+        options:
+          type: api
+          url: "{{ site.url }}/options.json"
+          query: Companies
+          text: "{{ item.name }}"
+          value: "{{ item.short }}"
+      optionsFromQuery:
+        type: radio
+        options:
+          type: query
+          query: site.children
+          text: "{{ page.title }}"
+          value: "{{ page.id }}"
+  - width: 1/2
+    fields:
+      columns:
+        type: radio
+        options:
+          - a
+          - b
+          - c
+        columns: 2
+      disabled:
+        type: radio
+        options:
+          - a
+          - b
+          - c
+        disabled: true
