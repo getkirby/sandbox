@@ -134,6 +134,17 @@ class Environment
             Dir::remove($root . '/site/accounts');
         }
 
+        // remove sessions
+        if (is_dir($root . '/site/sessions') === true) {
+            Dir::remove($root . '/site/sessions');
+        }
+
+        // remove global ray plugin
+        if (is_dir($root . '/site/plugins/ray') === true) {
+            Dir::remove($root . '/site/plugins/ray');
+        }
+
+
         // store the name of the environment for switching later
         F::write($public . '/.environment', $environment);
 
