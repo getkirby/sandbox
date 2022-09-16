@@ -50,11 +50,34 @@ columns:
         type: checkboxes
         options:
           type: query
-          query: site.children
+          query: site.children.limit(3)
           text: "{{ page.title }}"
           value: "{{ page.id }}"
+      htmlEscaped:
+        type: checkboxes
+        options:
+          type: api
+          url: "{{ site.url }}/options.json"
+          query: Html
+          text: "{{ item.name }}"
+          value: "{{ item.short }}"
+      htmlAllowed:
+        type: checkboxes
+        options:
+          type: api
+          url: "{{ site.url }}/options.json"
+          query: Html
+          text: "{< item.name >}"
+          value: "{{ item.short }}"
   - width: 1/2
     fields:
+      required:
+        type: checkboxes
+        required: true
+        options:
+          - a
+          - b
+          - c
       columns:
         type: checkboxes
         options:
@@ -83,3 +106,9 @@ columns:
           - b
           - c
         disabled: true
+      help:
+        type: checkboxes
+        options:
+          - a
+          - b
+        help: This is a short help text.

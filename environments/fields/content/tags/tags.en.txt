@@ -1,1 +1,57 @@
+Tags: 
+
+----
+
+Manualoptions: a
+
+----
+
+Manualoptionswithlabel: b
+
+----
+
+Manualoptionswithtranslatedlabel: a
+
+----
+
+Manualoptionswithtranslatedlabeli18nkey: b
+
+----
+
+Optionsfromapi: xss
+
+----
+
+Optionsfromquery: 
+
+----
+
+Required: 
+
+----
+
+Max: 
+
+----
+
+Min: 
+
+----
+
+Disabled: 
+
+----
+
+Icon: 
+
+----
+
+Layout: 
+
+----
+
+Help: 
+
+----
+
 Uuid: RDIx4DDW4mcoPKcm

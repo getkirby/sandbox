@@ -16,5 +16,19 @@
 			"name": "<img src=\"x\" onerror=\"alert('xss')\">",
 			"short": "xss"
 		}
+	],
+	"Html": [
+		{
+			"name": "A<b>ppl</b>e",
+			"short": "APPL"
+		},
+		{
+			"name": "Micro<b>soft</b>",
+			"short": "MST"
+		},
+		{
+			"name": "<b>K</b>irby",
+			"short": "KBY"
+		}
 	]
 }

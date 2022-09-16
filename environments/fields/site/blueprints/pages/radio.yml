@@ -50,11 +50,33 @@ columns:
         type: radio
         options:
           type: query
-          query: site.children
+          query: site.children.limit(3)
           text: "{{ page.title }}"
           value: "{{ page.id }}"
+      htmlEscaped:
+        type: radio
+        options:
+          type: api
+          url: "{{ site.url }}/options.json"
+          query: Html
+          text: "{{ item.name }}"
+          value: "{{ item.short }}"
+      htmlAllowed:
+        type: radio
+        options:
+          type: api
+          url: "{{ site.url }}/options.json"
+          query: Html
+          text: "{< item.name >}"
+          value: "{{ item.short }}"
   - width: 1/2
     fields:
+      required:
+        type: radio
+        required: true
+        options:
+          - a
+          - b
       columns:
         type: radio
         options:
@@ -69,3 +91,9 @@ columns:
           - b
           - c
         disabled: true
+      help:
+        type: radio
+        options:
+          - a
+          - b
+        help: This is a short help text.

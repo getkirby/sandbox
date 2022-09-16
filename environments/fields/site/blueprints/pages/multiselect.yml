@@ -53,6 +53,31 @@ columns:
           query: site.children
           text: "{{ page.title }}"
           value: "{{ page.id }}"
+      htmlEscaped:
+        type: multiselect
+        options:
+          type: api
+          url: "{{ site.url }}/options.json"
+          query: Html
+          text: "{{ item.name }}"
+          value: "{{ item.short }}"
+      htmlAllowed:
+        type: multiselect
+        options:
+          type: api
+          url: "{{ site.url }}/options.json"
+          query: Html
+          text: "{< item.name >}"
+          value: "{{ item.short }}"
+  - width: 1/2
+    fields:
+      required:
+        type: multiselect
+        required: true
+        options:
+          - a
+          - b
+          - c
       sortOptions:
         type: multiselect
         sort: true
@@ -60,8 +85,6 @@ columns:
           - a
           - b
           - c
-  - width: 1/2
-    fields:
       min:
         type: multiselect
         options:
@@ -105,3 +128,9 @@ columns:
           - aaaaaa
           - bbbbbb
           - cccccc
+      help:
+        type: multiselect
+        options:
+          - a
+          - b
+        help: This is a short help text.

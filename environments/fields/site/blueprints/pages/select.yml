@@ -1,4 +1,79 @@
 title: Select
 extends: pages/default
-fields:
-  select: true
+
+columns:
+  - width: 1/2
+    fields:
+      select: true
+      manualOptions:
+        type: select
+        options:
+          - a
+          - b
+          - c
+      manualOptionsWithLabel:
+        type: select
+        options:
+          a: Option A
+          b: Option B
+          c: Option C
+      manualOptionsWithTranslatedLabel:
+        type: select
+        options:
+          a:
+            en: Option A
+            de: Variante A
+          b:
+            en: Option B
+            de: Variante B
+          c:
+            en: Option C
+            de: Variante C
+      manualOptionsWithTranslatedLabelI18nKey:
+        type: select
+        options:
+          a:
+            *: option.a
+          b:
+            *: option.b
+          c:
+            *: option.c
+      optionsFromApi:
+        type: select
+        options:
+          type: api
+          url: "{{ site.url }}/options.json"
+          query: Companies
+          text: "{{ item.name }}"
+          value: "{{ item.short }}"
+      optionsFromQuery:
+        type: select
+        options:
+          type: query
+          query: site.children.limit(3)
+          text: "{{ page.title }}"
+          value: "{{ page.id }}"
+  - width: 1/2
+    fields:
+      required:
+        type: select
+        required: true
+        options:
+          - a
+          - b
+          - c
+      icon:
+        type: select
+        icon: heart
+      placeholder:
+        type: select
+        placeholder: "@:@:@:@"
+      disabled:
+        type: select
+        disabled: true
+      help:
+        type: select
+        options:
+          - a
+          - b
+        help: This is a short help text.

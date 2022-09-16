@@ -4,12 +4,54 @@ columns:
   - width: 1/2
     fields:
       tags: true
-      icon:
+      manualOptions:
         type: tags
-        icon: edit
-      layout:
+        options:
+          - a
+          - b
+          - c
+      manualOptionsWithLabel:
         type: tags
-        layout: list
+        options:
+          a: Option A
+          b: Option B
+          c: Option C
+      manualOptionsWithTranslatedLabel:
+        type: tags
+        options:
+          a:
+            en: Option A
+            de: Variante A
+          b:
+            en: Option B
+            de: Variante B
+          c:
+            en: Option C
+            de: Variante C
+      manualOptionsWithTranslatedLabelI18nKey:
+        type: tags
+        options:
+          a:
+            *: option.a
+          b:
+            *: option.b
+          c:
+            *: option.c
+      optionsFromApi:
+        type: tags
+        options:
+          type: api
+          url: "{{ site.url }}/options.json"
+          query: Companies
+          text: "{{ item.name }}"
+          value: "{{ item.short }}"
+      optionsFromQuery:
+        type: tags
+        options:
+          type: query
+          query: site.children.limit(3)
+          text: "{{ page.title }}"
+          value: "{{ page.id }}"
   - width: 1/2
     fields:
       required:
@@ -24,6 +66,12 @@ columns:
       disabled:
         type: tags
         disabled: true
+      icon:
+        type: tags
+        icon: edit
+      layout:
+        type: tags
+        layout: list
       help:
         type: tags
         help: Some help text
