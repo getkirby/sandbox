@@ -1,0 +1,52 @@
+{
+    "name": "distantnative/retour",
+    "description": "Redirects and 404 tracking for Kirby",
+    "license": "MIT",
+    "type": "kirby-plugin",
+    "version": "4.2.0",
+    "authors": [
+        {
+            "name": "Nico Hoffmann",
+            "email": "on-github@nhoffmann.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4.0 <8.2.0",
+        "ext-json": "*",
+        "getkirby/cms": ">=3.7.4 <3.8.0",
+        "getkirby/composer-installer": "^1.1"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "distantnative\\": "tests/"
+        }
+    },
+    "extra": {
+        "installer-name": "retour",
+        "kirby-cms-path": false
+    },
+    "scripts": {
+        "analyze": [
+            "@analyze:composer",
+            "@analyze:psalm",
+            "@analyze:phpcpd",
+            "@analyze:phpmd"
+        ],
+        "analyze:composer": "composer validate --strict --no-check-version --no-check-all",
+        "analyze:phpcpd": "phpcpd --fuzzy --exclude node_modules --exclude tests --exclude vendor .",
+        "analyze:phpmd": "phpmd . ansi phpmd.xml.dist --exclude 'node_modules/*,tests/*,vendor/*'",
+        "analyze:psalm": "psalm",
+        "ci": [
+            "@fix",
+            "@analyze",
+            "@test"
+        ],
+        "fix": "php-cs-fixer fix",
+        "test": "phpunit --stderr --coverage-html=tests/coverage"
+    },
+    "config": {
+        "allow-plugins": {
+            "getkirby/composer-installer": true
+        }
+    }
+}

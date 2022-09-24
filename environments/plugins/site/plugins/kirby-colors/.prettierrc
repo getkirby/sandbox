@@ -1,0 +1,6 @@
+{
+    "singleQuote": true,
+    "trailingComma": "none",
+    "phpVersion": "7.4",
+    "trailingCommaPHP": false
+}

@@ -1,0 +1,36 @@
+title: Fields
+
+columns:
+  - width: 1/2
+    fields:
+      markdown:
+        type: markdown
+        help: "`k-community/markdown-field` - <a href='https://github.com/OblikStudio/kirby-link-field'>Plugin docs</a>"
+      link:
+        type: link
+        help: "`oblik/kirby-link-field` - <a href='https://github.com/fabianmichael/kirby-markdown-field'>Plugin docs</a>"
+      colors:
+        type: colors
+        alpha: true
+        contrast: true
+        help: "`hananils/kirby-colors` - <a href='https://github.com/hananils/kirby-colors'>Plugin docs</a>"
+      color-palette:
+        type: color-palette
+        options:
+          - "#135fdc"
+          - "#f6917e"
+          - "#6a96e4"
+        help: "`sylvainjule/color-palette` - <a href='https://github.com/sylvainjule/kirby-color-palette'>Plugin docs</a>"
+      relationship:
+        type: relationship
+        options:
+          sweden: Sweden
+          norway: Norway
+          denmark: Denmark
+          finland: Finland
+          iceland: Iceland
+          germany: Germany
+          france: France
+          spain: Spain
+          portugal: Portugal
+        help: "`olach/relationship` - <a href='https://github.com/olach/kirby3-relationship'>Plugin docs</a>"
