@@ -6,11 +6,17 @@ use Kirby\Filesystem\F;
 class Environment
 {
 
+    /**
+     * Returns the name of the currently active environment
+     */
     public static function active(): string
     {
         return F::read(__DIR__ . '/public/.environment');
     }
 
+    /**
+     * Authenticates as the given user without login
+     */
     public static function auth(string $username): bool
     {
         if ($user = kirby()->user($username)) {
@@ -21,6 +27,9 @@ class Environment
         throw new Exception('The user could not be found');
     }
 
+    /**
+     * Deletes an available environment from the `environments` folder
+     */
     public static function delete(string $environment): void
     {
         if (static::exists($environment) !== true) {
@@ -30,6 +39,10 @@ class Environment
         Dir::remove(static::root($environment));
     }
 
+    /**
+     * Returns a list of all available environments with an `active`
+     * marker for the current environment
+     */
     public static function envs(): array
     {
         $envs = [];
@@ -48,6 +61,10 @@ class Environment
         return $envs;
     }
 
+    /**
+     * Copies an environment into the `public` dir
+     * and prepares it for use
+     */
     public static function install(string $environment): bool
     {
         if (static::exists($environment) !== true) {
@@ -86,11 +103,17 @@ class Environment
         return true;
     }
 
+    /**
+     * Returns whether an environment exists in the `environments` folder
+     */
     public static function exists(string $environment): bool
     {
         return is_dir(static::root($environment));
     }
 
+    /**
+     * Clears the currently active installation in the `public` folder
+     */
     public static function remove()
     {
         $public = __DIR__ . '/public';
@@ -101,11 +124,20 @@ class Environment
         Dir::remove($public . '/site');
     }
 
+    /**
+     * Returns the root to an environment in the `environments` folder
+     */
     public static function root(string $environment): string
     {
         return __DIR__ . '/environments/' . basename($environment);
     }
 
+    /**
+     * Copies the current installation from the `public` folder to
+     * a new or existing environment in the `environments` folder
+     *
+     * @param string|null $environment Target environment (defaults to current one)
+     */
     public static function store(?string $environment = null): bool
     {
         $public      = __DIR__ . '/public';
@@ -144,6 +176,9 @@ class Environment
         return true;
     }
 
+    /**
+     * Copies a user preset from `accounts` to the `public` folder
+     */
     public static function user(string $username): bool
     {
         $accounts = __DIR__ . '/accounts';
