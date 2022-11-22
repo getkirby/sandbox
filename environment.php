@@ -61,6 +61,14 @@ class Environment
 	}
 
 	/**
+	 * Returns whether an environment exists in the `environments` folder
+	 */
+	public static function exists(string $environment): bool
+	{
+		return is_dir(static::root($environment));
+	}
+
+	/**
 	 * Copies an environment into the `public` dir
 	 * and prepares it for use
 	 */
@@ -100,14 +108,6 @@ class Environment
 		F::write($public . '/.environment', $environment);
 
 		return true;
-	}
-
-	/**
-	 * Returns whether an environment exists in the `environments` folder
-	 */
-	public static function exists(string $environment): bool
-	{
-		return is_dir(static::root($environment));
 	}
 
 	/**
