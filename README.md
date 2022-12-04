@@ -7,11 +7,14 @@ The Kirby Sandbox is our local test environment. We use this to work on Kirby an
 ```console
 # clone the repo
 git clone git@github.com:getkirby/sandbox.git
+
 # step into the sandbox
 cd sandbox
+
 # initialize all submodules
 git submodule update --init --recursive
-# get the panel up and running
+
+# get the Panel up and running
 cd kirby/panel
 npm i
 npm run dev
@@ -77,3 +80,15 @@ For Cypress user handling there are these two routes:
 cy.visit('http://localhost:8080/env/user/test); // installs the test user
 cy.visit('http://localhost:8080/env/auth/test@getkirby.com); // automatic login
 ```
+
+## Creating environments
+
+New environments can be created in two ways:
+
+- directly in the `environments` folder or
+- from the current `public` folder contents by using the "Custom" text field and "Store" button in the UI.
+
+Environments may contain submodules (e.g. for plugins), but with the following caveats:
+
+- The submodule must be initialized inside `environments/<your-environment>`, *never* inside `public`. Otherwise the submodule will break once the environment is switched or stored. Also the initialization of the submodules after cloning the Sandbox repo would not work with submodules that were initialized inside `public`.
+- Changes inside the submodule while it's in `public` will directly reflect on the original submodule in `environments`. Changes can be discarded using Git inside the submodule, but not by switching to the environment again. This is because each submodule is linked to the environment directory with a symlink, so changes inside the submodule are in fact performed in the environment folder.
