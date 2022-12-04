@@ -92,12 +92,12 @@ class Environment
 
 		foreach ($directories as $directory) {
 			if (is_dir($root . '/' . $directory)) {
-				Dir::copy($root . '/' . $directory, $public . '/' . $directory);
+				static::copyDirectory($root . '/' . $directory, $public . '/' . $directory);
 			}
 		}
 
 		// copy the global ray plugin
-		Dir::copy(__DIR__ . '/plugins/ray', $public . '/site/plugins/ray');
+		static::copyDirectory(__DIR__ . '/plugins/ray', $public . '/site/plugins/ray');
 
 		// remove pre-installed users
 		if (is_dir($public . '/site/accounts') === true) {
@@ -161,7 +161,7 @@ class Environment
 
 		foreach ($directories as $directory) {
 			if (is_dir($public . '/' . $directory)) {
-				Dir::copy($public . '/' . $directory, $root . '/' . $directory);
+				static::copyDirectory($public . '/' . $directory, $root . '/' . $directory);
 			}
 		}
 
@@ -198,8 +198,25 @@ class Environment
 		Dir::make(dirname($dest));
 
 		// copy the account
-		Dir::copy($account, $dest);
+		static::copyDirectory($account, $dest);
 
 		return true;
+	}
+
+	/**
+	 * Copies a directory to a new destination including
+	 * files ignored by Kirby like `.gitignore`
+	 */
+	protected static function copyDirectory(string $dir, string $target): void
+	{
+		// create a backup of the ignore list
+		$ignore = Dir::$ignore;
+		Dir::$ignore = [];
+
+		try {
+			Dir::copy($dir, $target);
+		} finally {
+			Dir::$ignore = $ignore;
+		}
 	}
 }
