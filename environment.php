@@ -121,6 +121,8 @@ class Environment
 		Dir::remove($public . '/content');
 		Dir::remove($public . '/media');
 		Dir::remove($public . '/site');
+
+		F::remove($public . '/.environment');
 	}
 
 	/**
