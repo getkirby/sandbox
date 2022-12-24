@@ -92,17 +92,20 @@ class Environment
 
 		foreach ($directories as $directory) {
 			if (is_dir($root . '/' . $directory)) {
-				Dir::copy($root . '/' . $directory, $public . '/' . $directory);
+				static::copyDirectory($root . '/' . $directory, $public . '/' . $directory);
 			}
 		}
 
 		// copy the global ray plugin
-		Dir::copy(__DIR__ . '/plugins/ray', $public . '/site/plugins/ray');
+		static::copyDirectory(__DIR__ . '/plugins/ray', $public . '/site/plugins/ray');
 
 		// remove pre-installed users
 		if (is_dir($public . '/site/accounts') === true) {
 			Dir::remove($public . '/site/accounts');
 		}
+
+		// link the submodules to the environment directory
+		static::linkSubmodules($public, $root);
 
 		// store the name of the environment for switching later
 		F::write($public . '/.environment', $environment);
@@ -121,6 +124,8 @@ class Environment
 		Dir::remove($public . '/content');
 		Dir::remove($public . '/media');
 		Dir::remove($public . '/site');
+
+		F::remove($public . '/.environment');
 	}
 
 	/**
@@ -147,6 +152,11 @@ class Environment
 
 		$root = static::root($environment);
 
+		// copy the submodule files to the public dir temporarily
+		// so we can cleanly copy them back
+		// (otherwise they would be deleted in the next step)
+		static::unlinkSubmodules($public);
+
 		// remove the previous state
 		Dir::remove($root);
 		Dir::make($root);
@@ -159,9 +169,12 @@ class Environment
 
 		foreach ($directories as $directory) {
 			if (is_dir($public . '/' . $directory)) {
-				Dir::copy($public . '/' . $directory, $root . '/' . $directory);
+				static::copyDirectory($public . '/' . $directory, $root . '/' . $directory);
 			}
 		}
+
+		// link the submodules to the environment directory again
+		static::linkSubmodules($public, $root);
 
 		// remove directories that should not be stored
 		Dir::remove($root . '/site/accounts');
@@ -196,8 +209,90 @@ class Environment
 		Dir::make(dirname($dest));
 
 		// copy the account
-		Dir::copy($account, $dest);
+		static::copyDirectory($account, $dest);
 
 		return true;
+	}
+
+	/**
+	 * Copies a directory to a new destination including
+	 * files ignored by Kirby like `.gitignore`
+	 */
+	protected static function copyDirectory(string $dir, string $target): void
+	{
+		// create a backup of the ignore list
+		$ignore = Dir::$ignore;
+		Dir::$ignore = [];
+
+		try {
+			Dir::copy($dir, $target);
+		} finally {
+			Dir::$ignore = $ignore;
+		}
+	}
+
+	/**
+	 * Returns an iterator that finds every submodule in the given directory
+	 * unless it's a nested submodule (submodule within another submodule)
+	 */
+	protected static function findSubmodules($directory): Iterator
+	{
+		// iterate through all files and directories recursively
+		$directoryIterator = new RecursiveDirectoryIterator(
+			$directory,
+			FilesystemIterator::KEY_AS_PATHNAME | FilesystemIterator::CURRENT_AS_FILEINFO | FilesystemIterator::SKIP_DOTS
+		);
+		$recursiveIterator = new RecursiveIteratorIterator($directoryIterator, RecursiveIteratorIterator::SELF_FIRST);
+
+		// only iterate through all directories that contain .git files
+		return new CallbackFilterIterator($recursiveIterator, function ($fileinfo) {
+			// only keep directories that have .git files themselves
+			if (is_file($fileinfo->getPathname() . '/.git') !== true) {
+				return false;
+			}
+
+			// but skip every directory whose parent is already a submodule
+			// (nested submodule which is already covered by the parent's link)
+			return is_file(dirname($fileinfo->getPathname()) . '/.git') === false;
+		});
+	}
+
+	/**
+	 * Updates all `.git` files of submodules recursively to point to the new
+	 * submodule path
+	 *
+	 * @param string $directory Directory to operate in
+	 * @param string $previous Source directory to link the submodules to
+	 */
+	protected static function linkSubmodules(string $directory, string $previous): void
+	{
+		foreach (static::findSubmodules($directory) as $path => $fileinfo) {
+			// find the matching submodule path in the original location
+			$previousPath = str_replace($directory, $previous, $path);
+
+			// replace the submodule with a symlink to the environment
+			Dir::remove($path);
+			symlink($previousPath, $path);
+		}
+	}
+
+	/**
+	 * Replaces all links to submodules with the actual submodule worktrees
+	 */
+	protected static function unlinkSubmodules(string $directory): void
+	{
+		foreach (static::findSubmodules($directory) as $path => $fileinfo) {
+			if ($fileinfo->isLink() !== true) {
+				continue;
+			}
+
+			$source = $fileinfo->getLinkTarget();
+			if (is_string($source) !== true) {
+				continue;
+			}
+
+			unlink($path);
+			static::copyDirectory($source, $path);
+		}
 	}
 }
