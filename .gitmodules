@@ -10,3 +10,6 @@
 [submodule "environments/demokit"]
 	path = environments/demokit
 	url = https://github.com/getkirby/demokit.git
+[submodule "environments/plugin-staticache/site/plugins/staticache"]
+	path = environments/plugin-staticache/site/plugins/staticache
+	url = https://github.com/getkirby/staticache.git
