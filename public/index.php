@@ -36,6 +36,11 @@ $kirby = new Kirby([
             'pattern' => '/env/auth/(:any)',
             'action'  => function ($username) {
                 Environment::auth($username);
+
+                if (get('panel') !== null) {
+                    return go('panel');
+                }
+
                 die('The user has been authenticated');
             }
         ],

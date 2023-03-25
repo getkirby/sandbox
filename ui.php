@@ -46,7 +46,7 @@ $active = Environment::active();
 	<h1>Kirby Sandbox</h1>
 	<a href="<?= url('/') ?>">Home</a> |
 	<a href="<?= url('panel') ?>">Panel</a> |
-	<a href="<?= url('env/auth/test@getkirby.com') ?>">Auth test@getkirby.com</a>
+	<a href="<?= url('env/auth/test@getkirby.com?panel') ?>">Auth test@getkirby.com</a>
 
 	<table>
 		<?php foreach (Environment::envs() as $env): ?>
