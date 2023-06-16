@@ -10,7 +10,7 @@
 
   <div class="p-panels">
     <div class="p-panel p-input">
-      <textarea autofocus id="input" placeholder="Paste your HTML here" spellcheck="false" name="html"><?= htmlspecialchars(get('html')) ?></textarea>
+      <textarea autofocus id="input" placeholder="Paste your HTML here" spellcheck="false" name="html"><?= esc(get('html')) ?></textarea>
     </div>
     <div class="p-panel p-json">
       <div class="p-blocks">
