@@ -66,3 +66,7 @@ fields:
         type: structure
         fields:
           text: true
+  columnPreviewsE:
+    type: structure
+    fields:
+      color: true

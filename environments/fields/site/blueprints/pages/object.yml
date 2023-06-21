@@ -1,0 +1,11 @@
+title: Object
+extends: pages/default
+
+fields:
+  object: true
+
+  default:
+    type: object
+    fields:
+      email: true
+      url: true
