@@ -1,0 +1,111 @@
+title: Files
+extends: pages/default
+
+tabs:
+  list:
+    sections:
+      list:
+        type: files
+      listWithInfo:
+        type: files
+        info: "{{ file.dimensions }}"
+      listWithoutImage:
+        type: files
+        layout: list
+        image: false
+
+  cardlets:
+    sections:
+      cardlets:
+        type: files
+        layout: cardlets
+      cardletsWithInfo:
+        type: files
+        layout: cardlets
+        info: "{{ file.dimensions }}"
+      cardletsWithoutImage:
+        type: files
+        layout: cardlets
+        image: false
+
+  cards:
+    sections:
+      cards:
+        type: files
+        layout: cards
+      cardsWithInfo:
+        type: files
+        layout: cards
+        info: "{{ file.dimensions }}"
+      cardsWithoutImage:
+        type: files
+        layout: cards
+        image: false
+
+  table:
+    sections:
+      table:
+        type: files
+        layout: table
+      tableWithInfo:
+        type: files
+        layout: table
+        info: "{{ file.dimensions }}"
+      tableWithoutImage:
+        type: files
+        layout: table
+        image: false
+
+  cardSizes:
+    sections:
+      cardsTiny:
+        type: files
+        layout: cards
+        size: tiny
+
+      cardsSmall:
+        type: files
+        layout: cards
+        size: small
+
+      cardsMedium:
+        type: files
+        layout: cards
+        size: medium
+
+      cardsLarge:
+        type: files
+        layout: cards
+        size: large
+
+  imageSettings:
+    sections:
+      cover:
+        type: files
+        layout: cards
+        image:
+          cover: true
+      backBlack:
+        type: files
+        layout: cards
+        image:
+          back: black
+      backWhite:
+        type: files
+        layout: cards
+        image:
+          back: white
+      ratio4by5:
+        type: files
+        layout: cards
+        image:
+          ratio: 4/5
+          cover: true
+      ratio16by9:
+        type: files
+        layout: cards
+        image:
+          ratio: 16/9
+          cover: true
+
+

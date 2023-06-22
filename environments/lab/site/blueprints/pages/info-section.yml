@@ -1,0 +1,50 @@
+title: Info
+extends: pages/default
+
+sections:
+  info: true
+
+  default:
+    type: info
+    text: This is some test text
+
+  white:
+    type: info
+    text: This is some test text
+    theme: white
+
+  passive:
+    type: info
+    text: This is some test text
+    theme: passive
+
+  empty:
+    type: info
+    text: This is some test text
+    theme: empty
+
+  dark:
+    type: info
+    text: This is some test text
+    theme: dark
+
+  notice:
+    type: info
+    text: This is some test text
+    theme: notice
+
+  negative:
+    type: info
+    text: This is some test text
+    theme: negative
+
+  positive:
+    type: info
+    text: This is some test text
+    theme: positive
+
+  text:
+    type: info
+    text: This is some test text
+    theme: text
+

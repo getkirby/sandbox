@@ -1,5 +1,5 @@
-label: Fields
-parent: page('fields')
+label: Sections
+parent: page('sections')
 type: pages
 layout: list
 image: false

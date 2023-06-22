@@ -1,0 +1,130 @@
+title: Pages
+extends: pages/default
+
+tabs:
+  list:
+    sections:
+      list:
+        type: pages
+        template: page
+      listWithInfo:
+        type: pages
+        info: "{{ page.slug }}"
+        template: page
+      listWithoutImage:
+        type: pages
+        layout: list
+        image: false
+        template: page
+
+  cardlets:
+    sections:
+      cardlets:
+        type: pages
+        layout: cardlets
+        template: page
+      cardletsWithInfo:
+        type: pages
+        layout: cardlets
+        info: "{{ page.slug }}"
+        template: page
+      cardletsWithoutImage:
+        type: pages
+        layout: cardlets
+        image: false
+        template: page
+
+  cards:
+    sections:
+      cards:
+        type: pages
+        layout: cards
+        template: page
+      cardsWithInfo:
+        type: pages
+        layout: cards
+        info: "{{ page.slug }}"
+        template: page
+      cardsWithoutImage:
+        type: pages
+        layout: cards
+        image: false
+        template: page
+
+  table:
+    sections:
+      table:
+        type: pages
+        layout: table
+        template: page
+      tableWithInfo:
+        type: pages
+        layout: table
+        info: "{{ page.slug }}"
+        template: page
+      tableWithoutImage:
+        type: pages
+        layout: table
+        image: false
+        template: page
+
+  cardSizes:
+    sections:
+      cardsTiny:
+        type: pages
+        layout: cards
+        size: tiny
+        template: page
+
+      cardsSmall:
+        type: pages
+        layout: cards
+        size: small
+        template: page
+
+      cardsMedium:
+        type: pages
+        layout: cards
+        size: medium
+        template: page
+
+      cardsLarge:
+        type: pages
+        layout: cards
+        size: large
+        template: page
+
+  imageSettings:
+    sections:
+      cover:
+        type: pages
+        layout: cards
+        image:
+          cover: true
+        template: page
+      backBlack:
+        type: pages
+        layout: cards
+        image:
+          back: black
+        template: page
+      backWhite:
+        type: pages
+        layout: cards
+        image:
+          back: white
+        template: page
+      ratio4by5:
+        type: pages
+        layout: cards
+        image:
+          ratio: 4/5
+          cover: true
+        template: page
+      ratio16by9:
+        type: pages
+        layout: cards
+        image:
+          ratio: 16/9
+          cover: true
+        template: page

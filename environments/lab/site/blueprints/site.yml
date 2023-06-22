@@ -1,3 +1,9 @@
 title: Site
-sections:
-  fields: sections/fields
+
+columns:
+  - width: 1/2
+    sections:
+      fields: sections/fields
+  - width: 1/2
+    sections:
+      sections: sections/sections
