@@ -1,0 +1,47 @@
+title: Email
+extends: pages/default
+columns:
+  - width: 1/2
+    fields:
+      email: true
+      placeholder:
+        type: email
+        placeholder: Contact me …
+      icon:
+        type: email
+        icon: text
+      before:
+        type: email
+        before: Before
+      after:
+        type: email
+        before: After
+      beforeAndAfter:
+        type: email
+        before: Before
+        after: After
+      beforeAndAfterAndIcon:
+        type: email
+        before: Before
+        after: After
+        icon: edit
+  - width: 1/2
+    fields:
+      required:
+        type: email
+        required: true
+      maxlength:
+        type: email
+        maxlength: 10
+      minlength:
+        type: email
+        maxlength: 10
+      disabled:
+        type: email
+        disabled: true
+      disabledCounter:
+        type: email
+        counter: false
+      help:
+        type: email
+        help: Some help text

@@ -1,0 +1,7 @@
+label: Fields
+parent: page('fields')
+type: pages
+layout: cardlets
+image: false
+create: false
+limit: 50

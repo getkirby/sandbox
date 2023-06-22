@@ -1,0 +1,136 @@
+title: Multiselect
+extends: pages/default
+
+columns:
+  - width: 1/2
+    fields:
+      multiselect: true
+      manualOptions:
+        type: multiselect
+        options:
+          - a
+          - b
+          - c
+      manualOptionsWithLabel:
+        type: multiselect
+        options:
+          a: Option A
+          b: Option B
+          c: Option C
+      manualOptionsWithTranslatedLabel:
+        type: multiselect
+        options:
+          a:
+            en: Option A
+            de: Variante A
+          b:
+            en: Option B
+            de: Variante B
+          c:
+            en: Option C
+            de: Variante C
+      manualOptionsWithTranslatedLabelI18nKey:
+        type: multiselect
+        options:
+          a:
+            *: option.a
+          b:
+            *: option.b
+          c:
+            *: option.c
+      optionsFromApi:
+        type: multiselect
+        options:
+          type: api
+          url: "{{ site.url }}/options.json"
+          query: Companies
+          text: "{{ item.name }}"
+          value: "{{ item.short }}"
+      optionsFromQuery:
+        type: multiselect
+        options:
+          type: query
+          query: site.children
+          text: "{{ page.title }}"
+          value: "{{ page.id }}"
+      htmlEscaped:
+        type: multiselect
+        options:
+          type: api
+          url: "{{ site.url }}/options.json"
+          query: Html
+          text: "{{ item.name }}"
+          value: "{{ item.short }}"
+      htmlAllowed:
+        type: multiselect
+        options:
+          type: api
+          url: "{{ site.url }}/options.json"
+          query: Html
+          text: "{< item.name >}"
+          value: "{{ item.short }}"
+  - width: 1/2
+    fields:
+      required:
+        type: multiselect
+        required: true
+        options:
+          - a
+          - b
+          - c
+      sortOptions:
+        type: multiselect
+        sort: true
+        options:
+          - a
+          - b
+          - c
+      min:
+        type: multiselect
+        options:
+          - a
+          - b
+          - c
+        min: 2
+      max:
+        type: multiselect
+        options:
+          - a
+          - b
+          - c
+        max: 2
+      disabled:
+        type: multiselect
+        disabled: true
+      icon:
+        type: multiselect
+        icon: heart
+      searchFalse:
+        type: multiselect
+        search: false
+        options:
+          - a
+          - b
+          - c
+      searchDisplayOnly2:
+        type: multiselect
+        search:
+          display: 2
+        options:
+          - a
+          - b
+          - c
+      searchMin:
+        type: multiselect
+        search:
+          min: 4
+        options:
+          - aaaaaa
+          - bbbbbb
+          - cccccc
+      help:
+        type: multiselect
+        options:
+          - a
+          - b
+        help: This is a short help text.

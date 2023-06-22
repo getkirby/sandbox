@@ -1,0 +1,4 @@
+title: Writer
+extends: pages/default
+fields:
+  writer: true

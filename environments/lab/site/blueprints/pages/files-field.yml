@@ -1,0 +1,4 @@
+title: Files
+extends: pages/default
+fields:
+  files: true

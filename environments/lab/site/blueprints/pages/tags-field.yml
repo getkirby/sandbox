@@ -1,0 +1,84 @@
+title: Tags
+extends: pages/default
+columns:
+  - width: 1/2
+    fields:
+      tags: true
+      manualOptions:
+        type: tags
+        options:
+          - a
+          - b
+          - c
+      manualOptionsWithLabel:
+        type: tags
+        options:
+          a: Option A
+          b: Option B
+          c: Option C
+      manualOptionsWithTranslatedLabel:
+        type: tags
+        options:
+          a:
+            en: Option A
+            de: Variante A
+          b:
+            en: Option B
+            de: Variante B
+          c:
+            en: Option C
+            de: Variante C
+      manualOptionsWithTranslatedLabelI18nKey:
+        type: tags
+        options:
+          a:
+            *: option.a
+          b:
+            *: option.b
+          c:
+            *: option.c
+      optionsFromApi:
+        type: tags
+        options:
+          type: api
+          url: "{{ site.url }}/options.json"
+          query: Companies
+          text: "{{ item.name }}"
+          value: "{{ item.short }}"
+      optionsFromQuery:
+        type: tags
+        options:
+          type: query
+          query: site.children.limit(3)
+          text: "{{ page.title }}"
+          value: "{{ page.id }}"
+      acceptOnlyOptions:
+        type: tags
+        accept: options
+        options:
+          - a
+          - b
+          - c
+  - width: 1/2
+    fields:
+      required:
+        type: tags
+        required: true
+      max:
+        type: tags
+        max: 10
+      min:
+        type: tags
+        min: 10
+      disabled:
+        type: tags
+        disabled: true
+      icon:
+        type: tags
+        icon: edit
+      layout:
+        type: tags
+        layout: list
+      help:
+        type: tags
+        help: Some help text

@@ -1,0 +1,180 @@
+title: Date
+extends: pages/default
+
+columns:
+  - width: 1/2
+    fields:
+      date: true
+      display:
+        type: date
+        display: DD.MM.YYYY
+      dateStep:
+        type: date
+        label: Date Step (Year)
+        step: year
+      dateRequired:
+        type: date
+        label: Date required
+        required: true
+      dateMin:
+        type: date
+        label: Date min
+        min: "2022-01-01"
+        help: "min: 2022-01-01"
+      dateMax:
+        type: date
+        label: Date max
+        max: "2022-01-01"
+        help: "max: 2022-01-01"
+      dateMinMax:
+        type: date
+        label: Date min & max
+        min: "2022-01-01"
+        max: "2022-02-01"
+        help: "min: 2022-01-01 max: 2022-02-01"
+      yearOnly:
+        type: date
+        label: Year only
+        display: YYYY
+        step: year
+      dateWithMonthname:
+        type: date
+        label: Date with month name
+        display: DD. MMMM YYYY
+      disabledCalendar:
+        type: date
+        label: Disabled calendar
+        calendar: false
+      before:
+        type: date
+        label: Before
+        before: Published
+      after:
+        type: date
+        label: After
+        after: Published
+      before:
+        type: date
+        label: Before
+        before: Published
+      beforeAndAfter:
+        type: date
+        label: Before & After
+        before: Published
+        after: Date
+      help:
+        type: date
+        label: Help
+        help: Some help text …
+      dateDisabled:
+        type: date
+        disabled: true
+        label: Disabled date field
+      dateStructure:
+        type: structure
+        fields:
+          date: true
+          dateDisplay:
+            type: date
+            display: DD.MM.YYYY
+      dateReferenceText:
+        label: Reference text field
+        type: text
+        width: 1/2
+      dateReference:
+        label: Date field
+        type: date
+        width: 1/2
+      narrow:
+        type: date
+        label: Narrow example
+        width: 1/4
+  - width: 1/2
+    fields:
+      datetime:
+        type: date
+        label: Date & Time
+        time: true
+      timeStep:
+        type: date
+        label: Time step
+        time:
+          step:
+            unit: minute
+            size: 1
+      timeNotation:
+        type: date
+        label: Time notation
+        time:
+          notation: 12
+      timesSeconds:
+        type: date
+        label: Seconds
+        time:
+          display: HH:mm:ss
+          step:
+            unit: second
+            size: 1
+      timeSeconds12:
+        type: date
+        label: Seconds (am/pm)
+        time:
+          display: hh:mm:ss a
+          notation: 12
+      disabledTimes:
+        type: date
+        label: Disabled calendare & times
+        time: true
+        calendar: false
+        times: false
+      timeBefore:
+        type: date
+        label: Before
+        time: true
+        before: Published
+      timeAfter:
+        type: date
+        label: After
+        time: true
+        after: Published
+      timeBeforeAndAfter:
+        type: date
+        label: Before & After
+        time: true
+        before: Published
+        after: Date
+      timeHelp:
+        type: date
+        time: true
+        label: Help
+        help: Some help text …
+      timeDisabled:
+        type: date
+        time: true
+        disabled: true
+        label: Disabled date&time field
+      timeStructure:
+        type: structure
+        fields:
+          date:
+            type: date
+            time: true
+          dateDisplay:
+            type: date
+            display: MM/DD/YYYY
+            time:
+              display: hh:mm a
+      timeReferenceText:
+        label: Reference time field
+        type: text
+        width: 1/2
+      timeReference:
+        label: Time field
+        type: date
+        time: true
+        width: 1/2
+      timeNarrow:
+        type: date
+        label: Narrow example
+        width: 1/4
+        time: true

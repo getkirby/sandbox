@@ -1,0 +1,79 @@
+title: Time
+extends: pages/default
+
+columns:
+  - width: 1/2
+    fields:
+      time: true
+      timeStep:
+        type: time
+        label: Time step
+        step:
+          unit: minute
+          size: 1
+      timeNotation:
+        type: time
+        label: Time notation
+        notation: 12
+      timesSeconds:
+        type: time
+        label: Seconds
+        display: HH:mm:ss
+        step:
+          unit: second
+          size: 1
+      timeSeconds12:
+        type: time
+        label: Seconds (am/pm)
+        display: hh:mm:ss a
+        notation: 12
+        step:
+          unit: second
+          size: 1
+      timeDisabledDropdown:
+        type: time
+        label: Disabled times dropdown
+        times: false
+      timeDisabled:
+        type: time
+        disabled: true
+        label: Disabled time field
+      timeStructure:
+        type: structure
+        fields:
+          time:
+            type: time
+          timeDisplay:
+            type: time
+            display: hh:mm a
+  - width: 1/2
+    fields:
+      timeBefore:
+        type: time
+        label: Before
+        before: Published
+      timeAfter:
+        type: time
+        label: After
+        after: Published
+      timeBeforeAndAfter:
+        type: time
+        label: Before & After
+        before: Published
+        after: Date
+      timeHelp:
+        type: time
+        label: Help
+        help: Some help text …
+      timeReferenceText:
+        label: Reference time field
+        type: text
+        width: 1/2
+      timeReference:
+        label: Time field
+        type: time
+        width: 1/2
+      timeNarrow:
+        type: time
+        label: Narrow example
+        width: 1/4

@@ -1,0 +1,4 @@
+title: Line
+extends: pages/default
+fields:
+  line: true
