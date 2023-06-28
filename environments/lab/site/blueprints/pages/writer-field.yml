@@ -2,3 +2,23 @@ title: Writer
 extends: pages/default
 fields:
   writer: true
+
+  writerNextToText:
+    type: writer
+    width: 1/2
+  textA:
+    type: text
+    width: 1/2
+
+  writerWithPlaceholderNextToText:
+    type: writer
+    placeholder: Nice writer …
+    width: 1/2
+  textB:
+    type: text
+    width: 1/2
+
+  toolbarInline:
+    type: writer
+    toolbar:
+      inline: false

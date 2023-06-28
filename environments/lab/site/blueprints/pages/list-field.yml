@@ -2,3 +2,10 @@ title: List
 extends: pages/default
 fields:
   list: true
+
+  listNextToText:
+    type: list
+    width: 1/2
+  textA:
+    type: text
+    width: 1/2
