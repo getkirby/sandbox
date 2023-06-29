@@ -29,6 +29,10 @@ tabs:
             info: +112.5%
             value: €29,682
             theme: positive
+          - label: Warning
+            info: +112.5%
+            value: €29,682
+            theme: warning
           - label: Notice
             info: +112.5%
             value: €29,682
@@ -48,7 +52,6 @@ tabs:
           - label: Revenue
             value: €29,682
             link: https://getkirby.com/buy
-
 
   sizes:
     sections:

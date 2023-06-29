@@ -13,6 +13,10 @@ fields:
     type: info
     text: This is some text
     theme: negative
+  warning:
+    type: info
+    text: This is some text
+    theme: warning
   notice:
     type: info
     text: This is some text
