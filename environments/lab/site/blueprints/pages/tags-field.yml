@@ -59,6 +59,16 @@ columns:
           - a
           - b
           - c
+      manyOptions:
+        type: tags
+        accept: options
+        options:
+          type: api
+          url: "{{ site.url }}/countries.json"
+          text: "{{ item.name }}"
+          value: "{{ item.alpha2 }}"
+        search: false
+
   - width: 1/2
     fields:
       required:
