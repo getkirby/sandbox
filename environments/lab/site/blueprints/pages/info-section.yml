@@ -28,6 +28,11 @@ sections:
     text: This is some test text
     theme: dark
 
+  warning:
+    type: info
+    text: This is some test text
+    theme: warning
+
   notice:
     type: info
     text: This is some test text
@@ -47,4 +52,3 @@ sections:
     type: info
     text: This is some test text
     theme: text
-
