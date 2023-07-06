@@ -67,7 +67,16 @@ columns:
           url: "{{ site.url }}/countries.json"
           text: "{{ item.name }}"
           value: "{{ item.alpha2 }}"
-        search: false
+      sortedOptions:
+        type: tags
+        sort: true
+        options:
+          - a
+          - b
+          - c
+      noOptions:
+        type: tags
+        accept: options
 
   - width: 1/2
     fields:
@@ -76,19 +85,34 @@ columns:
         required: true
       max:
         type: tags
-        max: 10
+        max: 3
       min:
         type: tags
-        min: 10
+        min: 3
       disabled:
         type: tags
         disabled: true
       icon:
         type: tags
         icon: edit
+      noSearch:
+        type: tags
+        icon: edit
+        search: false
+        accept: options
+        options:
+          - a
+          - b
+          - c
       layout:
         type: tags
         layout: list
       help:
         type: tags
         help: Some help text
+      heightCheck:
+        type: tags
+        width: 1/2
+      heightCheckReference:
+        type: text
+        width: 1/2

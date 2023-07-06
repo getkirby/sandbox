@@ -128,3 +128,9 @@ tabs:
           ratio: 16/9
           cover: true
         template: page
+  invalid:
+    sections:
+      invalid:
+        type: pages
+        min: 2
+        template: does-not-exist

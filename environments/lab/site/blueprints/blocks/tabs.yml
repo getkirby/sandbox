@@ -1,0 +1,9 @@
+wysiwyg: true
+preview: fields
+tabs:
+  content:
+    fields:
+      text: true
+  settings:
+    fields:
+      email: true

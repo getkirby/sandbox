@@ -102,9 +102,17 @@ columns:
       disabled:
         type: multiselect
         disabled: true
+        options:
+          - a
+          - b
+          - c
       icon:
         type: multiselect
         icon: heart
+        options:
+          - a
+          - b
+          - c
       searchFalse:
         type: multiselect
         search: false

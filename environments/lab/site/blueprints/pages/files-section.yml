@@ -108,4 +108,9 @@ tabs:
           ratio: 16/9
           cover: true
 
-
+  invalid:
+    sections:
+      invalid:
+        type: files
+        template: does-not-exist
+        min: 2

@@ -6,6 +6,11 @@ fields:
     type: structure
     fields:
       text: true
+  required:
+    type: structure
+    required: true
+    fields:
+      text: true
   customColumns:
     type: structure
     columns:

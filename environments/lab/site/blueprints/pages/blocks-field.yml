@@ -1,35 +1,43 @@
 title: Blocks
 extends: pages/default
-fields:
-  blocks: true
 
-  nestedStructure:
-    label: Nested Blocks
-    type: blocks
-    fieldsets:
-      test:
-        fields:
-          blocks: true
+tabs:
+  simple:
+    fields:
+      blocks: true
+      tabs:
+        type: blocks
+        fieldsets:
+          - tabs
+      fields:
+        type: blocks
+        fieldsets:
+          test:
+            wysiwyg: true
+            preview: fields
+            fields:
+              title:
+                type: text
+              text:
+                type: writer
 
-  fields:
-    type: blocks
-    fieldsets:
-      test:
-        wysiwyg: true
-        preview: fields
-        fields:
-          title:
-            type: text
-          text:
-            type: writer
 
-  nestedBlocks:
-    label: Nested Blocks
-    type: blocks
-    fieldsets:
-      test:
-        wysiwyg: true
-        preview: fields
-        fields:
-          blocks:
-            type: blocks
+  nested:
+    fields:
+      nestedStructure:
+        label: Nested Blocks
+        type: blocks
+        fieldsets:
+          test:
+            fields:
+              blocks: true
+      nestedBlocks:
+        label: Nested Blocks
+        type: blocks
+        fieldsets:
+          test:
+            wysiwyg: true
+            preview: fields
+            fields:
+              blocks:
+                type: blocks

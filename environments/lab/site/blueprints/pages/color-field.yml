@@ -13,6 +13,9 @@ tabs:
           icon:
             type: color
             icon: text
+          alpha:
+            type: color
+            alpha: true
           options:
             type: color
             options:
