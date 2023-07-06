@@ -114,3 +114,16 @@ tabs:
         type: files
         template: does-not-exist
         min: 2
+
+  pagination:
+    sections:
+      pagination:
+        type: files
+        limit: 1
+      paginationAndHelp:
+        type: files
+        limit: 1
+        help: This is some nice help for this files section
+      paginationNoDetails:
+        type: files
+        limit: 1

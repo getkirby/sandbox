@@ -134,3 +134,16 @@ tabs:
         type: pages
         min: 2
         template: does-not-exist
+
+  pagination:
+    sections:
+      pagination:
+        type: pages
+        limit: 1
+      paginationAndHelp:
+        type: pages
+        limit: 1
+        help: This is some nice help for this pages section
+      paginationNoDetails:
+        type: pages
+        limit: 1
