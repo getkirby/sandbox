@@ -35,7 +35,7 @@ columns:
         maxlength: 10
       minlength:
         type: text
-        maxlength: 10
+        minlength: 10
       disabled:
         type: text
         disabled: true

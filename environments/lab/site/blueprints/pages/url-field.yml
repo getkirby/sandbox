@@ -35,7 +35,7 @@ columns:
         maxlength: 10
       minlength:
         type: url
-        maxlength: 10
+        minlength: 10
       disabled:
         type: url
         disabled: true
