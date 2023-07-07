@@ -15,7 +15,7 @@ columns:
         before: Before
       after:
         type: number
-        before: After
+        after: After
       beforeAndAfter:
         type: number
         before: Before

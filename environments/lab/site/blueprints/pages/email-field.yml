@@ -15,7 +15,7 @@ columns:
         before: Before
       after:
         type: email
-        before: After
+        after: After
       beforeAndAfter:
         type: email
         before: Before

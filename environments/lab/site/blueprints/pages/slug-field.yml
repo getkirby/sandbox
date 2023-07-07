@@ -1,4 +1,45 @@
 title: Slug
 extends: pages/default
-fields:
-  slug: true
+columns:
+  - width: 1/2
+    fields:
+      slug: true
+      placeholder:
+        type: slug
+        placeholder: Write something …
+      icon:
+        type: slug
+        icon: text
+      before:
+        type: slug
+        before: Before
+      after:
+        type: slug
+        after: After
+      beforeAndAfter:
+        type: slug
+        before: Before
+        after: After
+      beforeAndAfterAndIcon:
+        type: slug
+        before: Before
+        after: After
+        icon: edit
+  - width: 1/2
+    fields:
+      required:
+        type: slug
+        required: true
+      maxlength:
+        type: slug
+        maxlength: 10
+      minlength:
+        type: slug
+        maxlength: 10
+      disabled:
+        type: slug
+        disabled: true
+      help:
+        type: slug
+        help: Some help text
+
