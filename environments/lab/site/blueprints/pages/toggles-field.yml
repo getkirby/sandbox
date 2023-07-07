@@ -1,66 +1,212 @@
 title: Toggles
 extends: pages/default
-fields:
-  toggles: true
+columns:
+  - width: 1/2
+    fields:
+      toggles: true
 
-  labels:
-    type: toggles
-    label: Labels
-    options:
-      - left
-      - center
-      - right
+      labels:
+        type: toggles
+        label: Labels
+        options:
+          - left
+          - center
+          - right
 
-  iconAndLabel:
-    type: toggles
-    label: Icon & Label
-    options:
-      - value: left
-        text: Left
-        icon: text-left
-      - value: center
-        text: Center
-        icon: text-center
-      - value: right
-        text: Right
-        icon: text-right
-      - value: justify
-        text: Justify
-        icon: text-justify
+      iconAndLabel:
+        type: toggles
+        label: Icon & Label
+        options:
+          - value: left
+            text: Left
+            icon: text-left
+          - value: center
+            text: Center
+            icon: text-center
+          - value: right
+            text: Right
+            icon: text-right
+          - value: justify
+            text: Justify
+            icon: text-justify
 
-  icons:
-    type: toggles
-    label: Icons
-    labels: false
-    options:
-      - value: left
-        text: Left
-        icon: text-left
-      - value: center
-        text: Center
-        icon: text-center
-      - value: right
-        text: Right
-        icon: text-right
-      - value: justify
-        text: Justify
-        icon: text-justify
+      icons:
+        type: toggles
+        label: Icons
+        labels: false
+        options:
+          - value: left
+            text: Left
+            icon: text-left
+          - value: center
+            text: Center
+            icon: text-center
+          - value: right
+            text: Right
+            icon: text-right
+          - value: justify
+            text: Justify
+            icon: text-justify
 
-  nonGrowing:
-    type: toggles
-    label: Grow = false
-    labels: false
-    grow: false
-    options:
-      - value: left
-        text: Left
-        icon: text-left
-      - value: center
-        text: Center
-        icon: text-center
-      - value: right
-        text: Right
-        icon: text-right
-      - value: justify
-        text: Justify
-        icon: text-justify
+      iconAndLabelRequired:
+        type: toggles
+        label: Required
+        required: true
+        options:
+          - value: left
+            text: Left
+            icon: text-left
+          - value: center
+            text: Center
+            icon: text-center
+          - value: right
+            text: Right
+            icon: text-right
+          - value: justify
+            text: Justify
+            icon: text-justify
+
+      iconAndLabelHelp:
+        type: toggles
+        label: Help
+        help: This is some nice help here
+        options:
+          - value: left
+            text: Left
+            icon: text-left
+          - value: center
+            text: Center
+            icon: text-center
+          - value: right
+            text: Right
+            icon: text-right
+          - value: justify
+            text: Justify
+            icon: text-justify
+
+      iconAndLabelDisabled:
+        type: toggles
+        label: Icon & Label disabled
+        disabled: true
+        options:
+          - value: left
+            text: Left
+            icon: text-left
+          - value: center
+            text: Center
+            icon: text-center
+          - value: right
+            text: Right
+            icon: text-right
+          - value: justify
+            text: Justify
+            icon: text-justify
+
+  - width: 1/2
+    fields:
+      nonGrowingNoOptions:
+        type: toggles
+        label: No Options
+        grow: false
+      nonGrowingLabels:
+        type: toggles
+        label: Labels
+        grow: false
+        options:
+          - left
+          - center
+          - right
+
+      nonGrowingIconAndLabel:
+        type: toggles
+        label: Icon & Label
+        grow: false
+        options:
+          - value: left
+            text: Left
+            icon: text-left
+          - value: center
+            text: Center
+            icon: text-center
+          - value: right
+            text: Right
+            icon: text-right
+          - value: justify
+            text: Justify
+            icon: text-justify
+
+      nonGrowingIcons:
+        type: toggles
+        label: Icons
+        labels: false
+        grow: false
+        options:
+          - value: left
+            text: Left
+            icon: text-left
+          - value: center
+            text: Center
+            icon: text-center
+          - value: right
+            text: Right
+            icon: text-right
+          - value: justify
+            text: Justify
+            icon: text-justify
+
+      nonGrowingRequired:
+        type: toggles
+        label: Required
+        required: true
+        grow: false
+        options:
+          - value: left
+            text: Left
+            icon: text-left
+          - value: center
+            text: Center
+            icon: text-center
+          - value: right
+            text: Right
+            icon: text-right
+          - value: justify
+            text: Justify
+            icon: text-justify
+
+      nonGrowingHelp:
+        type: toggles
+        label: Help
+        grow: false
+        help: This is some nice help here
+        options:
+          - value: left
+            text: Left
+            icon: text-left
+          - value: center
+            text: Center
+            icon: text-center
+          - value: right
+            text: Right
+            icon: text-right
+          - value: justify
+            text: Justify
+            icon: text-justify
+
+      nonGrowingIconAndLabelDisabled:
+        type: toggles
+        label: Icon & Label disabled
+        grow: false
+        disabled: true
+        options:
+          - value: left
+            text: Left
+            icon: text-left
+          - value: center
+            text: Center
+            icon: text-center
+          - value: right
+            text: Right
+            icon: text-right
+          - value: justify
+            text: Justify
+            icon: text-justify
