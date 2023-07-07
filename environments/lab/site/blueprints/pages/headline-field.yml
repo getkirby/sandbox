@@ -5,10 +5,6 @@ fields:
   label:
     type: headline
     label: Some Text
-  notNumbered:
-    type: headline
-    label: Without number
-    numbered: false
   help:
     type: headline
     label: With help
