@@ -75,3 +75,8 @@ fields:
     type: structure
     fields:
       color: true
+  disabled:
+    type: structure
+    disabled: true
+    fields:
+      color: true

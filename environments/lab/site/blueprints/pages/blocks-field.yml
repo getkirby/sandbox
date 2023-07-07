@@ -5,6 +5,9 @@ tabs:
   simple:
     fields:
       blocks: true
+      disabled:
+        type: blocks
+        disabled: true
       tabs:
         type: blocks
         fieldsets:
