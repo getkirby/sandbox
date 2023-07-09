@@ -15,7 +15,7 @@ columns:
         before: Before
       after:
         type: url
-        before: After
+        after: After
       beforeAndAfter:
         type: url
         before: Before

@@ -15,7 +15,7 @@ columns:
         before: Before
       after:
         type: text
-        before: After
+        after: After
       beforeAndAfter:
         type: text
         before: Before

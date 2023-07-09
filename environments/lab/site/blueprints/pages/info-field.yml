@@ -2,35 +2,56 @@ title: Info
 extends: pages/default
 fields:
   info: true
-  text:
+
+  default:
     type: info
-    text: This is some text
-  positive:
+    text: This is some test text
+
+  white:
     type: info
-    text: This is some text
-    theme: positive
-  negative:
+    text: This is some test text
+    theme: white
+
+  passive:
     type: info
-    text: This is some text
-    theme: negative
+    text: This is some test text
+    theme: passive
+
+  empty:
+    type: info
+    text: This is some test text
+    theme: empty
+
+  dark:
+    type: info
+    text: This is some test text
+    theme: dark
+
   warning:
     type: info
-    text: This is some text
+    text: This is some test text
     theme: warning
+
   notice:
     type: info
-    text: This is some text
+    text: This is some test text
     theme: notice
-  plain:
+
+  negative:
     type: info
-    text: This is some text
-    theme: plain
-  none:
+    text: This is some test text
+    theme: negative
+
+  positive:
     type: info
-    text: This is some text
-    theme: none
-    help: Some help text …
-  help:
+    text: This is some test text
+    theme: positive
+
+  text:
     type: info
-    text: This is some text
-    help: Some help text …
+    text: This is some test text
+    theme: text
+
+  noLabel:
+    type: info
+    label: ""
