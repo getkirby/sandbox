@@ -1,5 +1,6 @@
 <?php
 
+use Kirby\Cms\App;
 use Kirby\Filesystem\Dir;
 use Kirby\Filesystem\F;
 
@@ -18,7 +19,7 @@ class Environment
 	 */
 	public static function auth(string $username): bool
 	{
-		if ($user = kirby()->user($username)) {
+		if ($user = App::instance()->user($username)) {
 			$user->loginPasswordless();
 			return true;
 		}
@@ -142,10 +143,11 @@ class Environment
 	 *
 	 * @param string|null $environment Target environment (defaults to current one)
 	 */
-	public static function store(?string $environment = null): bool
+	public static function store(string|null $environment = null): bool
 	{
-		$public      = __DIR__ . '/public';
-		$environment = $environment ?? F::read($public . '/.environment');
+		$public        = __DIR__ . '/public';
+		$environment ??= F::read($public . '/.environment');
+
 		if (!$environment) {
 			return false;
 		}
@@ -264,8 +266,10 @@ class Environment
 	 * @param string $directory Directory to operate in
 	 * @param string $previous Source directory to link the submodules to
 	 */
-	protected static function linkSubmodules(string $directory, string $previous): void
-	{
+	protected static function linkSubmodules(
+		string $directory,
+		string $previous
+	): void {
 		foreach (static::findSubmodules($directory) as $path => $fileinfo) {
 			// find the matching submodule path in the original location
 			$previousPath = str_replace($directory, $previous, $path);
