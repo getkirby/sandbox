@@ -1,0 +1,12 @@
+{
+	"name": "getkirby/environments",
+	"description": "Manage Sandbox environments form the Kirby Panel",
+	"version": "1.0.0",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Nico Hoffmann",
+			"email": "nico@getkirby.com"
+		}
+	]
+}

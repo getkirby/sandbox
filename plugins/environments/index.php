@@ -4,7 +4,7 @@ use Kirby\Cms\App;
 use Kirby\Panel\Panel;
 use Kirby\Toolkit\A;
 
-App::plugin('getkirby/environemnts', [
+App::plugin('getkirby/environments', [
 	'areas' => [
 		'environments' => function ($kirby) {
 			return [

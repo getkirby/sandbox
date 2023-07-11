@@ -1,4 +1,4 @@
-panel.plugin("yourname/todos", {
+panel.plugin("getkirby/environments", {
 	components: {
 		"k-environments-view": {
 			props: {
