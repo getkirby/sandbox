@@ -128,6 +128,12 @@ tabs:
         extends: fields/structure/simple
         width: 1/4
 
+  pagination:
+    fields:
+      pagination:
+        extends: fields/structure/simple
+        limit: 1
+
   preview:
     fields:
       structurePreview:

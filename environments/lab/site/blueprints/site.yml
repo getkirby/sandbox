@@ -7,3 +7,4 @@ columns:
   - width: 1/2
     sections:
       sections: sections/sections
+      components: sections/components

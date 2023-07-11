@@ -1,0 +1,7 @@
+label: Components
+parent: page('components')
+type: pages
+layout: list
+image: false
+create: false
+limit: 50

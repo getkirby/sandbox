@@ -1,0 +1,29 @@
+.k-ui-playground {
+	position: relative;
+	container-type: inline-size;
+	max-width: 100%;
+	padding: 1.5rem;
+	outline-offset: -2px;
+	border-radius: var(--rounded);
+}
+.k-ui-playground::before {
+	position: absolute;
+	inset-block-start: .5rem;
+	inset-inline-start: 0;
+	font-size: 10px;
+	content: attr(aria-label);
+	color: var(--color-gray-600);
+}
+.k-ui-playground-canvas {
+	padding: 1.5rem;
+	display: flex;
+	gap: 1.5rem;
+}
+
+.k-ui-canvas:has(.k-ui-playground) {
+	padding: 0;
+}
+
+.k-ui-playground + .k-ui-playground {
+	border-block-start: 1px dashed var(--color-border);
+}
