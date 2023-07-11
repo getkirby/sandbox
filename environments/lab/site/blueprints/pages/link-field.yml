@@ -51,3 +51,14 @@ tabs:
       oneQuarter4:
         type: link
         width: 1/4
+
+  preview:
+    fields:
+      structurePreview:
+        type: structure
+        fields:
+          link: true
+      objectPreview:
+        type: object
+        fields:
+          link: true
