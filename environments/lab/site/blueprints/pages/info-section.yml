@@ -49,6 +49,11 @@ tabs:
         text: This is some test text
         theme: positive
 
+      none:
+        type: info
+        text: This is some test text
+        theme: none
+
       text:
         type: info
         text: This is some test text
@@ -139,7 +144,3 @@ tabs:
         sections:
           textOneQuarter4:
             extends: sections/info/text
-
-
-
-

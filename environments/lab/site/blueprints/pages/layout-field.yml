@@ -6,6 +6,16 @@ tabs:
       layout: true
       layouts:
         extends: fields/layout/default
+      settings:
+        extends: fields/layout/default
+        settings:
+          fields:
+            class:
+              type: text
+              width: 1/2
+            id:
+              type: text
+              width: 1/2
       empty:
         extends: fields/layout/default
         empty: This is some custom empty text
