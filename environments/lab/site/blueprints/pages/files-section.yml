@@ -12,6 +12,9 @@ tabs:
         type: files
         layout: list
         image: false
+      listWithSearch:
+        type: files
+        search: true
 
   cardlets:
     sections:
@@ -26,6 +29,10 @@ tabs:
         type: files
         layout: cardlets
         image: false
+      cardletsWithSearch:
+        type: files
+        layout: cardlets
+        search: true
 
   cards:
     sections:
@@ -40,6 +47,10 @@ tabs:
         type: files
         layout: cards
         image: false
+      cardsWithSearch:
+        type: files
+        layout: cards
+        search: true
 
   table:
     sections:
@@ -54,6 +65,10 @@ tabs:
         type: files
         layout: table
         image: false
+      tableWithSearch:
+        type: files
+        layout: table
+        search: true
 
   cardSizes:
     sections:

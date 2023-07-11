@@ -15,6 +15,10 @@ tabs:
         layout: list
         image: false
         template: page
+      listWithSearch:
+        type: pages
+        template: page
+        search: true
 
   cardlets:
     sections:
@@ -32,6 +36,11 @@ tabs:
         layout: cardlets
         image: false
         template: page
+      cardletsWithSearch:
+        type: pages
+        layout: cardlets
+        template: page
+        search: true
 
   cards:
     sections:
@@ -49,6 +58,11 @@ tabs:
         layout: cards
         image: false
         template: page
+      cardsWithSearch:
+        type: pages
+        layout: cards
+        template: page
+        search: true
 
   table:
     sections:
@@ -66,6 +80,11 @@ tabs:
         layout: table
         image: false
         template: page
+      tableWithSearch:
+        type: pages
+        layout: table
+        template: page
+        search: true
 
   cardSizes:
     sections:
