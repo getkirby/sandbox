@@ -1,24 +1,143 @@
 title: Writer
-extends: pages/default
-fields:
-  writer: true
+tabs:
+  general:
+    fields:
+      writer: true
+      placeholder:
+        type: writer
+        placeholder: Write something …
+      icon:
+        type: writer
+        icon: text
+      disabled:
+        type: writer
+        disabled: true
+      disabledCounter:
+        type: writer
+        counter: false
+      help:
+        type: writer
+        help: Some help text
 
-  writerNextToText:
-    type: writer
-    width: 1/2
-  textA:
-    type: text
-    width: 1/2
+  toolbar:
+    fields:
+      toolbar:
+        type: writer
+        toolbar:
+          inline: false
+      toolbarPlaceholder:
+        type: writer
+        placeholder: Write something …
+        toolbar:
+          inline: false
+      toolbarIcon:
+        type: writer
+        icon: text
+        toolbar:
+          inline: false
+      toolbarDisabled:
+        type: writer
+        disabled: true
+        toolbar:
+          inline: false
+      toolbarDisabledCounter:
+        type: writer
+        counter: false
+        toolbar:
+          inline: false
+      toolbarHelp:
+        type: writer
+        help: Some help text
+        toolbar:
+          inline: false
 
-  writerWithPlaceholderNextToText:
-    type: writer
-    placeholder: Nice writer …
-    width: 1/2
-  textB:
-    type: text
-    width: 1/2
+  validation:
+    fields:
+      required:
+        type: writer
+        required: true
+      maxlength:
+        type: writer
+        maxlength: 10
+      minlength:
+        type: writer
+        maxlength: 10
 
-  toolbarInline:
-    type: writer
-    toolbar:
-      inline: false
+  widths:
+    fields:
+      oneHalf1:
+        type: writer
+        width: 1/2
+      oneHalf2:
+        type: writer
+        width: 1/2
+      oneThird1:
+        type: writer
+        width: 1/3
+      oneThird2:
+        type: writer
+        width: 1/3
+      oneThird3:
+        type: writer
+        width: 1/3
+      oneQuarter1:
+        type: writer
+        width: 1/4
+      oneQuarter2:
+        type: writer
+        width: 1/4
+      oneQuarter3:
+        type: writer
+        width: 1/4
+      oneQuarter4:
+        type: writer
+        width: 1/4
+
+      widthsLine:
+        type: line
+
+      toolbarOneHalf1:
+        type: writer
+        width: 1/2
+        toolbar:
+          inline: false
+      toolbarOneHalf2:
+        type: writer
+        width: 1/2
+        toolbar:
+          inline: false
+      toolbarOneThird1:
+        type: writer
+        width: 1/3
+        toolbar:
+          inline: false
+      toolbarOneThird2:
+        type: writer
+        width: 1/3
+        toolbar:
+          inline: false
+      toolbarOneThird3:
+        type: writer
+        width: 1/3
+        toolbar:
+          inline: false
+      toolbarOneQuarter1:
+        type: writer
+        width: 1/4
+        toolbar:
+          inline: false
+      toolbarOneQuarter2:
+        type: writer
+        width: 1/4
+        toolbar:
+          inline: false
+      toolbarOneQuarter3:
+        type: writer
+        width: 1/4
+        toolbar:
+          inline: false
+      toolbarOneQuarter4:
+        type: writer
+        width: 1/4
+        toolbar:
+          inline: false

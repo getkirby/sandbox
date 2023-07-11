@@ -1,54 +1,145 @@
 title: Info
-extends: pages/default
 
-sections:
-  info: true
+tabs:
+  themes:
+    sections:
+      info: true
 
-  default:
-    type: info
-    text: This is some test text
+      default:
+        type: info
+        text: This is some test text
 
-  white:
-    type: info
-    text: This is some test text
-    theme: white
+      white:
+        type: info
+        text: This is some test text
+        theme: white
 
-  passive:
-    type: info
-    text: This is some test text
-    theme: passive
+      passive:
+        type: info
+        text: This is some test text
+        theme: passive
 
-  empty:
-    type: info
-    text: This is some test text
-    theme: empty
+      empty:
+        type: info
+        text: This is some test text
+        theme: empty
 
-  dark:
-    type: info
-    text: This is some test text
-    theme: dark
+      dark:
+        type: info
+        text: This is some test text
+        theme: dark
 
-  warning:
-    type: info
-    text: This is some test text
-    theme: warning
+      warning:
+        type: info
+        text: This is some test text
+        theme: warning
 
-  notice:
-    type: info
-    text: This is some test text
-    theme: notice
+      notice:
+        type: info
+        text: This is some test text
+        theme: notice
 
-  negative:
-    type: info
-    text: This is some test text
-    theme: negative
+      negative:
+        type: info
+        text: This is some test text
+        theme: negative
 
-  positive:
-    type: info
-    text: This is some test text
-    theme: positive
+      positive:
+        type: info
+        text: This is some test text
+        theme: positive
 
-  text:
-    type: info
-    text: This is some test text
-    theme: text
+      text:
+        type: info
+        text: This is some test text
+        theme: text
+
+      noLabel:
+        type: info
+        label: ""
+
+  widths:
+    columns:
+      - width: 1/2
+        sections:
+          oneHalf1:
+            extends: sections/info/long
+      - width: 1/2
+        sections:
+          oneHalf2:
+            extends: sections/info/long
+
+      - width: 1/3
+        sections:
+          oneThird1:
+            extends: sections/info/long
+      - width: 1/3
+        sections:
+          oneThird2:
+            extends: sections/info/long
+      - width: 1/3
+        sections:
+          oneThird3:
+            extends: sections/info/long
+
+      - width: 1/4
+        sections:
+          oneQuarter1:
+            extends: sections/info/long
+      - width: 1/4
+        sections:
+          oneQuarter2:
+            extends: sections/info/long
+      - width: 1/4
+        sections:
+          oneQuarter3:
+            extends: sections/info/long
+      - width: 1/4
+        sections:
+          oneQuarter4:
+            extends: sections/info/long
+
+      # text
+
+      - width: 1/2
+        sections:
+          textOneHalf1:
+            extends: sections/info/text
+      - width: 1/2
+        sections:
+          textOneHalf2:
+            extends: sections/info/text
+
+      - width: 1/3
+        sections:
+          textOneThird1:
+            extends: sections/info/text
+      - width: 1/3
+        sections:
+          textOneThird2:
+            extends: sections/info/text
+      - width: 1/3
+        sections:
+          textOneThird3:
+            extends: sections/info/text
+
+      - width: 1/4
+        sections:
+          textOneQuarter1:
+            extends: sections/info/text
+      - width: 1/4
+        sections:
+          textOneQuarter2:
+            extends: sections/info/text
+      - width: 1/4
+        sections:
+          textOneQuarter3:
+            extends: sections/info/text
+      - width: 1/4
+        sections:
+          textOneQuarter4:
+            extends: sections/info/text
+
+
+
+

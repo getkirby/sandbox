@@ -1,57 +1,120 @@
 title: Info
-extends: pages/default
-fields:
-  info: true
 
-  default:
-    type: info
-    text: This is some test text
+tabs:
+  themes:
+    fields:
+      info: true
 
-  white:
-    type: info
-    text: This is some test text
-    theme: white
+      default:
+        type: info
+        text: This is some test text
 
-  passive:
-    type: info
-    text: This is some test text
-    theme: passive
+      white:
+        type: info
+        text: This is some test text
+        theme: white
 
-  empty:
-    type: info
-    text: This is some test text
-    theme: empty
+      passive:
+        type: info
+        text: This is some test text
+        theme: passive
 
-  dark:
-    type: info
-    text: This is some test text
-    theme: dark
+      empty:
+        type: info
+        text: This is some test text
+        theme: empty
 
-  warning:
-    type: info
-    text: This is some test text
-    theme: warning
+      dark:
+        type: info
+        text: This is some test text
+        theme: dark
 
-  notice:
-    type: info
-    text: This is some test text
-    theme: notice
+      warning:
+        type: info
+        text: This is some test text
+        theme: warning
 
-  negative:
-    type: info
-    text: This is some test text
-    theme: negative
+      notice:
+        type: info
+        text: This is some test text
+        theme: notice
 
-  positive:
-    type: info
-    text: This is some test text
-    theme: positive
+      negative:
+        type: info
+        text: This is some test text
+        theme: negative
 
-  text:
-    type: info
-    text: This is some test text
-    theme: text
+      positive:
+        type: info
+        text: This is some test text
+        theme: positive
 
-  noLabel:
-    type: info
-    label: ""
+      text:
+        type: info
+        text: This is some test text
+        theme: text
+
+      noLabel:
+        type: info
+        label: ""
+
+  widths:
+    fields:
+      oneHalf1:
+        extends: fields/info/long
+        width: 1/2
+      oneHalf2:
+        extends: fields/info/long
+        width: 1/2
+      oneThird1:
+        extends: fields/info/long
+        width: 1/3
+      oneThird2:
+        extends: fields/info/long
+        width: 1/3
+      oneThird3:
+        extends: fields/info/long
+        width: 1/3
+      oneQuarter1:
+        extends: fields/info/long
+        width: 1/4
+      oneQuarter2:
+        extends: fields/info/long
+        width: 1/4
+      oneQuarter3:
+        extends: fields/info/long
+        width: 1/4
+      oneQuarter4:
+        extends: fields/info/long
+        width: 1/4
+
+      widthsLine:
+        type: line
+
+      textOneHalf1:
+        extends: fields/info/text
+        width: 1/2
+      textOneHalf2:
+        extends: fields/info/text
+        width: 1/2
+      textOneThird1:
+        extends: fields/info/text
+        width: 1/3
+      textOneThird2:
+        extends: fields/info/text
+        width: 1/3
+      textOneThird3:
+        extends: fields/info/text
+        width: 1/3
+      textOneQuarter1:
+        extends: fields/info/text
+        width: 1/4
+      textOneQuarter2:
+        extends: fields/info/text
+        width: 1/4
+      textOneQuarter3:
+        extends: fields/info/text
+        width: 1/4
+      textOneQuarter4:
+        extends: fields/info/text
+        width: 1/4

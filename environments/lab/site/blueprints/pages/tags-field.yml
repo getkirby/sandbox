@@ -1,118 +1,144 @@
 title: Tags
-extends: pages/default
-columns:
-  - width: 1/2
+
+tabs:
+  general:
     fields:
       tags: true
-      manualOptions:
+      simple:
+        extends: fields/options/simple
         type: tags
-        options:
-          - a
-          - b
-          - c
-      manualOptionsWithLabel:
+      icon:
+        extends: fields/options/simple
         type: tags
-        options:
-          a: Option A
-          b: Option B
-          c: Option C
-      manualOptionsWithTranslatedLabel:
-        type: tags
-        options:
-          a:
-            en: Option A
-            de: Variante A
-          b:
-            en: Option B
-            de: Variante B
-          c:
-            en: Option C
-            de: Variante C
-      manualOptionsWithTranslatedLabelI18nKey:
-        type: tags
-        options:
-          a:
-            *: option.a
-          b:
-            *: option.b
-          c:
-            *: option.c
-      optionsFromApi:
-        type: tags
-        options:
-          type: api
-          url: "{{ site.url }}/options.json"
-          query: Companies
-          text: "{{ item.name }}"
-          value: "{{ item.short }}"
-      optionsFromQuery:
-        type: tags
-        options:
-          type: query
-          query: site.children.limit(3)
-          text: "{{ page.title }}"
-          value: "{{ page.id }}"
-      acceptOnlyOptions:
-        type: tags
-        accept: options
-        options:
-          - a
-          - b
-          - c
-      manyOptions:
-        type: tags
-        accept: options
-        options:
-          type: api
-          url: "{{ site.url }}/countries.json"
-          text: "{{ item.name }}"
-          value: "{{ item.alpha2 }}"
-      sortedOptions:
-        type: tags
-        sort: true
-        options:
-          - a
-          - b
-          - c
-      noOptions:
-        type: tags
-        accept: options
-
-  - width: 1/2
-    fields:
-      required:
-        type: tags
-        required: true
-      max:
-        type: tags
-        max: 3
-      min:
-        type: tags
-        min: 3
+        icon: heart
       disabled:
+        extends: fields/options/simple
         type: tags
         disabled: true
-      icon:
+      help:
+        extends: fields/options/simple
         type: tags
-        icon: edit
-      noSearch:
+        help: This is a short help text.
+  options:
+    fields:
+      optionsFromKeysAndValues:
+        extends: fields/options/key-value
         type: tags
-        icon: edit
+      optionsFromObjects:
+        extends: fields/options/objects
+        type: tags
+      optionsWithInfo:
+        extends: fields/options/info
+        type: tags
+      optionsWithTranslatedLabel:
+        extends: fields/options/translated
+        type: tags
+      optionsWithTranslatedLabelI18nKey:
+        extends: fields/options/i18n
+        type: tags
+      optionsFromApi:
+        extends: fields/options/api
+        type: tags
+      optionsFromQuery:
+        type: tags
+        extends: fields/options/query
+      optionsMany:
+        type: tags
+        extends: fields/options/countries
+      optionsWithHtmlEscaped:
+        type: tags
+        extends: fields/options/escaped
+      optionsWithHtmlAllowed:
+        type: tags
+        extends: fields/options/html
+      optionsSorted:
+        type: tags
+        extends: fields/options/countries
+        sort: true
+      optionsAcceptAll:
+        type: tags
+        extends: fields/options/simple
+        accept: all
+        sort: true
+  search:
+    fields:
+      searchFalse:
+        extends: fields/options/simple
+        type: tags
         search: false
-        accept: options
-        options:
-          - a
-          - b
-          - c
-      layout:
+      searchDisplayOnly2:
+        extends: fields/options/simple
+        type: tags
+        search:
+          display: 2
+      searchMin:
+        extends: fields/options/long
+        type: tags
+        search:
+          min: 4
+
+  layout:
+    fields:
+      list:
+        extends: fields/options/simple
         type: tags
         layout: list
-      help:
+
+  validation:
+    fields:
+      required:
+        extends: fields/options/simple
         type: tags
-        help: Some help text
-      heightCheck:
+        required: true
+      min:
+        extends: fields/options/simple
+        type: tags
+        min: 2
+      max:
+        extends: fields/options/simple
+        type: tags
+        max: 2
+      minmax:
+        extends: fields/options/simple
+        type: tags
+        min: 1
+        max: 2
+
+  widths:
+    fields:
+      oneHalf1:
+        extends: fields/options/simple
         type: tags
         width: 1/2
-      heightCheckReference:
-        type: text
+      oneHalf2:
+        extends: fields/options/simple
+        type: tags
         width: 1/2
+      oneThird1:
+        extends: fields/options/simple
+        type: tags
+        width: 1/3
+      oneThird2:
+        extends: fields/options/simple
+        type: tags
+        width: 1/3
+      oneThird3:
+        extends: fields/options/simple
+        type: tags
+        width: 1/3
+      oneQuarter1:
+        extends: fields/options/simple
+        type: tags
+        width: 1/4
+      oneQuarter2:
+        extends: fields/options/simple
+        type: tags
+        width: 1/4
+      oneQuarter3:
+        extends: fields/options/simple
+        type: tags
+        width: 1/4
+      oneQuarter4:
+        extends: fields/options/simple
+        type: tags
+        width: 1/4

@@ -1,0 +1,6 @@
+options:
+  type: api
+  url: "{{ site.url }}/options.json"
+  query: Companies
+  text: "{{ item.name }}"
+  value: "{{ item.short }}"

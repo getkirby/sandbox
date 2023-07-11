@@ -1,82 +1,129 @@
 title: Structure
-extends: pages/default
-fields:
-  structure: true
-  simple:
-    type: structure
+tabs:
+  general:
     fields:
-      text: true
-  required:
-    type: structure
-    required: true
+      structure: true
+      simple:
+        extends: fields/structure/simple
+      empty:
+        extends: fields/structure/simple
+        empty: This is some custom empty text
+      disabled:
+        extends: fields/structure/simple
+        disabled: true
+      help:
+        extends: fields/structure/simple
+        help: This is some test help text
+
+  validation:
     fields:
-      text: true
-  customColumns:
-    type: structure
-    columns:
-      text: true
+      required:
+        extends: fields/structure/simple
+        required: true
+      min:
+        extends: fields/structure/simple
+        min: 1
+      max:
+        extends: fields/structure/simple
+        max: 1
+      minmax:
+        extends: fields/structure/simple
+        min: 1
+        max: 2
+
+  previews:
     fields:
-      text: true
-      number: true
-  columnPreviewsA:
-    type: structure
-    fields:
-      date: true
-      email: true
-      files: true
-      list: true
-      pages: true
-      tags: true
-  columnPreviewsB:
-    type: structure
-    fields:
-      time: true
-      toggle: true
-      url: true
-      users: true
-      writer: true
-  columnPreviewsC:
-    type: structure
-    fields:
-      multiselect:
-        type: multiselect
-        options:
-          - design
-          - architecture
-          - photography
-      select:
-        type: select
-        options:
-          - design
-          - architecture
-          - photography
-      radio:
-        type: radio
-        options:
-          - design
-          - architecture
-          - photography
-      checkboxes:
-        type: checkboxes
-        options:
-          - design
-          - architecture
-          - photography
-  columnPreviewsD:
-    type: structure
-    fields:
-      blocks: true
-      layout: true
-      structure:
+      customColumns:
         type: structure
+        columns:
+          text: true
         fields:
           text: true
-  columnPreviewsE:
-    type: structure
+          number: true
+      columnPreviewsA:
+        type: structure
+        fields:
+          date: true
+          email: true
+          files: true
+          list: true
+          pages: true
+          tags: true
+      columnPreviewsB:
+        type: structure
+        fields:
+          time: true
+          toggle: true
+          url: true
+          users: true
+          writer: true
+      columnPreviewsC:
+        type: structure
+        fields:
+          multiselect:
+            type: multiselect
+            options:
+              - design
+              - architecture
+              - photography
+          select:
+            type: select
+            options:
+              - design
+              - architecture
+              - photography
+          radio:
+            type: radio
+            options:
+              - design
+              - architecture
+              - photography
+          checkboxes:
+            type: checkboxes
+            options:
+              - design
+              - architecture
+              - photography
+      columnPreviewsD:
+        type: structure
+        fields:
+          blocks: true
+          layout: true
+          structure:
+            type: structure
+            fields:
+              text: true
+      columnPreviewsE:
+        type: structure
+        fields:
+          color: true
+
+  widths:
     fields:
-      color: true
-  disabled:
-    type: structure
-    disabled: true
-    fields:
-      color: true
+      oneHalf1:
+        extends: fields/structure/simple
+        width: 1/2
+      oneHalf2:
+        extends: fields/structure/simple
+        width: 1/2
+      oneThird1:
+        extends: fields/structure/simple
+        width: 1/3
+      oneThird2:
+        extends: fields/structure/simple
+        width: 1/3
+      oneThird3:
+        extends: fields/structure/simple
+        width: 1/3
+      oneQuarter1:
+        extends: fields/structure/simple
+        width: 1/4
+      oneQuarter2:
+        extends: fields/structure/simple
+        width: 1/4
+      oneQuarter3:
+        extends: fields/structure/simple
+        width: 1/4
+      oneQuarter4:
+        extends: fields/structure/simple
+        width: 1/4

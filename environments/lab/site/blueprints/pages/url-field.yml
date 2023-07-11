@@ -1,7 +1,7 @@
 title: URL
-extends: pages/default
-columns:
-  - width: 1/2
+
+tabs:
+  general:
     fields:
       url: true
       placeholder:
@@ -25,17 +25,6 @@ columns:
         before: Before
         after: After
         icon: edit
-  - width: 1/2
-    fields:
-      required:
-        type: url
-        required: true
-      maxlength:
-        type: url
-        maxlength: 10
-      minlength:
-        type: url
-        maxlength: 10
       disabled:
         type: url
         disabled: true
@@ -45,3 +34,53 @@ columns:
       help:
         type: url
         help: Some help text
+
+  validation:
+    fields:
+      required:
+        type: url
+        required: true
+      minlength:
+        type: url
+        minlength: 10
+      maxlength:
+        type: url
+        maxlength: 10
+
+  widths:
+    fields:
+      oneHalf1:
+        type: url
+        width: 1/2
+      oneHalf2:
+        type: url
+        width: 1/2
+        before: Before
+        after: After
+      oneThird1:
+        type: url
+        width: 1/3
+      oneThird2:
+        type: url
+        width: 1/3
+      oneThird3:
+        type: url
+        width: 1/3
+        before: Before
+        after: After
+      oneQuarter1:
+        type: url
+        width: 1/4
+      oneQuarter2:
+        type: url
+        width: 1/4
+      oneQuarter3:
+        type: url
+        width: 1/4
+      oneQuarter4:
+        type: url
+        width: 1/4
+        before: Before
+        after: After
+
+

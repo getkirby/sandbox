@@ -1,0 +1,4 @@
+options:
+  - Option A with a long label that should wrap nicely
+  - Option B with a long label that should wrap nicely
+  - Option C with a long label that should wrap nicely

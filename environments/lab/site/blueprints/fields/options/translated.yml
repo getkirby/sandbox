@@ -1,0 +1,10 @@
+options:
+  a:
+    en: Option A
+    de: Variante A
+  b:
+    en: Option B
+    de: Variante B
+  c:
+    en: Option C
+    de: Variante C

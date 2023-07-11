@@ -1,4 +1,68 @@
 title: Users
-extends: pages/default
-fields:
-  users: true
+
+tabs:
+  general:
+    fields:
+      files: true
+      empty:
+        type: users
+        empty: This is a custom empty text
+      disabled:
+        type: users
+        disabled: true
+      help:
+        type: users
+        help: This is some nice help
+
+  validation:
+    fields:
+      required:
+        type: users
+        required: true
+      min:
+        type: users
+        min: 1
+      max:
+        type: users
+        max: 1
+
+  layouts:
+    fields:
+      list:
+        type: users
+      cardlets:
+        type: users
+        layout: cardlets
+      cards:
+        type: users
+        layout: cards
+
+  widths:
+    fields:
+      oneHalf1:
+        type: users
+        width: 1/2
+      oneHalf2:
+        type: users
+        width: 1/2
+      oneThird1:
+        type: users
+        width: 1/3
+      oneThird2:
+        type: users
+        width: 1/3
+      oneThird3:
+        type: users
+        width: 1/3
+      oneQuarter1:
+        type: users
+        width: 1/4
+      oneQuarter2:
+        type: users
+        width: 1/4
+      oneQuarter3:
+        type: users
+        width: 1/4
+      oneQuarter4:
+        type: users
+        width: 1/4

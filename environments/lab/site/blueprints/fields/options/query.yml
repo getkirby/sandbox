@@ -1,0 +1,5 @@
+options:
+  type: query
+  query: site.children.limit(3)
+  text: "{{ page.title }}"
+  value: "{{ page.id }}"

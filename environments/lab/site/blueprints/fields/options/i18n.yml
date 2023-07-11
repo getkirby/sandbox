@@ -1,0 +1,7 @@
+options:
+  a:
+    *: option.a
+  b:
+    *: option.b
+  c:
+    *: option.c

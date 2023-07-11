@@ -1,5 +1,4 @@
 title: Stats
-extends: pages/default
 
 tabs:
   item:

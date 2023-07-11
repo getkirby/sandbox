@@ -1,79 +1,95 @@
 title: Select
-extends: pages/default
 
-columns:
-  - width: 1/2
+tabs:
+  general:
     fields:
       select: true
-      manualOptions:
+      simple:
+        extends: fields/options/simple
         type: select
-        options:
-          - a
-          - b
-          - c
-      manualOptionsWithLabel:
-        type: select
-        options:
-          a: Option A
-          b: Option B
-          c: Option C
-      manualOptionsWithTranslatedLabel:
-        type: select
-        options:
-          a:
-            en: Option A
-            de: Variante A
-          b:
-            en: Option B
-            de: Variante B
-          c:
-            en: Option C
-            de: Variante C
-      manualOptionsWithTranslatedLabelI18nKey:
-        type: select
-        options:
-          a:
-            *: option.a
-          b:
-            *: option.b
-          c:
-            *: option.c
-      optionsFromApi:
-        type: select
-        options:
-          type: api
-          url: "{{ site.url }}/options.json"
-          query: Companies
-          text: "{{ item.name }}"
-          value: "{{ item.short }}"
-      optionsFromQuery:
-        type: select
-        options:
-          type: query
-          query: site.children.limit(3)
-          text: "{{ page.title }}"
-          value: "{{ page.id }}"
-  - width: 1/2
-    fields:
-      required:
-        type: select
-        required: true
-        options:
-          - a
-          - b
-          - c
       icon:
+        extends: fields/options/simple
         type: select
         icon: heart
       placeholder:
+        extends: fields/options/simple
         type: select
-        placeholder: "@:@:@:@"
+        placeholder: Placeholder
       disabled:
+        extends: fields/options/simple
         type: select
         disabled: true
       help:
+        extends: fields/options/simple
         type: select
-        options:
-          - a
-          - b
         help: This is a short help text.
+
+  options:
+    fields:
+      optionsFromKeysAndValues:
+        extends: fields/options/key-value
+        type: select
+      optionsFromObjects:
+        extends: fields/options/objects
+        type: select
+      optionsWithTranslatedLabel:
+        extends: fields/options/translated
+        type: select
+      optionsWithTranslatedLabelI18nKey:
+        extends: fields/options/i18n
+        type: select
+      optionsFromApi:
+        extends: fields/options/api
+        type: select
+      optionsFromQuery:
+        type: select
+        extends: fields/options/query
+      optionsWithHtmlEscaped:
+        type: select
+        extends: fields/options/escaped
+
+  validation:
+    fields:
+      required:
+        extends: fields/options/simple
+        type: select
+        required: true
+
+  widths:
+    fields:
+      oneHalf1:
+        extends: fields/options/long
+        type: select
+        width: 1/2
+      oneHalf2:
+        extends: fields/options/long
+        type: select
+        width: 1/2
+      oneThird1:
+        extends: fields/options/long
+        type: select
+        width: 1/3
+      oneThird2:
+        extends: fields/options/long
+        type: select
+        width: 1/3
+      oneThird3:
+        extends: fields/options/long
+        type: select
+        width: 1/3
+      oneQuarter1:
+        extends: fields/options/long
+        type: select
+        width: 1/4
+      oneQuarter2:
+        extends: fields/options/long
+        type: select
+        width: 1/4
+      oneQuarter3:
+        extends: fields/options/long
+        type: select
+        width: 1/4
+      oneQuarter4:
+        extends: fields/options/long
+        type: select
+        width: 1/4

@@ -1,0 +1,11 @@
+type: toggles
+label: Labels
+options:
+  - value: left
+    text: Left
+  - value: center
+    text: Center
+  - value: right
+    text: Right
+  - value: justify
+    text: Justify

@@ -1,144 +1,144 @@
 title: Multiselect
-extends: pages/default
 
-columns:
-  - width: 1/2
+tabs:
+  general:
     fields:
       multiselect: true
-      manualOptions:
+      simple:
+        extends: fields/options/simple
         type: multiselect
-        options:
-          - a
-          - b
-          - c
-      manualOptionsWithLabel:
-        type: multiselect
-        options:
-          a: Option A
-          b: Option B
-          c: Option C
-      manualOptionsWithTranslatedLabel:
-        type: multiselect
-        options:
-          a:
-            en: Option A
-            de: Variante A
-          b:
-            en: Option B
-            de: Variante B
-          c:
-            en: Option C
-            de: Variante C
-      manualOptionsWithTranslatedLabelI18nKey:
-        type: multiselect
-        options:
-          a:
-            *: option.a
-          b:
-            *: option.b
-          c:
-            *: option.c
-      optionsFromApi:
-        type: multiselect
-        options:
-          type: api
-          url: "{{ site.url }}/options.json"
-          query: Companies
-          text: "{{ item.name }}"
-          value: "{{ item.short }}"
-      optionsFromQuery:
-        type: multiselect
-        options:
-          type: query
-          query: site.children
-          text: "{{ page.title }}"
-          value: "{{ page.id }}"
-      htmlEscaped:
-        type: multiselect
-        options:
-          type: api
-          url: "{{ site.url }}/options.json"
-          query: Html
-          text: "{{ item.name }}"
-          value: "{{ item.short }}"
-      htmlAllowed:
-        type: multiselect
-        options:
-          type: api
-          url: "{{ site.url }}/options.json"
-          query: Html
-          text: "{< item.name >}"
-          value: "{{ item.short }}"
-  - width: 1/2
-    fields:
-      required:
-        type: multiselect
-        required: true
-        options:
-          - a
-          - b
-          - c
-      sortOptions:
-        type: multiselect
-        sort: true
-        options:
-          - a
-          - b
-          - c
-      min:
-        type: multiselect
-        options:
-          - a
-          - b
-          - c
-        min: 2
-      max:
-        type: multiselect
-        options:
-          - a
-          - b
-          - c
-        max: 2
-      disabled:
-        type: multiselect
-        disabled: true
-        options:
-          - a
-          - b
-          - c
       icon:
+        extends: fields/options/simple
         type: multiselect
         icon: heart
-        options:
-          - a
-          - b
-          - c
+      disabled:
+        extends: fields/options/simple
+        type: multiselect
+        disabled: true
+      help:
+        extends: fields/options/simple
+        type: multiselect
+        help: This is a short help text.
+  options:
+    fields:
+      optionsFromKeysAndValues:
+        extends: fields/options/key-value
+        type: multiselect
+      optionsFromObjects:
+        extends: fields/options/objects
+        type: multiselect
+      optionsWithInfo:
+        extends: fields/options/info
+        type: multiselect
+      optionsWithTranslatedLabel:
+        extends: fields/options/translated
+        type: multiselect
+      optionsWithTranslatedLabelI18nKey:
+        extends: fields/options/i18n
+        type: multiselect
+      optionsFromApi:
+        extends: fields/options/api
+        type: multiselect
+      optionsFromQuery:
+        type: multiselect
+        extends: fields/options/query
+      optionsMany:
+        type: multiselect
+        extends: fields/options/countries
+      optionsWithHtmlEscaped:
+        type: multiselect
+        extends: fields/options/escaped
+      optionsWithHtmlAllowed:
+        type: multiselect
+        extends: fields/options/html
+      optionsSorted:
+        type: multiselect
+        extends: fields/options/countries
+        sort: true
+      optionsAcceptAll:
+        type: multiselect
+        extends: fields/options/simple
+        accept: all
+        sort: true
+  search:
+    fields:
       searchFalse:
+        extends: fields/options/simple
         type: multiselect
         search: false
-        options:
-          - a
-          - b
-          - c
       searchDisplayOnly2:
+        extends: fields/options/simple
         type: multiselect
         search:
           display: 2
-        options:
-          - a
-          - b
-          - c
       searchMin:
+        extends: fields/options/long
         type: multiselect
         search:
           min: 4
-        options:
-          - aaaaaa
-          - bbbbbb
-          - cccccc
-      help:
+
+  layout:
+    fields:
+      list:
+        extends: fields/options/simple
         type: multiselect
-        options:
-          - a
-          - b
-        help: This is a short help text.
+        layout: list
+
+  validation:
+    fields:
+      required:
+        extends: fields/options/simple
+        type: multiselect
+        required: true
+      min:
+        extends: fields/options/simple
+        type: multiselect
+        min: 2
+      max:
+        extends: fields/options/simple
+        type: multiselect
+        max: 2
+      minmax:
+        extends: fields/options/simple
+        type: multiselect
+        min: 1
+        max: 2
+
+  widths:
+    fields:
+      oneHalf1:
+        extends: fields/options/simple
+        type: multiselect
+        width: 1/2
+      oneHalf2:
+        extends: fields/options/simple
+        type: multiselect
+        width: 1/2
+      oneThird1:
+        extends: fields/options/simple
+        type: multiselect
+        width: 1/3
+      oneThird2:
+        extends: fields/options/simple
+        type: multiselect
+        width: 1/3
+      oneThird3:
+        extends: fields/options/simple
+        type: multiselect
+        width: 1/3
+      oneQuarter1:
+        extends: fields/options/simple
+        type: multiselect
+        width: 1/4
+      oneQuarter2:
+        extends: fields/options/simple
+        type: multiselect
+        width: 1/4
+      oneQuarter3:
+        extends: fields/options/simple
+        type: multiselect
+        width: 1/4
+      oneQuarter4:
+        extends: fields/options/simple
+        type: multiselect
+        width: 1/4
