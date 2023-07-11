@@ -10,13 +10,20 @@ panel.plugin("yourname/todos", {
 						Sandbox
 
 						<template #buttons>
-							<!--<k-button
-								dialog="environments/create"
-								icon="add"
-								text="Store as new"
+							<k-button
+								:link="$panel.urls.site"
+								target="_blank"
+								icon="open"
 								size="sm"
 								variant="filled"
-							 />-->
+							 />
+							<k-button
+								dialog="environments/create"
+								icon="add"
+								text="New environment"
+								size="sm"
+								variant="filled"
+							 />
 						</template>
 					</k-header>
 

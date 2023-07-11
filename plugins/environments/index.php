@@ -41,7 +41,7 @@ App::plugin('getkirby/environemnts', [
 													'icon'    => 'trash',
 													'text'    => 'Delete',
 													'variant' => 'filled',
-													'link'    => 'environments/' . $env['name'] . '/delete'
+													'dialog'    => 'environments/' . $env['name'] . '/delete'
 												]
 											]
 										]
@@ -64,13 +64,6 @@ App::plugin('getkirby/environemnts', [
 							Environment::user('test');
 							go(url('env/auth/test@getkirby.com?panel'));
 						}
-					],
-					[
-						'pattern' => 'environments/(:any)/switch',
-						'action'  => function (string $env) {
-							Environment::delete($env);
-							Panel::go('environments');
-						}
 					]
 				],
 				'dialogs' => [
@@ -81,8 +74,10 @@ App::plugin('getkirby/environemnts', [
 								'props' => [
 									'fields' => [
 										'env' => [
-											'type'  => 'text',
-											'label' => 'Environment name',
+											'type'     => 'text',
+											'label'    => 'Environment name',
+											'required' => true,
+											'help'     => 'New environment will be based on the current public folder'
 										]
 									],
 									'submitButton' => [
@@ -93,9 +88,22 @@ App::plugin('getkirby/environemnts', [
 							];
 						},
 						'submit' => function () {
-							$env = get('env');
-							Environment::store($env);
-
+							Environment::store(get('env'));
+							return true;
+						}
+					],
+					'environments/delete' => [
+						'pattern' => 'environments/(:any)/delete',
+						'load'   => function (string $env) {
+							return [
+								'component' => 'k-remove-dialog',
+								'props' => [
+									'text' => 'Are you sure you want to delete the <b>' . $env . '</b> environment?'
+								]
+							];
+						},
+						'submit' => function (string $env) {
+							Environment::delete($env);
 							return true;
 						}
 					]
