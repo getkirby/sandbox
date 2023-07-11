@@ -93,3 +93,19 @@ tabs:
         extends: fields/options/long
         type: select
         width: 1/4
+
+  preview:
+    fields:
+      structurePreview:
+        type: structure
+        fields:
+          select:
+            extends: fields/options/simple
+            type: select
+      objectPreview:
+        type: object
+        fields:
+          select:
+            extends: fields/options/simple
+            type: select
+

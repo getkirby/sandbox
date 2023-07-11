@@ -82,3 +82,14 @@ tabs:
         before: Before
         after: After
         placeholder: Placeholder
+
+  preview:
+    fields:
+      structurePreview:
+        type: structure
+        fields:
+          slug: true
+      objectPreview:
+        type: object
+        fields:
+          slug: true

@@ -127,3 +127,14 @@ tabs:
       oneQuarter4:
         extends: fields/structure/simple
         width: 1/4
+
+  preview:
+    fields:
+      structurePreview:
+        type: structure
+        fields:
+          structure: fields/structure/simple
+      objectPreview:
+        type: object
+        fields:
+          structure: fields/structure/simple

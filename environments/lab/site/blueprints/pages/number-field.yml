@@ -90,3 +90,14 @@ tabs:
         after: After
         icon: edit
         placeholder: Placeholder
+
+  preview:
+    fields:
+      structurePreview:
+        type: structure
+        fields:
+          number: true
+      objectPreview:
+        type: object
+        fields:
+          number: true

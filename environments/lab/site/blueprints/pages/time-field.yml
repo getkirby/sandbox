@@ -111,8 +111,16 @@ tabs:
 
   preview:
     fields:
-      preview:
+      structurePreview:
         type: structure
+        fields:
+          time:
+            type: time
+          timeDisplay:
+            type: time
+            display: hh:mm a
+      objectPreview:
+        type: object
         fields:
           time:
             type: time

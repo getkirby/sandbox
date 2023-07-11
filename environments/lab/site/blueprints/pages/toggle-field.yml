@@ -93,5 +93,15 @@ tabs:
         after: After
         icon: edit
 
+  preview:
+    fields:
+      structurePreview:
+        type: structure
+        fields:
+          toggle: true
+      objectPreview:
+        type: object
+        fields:
+          toggle: true
 
 

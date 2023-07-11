@@ -66,3 +66,14 @@ tabs:
       oneQuarter4:
         type: files
         width: 1/4
+
+  preview:
+    fields:
+      structurePreview:
+        type: structure
+        fields:
+          files: true
+      objectPreview:
+        type: object
+        fields:
+          files: true

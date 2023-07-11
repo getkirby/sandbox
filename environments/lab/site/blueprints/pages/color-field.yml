@@ -116,3 +116,14 @@ tabs:
       optionsOneQuarter4:
         extends: fields/color/options
         width: 1/4
+
+  preview:
+    fields:
+      structurePreview:
+        type: structure
+        fields:
+          color: true
+      objectPreview:
+        type: object
+        fields:
+          color: true

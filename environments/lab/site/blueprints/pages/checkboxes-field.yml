@@ -108,3 +108,18 @@ tabs:
         extends: fields/options/long
         type: checkboxes
         width: 1/4
+
+  preview:
+    fields:
+      structurePreview:
+        type: structure
+        fields:
+          checkboxes:
+            extends: fields/options/simple
+            type: checkboxes
+      objectPreview:
+        type: object
+        fields:
+          checkboxes:
+            extends: fields/options/simple
+            type: checkboxes

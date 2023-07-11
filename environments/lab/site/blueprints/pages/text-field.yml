@@ -89,5 +89,14 @@ tabs:
         after: After
         icon: edit
 
-
+  preview:
+    fields:
+      structurePreview:
+        type: structure
+        fields:
+          text: true
+      objectPreview:
+        type: object
+        fields:
+          text: true
 

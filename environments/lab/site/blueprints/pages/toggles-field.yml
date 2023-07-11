@@ -121,3 +121,14 @@ tabs:
         extends: fields/toggles/icons-and-labels
         width: 1/4
         grow: false
+
+  preview:
+    fields:
+      structurePreview:
+        type: structure
+        fields:
+          toggles: fields/toggles/icons-and-labels
+      objectPreview:
+        type: object
+        fields:
+          toggles: fields/toggles/icons-and-labels

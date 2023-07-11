@@ -142,3 +142,18 @@ tabs:
         extends: fields/options/simple
         type: multiselect
         width: 1/4
+
+  preview:
+    fields:
+      structurePreview:
+        type: structure
+        fields:
+          multiselect:
+            extends: fields/options/simple
+            type: multiselect
+      objectPreview:
+        type: object
+        fields:
+          multiselect:
+            extends: fields/options/simple
+            type: multiselect

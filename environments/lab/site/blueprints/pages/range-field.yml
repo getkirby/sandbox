@@ -109,3 +109,14 @@ tabs:
         after: After
         icon: edit
         placeholder: Placeholder
+
+  preview:
+    fields:
+      structurePreview:
+        type: structure
+        fields:
+          range: true
+      objectPreview:
+        type: object
+        fields:
+          range: true

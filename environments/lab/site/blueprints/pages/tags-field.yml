@@ -142,3 +142,18 @@ tabs:
         extends: fields/options/simple
         type: tags
         width: 1/4
+
+  preview:
+    fields:
+      structurePreview:
+        type: structure
+        fields:
+          tags:
+            extends: fields/options/simple
+            type: tags
+      objectPreview:
+        type: object
+        fields:
+          tags:
+            extends: fields/options/simple
+            type: tags

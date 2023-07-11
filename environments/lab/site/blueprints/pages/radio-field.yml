@@ -95,3 +95,18 @@ tabs:
         extends: fields/options/long
         type: radio
         width: 1/4
+
+  preview:
+    fields:
+      structurePreview:
+        type: structure
+        fields:
+          radio:
+            extends: fields/options/simple
+            type: radio
+      objectPreview:
+        type: object
+        fields:
+          radio:
+            extends: fields/options/simple
+            type: radio

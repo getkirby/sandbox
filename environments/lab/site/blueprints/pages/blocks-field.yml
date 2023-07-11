@@ -90,3 +90,14 @@ tabs:
       oneQuarter4:
         type: blocks
         width: 1/4
+
+  preview:
+    fields:
+      structurePreview:
+        type: structure
+        fields:
+          blocks: true
+      objectPreview:
+        type: object
+        fields:
+          blocks: true

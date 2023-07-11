@@ -81,3 +81,14 @@ tabs:
       oneQuarter4:
         type: textarea
         width: 1/4
+
+  preview:
+    fields:
+      structurePreview:
+        type: structure
+        fields:
+          textarea: true
+      objectPreview:
+        type: object
+        fields:
+          textarea: true

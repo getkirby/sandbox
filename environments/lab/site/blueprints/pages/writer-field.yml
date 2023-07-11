@@ -141,3 +141,15 @@ tabs:
         width: 1/4
         toolbar:
           inline: false
+
+  preview:
+    fields:
+      structurePreview:
+        type: structure
+        fields:
+          writer: true
+      objectPreview:
+        type: object
+        fields:
+          writer: true
+

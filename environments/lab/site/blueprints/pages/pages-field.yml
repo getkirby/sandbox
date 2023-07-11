@@ -66,3 +66,14 @@ tabs:
       oneQuarter4:
         type: pages
         width: 1/4
+
+  preview:
+    fields:
+      structurePreview:
+        type: structure
+        fields:
+          pages: true
+      objectPreview:
+        type: object
+        fields:
+          pages: true

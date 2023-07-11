@@ -271,6 +271,13 @@ tabs:
           dateDisplay:
             type: date
             display: DD.MM.YYYY
+      dateObject:
+        type: object
+        fields:
+          date: true
+          dateDisplay:
+            type: date
+            display: DD.MM.YYYY
       timeStructure:
         type: structure
         fields:
@@ -282,6 +289,21 @@ tabs:
             display: MM/DD/YYYY
             time:
               display: hh:mm a
+      timeObject:
+        type: object
+        fields:
+          date:
+            type: date
+            time: true
+          dateDisplay:
+            type: date
+            display: MM/DD/YYYY
+            time:
+              display: hh:mm a
+
+
+
+
 
 
 

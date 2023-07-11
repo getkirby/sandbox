@@ -83,4 +83,14 @@ tabs:
         before: Before
         after: After
 
+  preview:
+    fields:
+      structurePreview:
+        type: structure
+        fields:
+          url: true
+      objectPreview:
+        type: object
+        fields:
+          url: true
 

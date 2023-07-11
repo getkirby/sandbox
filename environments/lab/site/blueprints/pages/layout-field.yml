@@ -51,3 +51,14 @@ tabs:
       oneQuarter4:
         extends: fields/layout/default
         width: 1/4
+
+  preview:
+    fields:
+      structurePreview:
+        type: structure
+        fields:
+          layout: true
+      objectPreview:
+        type: object
+        fields:
+          layout: true

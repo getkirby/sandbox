@@ -82,3 +82,13 @@ tabs:
         before: Before
         after: After
 
+  preview:
+    fields:
+      structurePreview:
+        type: structure
+        fields:
+          email: true
+      objectPreview:
+        type: object
+        fields:
+          email: true
