@@ -1,4 +1,0 @@
-title: Slug
-extends: pages/default
-fields:
-  slug: true

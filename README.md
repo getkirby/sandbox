@@ -66,21 +66,6 @@ Clicking "Store & Switch" will first store the changes in the *current* environm
 
 If you want to create an entirely new environment, enter the name in the text field and click "Store".
 
-### Switching environments in Cypress
-
-Cypress does not allow visiting URLs on different domains in the same test setup. That's why there's a little proxy route to switch environments in Cypress:
-
-```js
-cy.visit('http://localhost:8080/env/install/demokit);
-```
-
-For Cypress user handling there are these two routes:
-
-```js
-cy.visit('http://localhost:8080/env/user/test); // installs the test user
-cy.visit('http://localhost:8080/env/auth/test@getkirby.com); // automatic login
-```
-
 ## Creating environments
 
 New environments can be created in two ways:

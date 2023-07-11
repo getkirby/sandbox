@@ -1,4 +1,0 @@
-title: Textarea
-extends: pages/default
-fields:
-  textarea: true

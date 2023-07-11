@@ -1,4 +1,0 @@
-title: List
-extends: pages/default
-fields:
-  list: true

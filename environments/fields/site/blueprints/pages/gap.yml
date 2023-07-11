@@ -1,4 +1,0 @@
-title: Gap
-extends: pages/default
-fields:
-  gap: true

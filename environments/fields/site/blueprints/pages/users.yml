@@ -1,4 +1,0 @@
-title: Users
-extends: pages/default
-fields:
-  users: true

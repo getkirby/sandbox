@@ -1,9 +1,0 @@
-title: Site
-sections:
-  pages:
-    headline: Field Types
-    type: pages
-    layout: cardlets
-    image: false
-    create: false
-    limit: 50
