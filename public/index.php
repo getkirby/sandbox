@@ -5,11 +5,6 @@ $root = dirname(__DIR__);
 require $root . '/kirby/bootstrap.php';
 require $root . '/environment.php';
 
-if (get('env') !== null) {
-    require $root . '/ui.php';
-    die();
-}
-
 $kirby = new Kirby([
     'options' => [
         'api' => [
