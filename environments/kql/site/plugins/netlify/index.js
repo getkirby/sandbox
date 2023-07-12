@@ -1,17 +1,23 @@
 panel.plugin("getkirby/netlify", {
-  sections: {
-    netlify: {
-      template: `
-        <section>
-          <k-button class="k-netlify-cta" @click="publish">Publish to Netlify</k-button>
+	sections: {
+		netlify: {
+			template: `
+        <section class="k-section">
+          <k-button
+            icon="plane"
+            text="Publish to Netlify"
+            theme="positive"
+            variant="filled"
+            class="k-netlify-cta"
+            @click="publish"/>
         </section>
       `,
-      methods: {
-        publish() {
-          this.$api.post("deploy");
-          alert("Published");
-        }
-      }
-    }
-  }
+			methods: {
+				publish() {
+					this.$api.post("deploy");
+					alert("Published");
+				},
+			},
+		},
+	},
 });

@@ -1,0 +1,11 @@
+{
+	"name": "getkirby/playground",
+	"version": "1.0.0",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Bastian Allgeier",
+			"email": "bastian@getkirby.com"
+		}
+	]
+}

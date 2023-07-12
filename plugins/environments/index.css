@@ -1,0 +1,13 @@
+.k-environments-view .k-header {
+	margin-bottom: var(--spacing-12);
+}
+
+.k-environments-view .k-item-options {
+	gap: var(--spacing-1);
+	padding-left: var(--spacing-6);
+	padding-right: var(--spacing-1);
+}
+.k-environments-view .k-item-options .k-button {
+	--button-height: var(--height-sm);
+	--button-padding: 0.5rem;
+}

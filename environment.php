@@ -45,16 +45,13 @@ class Environment
 	 */
 	public static function envs(): array
 	{
-		$envs = [];
-
-		$activeEnv = static::active();
+		$envs   = [];
+		$active = static::active();
 
 		foreach (Dir::read(__DIR__ . '/environments') as $env) {
-			$root = static::root($env);
-
 			$envs[] = [
 				'name'   => $env,
-				'active' => $env === $activeEnv
+				'active' => $env === $active
 			];
 		}
 
@@ -66,7 +63,8 @@ class Environment
 	 */
 	public static function exists(string $environment): bool
 	{
-		return is_dir(static::root($environment));
+		$root = static::root($environment);
+		return is_dir($root) === true;
 	}
 
 	/**
@@ -92,13 +90,23 @@ class Environment
 		];
 
 		foreach ($directories as $directory) {
-			if (is_dir($root . '/' . $directory)) {
-				static::copyDirectory($root . '/' . $directory, $public . '/' . $directory);
+			if (is_dir($root . '/' . $directory) === true) {
+				static::copyDirectory(
+					$root . '/' . $directory,
+					$public . '/' . $directory
+				);
 			}
 		}
 
-		// copy the global ray plugin
-		static::copyDirectory(__DIR__ . '/plugins/ray', $public . '/site/plugins/ray');
+		// copy global plugins
+		static::copyDirectory(
+			__DIR__ . '/plugins/environments',
+			$public . '/site/plugins/environments'
+		);
+		static::copyDirectory(
+			__DIR__ . '/plugins/ray',
+			$public . '/site/plugins/ray'
+		);
 
 		// remove pre-installed users
 		if (is_dir($public . '/site/accounts') === true) {
@@ -171,7 +179,10 @@ class Environment
 
 		foreach ($directories as $directory) {
 			if (is_dir($public . '/' . $directory)) {
-				static::copyDirectory($public . '/' . $directory, $root . '/' . $directory);
+				static::copyDirectory(
+					$public . '/' . $directory,
+					$root . '/' . $directory
+				);
 			}
 		}
 
@@ -181,6 +192,7 @@ class Environment
 		// remove directories that should not be stored
 		Dir::remove($root . '/site/accounts');
 		Dir::remove($root . '/site/cache');
+		Dir::remove($root . '/site/plugins/environments');
 		Dir::remove($root . '/site/plugins/ray');
 		Dir::remove($root . '/site/sessions');
 
@@ -240,14 +252,17 @@ class Environment
 	protected static function findSubmodules($directory): Iterator
 	{
 		// iterate through all files and directories recursively
-		$directoryIterator = new RecursiveDirectoryIterator(
+		$directory = new RecursiveDirectoryIterator(
 			$directory,
 			FilesystemIterator::KEY_AS_PATHNAME | FilesystemIterator::CURRENT_AS_FILEINFO | FilesystemIterator::SKIP_DOTS
 		);
-		$recursiveIterator = new RecursiveIteratorIterator($directoryIterator, RecursiveIteratorIterator::SELF_FIRST);
+		$recursive = new RecursiveIteratorIterator(
+			$directory,
+			RecursiveIteratorIterator::SELF_FIRST
+		);
 
 		// only iterate through all directories that contain .git files
-		return new CallbackFilterIterator($recursiveIterator, function ($fileinfo) {
+		return new CallbackFilterIterator($recursive, function ($fileinfo) {
 			// only keep directories that have .git files themselves
 			if (is_file($fileinfo->getPathname() . '/.git') !== true) {
 				return false;
@@ -255,7 +270,8 @@ class Environment
 
 			// but skip every directory whose parent is already a submodule
 			// (nested submodule which is already covered by the parent's link)
-			return is_file(dirname($fileinfo->getPathname()) . '/.git') === false;
+			$dir = dirname($fileinfo->getPathname());
+			return is_file($dir . '/.git') === false;
 		});
 	}
 
