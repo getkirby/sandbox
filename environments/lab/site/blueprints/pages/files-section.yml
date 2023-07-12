@@ -126,3 +126,146 @@ tabs:
       paginationNoDetails:
         type: files
         limit: 1
+
+  widths:
+    columns:
+      # list
+      - width: 1/2
+        sections:
+          oneHalf1:
+            type: files
+      - width: 1/2
+        sections:
+          oneHalf2:
+            type: files
+      - width: 1/3
+        sections:
+          oneThird1:
+            type: files
+      - width: 1/3
+        sections:
+          oneThird2:
+            type: files
+      - width: 1/3
+        sections:
+          oneThird3:
+            type: files
+      - width: 1/4
+        sections:
+          oneQuarter1:
+            type: files
+      - width: 1/4
+        sections:
+          oneQuarter2:
+            type: files
+      - width: 1/4
+        sections:
+          oneQuarter3:
+            type: files
+      - width: 1/4
+        sections:
+          oneQuarter4:
+            type: files
+
+      # cardlets
+      - width: 1/2
+        sections:
+          cardletsOneHalf1:
+            type: files
+            layout: cardlets
+      - width: 1/2
+        sections:
+          cardletsOneHalf2:
+            type: files
+            layout: cardlets
+      - width: 1/3
+        sections:
+          cardletsOneThird1:
+            type: files
+            layout: cardlets
+      - width: 1/3
+        sections:
+          cardletsOneThird2:
+            type: files
+            layout: cardlets
+      - width: 1/3
+        sections:
+          cardletsOneThird3:
+            type: files
+            layout: cardlets
+      - width: 1/4
+        sections:
+          cardletsOneQuarter1:
+            type: files
+            layout: cardlets
+      - width: 1/4
+        sections:
+          cardletsOneQuarter2:
+            type: files
+            layout: cardlets
+      - width: 1/4
+        sections:
+          cardletsOneQuarter3:
+            type: files
+            layout: cardlets
+      - width: 1/4
+        sections:
+          cardletsOneQuarter4:
+            type: files
+            layout: cardlets
+
+      # cards
+      - width: 1/2
+        sections:
+          cardsOneHalf1:
+            type: files
+            layout: cards
+            size: small
+      - width: 1/2
+        sections:
+          cardsOneHalf2:
+            type: files
+            layout: cards
+            size: small
+      - width: 1/3
+        sections:
+          cardsOneThird1:
+            type: files
+            layout: cards
+            size: small
+      - width: 1/3
+        sections:
+          cardsOneThird2:
+            type: files
+            layout: cards
+            size: small
+      - width: 1/3
+        sections:
+          cardsOneThird3:
+            type: files
+            layout: cards
+            size: small
+      - width: 1/4
+        sections:
+          cardsOneQuarter1:
+            type: files
+            layout: cards
+            size: small
+      - width: 1/4
+        sections:
+          cardsOneQuarter2:
+            type: files
+            layout: cards
+            size: small
+      - width: 1/4
+        sections:
+          cardsOneQuarter3:
+            type: files
+            layout: cards
+            size: small
+      - width: 1/4
+        sections:
+          cardsOneQuarter4:
+            type: files
+            layout: cards
+            size: small
