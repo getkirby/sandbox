@@ -20,6 +20,10 @@
 	gap: 1.5rem;
 }
 
+.k-ui-playground-canvas:has(> *:only-child) {
+	display: block;
+}
+
 .k-ui-canvas:has(.k-ui-playground) {
 	padding: 0;
 }
