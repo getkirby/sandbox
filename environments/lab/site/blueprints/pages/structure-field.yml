@@ -15,6 +15,14 @@ tabs:
         extends: fields/structure/simple
         help: This is some test help text
 
+  nested:
+    fields:
+      nested:
+        type: structure
+        fields:
+          structure:
+            extends: fields/structure/simple
+
   validation:
     fields:
       required:
