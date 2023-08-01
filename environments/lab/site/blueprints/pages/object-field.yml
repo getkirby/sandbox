@@ -20,6 +20,24 @@ tabs:
         extends: fields/object/simple
         help: Custom help text
 
+  nested:
+    fields:
+      nestedStructure:
+        type: object
+        fields:
+          children:
+            extends: fields/structure/simple
+      nestedBlocks:
+        type: object
+        fields:
+          children:
+            type: blocks
+      nestedObject:
+        type: object
+        fields:
+          children:
+            extends: fields/object/simple
+
   validation:
     fields:
       required:

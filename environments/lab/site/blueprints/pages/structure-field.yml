@@ -17,11 +17,21 @@ tabs:
 
   nested:
     fields:
-      nested:
+      nestedStructure:
         type: structure
         fields:
-          structure:
+          children:
             extends: fields/structure/simple
+      nestedBlocks:
+        type: structure
+        fields:
+          children:
+            type: blocks
+      nestedObject:
+        type: structure
+        fields:
+          children:
+            extends: fields/object/simple
 
   validation:
     fields:
