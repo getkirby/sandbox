@@ -123,3 +123,16 @@ tabs:
       textOneQuarter4:
         extends: fields/info/text
         width: 1/4
+
+  icons:
+    fields:
+      infoIcon:
+        type: info
+        text: This is some test text
+        icon: info
+
+      heartIcon:
+        type: info
+        text: This is some test text
+        icon: heart
+        theme: positive

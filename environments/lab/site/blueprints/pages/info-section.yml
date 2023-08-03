@@ -144,3 +144,16 @@ tabs:
         sections:
           textOneQuarter4:
             extends: sections/info/text
+
+  icons:
+    sections:
+      infoIcon:
+        type: info
+        text: This is some test text
+        icon: info
+
+      heartIcon:
+        type: info
+        text: This is some test text
+        icon: heart
+        theme: positive
