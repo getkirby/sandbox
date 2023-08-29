@@ -51,6 +51,61 @@ tabs:
         toolbar:
           inline: false
 
+  nodesAndMarks:
+    label: Nodes & Marks
+    columns:
+      - width: 1/2
+        fields:
+          limitedNodes:
+            label: Limited Nodes
+            type: writer
+            nodes:
+              - paragraph
+              - orderedList
+              - bulletList
+          limitedNodesInToolbar:
+            label: Limited Nodes in Toolbar
+            type: writer
+            nodes:
+              - paragraph
+              - orderedList
+              - bulletList
+            toolbar:
+              nodes:
+                - paragraph
+                - orderedList
+          singleNode:
+            label: Single Node
+            type: writer
+            nodes:
+              - paragraph
+
+      - width: 1/2
+        fields:
+          limitedMarks:
+            label: Limited Marks
+            type: writer
+            marks:
+              - bold
+              - italic
+              - underline
+          limitedMarksInToolbar:
+            label: Limited Marks in Toolbar
+            type: writer
+            marks:
+              - bold
+              - italic
+              - underline
+            toolbar:
+              marks:
+                - bold
+                - italic
+          singleMark:
+            label: Single Mark
+            type: writer
+            marks:
+              - bold
+
   validation:
     fields:
       required:
