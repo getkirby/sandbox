@@ -141,6 +141,10 @@ tabs:
       paginationNoDetails:
         type: files
         limit: 1
+      paginationWithSearch:
+        type: files
+        search: true
+        limit: 1
 
   widths:
     columns:
