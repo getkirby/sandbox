@@ -63,6 +63,8 @@ tabs:
               - paragraph
               - orderedList
               - bulletList
+            toolbar:
+              inline: false
           limitedNodesInToolbar:
             label: Limited Nodes in Toolbar
             type: writer
@@ -71,6 +73,7 @@ tabs:
               - orderedList
               - bulletList
             toolbar:
+              inline: false
               nodes:
                 - paragraph
                 - orderedList
@@ -79,6 +82,8 @@ tabs:
             type: writer
             nodes:
               - paragraph
+            toolbar:
+              inline: false
 
       - width: 1/2
         fields:
@@ -89,6 +94,8 @@ tabs:
               - bold
               - italic
               - underline
+            toolbar:
+              inline: false
           limitedMarksInToolbar:
             label: Limited Marks in Toolbar
             type: writer
@@ -97,6 +104,7 @@ tabs:
               - italic
               - underline
             toolbar:
+              inline: false
               marks:
                 - bold
                 - italic
@@ -105,7 +113,8 @@ tabs:
             type: writer
             marks:
               - bold
-
+            toolbar:
+              inline: false
   validation:
     fields:
       required:
