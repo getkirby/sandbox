@@ -92,3 +92,13 @@ tabs:
         type: object
         fields:
           textarea: true
+
+  comparison:
+    fields:
+      textareaForComparison:
+        type: textarea
+        buttons: false
+        width: 1/2
+      textForComparison:
+        type: text
+        width: 1/2

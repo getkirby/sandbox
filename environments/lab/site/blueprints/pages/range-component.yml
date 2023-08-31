@@ -1,0 +1,28 @@
+title: Range
+
+sections:
+  default:
+    type: playground
+    components:
+      - component: k-range
+  autofocus:
+    type: playground
+    components:
+      - component: k-range
+        props:
+          autofocus: true
+  hue:
+    type: playground
+    label: "Variant: hue"
+    components:
+      - component: k-range
+        props:
+          variant: hue
+  alpha:
+    type: playground
+    label: "Variant: alpha"
+    components:
+      - component: k-range
+        props:
+          variant: alpha
+

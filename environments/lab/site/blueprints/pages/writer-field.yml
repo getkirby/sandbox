@@ -217,3 +217,20 @@ tabs:
         fields:
           writer: true
 
+  comparison:
+    fields:
+      writerWithoutToolbar:
+        type: writer
+        width: 1/2
+      textareaWithoutToolbar:
+        type: textarea
+        buttons: false
+        width: 1/2
+      writerWithToolbar:
+        type: writer
+        width: 1/2
+        toolbar:
+          inline: false
+      textareaWithToolbar:
+        type: textarea
+        width: 1/2
