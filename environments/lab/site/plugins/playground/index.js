@@ -4,11 +4,13 @@ panel.plugin("getkirby/playground", {
 			data() {
 				return {
 					label: null,
-					components: []
-				}
+					components: [],
+				};
 			},
 			async created() {
-				const response = await this.$api.get(this.parent + "/sections/" + this.name);
+				const response = await this.$api.get(
+					this.parent + "/sections/" + this.name
+				);
 
 				this.label = response.label ?? this.name;
 				this.components = response.components ?? [];
@@ -16,10 +18,16 @@ panel.plugin("getkirby/playground", {
 			template: `
 				<div class="k-ui-playground" :aria-label="label" tabindex="0">
 					<div class="k-ui-playground-canvas">
-						<component v-for="(example, index) in components" :key="index" :is="example.component" v-bind="example.props" />
+						<component
+							v-for="(example, index) in components"
+							:key="index"
+							:is="example.component"
+							v-bind="example.props"
+							:style="example.style"
+						/>
 					</div>
 				</div>
-			`
-		}
-	}
+			`,
+		},
+	},
 });

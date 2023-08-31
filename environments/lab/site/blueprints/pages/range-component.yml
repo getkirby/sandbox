@@ -25,4 +25,4 @@ sections:
       - component: k-range
         props:
           variant: alpha
-
+        style: "color: aqua"
