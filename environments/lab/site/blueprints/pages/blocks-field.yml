@@ -61,6 +61,34 @@ tabs:
               blocks:
                 type: blocks
 
+  blocktypes:
+    fields:
+      writerBlock:
+        type: blocks
+        fieldsets:
+          text:
+            icon: text
+            wysiwyg: true
+            preview: text
+            fields:
+              text:
+                type: writer
+                label: Text
+                headings:
+                  - 2
+                  - 3
+                toolbar:
+                  inline: false
+      tableBlock:
+        type: blocks
+        fieldsets:
+          table:
+            icon: text
+            fields:
+              rows:
+                extends: fields/structure/simple
+
+
   widths:
     fields:
       oneHalf1:
