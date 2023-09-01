@@ -18,6 +18,7 @@
 	padding: 1.5rem;
 	display: flex;
 	gap: 1.5rem;
+	align-items: center;
 }
 
 .k-ui-playground-canvas:has(> *:only-child) {
