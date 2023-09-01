@@ -109,3 +109,13 @@ tabs:
             extends: fields/options/simple
             type: select
 
+  comparison:
+    fields:
+      selectForComparison:
+        extends: fields/options/simple
+        type: select
+        width: 1/2
+      textForComparison:
+        type: text
+        width: 1/2
+

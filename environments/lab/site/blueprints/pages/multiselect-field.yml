@@ -157,3 +157,13 @@ tabs:
           multiselect:
             extends: fields/options/simple
             type: multiselect
+
+  comparison:
+    fields:
+      multiselectForComparison:
+        extends: fields/options/simple
+        type: multiselect
+        width: 1/2
+      textForComparison:
+        type: text
+        width: 1/2

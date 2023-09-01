@@ -157,3 +157,13 @@ tabs:
           tags:
             extends: fields/options/simple
             type: tags
+
+  comparison:
+    fields:
+      tagsForComparison:
+        extends: fields/options/simple
+        type: tags
+        width: 1/2
+      textForComparison:
+        type: text
+        width: 1/2

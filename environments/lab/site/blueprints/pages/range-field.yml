@@ -120,3 +120,13 @@ tabs:
         type: object
         fields:
           range: true
+
+  comparison:
+    fields:
+      rangeForComparison:
+        type: range
+        width: 1/2
+      textForComparison:
+        type: text
+        width: 1/2
+

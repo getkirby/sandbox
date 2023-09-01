@@ -127,3 +127,12 @@ tabs:
         type: object
         fields:
           color: true
+
+  comparison:
+    fields:
+      colorForComparison:
+        type: color
+        width: 1/2
+      textForComparison:
+        type: text
+        width: 1/2

@@ -62,3 +62,12 @@ tabs:
         type: object
         fields:
           link: true
+
+  comparison:
+    fields:
+      linkForComparison:
+        type: link
+        width: 1/2
+      textForComparison:
+        type: text
+        width: 1/2

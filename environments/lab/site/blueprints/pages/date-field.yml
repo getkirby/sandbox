@@ -301,6 +301,15 @@ tabs:
             time:
               display: hh:mm a
 
+  comparison:
+    fields:
+      dateForComparison:
+        type: date
+        width: 1/2
+      textForComparison:
+        type: text
+        width: 1/2
+
 
 
 
