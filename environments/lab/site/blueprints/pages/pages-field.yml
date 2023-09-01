@@ -3,7 +3,7 @@ title: Pages
 tabs:
   general:
     fields:
-      files: true
+      pages: true
       empty:
         type: pages
         empty: This is a custom empty text
