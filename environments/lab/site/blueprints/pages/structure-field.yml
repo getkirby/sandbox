@@ -33,6 +33,29 @@ tabs:
           children:
             extends: fields/object/simple
 
+  sorting:
+    fields:
+      sortedByTitle:
+        type: structure
+        sortBy: title asc
+        fields:
+          title:
+            type: text
+          date: true
+      sortedByDate:
+        type: structure
+        sortBy: date asc
+        fields:
+          title:
+            type: text
+          date: true
+      notSortable:
+        type: structure
+        sortable: false
+        fields:
+          title:
+            type: text
+          date: true
   validation:
     fields:
       required:
