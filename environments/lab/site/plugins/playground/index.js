@@ -1,6 +1,7 @@
 panel.plugin("getkirby/playground", {
 	sections: {
 		playground: {
+			inheritAttrs: false,
 			data() {
 				return {
 					label: null,
@@ -17,7 +18,7 @@ panel.plugin("getkirby/playground", {
 			},
 			template: `
 				<div class="k-ui-playground" :aria-label="label" tabindex="0">
-					<div class="k-ui-playground-canvas">
+					<div class="k-ui-playground-canvas" :data-children="components.length">
 						<component
 							v-for="(example, index) in components"
 							:key="index"

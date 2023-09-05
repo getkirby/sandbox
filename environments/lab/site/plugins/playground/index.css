@@ -21,7 +21,7 @@
 	align-items: center;
 }
 
-.k-ui-playground-canvas:has(> *:only-child) {
+.k-ui-playground-canvas[data-children="1"] {
 	display: block;
 }
 
