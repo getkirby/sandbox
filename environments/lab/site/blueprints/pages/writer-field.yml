@@ -84,6 +84,14 @@ tabs:
               - paragraph
             toolbar:
               inline: false
+          nonDefaultNodes:
+            label: Non-default Nodes
+            type: writer
+            nodes:
+              - paragraph
+              - quote
+            toolbar:
+              inline: false
 
       - width: 1/2
         fields:
@@ -113,6 +121,14 @@ tabs:
             type: writer
             marks:
               - bold
+            toolbar:
+              inline: false
+          nonDefaultMarks:
+            label: Non-default Marks
+            type: writer
+            marks:
+              - sup
+              - sub
             toolbar:
               inline: false
   validation:
