@@ -1,0 +1,71 @@
+{
+	"name": "getkirby/ui",
+	"description": "Kirby UI library explorer",
+	"license": "MIT",
+	"type": "kirby-plugin",
+	"version": "1.0.0",
+	"keywords": [
+		"kirby",
+		"cms",
+		"ui",
+		"panel"
+	],
+	"authors": [
+		{
+			"name": "Bastian Allgeier",
+			"email": "bastian@getkirby.com"
+		},
+		{
+			"name": "Nico Hoffmann",
+			"email": "nico@getkirby.com"
+		}
+	],
+	"homepage": "https://getkirby.com",
+	"support": {
+		"email": "support@getkirby.com",
+		"issues": "https://github.com/getkirby/kql/issues",
+		"forum": "https://forum.getkirby.com",
+		"source": "https://github.com/getkirby/kql"
+	},
+	"require": {
+		"php": ">=8.0.0 <8.3.0",
+		"getkirby/composer-installer": "^1.2.1"
+	},
+	"autoload": {
+		"psr-4": {
+			"Kirby\\": [
+				"src/",
+				"tests/"
+			]
+		}
+	},
+	"config": {
+		"allow-plugins": {
+			"getkirby/composer-installer": true
+		},
+		"optimize-autoloader": true
+	},
+	"extra": {
+		"installer-name": "ui",
+		"kirby-cms-path": false
+	},
+	"scripts": {
+		"analyze": [
+			"@analyze:composer",
+			"@analyze:psalm",
+			"@analyze:phpcpd",
+			"@analyze:phpmd"
+		],
+		"analyze:composer": "composer validate --strict --no-check-version --no-check-all",
+		"analyze:phpcpd": "phpcpd --fuzzy --exclude tests --exclude vendor .",
+		"analyze:phpmd": "phpmd . ansi phpmd.xml.dist --exclude 'dependencies/*,tests/*,vendor/*'",
+		"analyze:psalm": "psalm",
+		"ci": [
+			"@fix",
+			"@analyze",
+			"@test"
+		],
+		"fix": "php-cs-fixer fix",
+		"test": "phpunit --stderr --coverage-html=tests/coverage"
+	}
+}

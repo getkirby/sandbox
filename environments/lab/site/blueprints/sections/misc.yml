@@ -1,7 +1,0 @@
-label: Misc
-parent: page('misc')
-type: pages
-layout: list
-image: false
-create: false
-limit: 50
