@@ -3,7 +3,10 @@
 use Kirby\Cms\App;
 use Kirby\Lab\Example;
 
-@include_once __DIR__ . '/vendor/autoload.php';
+load([
+	'kirby\lab\example' => __DIR__ . '/src/Lab/Example.php'
+]);
+
 require_once __DIR__ . '/helpers.php';
 
 App::plugin('getkirby/ui', [

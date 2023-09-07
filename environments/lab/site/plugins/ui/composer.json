@@ -2,7 +2,6 @@
 	"name": "getkirby/ui",
 	"description": "Kirby UI library explorer",
 	"license": "MIT",
-	"type": "kirby-plugin",
 	"version": "1.0.0",
 	"keywords": [
 		"kirby",
@@ -28,26 +27,7 @@
 		"source": "https://github.com/getkirby/kql"
 	},
 	"require": {
-		"php": ">=8.0.0 <8.3.0",
-		"getkirby/composer-installer": "^1.2.1"
-	},
-	"autoload": {
-		"psr-4": {
-			"Kirby\\": [
-				"src/",
-				"tests/"
-			]
-		}
-	},
-	"config": {
-		"allow-plugins": {
-			"getkirby/composer-installer": true
-		},
-		"optimize-autoloader": true
-	},
-	"extra": {
-		"installer-name": "ui",
-		"kirby-cms-path": false
+		"php": ">=8.0.0 <8.3.0"
 	},
 	"scripts": {
 		"analyze": [
