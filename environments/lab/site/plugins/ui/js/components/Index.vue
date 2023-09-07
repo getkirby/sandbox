@@ -12,3 +12,9 @@ export default {
 	},
 };
 </script>
+
+<style>
+.k-ui-index-view .k-list-items {
+	grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+}
+</style>
