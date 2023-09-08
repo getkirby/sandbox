@@ -15,14 +15,6 @@
 				@paginate="page = $event.page"
 			/>
 		</k-ui-example>
-		<k-ui-example label="Keys">
-			<k-pagination
-				:page="page"
-				:total="total"
-				:keys="true"
-				@paginate="page = $event.page"
-			/>
-		</k-ui-example>
 	</k-ui-examples>
 </template>
 
