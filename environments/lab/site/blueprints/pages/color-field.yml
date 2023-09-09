@@ -34,6 +34,16 @@ tabs:
           help:
             type: color
             help: Some help text
+  formats:
+    fields:
+      hexFormat:
+        type: color
+      rgbFormat:
+        type: color
+        format: rgb
+      hslFormat:
+        type: color
+        format: hsl
   options:
     fields:
       optionsMode:
