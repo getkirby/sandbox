@@ -3,7 +3,7 @@ title: Users
 tabs:
   general:
     fields:
-      files: true
+      users: true
       empty:
         type: users
         empty: This is a custom empty text
