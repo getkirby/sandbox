@@ -1,8 +1,3 @@
 <template>
-	<k-ui-examples>
-		<k-ui-example label="textarea">
-			<k-input type="textarea" />
-		</k-ui-example>
-	</k-ui-examples>
+	<k-ui-input-examples type="textarea" />
 </template>
-
