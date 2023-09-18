@@ -26,40 +26,6 @@
 				<li>Ordered list item</li>
 			</ol>
 		</k-ui-example>
-		<k-ui-example label="forms">
-			<form>
-				<fieldset>
-					<legend>Fieldset Legend</legend>
-					<div>
-						<input type="text" value="Text Input" />
-					</div>
-					<div>
-						<textarea>Textarea</textarea>
-					</div>
-					<div>
-						<select>
-							<option>Select A</option>
-							<option>Select B</option>
-						</select>
-					</div>
-					<div>
-						<input type="checkbox" />
-					</div>
-					<div>
-						<input type="radio" />
-					</div>
-					<div>
-						<button>Button</button>
-					</div>
-					<div>
-						<input type="submit" value="Submit" />
-					</div>
-					<div>
-						<input type="reset" value="Reset" />
-					</div>
-				</fieldset>
-			</form>
-		</k-ui-example>
 		<k-ui-example label="details">
 			<details>
 				<summary>Summary</summary>
