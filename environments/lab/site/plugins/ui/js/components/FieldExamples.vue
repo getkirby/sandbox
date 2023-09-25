@@ -1,25 +1,28 @@
 <template>
 	<k-ui-form>
-		<k-ui-examples class="k-ui-input-examples">
+		<k-ui-examples>
 			<k-ui-example label="Default">
 				<component
-					:is="`k-${type}-input`"
+					:is="`k-${type}-field`"
 					:name="type"
+					:label="label"
 					:value="input"
 					@input="emit"
 				/>
 			</k-ui-example>
 			<k-ui-example label="Autofocus">
 				<component
-					:is="`k-${type}-input`"
+					:is="`k-${type}-field`"
 					:autofocus="true"
+					:label="label"
 					:value="input"
 					@input="emit"
 				/>
 			</k-ui-example>
 			<k-ui-example label="Required">
 				<component
-					:is="`k-${type}-input`"
+					:is="`k-${type}-field`"
+					:label="label"
 					:required="true"
 					:value="input"
 					@input="emit"
@@ -27,28 +30,46 @@
 			</k-ui-example>
 			<k-ui-example v-if="placeholder" label="Placeholder">
 				<component
-					:is="`k-${type}-input`"
+					:is="`k-${type}-field`"
+					:label="label"
 					:value="input"
 					placeholder="Placeholder text …"
 					@input="emit"
 				/>
 			</k-ui-example>
-			<k-ui-example label="Focus">
+			<k-ui-example label="Help">
 				<component
-					ref="input"
-					:is="`k-${type}-input`"
+					:is="`k-${type}-field`"
+					:label="label"
 					:value="input"
-					style="margin-bottom: 1.5rem"
+					help="This is some help text"
 					@input="emit"
 				/>
-				<k-button variant="filled" @click="$refs.input.focus()" size="sm">
-					Focus
-				</k-button>
+			</k-ui-example>
+			<k-ui-example v-if="description" label="Before & After">
+				<component
+					:is="`k-${type}-field`"
+					:label="label"
+					:value="input"
+					after="After"
+					before="Before"
+					@input="emit"
+				/>
+			</k-ui-example>
+			<k-ui-example v-if="icon" label="Icon">
+				<component
+					:is="`k-${type}-field`"
+					:label="label"
+					:value="input"
+					icon="edit"
+					@input="emit"
+				/>
 			</k-ui-example>
 			<k-ui-example label="Disabled">
 				<component
-					:is="`k-${type}-input`"
+					:is="`k-${type}-field`"
 					:disabled="true"
+					:label="label"
 					:value="input"
 					@input="emit"
 				/>
@@ -61,6 +82,14 @@
 <script>
 export default {
 	props: {
+		description: {
+			default: true,
+			type: Boolean,
+		},
+		icon: {
+			default: true,
+			type: Boolean,
+		},
 		placeholder: {
 			default: true,
 			type: Boolean,
@@ -68,13 +97,18 @@ export default {
 		type: String,
 		value: {
 			default: null,
-			type: [String, Number, Boolean, Object, Array],
+			type: [String, Number, Array],
 		},
 	},
 	data() {
 		return {
 			input: null,
 		};
+	},
+	computed: {
+		label() {
+			return this.$helper.string.ucfirst(this.type);
+		},
 	},
 	watch: {
 		value: {
@@ -92,9 +126,3 @@ export default {
 	},
 };
 </script>
-
-<style>
-.k-ui-input-examples *:not([type="checkbox"], [type="radio"]):invalid {
-	outline: 2px solid var(--color-red-600) !important;
-}
-</style>
