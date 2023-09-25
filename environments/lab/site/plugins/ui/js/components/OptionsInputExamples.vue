@@ -55,7 +55,7 @@
 				<component
 					:is="`k-${type}-input`"
 					:disabled="true"
-					:options="optionsWithInfo"
+					:options="info ? optionsWithInfo : options"
 					:value="input"
 					@input="emit"
 				/>
