@@ -2,7 +2,7 @@
 	<k-ui-examples>
 		<k-ui-example
 			:flex="true"
-			label="parse"
+			label="$library.colors.parse()"
 			style="
 				--color-preview-size: var(--input-height);
 				--color-preview-rounded: var(--input-rounded);
