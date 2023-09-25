@@ -1,8 +1,5 @@
 <template>
-	<k-ui-examples>
-		<k-ui-example label="Default">
-			<k-choice-input :checked="value" @input="value = $event" />
-		</k-ui-example>
+	<k-ui-input-examples :value="value" type="choice" @input="value = $event">
 		<k-ui-example label="Label">
 			<k-choice-input :checked="value" label="Option" @input="value = $event" />
 		</k-ui-example>
@@ -32,25 +29,7 @@
 				@input="value = $event"
 			/>
 		</k-ui-example>
-		<k-ui-example label="Autofocus">
-			<k-choice-input
-				:autofocus="true"
-				:checked="value"
-				info="This is some info text"
-				label="Option"
-				@input="value = $event"
-			/>
-		</k-ui-example>
-		<k-ui-example label="Disabled">
-			<k-choice-input
-				:disabled="true"
-				:checked="value"
-				info="This is some info text"
-				label="Option"
-				@input="value = $event"
-			/>
-		</k-ui-example>
-	</k-ui-examples>
+	</k-ui-input-examples>
 </template>
 
 <script>
@@ -62,3 +41,9 @@ export default {
 	},
 };
 </script>
+
+<style>
+.k-ui-examples *:invalid {
+	outline: 2px solid var(--color-red-600);
+}
+</style>

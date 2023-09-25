@@ -1,13 +1,13 @@
 <template>
-	<k-ui-examples>
-		<k-ui-example label="Default">
-			<k-range-input :value="value" @input="value = $event" />
+	<k-ui-input-examples :placeholder="false" :value="value" type="range" @input="value = $event">
+		<k-ui-example label="Step: 0.01">
+			<k-range-input :step="0.01" :value="value" @input="value = $event" />
 		</k-ui-example>
-		<k-ui-example label="Autofocus">
-			<k-range-input :autofocus="true" :value="value" @input="value = $event" />
+		<k-ui-example label="Min: 5">
+			<k-range-input :min="5" :value="value" @input="value = $event" />
 		</k-ui-example>
-		<k-ui-example label="Disabled">
-			<k-range-input :disabled="true" :value="value" @input="value = $event" />
+		<k-ui-example label="Max: 10">
+			<k-range-input :max="10" :value="value" @input="value = $event" />
 		</k-ui-example>
 	</k-ui-examples>
 </template>
@@ -21,3 +21,4 @@ export default {
 	},
 };
 </script>
+
