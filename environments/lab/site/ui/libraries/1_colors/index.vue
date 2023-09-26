@@ -3,13 +3,10 @@
 		<k-ui-example
 			:flex="true"
 			label="$library.colors.parse()"
-			style="
-				--color-preview-size: var(--input-height);
-				--color-preview-rounded: var(--input-rounded);
-			"
+			style="--color-frame-size: var(--input-height)"
 		>
 			<div>
-				<div class="k-color-preview" :style="{ color: value }"></div>
+				<k-color-frame :color="value" />
 			</div>
 			<k-input type="text" placeholder="Type color …" @input="parse" />
 
@@ -17,11 +14,8 @@
 
 			<k-box theme="code">{{ parsed || "{}" }}</k-box>
 			<div>
-				<div
-					class="k-color-preview"
-					:style="{
-						color: parsed !== null ? $library.colors.toString(parsed) : value,
-					}"
+				<k-color-frame
+					:color="parsed !== null ? $library.colors.toString(parsed) : value"
 				/>
 			</div>
 		</k-ui-example>
