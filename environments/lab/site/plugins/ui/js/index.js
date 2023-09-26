@@ -1,6 +1,7 @@
 import Example from "./components/Example.vue";
 import Examples from "./components/Examples.vue";
 import FieldExamples from "./components/FieldExamples.vue";
+import FieldPreviewExample from "./components/FieldPreviewExample.vue";
 import Form from "./components/Form.vue";
 import Index from "./components/Index.vue";
 import InputExamples from "./components/InputExamples.vue";
@@ -16,6 +17,7 @@ panel.plugin("getkirby/ui", {
 		"k-ui-example": Example,
 		"k-ui-examples": Examples,
 		"k-ui-field-examples": FieldExamples,
+		"k-ui-field-preview-example": FieldPreviewExample,
 		"k-ui-form": Form,
 		"k-ui-index-view": Index,
 		"k-ui-input-examples": InputExamples,
