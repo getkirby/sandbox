@@ -1,11 +1,37 @@
 <template>
 	<k-ui-examples>
-		<k-ui-example label="Default">
+		<k-ui-example label="Lanscape">
 			<k-file-preview
 				:focus="focus"
 				:focusable="true"
 				:details="details"
 				:image="image"
+				url="https://getkirby.com"
+				@focus="focus = $event"
+			/>
+		</k-ui-example>
+		<k-ui-example label="Portrait">
+			<k-file-preview
+				:focus="focus"
+				:focusable="true"
+				:details="details"
+				:image="{
+					...image,
+					src: 'https://picsum.photos/800/1200',
+				}"
+				url="https://getkirby.com"
+				@focus="focus = $event"
+			/>
+		</k-ui-example>
+		<k-ui-example label="Square">
+			<k-file-preview
+				:focus="focus"
+				:focusable="true"
+				:details="details"
+				:image="{
+					...image,
+					src: 'https://picsum.photos/800/800',
+				}"
 				url="https://getkirby.com"
 				@focus="focus = $event"
 			/>
