@@ -1,18 +1,41 @@
 <template>
-	<k-ui-input-examples :placeholder="false" :value="value" type="colorpicker" @input="value = $event">
+	<k-ui-input-examples
+		:placeholder="false"
+		:value="value"
+		type="colorpicker"
+		@input="value = $event"
+	>
 		<k-ui-example label="Alpha: false">
-			<k-colorpicker-input :alpha="false" :value="value" @input="value = $event">
+			<k-colorpicker-input
+				:alpha="false"
+				:value="value"
+				@input="value = $event"
+			/>
 		</k-ui-example>
 		<k-ui-example label="Options">
-			<k-colorpicker-input :options="options" :value="value" @input="value = $event">
+			<k-colorpicker-input
+				:options="options"
+				:value="value"
+				@input="value = $event"
+			/>
 		</k-ui-example>
 		<k-ui-example label="Format: hsl">
-			<k-colorpicker-input :options="options" :value="value" format="hsl" @input="value = $event">
+			<k-colorpicker-input
+				:options="options"
+				:value="value"
+				format="hsl"
+				@input="value = $event"
+			/>
 		</k-ui-example>
 		<k-ui-example label="Format: rgb">
-			<k-colorpicker-input :options="options" :value="value" format="rgb" @input="value = $event">
+			<k-colorpicker-input
+				:options="options"
+				:value="value"
+				format="rgb"
+				@input="value = $event"
+			/>
 		</k-ui-example>
-	</k-ui-examples>
+	</k-ui-input-examples>
 </template>
 
 <script>
@@ -31,7 +54,7 @@ export default {
 				{ value: "#6C5B7B", text: "Morning gloom" },
 				{ value: "#355C7D", text: "Midnight rain" },
 			];
-		}
+		},
 	},
 };
 </script>

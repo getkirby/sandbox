@@ -173,19 +173,19 @@ class Example
 	{
 		$file = $this->read('index.vue') ?? '';
 
-		if (preg_match('!<template>(.*?)</template>!s', $file, $match)) {
+		if (preg_match('!<template>(.*)</template>!s', $file, $match)) {
 			$parts['template'] = preg_replace('!^\n!', '', $match[1]);
 		} else {
 			$parts['template'] = null;
 		}
 
-		if (preg_match('!<script>(.*?)</script>!s', $file, $match)) {
+		if (preg_match('!<script>(.*)</script>!s', $file, $match)) {
 			$parts['script'] = trim($match[1]);
 		} else {
 			$parts['script'] = 'export default {}';
 		}
 
-		if (preg_match('!<style>(.*?)</style>!s', $file, $match)) {
+		if (preg_match('!<style>(.*)</style>!s', $file, $match)) {
 			$parts['style'] = trim($match[1]);
 		} else {
 			$parts['style'] = null;

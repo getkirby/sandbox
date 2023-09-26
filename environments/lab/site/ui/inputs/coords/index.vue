@@ -1,5 +1,10 @@
 <template>
-	<k-ui-input-examples :placeholder="false" :value="value" type="coords" @input="value = $event">
+	<k-ui-input-examples
+		:placeholder="false"
+		:value="value"
+		type="coords"
+		@input="value = $event"
+	>
 		<k-ui-example label="Image">
 			<k-coords-input :value="value" @input="value = $event">
 				<k-image-frame
@@ -16,7 +21,7 @@
 				/>
 			</k-coords-input>
 		</k-ui-example>
-	</k-ui-examples>
+	</k-ui-input-examples>
 </template>
 
 <script>
