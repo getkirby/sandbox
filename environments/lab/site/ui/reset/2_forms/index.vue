@@ -82,6 +82,15 @@
 				</k-ui-example>
 			</div>
 		</k-grid>
+		<k-ui-example label="label">
+			<div>
+				<label for="input">Connected</label>
+				<input type="text" id="input" />
+			</div>
+			<div>
+				<label>Not connected</label>
+			</div>
+		</k-ui-example>
 		<k-ui-example label="fieldset">
 			<fieldset>
 				<legend>Fieldset Legend</legend>
