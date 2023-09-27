@@ -1,5 +1,10 @@
 <template>
-	<k-ui-input-examples :value="value" type="choice" @input="value = $event">
+	<k-ui-input-examples
+		:placeholder="false"
+		:value="value"
+		type="choice"
+		@input="value = $event"
+	>
 		<k-ui-example label="Label">
 			<k-choice-input :checked="value" label="Option" @input="value = $event" />
 		</k-ui-example>
