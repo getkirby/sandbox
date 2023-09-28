@@ -11,7 +11,7 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td data-mobile="true">
+						<td class="k-table-cell">
 							<component :is="`k-${type}-field-preview`" :column="column" :field="field" :value="value" @input="$emit('input', $event)" />
 						</td>
 					</tr>
