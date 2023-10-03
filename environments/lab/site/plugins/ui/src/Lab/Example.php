@@ -123,9 +123,15 @@ class Example
 		return $this->id . '/' . $this->tab;
 	}
 
-	public function props(): array|null
+	public function props(): array
 	{
-		return $this->load('index.php');
+		if ($this->tab !== null) {
+			$props = $this->load('../index.php') ?? [];
+		} else {
+			$props = [];
+		}
+
+		return array_replace_recursive($props, $this->load('index.php') ?? []);
 	}
 
 	public function read(string $filename): string|null

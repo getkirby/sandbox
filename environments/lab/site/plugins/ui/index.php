@@ -53,7 +53,8 @@ App::plugin('getkirby/ui', [
 								tab: $tab
 							);
 
-							$vue = $example->vue();
+							$props = $example->props();
+							$vue   = $example->vue();
 
 							return [
 								'component' => 'k-ui-playground-view',
@@ -64,12 +65,12 @@ App::plugin('getkirby/ui', [
 									]
 								],
 								'props' => [
-									'docs'     => $example->props()['docs'] ?? null,
+									'docs'     => $props['docs'] ?? null,
 									'title'    => $example->title(),
 									'template' => $vue['template'],
 									'styles'   => $vue['style'],
 									'file'     => $example->module(),
-									'props'    => $example->props(),
+									'props'    => $props,
 									'tab'      => $example->tab(),
 									'tabs'     => array_values($example->tabs()),
 								],
