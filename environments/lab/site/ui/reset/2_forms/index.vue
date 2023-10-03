@@ -1,6 +1,12 @@
 <template>
 	<k-ui-examples>
-		<k-grid style="--columns: 2">
+		<k-grid
+			style="
+				--columns: 2;
+				gap: var(--spacing-12);
+				margin-bottom: var(--spacing-12);
+			"
+		>
 			<div>
 				<k-ui-example label="select">
 					<select>

@@ -1,6 +1,7 @@
 <?php
 
 return [
+	'docs' => 'k-browser',
 	'items' => A::map(range(1, 10), function ($item) {
 		return [
 			'image' => [

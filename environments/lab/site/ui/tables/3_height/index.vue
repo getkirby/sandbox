@@ -1,6 +1,6 @@
 <template>
 	<k-ui-examples>
-		<k-grid style="--columns: 3">
+		<k-grid style="--columns: 3; gap: var(--spacing-12)">
 			<div>
 				<k-ui-example label="Horizontal">
 					<div class="k-table">
