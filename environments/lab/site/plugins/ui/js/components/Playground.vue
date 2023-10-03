@@ -9,6 +9,7 @@
 			</k-button-group>
 		</k-header>
 		<k-tabs :tab="tab" :tabs="tabs" />
+
 		<component v-if="file" :is="component" v-bind="props" />
 		<component v-if="styles" is="style" v-html="styles"></component>
 	</k-panel-inside>
@@ -18,6 +19,7 @@
 export default {
 	props: {
 		docs: String,
+		examples: Object,
 		file: String,
 		props: Object,
 		styles: String,
@@ -58,7 +60,8 @@ export default {
 
 			this.component = component.default;
 
-			await this.$nextTick();
+			// update the code strings for each example
+			window.UiExamples = this.examples;
 		},
 		openDocs() {
 			this.$panel.drawer.open({

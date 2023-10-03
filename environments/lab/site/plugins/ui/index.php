@@ -4,7 +4,9 @@ use Kirby\Cms\App;
 use Kirby\Lab\Example;
 
 load([
-	'kirby\lab\example' => __DIR__ . '/src/Lab/Example.php'
+	'kirby\lab\example'  => __DIR__ . '/src/Lab/Example.php',
+	'kirby\lab\snippet'  => __DIR__ . '/src/Lab/Snippet.php',
+	'kirby\lab\template' => __DIR__ . '/src/Lab/Template.php',
 ]);
 
 require_once __DIR__ . '/helpers.php';
@@ -66,6 +68,7 @@ App::plugin('getkirby/ui', [
 								],
 								'props' => [
 									'docs'     => $props['docs'] ?? null,
+									'examples' => $vue['examples'],
 									'title'    => $example->title(),
 									'template' => $vue['template'],
 									'styles'   => $vue['style'],
@@ -73,6 +76,7 @@ App::plugin('getkirby/ui', [
 									'props'    => $props,
 									'tab'      => $example->tab(),
 									'tabs'     => array_values($example->tabs()),
+									'template' => $vue['template'],
 								],
 							];
 						}

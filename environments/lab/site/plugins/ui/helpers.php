@@ -1,5 +1,15 @@
 <?php
 
+use Kirby\Lab\Snippet;
+
+/**
+ * Examples snippet
+ */
+function examples(string $name, array $data = [], bool $slots = false) {
+	return Snippet::factory($name, $data, $slots);
+
+}
+
 /**
  * Placeholder image URL
  */

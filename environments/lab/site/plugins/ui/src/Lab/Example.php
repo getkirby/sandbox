@@ -2,6 +2,7 @@
 
 namespace Kirby\Lab;
 
+use DOMDocument;
 use Kirby\Cms\App;
 use Kirby\Exception\NotFoundException;
 use Kirby\Filesystem\F;
@@ -165,6 +166,19 @@ class Example
 		return $this->tabs;
 	}
 
+	public function template(string $filename): string|null
+	{
+		$file = $this->file($filename);
+
+		if (is_file($file) === false) {
+			return null;
+		}
+
+		$data = $this->props();
+
+		return (new Template($file))->render($data);
+	}
+
 	public function title(): string
 	{
 		return basename($this->id);
@@ -177,20 +191,49 @@ class Example
 
 	public function vue(): array
 	{
-		$file = $this->read('index.vue') ?? '';
+		// read the index.vue file (or programmabel Vue PHP file)
+		$file   = $this->read('index.vue');
+		$file ??= $this->template('index.vue.php');
+		$file ??= '';
 
+		// extract template
 		if (preg_match('!<template>(.*)</template>!s', $file, $match)) {
 			$parts['template'] = preg_replace('!^\n!', '', $match[1]);
 		} else {
 			$parts['template'] = null;
 		}
 
+		// extract code for each example
+		if (preg_match_all('!<k-ui-example .*?label="(.*?)".*?>(.*?)<\/k-ui-example>!s', $parts['template'] ?? '', $matches)) {
+			foreach ($matches[1] as $key => $name) {
+				$code = $matches[2][$key];
+
+				// only use the code between the @code and @code-end comments
+				if (preg_match('$<!-- @code -->(.*?)<!-- @code-end -->$s', $code, $match)) {
+					$code = $match[1];
+				}
+
+				// get minimum indent
+				preg_match_all('/^(\t*)\S/m', $code, $indents);
+				$indents = min(array_map(fn ($i) => strlen($i), $indents[1]));
+
+				// strip minimum indent from each line
+				$code = preg_replace('/^\t{' . $indents . '}/m', '', $code);
+
+				$parts['examples'][$name] = trim($code);
+			}
+		} else {
+			$parts['examples'] = [];
+		}
+
+		// extract script
 		if (preg_match('!<script>(.*)</script>!s', $file, $match)) {
 			$parts['script'] = trim($match[1]);
 		} else {
 			$parts['script'] = 'export default {}';
 		}
 
+		// extract style
 		if (preg_match('!<style>(.*)</style>!s', $file, $match)) {
 			$parts['style'] = trim($match[1]);
 		} else {
