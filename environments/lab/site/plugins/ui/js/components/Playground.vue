@@ -2,39 +2,22 @@
 	<k-panel-inside :data-has-tabs="tabs.length > 1" class="k-ui-playground-view">
 		<k-header>
 			{{ title }}
-			<k-button-group slot="buttons" layout="collapsed">
-				<k-button
-					icon="code"
-					@click="inspect = true"
-					:theme="inspect === true ? 'positive' : null"
-					variant="filled"
-					size="sm"
-				/>
-				<k-button
-					icon="palette"
-					@click="inspect = false"
-					variant="filled"
-					:theme="inspect === false ? 'positive' : null"
-					size="sm"
-				/>
+			<k-button-group v-if="docs" slot="buttons">
+				<k-button icon="book" size="sm" variant="filled" @click="openDocs">
+					Docs
+				</k-button>
 			</k-button-group>
 		</k-header>
 		<k-tabs :tab="tab" :tabs="tabs" />
-
-		<template v-if="inspect">
-			<k-headline style="margin-bottom: 0.5rem">Example code</k-headline>
-			<k-code>{{ template }}</k-code>
-		</template>
-		<template v-else>
-			<component v-if="file" :is="component" v-bind="props" />
-			<component v-if="styles" is="style" v-html="styles"></component>
-		</template>
+		<component v-if="file" :is="component" v-bind="props" />
+		<component v-if="styles" is="style" v-html="styles"></component>
 	</k-panel-inside>
 </template>
 
 <script>
 export default {
 	props: {
+		docs: String,
 		file: String,
 		props: Object,
 		styles: String,
@@ -49,7 +32,6 @@ export default {
 	data() {
 		return {
 			component: null,
-			inspect: false,
 		};
 	},
 	watch: {
@@ -75,6 +57,18 @@ export default {
 			component.default.template = this.template;
 
 			this.component = component.default;
+
+			await this.$nextTick();
+		},
+		openDocs() {
+			this.$panel.drawer.open({
+				component: "k-ui-docs-drawer",
+				props: {
+					icon: "book",
+					title: this.docs,
+					docs: this.docs,
+				},
+			});
 		},
 	},
 };

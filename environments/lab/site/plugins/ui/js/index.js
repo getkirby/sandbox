@@ -1,3 +1,6 @@
+import Code from "./components/Code.vue";
+import Docs from "./components/Docs.vue";
+import DocsDrawer from "./components/DocsDrawer.vue";
 import Example from "./components/Example.vue";
 import Examples from "./components/Examples.vue";
 import FieldExamples from "./components/FieldExamples.vue";
@@ -14,6 +17,9 @@ import Playground from "./components/Playground.vue";
 
 panel.plugin("getkirby/ui", {
 	components: {
+		"k-ui-code": Code,
+		"k-ui-docs": Docs,
+		"k-ui-docs-drawer": DocsDrawer,
 		"k-ui-example": Example,
 		"k-ui-examples": Examples,
 		"k-ui-field-examples": FieldExamples,

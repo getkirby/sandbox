@@ -64,6 +64,7 @@ App::plugin('getkirby/ui', [
 									]
 								],
 								'props' => [
+									'docs'     => $example->props()['docs'] ?? null,
 									'title'    => $example->title(),
 									'template' => $vue['template'],
 									'styles'   => $vue['style'],
