@@ -4,7 +4,7 @@ return [
 	'panel' => [
 		'menu' => [
 			'site',
-			'lab' => ['menu' => true],
+			'lab',
 			'-',
 			'languages',
 			'users',
