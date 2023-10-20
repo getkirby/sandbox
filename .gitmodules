@@ -1,6 +1,7 @@
 [submodule "kirby"]
 	path = kirby
 	url = https://github.com/getkirby/kirby.git
+	ignore = all
 [submodule "environments/starterkit"]
 	path = environments/starterkit
 	url = https://github.com/getkirby/starterkit.git

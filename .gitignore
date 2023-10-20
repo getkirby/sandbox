@@ -1,5 +1,12 @@
+# os
 .DS_Store
-node_modules
+
+# editors
+*.sublime-project
+*.sublime-workspace
+/.idea
+
+# public folder
 public
 !public/.htaccess
 !public/index.php
