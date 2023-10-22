@@ -127,6 +127,11 @@ class Environment
 	 */
 	public static function remove()
 	{
+		// remove active user session
+		if ($user = App::instance()->user()) {
+			$user->logout();
+		}
+
 		$public = __DIR__ . '/public';
 
 		Dir::remove($public . '/assets');
