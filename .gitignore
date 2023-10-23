@@ -11,3 +11,6 @@ public
 !public/.htaccess
 !public/index.php
 /site
+
+# custom environments
+environments/custom-*
