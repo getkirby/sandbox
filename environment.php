@@ -268,15 +268,15 @@ class Environment
 
 		// only iterate through all directories that contain .git files
 		return new CallbackFilterIterator($recursive, function ($fileinfo) {
-			// only keep directories that have .git files themselves
-			if (is_file($fileinfo->getPathname() . '/.git') !== true) {
+			// only keep directories that have a .git file or folder themselves
+			if (file_exists($fileinfo->getPathname() . '/.git') !== true) {
 				return false;
 			}
 
 			// but skip every directory whose parent is already a submodule
 			// (nested submodule which is already covered by the parent's link)
 			$dir = dirname($fileinfo->getPathname());
-			return is_file($dir . '/.git') === false;
+			return file_exists($dir . '/.git') === false;
 		});
 	}
 
