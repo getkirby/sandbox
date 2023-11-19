@@ -13,5 +13,5 @@ return [
 			'environments',
 		]
 	],
-	// 'languages' => true
+	'languages' => true
 ];
