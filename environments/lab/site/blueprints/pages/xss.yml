@@ -1,0 +1,705 @@
+title: XSS
+
+tabs:
+  immediate:
+    sections:
+      info1:
+        label: Usage
+        type: info
+        text: |
+          The examples in this tab would immediately trigger alert boxes when visiting the page (please reload to verify).
+          <span style="color: var(--color-red-700)">Red text</span> must not appear, <span style="color: var(--color-green-700)">green text</span> is expected.
+      pages1:
+        label: Collection section (defaults)
+        type: pages
+      pages2:
+        label: Collection section (custom queries)
+        type: pages
+        text: "{{ page.title }}"
+        info: "{{ page.title }}"
+        help: "{{ page.title }}"
+      pages3:
+        label: Collection section (custom HTML queries)
+        type: pages
+        text: "{< page.safestring >}"
+        info: "{< page.safestring >}"
+      info2:
+        label: Info section (hardcoded text)
+        type: info
+        text: '<strong style="color: var(--color-green-700)">This is OK</strong>'
+      info3:
+        label: Info section (custom query)
+        type: info
+        text: "{{ page.children.first.title }}"
+      info4:
+        label: Info section (custom HTML query)
+        type: info
+        text: "{< page.children.first.safestring >}"
+      fields1:
+        type: fields
+        fields:
+          headline1:
+            label: Collection fields
+            type: headline
+          pages1:
+            label: Collection field (defaults)
+            type: pages
+            query: site.find('other/xss')
+            width: 1/3
+          pages2:
+            label: Collection field (custom queries)
+            type: pages
+            query: site.find('other/xss')
+            text: "{{ page.title }}"
+            info: "{{ page.title }}"
+            help: "{{ page.title }}"
+            width: 1/3
+          pages3:
+            label: Collection field (custom HTML queries)
+            type: pages
+            query: site.find('other/xss')
+            text: "{< page.safestring >}"
+            info: "{< page.safestring >}"
+            width: 1/3
+          headline2:
+            label: Options fields
+            type: headline
+          checkboxes1:
+            label: Checkboxes (hardcoded)
+            type: checkboxes
+            options:
+              -
+                text: '<strong style="color: var(--color-green-700)">This is OK</strong>'
+                info: '<strong style="color: var(--color-green-700)">This is OK</strong>'
+                value: test1
+              -
+                text: "{{ page.children.first.title }}"
+                info: "{{ page.children.first.title }}"
+                value: test2
+              -
+                text: "{< page.children.first.safestring >}"
+                info: "{< page.children.first.safestring >}"
+                value: test3
+            width: 1/3
+          checkboxes2:
+            label: Checkboxes (API, no HTML)
+            type: checkboxes
+            options:
+              type: api
+              url: "{{ site.url }}/options.json"
+              query: Companies
+              text: "{{ item.name }}"
+              value: "{{ item.short }}"
+            width: 1/3
+          checkboxes3:
+            label: Checkboxes (API, with HTML)
+            type: checkboxes
+            options:
+              type: api
+              url: "{{ site.url }}/options.json"
+              query: Html
+              text: "{< item.name >}"
+              value: "{{ item.short }}"
+            width: 1/3
+          checkboxes4:
+            label: Checkboxes (query, defaults)
+            type: checkboxes
+            options:
+              type: query
+              query: page.children
+            width: 1/3
+          checkboxes5:
+            label: Checkboxes (query, custom query)
+            type: checkboxes
+            options:
+              type: query
+              query: page.children
+              text: "{{ item.title }}"
+            width: 1/3
+          checkboxes6:
+            label: Checkboxes (query, custom HTML query)
+            type: checkboxes
+            options:
+              type: query
+              query: page.children
+              text: "{< item.safestring >}"
+            width: 1/3
+          multiselect1:
+            label: Multiselect (hardcoded)
+            type: multiselect
+            options:
+              -
+                text: '<strong style="color: var(--color-green-700)">This is OK</strong>'
+                info: '<strong style="color: var(--color-green-700)">This is OK</strong>'
+                value: test1
+              -
+                text: "{{ page.children.first.title }}"
+                info: "{{ page.children.first.title }}"
+                value: test2
+              -
+                text: "{< page.children.first.safestring >}"
+                info: "{< page.children.first.safestring >}"
+                value: test3
+            width: 1/3
+          multiselect2:
+            label: Multiselect (API, no HTML)
+            type: multiselect
+            options:
+              type: api
+              url: "{{ site.url }}/options.json"
+              query: Companies
+              text: "{{ item.name }}"
+              value: "{{ item.short }}"
+            width: 1/3
+          multiselect3:
+            label: Multiselect (API, with HTML)
+            type: multiselect
+            options:
+              type: api
+              url: "{{ site.url }}/options.json"
+              query: Html
+              text: "{< item.name >}"
+              value: "{{ item.short }}"
+            width: 1/3
+          multiselect4:
+            label: Multiselect (query, defaults)
+            type: multiselect
+            options:
+              type: query
+              query: page.children
+            width: 1/3
+          multiselect5:
+            label: Multiselect (query, custom query)
+            type: multiselect
+            options:
+              type: query
+              query: page.children
+              text: "{{ item.title }}"
+            width: 1/3
+          multiselect6:
+            label: Multiselect (query, custom HTML query)
+            type: multiselect
+            options:
+              type: query
+              query: page.children
+              text: "{< item.safestring >}"
+            width: 1/3
+          radio1:
+            label: Radio (hardcoded)
+            type: radio
+            options:
+              -
+                text: '<strong style="color: var(--color-green-700)">This is OK</strong>'
+                info: '<strong style="color: var(--color-green-700)">This is OK</strong>'
+                value: test1
+              -
+                text: "{{ page.children.first.title }}"
+                info: "{{ page.children.first.title }}"
+                value: test2
+              -
+                text: "{< page.children.first.safestring >}"
+                info: "{< page.children.first.safestring >}"
+                value: test3
+            width: 1/3
+          radio2:
+            label: Radio (API, no HTML)
+            type: radio
+            options:
+              type: api
+              url: "{{ site.url }}/options.json"
+              query: Companies
+              text: "{{ item.name }}"
+              value: "{{ item.short }}"
+            width: 1/3
+          radio3:
+            label: Radio (API, with HTML)
+            type: radio
+            options:
+              type: api
+              url: "{{ site.url }}/options.json"
+              query: Html
+              text: "{< item.name >}"
+              value: "{{ item.short }}"
+            width: 1/3
+          radio4:
+            label: Radio (query, defaults)
+            type: radio
+            options:
+              type: query
+              query: page.children
+            width: 1/3
+          radio5:
+            label: Radio (query, custom query)
+            type: radio
+            options:
+              type: query
+              query: page.children
+              text: "{{ item.title }}"
+            width: 1/3
+          radio6:
+            label: Radio (query, custom HTML query)
+            type: radio
+            options:
+              type: query
+              query: page.children
+              text: "{< item.safestring >}"
+            width: 1/3
+          tags1:
+            label: Tags (hardcoded)
+            type: tags
+            options:
+              -
+                text: '<strong style="color: var(--color-green-700)">This is OK</strong>'
+                info: '<strong style="color: var(--color-green-700)">This is OK</strong>'
+                value: test1
+              -
+                text: "{{ page.children.first.title }}"
+                info: "{{ page.children.first.title }}"
+                value: test2
+              -
+                text: "{< page.children.first.safestring >}"
+                info: "{< page.children.first.safestring >}"
+                value: test3
+            width: 1/3
+          tags2:
+            label: Tags (API, no HTML)
+            type: tags
+            options:
+              type: api
+              url: "{{ site.url }}/options.json"
+              query: Companies
+              text: "{{ item.name }}"
+              value: "{{ item.short }}"
+            width: 1/3
+          tags3:
+            label: Tags (API, with HTML)
+            type: tags
+            options:
+              type: api
+              url: "{{ site.url }}/options.json"
+              query: Html
+              text: "{< item.name >}"
+              value: "{{ item.short }}"
+            width: 1/3
+          tags4:
+            label: Tags (query, defaults)
+            type: tags
+            options:
+              type: query
+              query: page.children
+            width: 1/3
+          tags5:
+            label: Tags (query, custom query)
+            type: tags
+            options:
+              type: query
+              query: page.children
+              text: "{{ item.title }}"
+            width: 1/3
+          tags6:
+            label: Tags (query, custom HTML query)
+            type: tags
+            options:
+              type: query
+              query: page.children
+              text: "{< item.safestring >}"
+            width: 1/3
+          toggles1:
+            label: Toggles (hardcoded)
+            type: toggles
+            options:
+              -
+                text: '<strong style="color: var(--color-green-700)">This is OK</strong>'
+                info: '<strong style="color: var(--color-green-700)">This is OK</strong>'
+                value: test1
+              -
+                text: "{{ page.children.first.title }}"
+                info: "{{ page.children.first.title }}"
+                value: test2
+              -
+                text: "{< page.children.first.safestring >}"
+                info: "{< page.children.first.safestring >}"
+                value: test3
+            width: 1/3
+          toggles2:
+            label: Toggles (API, no HTML)
+            type: toggles
+            options:
+              type: api
+              url: "{{ site.url }}/options.json"
+              query: Companies
+              text: "{{ item.name }}"
+              value: "{{ item.short }}"
+            width: 1/3
+          toggles3:
+            label: Toggles (API, with HTML)
+            type: toggles
+            options:
+              type: api
+              url: "{{ site.url }}/options.json"
+              query: Html
+              text: "{< item.name >}"
+              value: "{{ item.short }}"
+            width: 1/3
+          toggles4:
+            label: Toggles (query, defaults)
+            type: toggles
+            options:
+              type: query
+              query: page.children
+            width: 1/3
+          toggles5:
+            label: Toggles (query, custom query)
+            type: toggles
+            options:
+              type: query
+              query: page.children
+              text: "{{ item.title }}"
+            width: 1/3
+          toggles6:
+            label: Toggles (query, custom HTML query)
+            type: toggles
+            options:
+              type: query
+              query: page.children
+              text: "{< item.safestring >}"
+            width: 1/3
+          select1:
+            label: Select (hardcoded)
+            type: select
+            options:
+              test1: '<strong style="color: var(--color-green-700)">This is OK</strong>'
+              test2: "{{ page.children.first.title }}"
+            width: 1/4
+          select2:
+            label: Select (API)
+            type: select
+            options:
+              type: api
+              url: "{{ site.url }}/options.json"
+              query: Companies
+              text: "{{ item.name }}"
+              value: "{{ item.short }}"
+            width: 1/4
+          select3:
+            label: Select (query, defaults)
+            type: select
+            options:
+              type: query
+              query: page.children
+            width: 1/4
+          select4:
+            label: Select (query, custom query)
+            type: select
+            options:
+              type: query
+              query: page.children
+              text: "{{ item.title }}"
+            width: 1/4
+          headline3:
+            label: Toggle field
+            type: headline
+          toggle1:
+            label: Toggle (hardcoded, one text option)
+            type: toggle
+            text: '<strong style="color: var(--color-green-700)">This is OK</strong>'
+            width: 1/4
+          toggle2:
+            label: Toggle (hardcoded, two text options)
+            type: toggle
+            text:
+              - '<strong style="color: var(--color-green-700)">This is no</strong>'
+              - '<strong style="color: var(--color-green-700)">This is yes</strong>'
+            width: 1/4
+          toggle3:
+            label: Toggle (query, one text option)
+            type: toggle
+            text: "{{ page.children.first.title }}"
+            width: 1/4
+          toggle4:
+            label: Toggle (query, two text options)
+            type: toggle
+            text:
+              - "{< page.children.first.safestring >}"
+              - "{{ page.children.first.title }}"
+            width: 1/4
+          headline4:
+            label: Bubbles field preview
+            type: headline
+          structure:
+            fields:
+              pages:
+                query: site.find('other/xss')
+          headline5:
+            label: Writer field with malicious stored content
+            type: headline
+          writer: true
+          headline6:
+            label: Help texts (headline, hardcoded help text)
+            type: headline
+            help: '<strong style="color: var(--color-green-700)">This is OK</strong>'
+          headline7:
+            label: Help texts (headline, with query)
+            type: headline
+            help: "{{ page.children.first.title }}"
+          headline8:
+            label: Help texts (headline, with HTML query)
+            type: headline
+            help: "{< page.children.first.safestring >}"
+          text1:
+            label: Hardcoded help text
+            type: text
+            help: '<strong style="color: var(--color-green-700)">This is OK</strong>'
+            width: 1/3
+          text2:
+            label: Help text with query
+            type: text
+            help: "{{ page.children.first.title }}"
+            width: 1/3
+          text3:
+            label: Help text with HTML query
+            type: text
+            help: "{< page.children.first.safestring >}"
+            width: 1/3
+          info1:
+            label: Info field (with hardcoded text and help)
+            type: info
+            text: '<strong style="color: var(--color-green-700)">This is OK</strong>'
+            help: '<strong style="color: var(--color-green-700)">This is OK</strong>'
+            width: 1/3
+          info2:
+            label: Info field (with queries in text and help)
+            type: info
+            text: "{{ page.children.first.title }}"
+            help: "{{ page.children.first.title }}"
+            width: 1/3
+          info3:
+            label: Info field (with HTML queries in text and help)
+            type: info
+            text: "{< page.children.first.safestring >}"
+            help: "{< page.children.first.safestring >}"
+            width: 1/3
+  interaction:
+    sections:
+      info5:
+        label: Usage
+        type: info
+        text: Do what the help text for each section/field says.
+      fields2:
+        type: fields
+        fields:
+          headline9:
+            label: Collection fields
+            type: headline
+          pages4:
+            label: Collection field (defaults)
+            type: pages
+            query: site.find('other/xss')
+            help: |
+              **Task:** Click the "Select" button
+              **Expected result:** HTML must *not* have been rendered in the dialog
+            width: 1/3
+          pages5:
+            label: Collection field (custom queries)
+            type: pages
+            query: site.find('other/xss')
+            text: "{{ page.title }}"
+            info: "{{ page.title }}"
+            help: |
+              **Task:** Click the "Select" button
+              **Expected result:** HTML must *not* have been rendered in the dialog
+            width: 1/3
+          pages6:
+            label: Collection field (custom HTML queries)
+            type: pages
+            query: site.find('other/xss')
+            text: "{< page.safestring >}"
+            info: "{< page.safestring >}"
+            help: |
+              **Task:** Click the "Select" button
+              **Expected result:** HTML *is* rendered
+            width: 1/3
+          headline10:
+            label: Options fields
+            type: headline
+          multiselect7:
+            label: Multiselect (hardcoded)
+            type: multiselect
+            options:
+              -
+                text: '<strong style="color: var(--color-green-700)">This is OK</strong>'
+                info: '<strong style="color: var(--color-green-700)">This is OK</strong>'
+                value: test1
+              -
+                text: "{{ page.children.first.title }}"
+                info: "{{ page.children.first.title }}"
+                value: test2
+              -
+                text: "{< page.children.first.safestring >}"
+                info: "{< page.children.first.safestring >}"
+                value: test3
+            help: |
+              **Task:** Open the multiselect dropdown
+              **Expected result:** HTML of first and third option text must be stripped, of first and third option info rendered, of second option text and info *not* rendered
+            width: 1/3
+          multiselect8:
+            label: Multiselect (API, no HTML)
+            type: multiselect
+            options:
+              type: api
+              url: "{{ site.url }}/options.json"
+              query: Companies
+              text: "{{ item.name }}"
+              value: "{{ item.short }}"
+            help: |
+              **Task:** Open the multiselect dropdown
+              **Expected result:** HTML of last option must *not* have been rendered
+            width: 1/3
+          multiselect9:
+            label: Multiselect (API, with HTML)
+            type: multiselect
+            options:
+              type: api
+              url: "{{ site.url }}/options.json"
+              query: Html
+              text: "{< item.name >}"
+              value: "{{ item.short }}"
+            help: |
+              **Task:** Open the multiselect dropdown
+              **Expected result:** HTML of all options must be stripped
+            width: 1/3
+          multiselect10:
+            label: Multiselect (query, defaults)
+            type: multiselect
+            options:
+              type: query
+              query: page.children
+            help: |
+              **Task:** Open the multiselect dropdown
+              **Expected result:** HTML must *not* have been rendered in the dropdown
+            width: 1/3
+          multiselect11:
+            label: Multiselect (query, custom query)
+            type: multiselect
+            options:
+              type: query
+              query: page.children
+              text: "{{ item.title }}"
+            help: |
+              **Task:** Open the multiselect dropdown
+              **Expected result:** HTML must *not* have been rendered in the dropdown
+            width: 1/3
+          multiselect12:
+            label: Multiselect (query, custom HTML query)
+            type: multiselect
+            options:
+              type: query
+              query: page.children
+              text: "{< item.safestring >}"
+            help: |
+              **Task:** Open the multiselect dropdown
+              **Expected result:** HTML must be stripped
+            width: 1/3
+          tags7:
+            label: Tags (hardcoded)
+            type: tags
+            options:
+              -
+                text: '<strong style="color: var(--color-green-700)">This is OK</strong>'
+                info: '<strong style="color: var(--color-green-700)">This is OK</strong>'
+                value: test1
+              -
+                text: "{{ page.children.first.title }}"
+                info: "{{ page.children.first.title }}"
+                value: test2
+              -
+                text: "{< page.children.first.safestring >}"
+                info: "{< page.children.first.safestring >}"
+                value: test3
+            help: |
+              **Task:** Open the tags dropdown
+              **Expected result:** HTML of first and third option text must be stripped, of first and third option info rendered, of second option text and info *not* rendered
+            width: 1/3
+          tags8:
+            label: Tags (API, no HTML)
+            type: tags
+            options:
+              type: api
+              url: "{{ site.url }}/options.json"
+              query: Companies
+              text: "{{ item.name }}"
+              value: "{{ item.short }}"
+            help: |
+              **Task:** Open the tags dropdown
+              **Expected result:** HTML of last option must *not* have been rendered
+            width: 1/3
+          tags9:
+            label: Tags (API, with HTML)
+            type: tags
+            options:
+              type: api
+              url: "{{ site.url }}/options.json"
+              query: Html
+              text: "{< item.name >}"
+              value: "{{ item.short }}"
+            help: |
+              **Task:** Open the tags dropdown
+              **Expected result:** HTML of all options must be stripped
+            width: 1/3
+          tags10:
+            label: Tags (query, defaults)
+            type: tags
+            options:
+              type: query
+              query: page.children
+            help: |
+              **Task:** Open the tags dropdown
+              **Expected result:** HTML must *not* have been rendered in the dropdown
+            width: 1/3
+          tags11:
+            label: Tags (query, custom query)
+            type: tags
+            options:
+              type: query
+              query: page.children
+              text: "{{ item.title }}"
+            help: |
+              **Task:** Open the tags dropdown
+              **Expected result:** HTML must *not* have been rendered in the dropdown
+            width: 1/3
+          tags12:
+            label: Tags (query, custom HTML query)
+            type: tags
+            options:
+              type: query
+              query: page.children
+              text: "{< item.safestring >}"
+            help: |
+              **Task:** Open the tags dropdown
+              **Expected result:** HTML must be stripped
+            width: 1/3
+  manual:
+    sections:
+      info6:
+        label: Preparation
+        type: info
+        text: |
+          - Create a user with the following username **manually in the filesystem**: `"><strong style="color: var(--color-red-700)">Malicious string</strong><img onerror="alert('XSS: Username')" src="x">`
+            (cannot be in the lab environment as the Sandbox does not copy accounts)
+      info7:
+        label: Manual checks
+        type: info
+        text: |
+          - <a href="javascript:panel.$vue.$store.state.content.models['/pages/other+xss+xss-title/?language=null'] = {changes: {test: 'test'}};panel.dialog.open('changes')">Open changes dialog</a> (with automatic addition of the `other/xss/xss-title` page)
+            **Expected result:** HTML in the page title must not have been rendered
+          - <a href="javascript:panel.search()">Open search dialog</a>
+            **Task:** Search for "XSS"
+            **Expected result:** HTML in the page title must not be rendered
+          - <a href="javascript:panel.open('search?type=pages&page=1&query=xss')">Go to the search view</a>
+            **Task:** Switch between the Pages and Users tabs
+            **Expected result:** HTML in the page title/username must not be rendered
+          - <a href="javascript:panel.open('languages')">Go to the languages view</a>
+            **Expected result:** HTML in the language name must not have been rendered
+          - <a href="javascript:panel.open('users')">Go to the users view</a>
+            **Expected result:** HTML in the username must not have been rendered
+          - Manually check all uses (and uses of uses) of the `<k-text>` component with the `html` prop

@@ -1,0 +1,253 @@
+Title: XSS
+
+----
+
+Pages1: - page://FgbmZTko9JE0u1Q1
+
+----
+
+Pages2: - page://FgbmZTko9JE0u1Q1
+
+----
+
+Pages3: - page://FgbmZTko9JE0u1Q1
+
+----
+
+Checkboxes1: 
+
+----
+
+Checkboxes2: 
+
+----
+
+Checkboxes3: 
+
+----
+
+Checkboxes4: 
+
+----
+
+Checkboxes5: 
+
+----
+
+Checkboxes6: 
+
+----
+
+Multiselect1: test1, test2
+
+----
+
+Multiselect2: xss
+
+----
+
+Multiselect3: APPL
+
+----
+
+Multiselect4: other/xss/xss-title
+
+----
+
+Multiselect5: other/xss/xss-title
+
+----
+
+Multiselect6: other/xss/xss-title
+
+----
+
+Radio1: 
+
+----
+
+Radio2: 
+
+----
+
+Radio3: 
+
+----
+
+Radio4: 
+
+----
+
+Radio5: 
+
+----
+
+Radio6: 
+
+----
+
+Tags1: test1, test2, Custom tag with "><strong style="color: var(--color-red-700)">malicious string</strong><img onerror="alert('XSS: Tag')" src="x">
+
+----
+
+Tags2: xss, Custom tag with "><strong style="color: var(--color-red-700)">malicious string</strong><img onerror="alert('XSS: Tag')" src="x">
+
+----
+
+Tags3: APPL, Custom tag with "><strong style="color: var(--color-red-700)">malicious string</strong><img onerror="alert('XSS: Tag')" src="x">
+
+----
+
+Tags4: other/xss/xss-title, Custom tag with "><strong style="color: var(--color-red-700)">malicious string</strong><img onerror="alert('XSS: Tag')" src="x">
+
+----
+
+Tags5: other/xss/xss-title, Custom tag with "><strong style="color: var(--color-red-700)">malicious string</strong><img onerror="alert('XSS: Tag')" src="x">
+
+----
+
+Tags6: other/xss/xss-title, Custom tag with "><strong style="color: var(--color-red-700)">malicious string</strong><img onerror="alert('XSS: Tag')" src="x">
+
+----
+
+Toggles1: 
+
+----
+
+Toggles2: 
+
+----
+
+Toggles3: 
+
+----
+
+Toggles4: 
+
+----
+
+Toggles5: 
+
+----
+
+Toggles6: 
+
+----
+
+Select1: test2
+
+----
+
+Select2: xss
+
+----
+
+Select3: other/xss/xss-title
+
+----
+
+Select4: other/xss/xss-title
+
+----
+
+Toggle1: false
+
+----
+
+Toggle2: false
+
+----
+
+Toggle3: false
+
+----
+
+Toggle4: false
+
+----
+
+Structure:
+
+- 
+  pages:
+    - page://FgbmZTko9JE0u1Q1
+
+----
+
+Writer: <p><strong style="color: var(--color-red-700)">Malicious string, hopefully sanitized</strong><img onerror="alert('XSS: Writer field')" src="x"></p>
+
+----
+
+Text1: 
+
+----
+
+Text2: 
+
+----
+
+Text3: 
+
+----
+
+Pages4: 
+
+----
+
+Pages5: 
+
+----
+
+Pages6: 
+
+----
+
+Multiselect7: 
+
+----
+
+Multiselect8: 
+
+----
+
+Multiselect9: 
+
+----
+
+Multiselect10: 
+
+----
+
+Multiselect11: 
+
+----
+
+Multiselect12: 
+
+----
+
+Tags7: 
+
+----
+
+Tags8: 
+
+----
+
+Tags9: 
+
+----
+
+Tags10: 
+
+----
+
+Tags11: 
+
+----
+
+Tags12: 
+
+----
+
+Uuid: sInh1nCthYnNN8gu

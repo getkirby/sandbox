@@ -1,0 +1,9 @@
+Title: "><strong style="color: var(--color-red-700)">Malicious string</strong><img onerror="alert('XSS: Page title')" src="x">
+
+----
+
+SafeString: <strong style="color: var(--color-green-700)">This is OK</strong>
+
+----
+
+Uuid: FgbmZTko9JE0u1Q1
