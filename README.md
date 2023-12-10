@@ -38,15 +38,16 @@ You can switch between the following environments:
 - starterkit
 - plainkit
 
-(There are more environments in /environments, but they are used for testing only and often don't have any usable site setup)
+There are more environments in /environments, but they are used for testing only and often don't have any usable site setup.
 
-You can switch between environments via the environment UI at `http://sandbox.test/?env`.
+You can switch between environments via the environment UI at `http://sandbox.test/panel/environments`.
 
-**ATTENTION: Switching environments will delete all existing content, accounts and sessions in your sandbox (unless you use the "Store" feature, see below)!**
+> [!CAUTION]
+> Switching environments will delete all existing content, accounts and sessions in your sandbox (unless you use the "Store" feature, see below)!
 
 ### Installing accounts when switching envionments
 
-If you switch the environment using the `?env` UI, the `test@getkirby.com` account is automatically installed to the site.
+If you switch the environment using the UI, the `test@getkirby.com` account is automatically installed to the site.
 
 Other accounts can be installed using the following route:
 
@@ -60,7 +61,8 @@ If you want to store the changes inside the environment, you can use the "Store"
 
 Clicking just "Store" will store the changes to the selected environment.
 
-**ATTENTION: The whole environment will be overwritten!**
+> [!CAUTION]
+> The whole environment will be overwritten!
 
 Clicking "Store & Switch" will first store the changes in the *current* environment and then switch to the selected new environment.
 
