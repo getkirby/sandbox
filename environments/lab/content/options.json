@@ -2,33 +2,40 @@
 	"Companies": [
 		{
 			"name": "Apple",
-			"short": "APPL"
+			"short": "APPL",
+			"color": "#000"
 		},
 		{
 			"name": "Microsoft",
-			"short": "MST"
+			"short": "MST",
+			"color": "#f00"
 		},
 		{
 			"name": "Kirby",
-			"short": "KBY"
+			"short": "KBY",
+			"color": "#0f0"
 		},
 		{
 			"name": "<img src=\"x\" onerror=\"alert('xss')\">",
-			"short": "xss"
+			"short": "xss",
+			"color": "#00f"
 		}
 	],
 	"Html": [
 		{
 			"name": "A<b>ppl</b>e",
-			"short": "APPL"
+			"short": "APPL",
+			"color": "#f00"
 		},
 		{
 			"name": "Micro<b>soft</b>",
-			"short": "MST"
+			"short": "MST",
+			"color": "#0f0"
 		},
 		{
 			"name": "<b>K</b>irby",
-			"short": "KBY"
+			"short": "KBY",
+			"color": "#00f"
 		}
 	]
 }

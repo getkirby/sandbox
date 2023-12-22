@@ -124,6 +124,69 @@ tabs:
               query: page.children
               text: "{< item.safestring >}"
             width: 1/3
+          color1:
+            label: Color (hardcoded 1)
+            type: color
+            options:
+              '<strong style="color: var(--color-green-700)">This is OK</strong>': "#3e3e3e"
+            width: 1/3
+          color2:
+            label: Color (hardcoded 2)
+            type: color
+            options:
+              "{{ page.children.first.title }}": "#aaa"
+            width: 1/3
+          color3:
+            label: Color (hardcoded 3)
+            type: color
+            options:
+              "{< page.children.first.safestring >}": "#ddd"
+            width: 1/3
+          color4:
+            label: Color (API, no HTML)
+            type: color
+            options:
+              type: api
+              url: "{{ site.url }}/options.json"
+              query: Companies
+              text: "{{ item.color }}"
+              value: "{{ item.name }}"
+            width: 1/2
+          color5:
+            label: Color (API, with HTML)
+            type: color
+            options:
+              type: api
+              url: "{{ site.url }}/options.json"
+              query: Html
+              text: "{{ item.color }}"
+              value: "{< item.name >}"
+            width: 1/2
+          color6:
+            label: Color (query, defaults)
+            type: color
+            options:
+              type: query
+              query: page.colorOptions
+            width: 1/3
+          color7:
+            label: Color (query, custom query)
+            type: color
+            options:
+              type: query
+              query: page.children
+              text: "#aaa"
+              value: "{{ item.title }}"
+            width: 1/3
+          color8:
+            label: Color (query, custom HTML query)
+            type: color
+            options:
+              type: query
+              query: page.children
+              text: "#aaa"
+              value: "{< item.safestring >}"
+            width: 1/3
           multiselect1:
             label: Multiselect (hardcoded)
             type: multiselect

@@ -38,6 +38,38 @@ Checkboxes6:
 
 ----
 
+Color1: #3e3e3e
+
+----
+
+Color2: #aaa
+
+----
+
+Color3: #ddd
+
+----
+
+Color4: #000
+
+----
+
+Color5: #00f
+
+----
+
+Color6: #aaa
+
+----
+
+Color7: #aaa
+
+----
+
+Color8: #aaa
+
+----
+
 Multiselect1: test1, test2
 
 ----
