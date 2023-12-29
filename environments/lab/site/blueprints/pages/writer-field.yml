@@ -136,10 +136,10 @@ tabs:
       required:
         type: writer
         required: true
-      maxlength:
-        type: writer
-        maxlength: 10
       minlength:
+        type: writer
+        minlength: 10
+      maxlength:
         type: writer
         maxlength: 10
 
