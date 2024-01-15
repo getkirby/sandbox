@@ -35,3 +35,8 @@ sections:
     label: Create with default values
     type: pages
     template: page-creation-with-default-values
+
+  validateCustomFields:
+    label: Create with validating custom fields
+    type: pages
+    template: page-creation-with-validating-custom-fields

@@ -1,0 +1,16 @@
+title: Page Creation with validating custom fields
+
+create:
+  fields:
+    - fieldA
+    - fieldB
+  status: listed
+
+fields:
+  fieldA:
+    type: text
+    required: true
+  fieldB:
+    type: text
+    minlength: 3
+    maxlength: 5

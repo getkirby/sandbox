@@ -4,6 +4,7 @@ create:
   fields:
     - fieldA
     - fieldB
+  status: listed
 
 fields:
   fieldA:
@@ -12,3 +13,6 @@ fields:
   fieldB:
     type: text
     default: Default value for field B
+  fieldC:
+    type: text
+    default: Default value for field C
