@@ -1,0 +1,14 @@
+title: Page Creation with default values
+
+create:
+  fields:
+    - fieldA
+    - fieldB
+
+fields:
+  fieldA:
+    type: text
+    default: Default value for field A
+  fieldB:
+    type: text
+    default: Default value for field B

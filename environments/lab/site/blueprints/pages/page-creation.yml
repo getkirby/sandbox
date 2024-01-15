@@ -1,0 +1,37 @@
+title: Page Creation
+
+sections:
+  simpleFields:
+    label: Simple custom fields
+    type: pages
+    template: page-creation-simple-fields
+
+  titleLabel:
+    label: Custom title field label
+    type: pages
+    template: page-creation-title-field
+
+  noRedirect:
+    label: No redirect after creation
+    type: pages
+    template: page-creation-no-redirect
+
+  statusListed:
+    label: Create as listed
+    type: pages
+    template: page-creation-status-listed
+
+  statusListedRequired:
+    label: Create as listed with required fields
+    type: pages
+    template: page-creation-status-listed-required
+
+  statusUnlisted:
+    label: Create as unlisted
+    type: pages
+    template: page-creation-status-unlisted
+
+  defaultValues:
+    label: Create with default values
+    type: pages
+    template: page-creation-with-default-values

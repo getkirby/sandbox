@@ -1,0 +1,4 @@
+title: Page Creation without redirect
+
+create:
+  redirect: false

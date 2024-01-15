@@ -1,0 +1,12 @@
+title: Page Creation with simple fields
+
+create:
+  fields:
+    - fieldA
+    - fieldB
+
+fields:
+  fieldA:
+    type: text
+  fieldB:
+    type: text

@@ -1,0 +1,12 @@
+title: Page Creation with listed status and required fields
+
+create:
+  status: listed
+
+fields:
+  fieldA:
+    type: text
+    required: true
+  fieldB:
+    type: text
+    required: true
