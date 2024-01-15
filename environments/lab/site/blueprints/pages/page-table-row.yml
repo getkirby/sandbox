@@ -6,3 +6,4 @@ fields:
   email: true
   url: true
   toggle: true
+  color: true

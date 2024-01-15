@@ -11,4 +11,5 @@ sections:
       email: true
       url: true
       toggle: true
+      color: true
     template: page-table-row
