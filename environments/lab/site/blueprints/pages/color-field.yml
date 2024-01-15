@@ -15,14 +15,6 @@ tabs:
           alpha:
             type: color
             alpha: true
-          options:
-            type: color
-            options:
-              "Sunny rays": "#F8B195"
-              "First-love blush": "#F67280"
-              "Cherry blossom": "#C06C84"
-              "Morning gloom": "#6C5B7B"
-              "Midnight rain": "#355C7D"
       - width: 1/2
         fields:
           required:
@@ -34,6 +26,47 @@ tabs:
           help:
             type: color
             help: Some help text
+  options:
+    fields:
+      optionsFromValues:
+        type: color
+        options:
+          - "#F8B195"
+          - "#F67280"
+          - "#C06C84"
+          - "#6C5B7B"
+          - "#355C7D"
+      optionsFromValuesAndKeys:
+        type: color
+        options:
+          "Sunny rays": "#F8B195"
+          "First-love blush": "#F67280"
+          "Cherry blossom": "#C06C84"
+          "Morning gloom": "#6C5B7B"
+          "Midnight rain": "#355C7D"
+      optionsFromKeysAndValues:
+        type: color
+        options:
+          "#F8B195": "Sunny rays"
+          "#F67280": "First-love blush"
+          "#C06C84": "Cherry blossom"
+          "#6C5B7B": "Morning gloom"
+          "#355C7D": "Midnight rain"
+      optionsFromApi:
+        type: color
+        options:
+          type: api
+          url: "{{ site.url }}/colors.json"
+          text: "{{ item.name }}"
+          value: "{{ item.value }}"
+      optionsFromQuery:
+        type: color
+        options:
+          type: query
+          query: kirby.option('colors')
+          text: "{{ item.value }}"
+          value: "{{ item.key }}"
+
   formats:
     fields:
       hexFormat:
@@ -44,7 +77,8 @@ tabs:
       hslFormat:
         type: color
         format: hsl
-  options:
+  optionsMode:
+    label: Options Mode
     fields:
       optionsMode:
         extends: fields/color/options
@@ -55,7 +89,8 @@ tabs:
       optionsModeDisabled:
         extends: fields/color/options
         disabled: true
-  input:
+  inputMode:
+    label: Input Mode
     columns:
       - width: 1/2
         fields:
