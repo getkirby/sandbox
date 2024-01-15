@@ -1,0 +1,8 @@
+title: Page Table Row
+
+fields:
+  tags: true
+  date: true
+  email: true
+  url: true
+  toggle: true

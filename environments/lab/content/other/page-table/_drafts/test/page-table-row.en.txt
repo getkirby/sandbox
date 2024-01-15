@@ -1,0 +1,29 @@
+Title: Test
+
+----
+
+Tags: Design, Photography, Interface
+
+----
+
+Date: 2024-01-15
+
+----
+
+Email: mail@getkirby.com
+
+----
+
+Url: https://getkirby.com
+
+----
+
+Toggle: true
+
+----
+
+Link: https://getkirby.com
+
+----
+
+Uuid: AcrbSFMnFegURcQM

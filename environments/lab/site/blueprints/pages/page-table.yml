@@ -1,0 +1,14 @@
+title: Page Table
+
+sections:
+  table:
+    type: pages
+    layout: table
+    image: false
+    columns:
+      tags: true
+      date: true
+      email: true
+      url: true
+      toggle: true
+    template: page-table-row
