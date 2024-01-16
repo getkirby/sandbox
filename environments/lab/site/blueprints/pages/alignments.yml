@@ -1,0 +1,18 @@
+title: Alignments
+
+columns:
+  - width: 1/2
+    fields:
+      h1:
+        label: Fields only
+        type: headline
+      pages: true
+
+  - width: 1/2
+    sections:
+      fields:
+        fields:
+          h2:
+            label: Fields followed by a section
+            type: headline
+      pages: true
