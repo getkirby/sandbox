@@ -40,3 +40,8 @@ sections:
     label: Create with validating custom fields
     type: pages
     template: page-creation-with-validating-custom-fields
+
+  customTitleAndSlug:
+    label: Create with custom title and slug
+    type: pages
+    template: page-creation-with-custom-title-and-slug

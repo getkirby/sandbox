@@ -1,0 +1,14 @@
+title: Page Creation with custom title and slug
+
+create:
+  title: "{{ page.location }} – {{ page.date.toDate('M Y') }}"
+  slug: "{{ page.location.slug }}-{{ page.date.toDate('Y-m-d') }}"
+  fields:
+    - location
+    - date
+
+fields:
+  location:
+    type: text
+  date:
+    type: date
