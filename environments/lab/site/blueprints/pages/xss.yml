@@ -159,8 +159,8 @@ tabs:
               type: api
               url: "{{ site.url }}/options.json"
               query: Html
-              text: "{{ item.name }}"
-              value: "{< item.color >}"
+              text: "{< item.name >}"
+              value: "{{ item.color }}"
             width: 1/2
           color6:
             label: Color (query, defaults)

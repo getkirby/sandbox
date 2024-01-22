@@ -50,7 +50,7 @@ Color3: #ddd
 
 ----
 
-Color4: #000
+Color4: #00f
 
 ----
 
