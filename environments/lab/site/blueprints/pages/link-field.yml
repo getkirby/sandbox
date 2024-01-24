@@ -9,6 +9,14 @@ tabs:
         options:
           - url
           - email
+      singleOptionUrl:
+        type: link
+        options:
+          - url
+      singleOptionPage:
+        type: link
+        options:
+          - page
       disabled:
         type: link
         disabled: true
