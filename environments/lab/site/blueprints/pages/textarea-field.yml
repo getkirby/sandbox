@@ -25,6 +25,21 @@ tabs:
         type: textarea
         help: Some help text
 
+  buttons:
+    fields:
+      limitedButtons:
+        type: textarea
+        buttons:
+          - bold
+          - "|"
+          - link
+          - email
+      customButtons:
+        type: textarea
+        buttons:
+          - bold
+          - highlight
+
   validation:
     fields:
       required:
