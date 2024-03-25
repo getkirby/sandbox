@@ -26,6 +26,22 @@ tabs:
         extends: fields/layout/default
         help: This is some help text
 
+  nesting:
+    fields:
+      blocks:
+        type: layout
+        fieldsets:
+          - type: blocks
+            preview: fields
+            wysiwyg: true
+            fields:
+              blocks: true
+          - type: layout
+            preview: fields
+            wysiwyg: true
+            fields:
+              layout: true
+
   validation:
     fields:
       required:
