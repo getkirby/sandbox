@@ -85,6 +85,18 @@ tabs:
         layout: table
         template: page
         search: true
+      tableWithCustomDefaultColumns:
+        type: pages
+        layout: table
+        template: page
+        info: "{{ page.slug }}"
+        search: true
+        columns:
+          title:
+            label: Custom Title
+          info:
+            label: Custom Slug
+            width: 10rem
 
   cardSizes:
     sections:
