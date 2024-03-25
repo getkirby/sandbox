@@ -28,11 +28,11 @@ if (! function_exists('ray')) {
             }
         }
 
-        if (class_exists(CraftRay::class)) {
+        if (class_exists(CraftRay::class) && class_exists(Yii::class)) {
             return Yii::$container->get(CraftRay::class)->send(...$args);
         }
 
-        if (class_exists(YiiRay::class)) {
+        if (class_exists(YiiRay::class) && class_exists(Yii::class)) {
             return Yii::$container->get(YiiRay::class)->send(...$args);
         }
 
@@ -50,6 +50,10 @@ if (! function_exists('ray')) {
 
         return (new $rayClass($settings))->send(...$args);
     }
+
+    register_shutdown_function(function () {
+        ray()->throwExceptions();
+    });
 }
 
 if (! function_exists('rd')) {

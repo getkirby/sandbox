@@ -10,8 +10,8 @@
         }
     ],
     "require": {
-        "getkirby/composer-installer": "^1.1",
-        "spatie/ray": "^1.2"
+        "getkirby/composer-installer": "^1.2",
+        "spatie/ray": "^1.4"
     },
     "autoload": {
         "psr-4": {
@@ -19,6 +19,9 @@
         }
     },
     "config": {
-        "optimize-autoloader": true
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "getkirby/composer-installer": true
+        }
     }
 }

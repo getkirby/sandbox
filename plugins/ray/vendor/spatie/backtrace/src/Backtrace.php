@@ -3,12 +3,21 @@
 namespace Spatie\Backtrace;
 
 use Closure;
+use Spatie\Backtrace\Arguments\ArgumentReducers;
+use Spatie\Backtrace\Arguments\ReduceArgumentsAction;
+use Spatie\Backtrace\Arguments\Reducers\ArgumentReducer;
 use Throwable;
 
 class Backtrace
 {
     /** @var bool */
     protected $withArguments = false;
+
+    /** @var bool */
+    protected $reduceArguments = false;
+
+    /** @var array<class-string<ArgumentReducer>|ArgumentReducer>|ArgumentReducers|null */
+    protected $argumentReducers = null;
 
     /** @var bool */
     protected $withObject = false;
@@ -45,9 +54,24 @@ class Backtrace
         return $this;
     }
 
-    public function withArguments(): self
-    {
-        $this->withArguments = true;
+    public function withArguments(
+        bool $withArguments = true
+    ): self {
+        $this->withArguments = $withArguments;
+
+        return $this;
+    }
+
+    /**
+     * @param array<class-string<ArgumentReducer>|ArgumentReducer>|ArgumentReducers|null $argumentReducers
+     *
+     * @return $this
+     */
+    public function reduceArguments(
+        $argumentReducers = null
+    ): self {
+        $this->reduceArguments = true;
+        $this->argumentReducers = $argumentReducers;
 
         return $this;
     }
@@ -61,7 +85,7 @@ class Backtrace
 
     public function applicationPath(string $applicationPath): self
     {
-        $this->applicationPath = $applicationPath;
+        $this->applicationPath = rtrim($applicationPath, '/');
 
         return $this;
     }
@@ -87,11 +111,25 @@ class Backtrace
         return $this;
     }
 
+    /**
+     * @return \Spatie\Backtrace\Frame[]
+     */
     public function frames(): array
     {
         $rawFrames = $this->getRawFrames();
 
         return $this->toFrameObjects($rawFrames);
+    }
+
+    public function firstApplicationFrameIndex(): ?int
+    {
+        foreach ($this->frames() as $index => $frame) {
+            if ($frame->applicationFrame) {
+                return $index;
+            }
+        }
+
+        return null;
     }
 
     protected function getRawFrames(): array
@@ -119,22 +157,40 @@ class Backtrace
         return debug_backtrace($options, $limit);
     }
 
+    /**
+     * @return \Spatie\Backtrace\Frame[]
+     */
     protected function toFrameObjects(array $rawFrames): array
     {
         $currentFile = $this->throwable ? $this->throwable->getFile() : '';
         $currentLine = $this->throwable ? $this->throwable->getLine() : 0;
+        $arguments = $this->withArguments ? [] : null;
 
         $frames = [];
+
+        $reduceArgumentsAction = new ReduceArgumentsAction($this->resolveArgumentReducers());
 
         foreach ($rawFrames as $rawFrame) {
             $frames[] = new Frame(
                 $currentFile,
                 $currentLine,
-                $rawFrame['args'] ?? null,
+                $arguments,
                 $rawFrame['function'] ?? null,
                 $rawFrame['class'] ?? null,
                 $this->isApplicationFrame($currentFile)
             );
+
+            $arguments = $this->withArguments
+                ? $rawFrame['args'] ?? null
+                : null;
+
+            if ($this->reduceArguments) {
+                $arguments = $reduceArgumentsAction->execute(
+                    $rawFrame['class'] ?? null,
+                    $rawFrame['function'] ?? null,
+                    $arguments
+                );
+            }
 
             $currentFile = $rawFrame['file'] ?? 'unknown';
             $currentLine = $rawFrame['line'] ?? 0;
@@ -165,7 +221,7 @@ class Backtrace
             $relativeFile = array_reverse(explode($this->applicationPath ?? '', $frameFilename, 2))[0];
         }
 
-        if (strpos($relativeFile, DIRECTORY_SEPARATOR . 'vendor') === 0) {
+        if (strpos($relativeFile, DIRECTORY_SEPARATOR.'vendor') === 0) {
             return false;
         }
 
@@ -198,5 +254,18 @@ class Backtrace
         }
 
         return $frames;
+    }
+
+    protected function resolveArgumentReducers(): ArgumentReducers
+    {
+        if ($this->argumentReducers === null) {
+            return ArgumentReducers::default();
+        }
+
+        if ($this->argumentReducers instanceof ArgumentReducers) {
+            return $this->argumentReducers;
+        }
+
+        return ArgumentReducers::create($this->argumentReducers);
     }
 }
