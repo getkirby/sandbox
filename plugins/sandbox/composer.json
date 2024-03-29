@@ -1,6 +1,6 @@
 {
-	"name": "getkirby/environments",
-	"description": "Manage Sandbox environments form the Kirby Panel",
+	"name": "getkirby/sandbox",
+	"description": "Manage Sandbox environments from the Kirby Panel",
 	"version": "1.0.0",
 	"license": "MIT",
 	"authors": [

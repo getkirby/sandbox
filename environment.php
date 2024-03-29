@@ -99,14 +99,12 @@ class Environment
 		}
 
 		// copy global plugins
-		static::copyDirectory(
-			__DIR__ . '/plugins/environments',
-			$public . '/site/plugins/environments'
-		);
-		static::copyDirectory(
-			__DIR__ . '/plugins/ray',
-			$public . '/site/plugins/ray'
-		);
+		foreach (Dir::read(__DIR__ . '/plugins') as $plugin) {
+			static::copyDirectory(
+				__DIR__ . '/plugins/' . $plugin,
+				$public . '/site/plugins/' . $plugin
+			);
+		}
 
 		// remove pre-installed users
 		if (is_dir($public . '/site/accounts') === true) {

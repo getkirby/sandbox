@@ -4,8 +4,34 @@ use Kirby\Cms\App;
 use Kirby\Panel\Panel;
 use Kirby\Toolkit\A;
 
-App::plugin('getkirby/environments', [
+App::plugin('getkirby/sandbox', [
 	'areas' => [
+		'login' => function ($kirby) {
+			return [
+				'views' => [
+					'login' => [
+						'action'  => function () use ($kirby) {
+							$system = $kirby->system();
+							$status = $kirby->auth()->status();
+							return [
+								'component' => 'k-login-view',
+								'props'     => [
+									'methods' => array_keys($system->loginMethods()),
+									'pending' => [
+										'email'     => $status->email(),
+										'challenge' => $status->challenge()
+									],
+									'value' => [
+										'email'    => 'test@getkirby.com',
+										'password' => '12345678'
+									]
+								],
+							];
+						}
+					],
+				]
+			];
+		},
 		'environments' => function ($kirby) {
 			return [
 				'label' => 'Environments',

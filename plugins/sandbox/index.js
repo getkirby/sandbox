@@ -1,4 +1,4 @@
-panel.plugin("getkirby/environments", {
+panel.plugin("getkirby/sandbox", {
 	components: {
 		"k-environments-view": {
 			props: {
