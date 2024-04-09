@@ -80,6 +80,12 @@ tabs:
         layout: table
         image: false
         template: page
+      tableWithoutTitle:
+        type: pages
+        layout: table
+        text: false
+        template: page
+        info: "{{ page.slug }}"
       tableWithSearch:
         type: pages
         layout: table
@@ -89,14 +95,25 @@ tabs:
         type: pages
         layout: table
         template: page
+        text: "Custom {{ page.title }}"
         info: "{{ page.slug }}"
-        search: true
         columns:
           title:
             label: Custom Title
           info:
             label: Custom Slug
             width: 10rem
+            mobile: true
+      tableWithCustomDefaultColumnValues:
+        type: pages
+        layout: table
+        template: page
+        columns:
+          title:
+            value: Custom Title Value
+            type: text
+          info:
+            value: Custom Info Value
 
   cardSizes:
     sections:
