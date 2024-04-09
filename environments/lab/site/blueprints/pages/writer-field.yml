@@ -51,86 +51,102 @@ tabs:
         toolbar:
           inline: false
 
-  nodesAndMarks:
-    label: Nodes & Marks
-    columns:
-      - width: 1/2
-        fields:
-          limitedNodes:
-            label: Limited Nodes
-            type: writer
-            nodes:
-              - paragraph
-              - orderedList
-              - bulletList
-            toolbar:
-              inline: false
-          limitedNodesInToolbar:
-            label: Limited Nodes in Toolbar
-            type: writer
-            nodes:
-              - paragraph
-              - orderedList
-              - bulletList
-            toolbar:
-              inline: false
-              nodes:
-                - paragraph
-                - orderedList
-          singleNode:
-            label: Single Node
-            type: writer
-            nodes:
-              - paragraph
-            toolbar:
-              inline: false
-          nonDefaultNodes:
-            label: Non-default Nodes
-            type: writer
-            nodes:
-              - paragraph
-              - quote
-            toolbar:
-              inline: false
+  nodes:
+    label: Nodes
+    fields:
+      limitedNodes:
+        label: Limited Nodes
+        type: writer
+        nodes:
+          - paragraph
+          - orderedList
+          - bulletList
+        toolbar:
+          inline: false
+      limitedNodesInToolbar:
+        label: Limited Nodes in Toolbar
+        type: writer
+        nodes:
+          - paragraph
+          - orderedList
+          - bulletList
+        toolbar:
+          inline: false
+          nodes:
+            - paragraph
+            - orderedList
+      singleNode:
+        label: Single Node
+        type: writer
+        nodes:
+          - paragraph
+        toolbar:
+          inline: false
+      nonDefaultNodes:
+        label: Non-default Nodes
+        type: writer
+        nodes:
+          - paragraph
+          - quote
+        toolbar:
+          inline: false
+      customNodes:
+        label: Custom Nodes
+        type: writer
+        nodes:
+          - quote
+        toolbar:
+          inline: false
 
-      - width: 1/2
-        fields:
-          limitedMarks:
-            label: Limited Marks
-            type: writer
-            marks:
-              - bold
-              - italic
-              - underline
-            toolbar:
-              inline: false
-          limitedMarksInToolbar:
-            label: Limited Marks in Toolbar
-            type: writer
-            marks:
-              - bold
-              - italic
-              - underline
-            toolbar:
-              inline: false
-              marks:
-                - bold
-                - italic
-          singleMark:
-            label: Single Mark
-            type: writer
-            marks:
-              - bold
-            toolbar:
-              inline: false
-          nonDefaultMarks:
-            label: Non-default Marks
-            type: writer
-            marks:
-              - sup
-              - sub
-            toolbar:
-              inline: false
+  marks:
+    label: Marks
+    fields:
+      limitedMarks:
+        label: Limited Marks
+        type: writer
+        marks:
+          - bold
+          - italic
+          - underline
+        toolbar:
+          inline: false
+      limitedMarksInToolbar:
+        label: Limited Marks in Toolbar
+        type: writer
+        marks:
+          - bold
+          - italic
+          - underline
+        toolbar:
+          inline: false
+          marks:
+            - bold
+            - italic
+      singleMark:
+        label: Single Mark
+        type: writer
+        marks:
+          - bold
+        toolbar:
+          inline: false
+      nonDefaultMarks:
+        label: Non-default Marks
+        type: writer
+        nodes: false
+        marks:
+          - sup
+          - sub
+        toolbar:
+          inline: false
+      customMarks:
+        label: Custom Marks
+        type: writer
+        nodes: false
+        marks:
+          - highlight
+        toolbar:
+          inline: false
+
   validation:
     fields:
       required:
