@@ -82,6 +82,14 @@ tabs:
           - paragraph
         toolbar:
           inline: false
+      horizontalRule:
+        label: Horizontal Rule
+        type: writer
+        nodes:
+          - paragraph
+          - horizontalRule
+        toolbar:
+          inline: false
       nonDefaultNodes:
         label: Non-default Nodes
         type: writer
