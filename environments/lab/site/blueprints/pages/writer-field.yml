@@ -18,6 +18,9 @@ tabs:
       help:
         type: writer
         help: Some help text
+      inline:
+        type: writer
+        inline: true
 
   toolbar:
     fields:
