@@ -195,7 +195,7 @@ class Environment
 		// remove directories that should not be stored
 		Dir::remove($root . '/site/accounts');
 		Dir::remove($root . '/site/cache');
-		Dir::remove($root . '/site/plugins/environments');
+		Dir::remove($root . '/site/plugins/sandbox');
 		Dir::remove($root . '/site/plugins/ray');
 		Dir::remove($root . '/site/sessions');
 
