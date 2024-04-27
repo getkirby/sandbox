@@ -26,9 +26,21 @@ sections:
     type: pages
     template: page-creation-status-listed-required
 
+  statusListedFiltered:
+    label: Create as listed in section only showing listed
+    type: pages
+    status: listed
+    template: page-creation-status-listed
+
   statusUnlisted:
     label: Create as unlisted
     type: pages
+    template: page-creation-status-unlisted
+
+  statusUnlistedFiltered:
+    label: Create as unlisted in section only showing unlisted
+    type: pages
+    status: unlisted
     template: page-creation-status-unlisted
 
   defaultValues:
@@ -45,3 +57,28 @@ sections:
     label: Create with custom title and slug
     type: pages
     template: page-creation-with-custom-title-and-slug
+
+  statusDraftFilteredListed:
+    label: Create draft in section only showing listed (should not show Add button)
+    type: pages
+    status: listed
+
+  statusListedFilteredUnlisted:
+    label: Create listed in section only showing unlisted (should not show Add button)
+    type: pages
+    status: unlisted
+    template: page-creation-status-listed
+
+  statusUnlistedFilteredListed:
+    label: Create unlisted in section only showing listed (should not show Add button)
+    type: pages
+    status: listed
+    template: page-creation-status-unlisted
+
+  statusListedUnlistedFilteredListed:
+    label: Create listed or unlisted in section only showing listed (should not show Add button)
+    type: pages
+    status: listed
+    templates:
+      - page-creation-status-listed
+      - page-creation-status-unlisted
