@@ -1,0 +1,19 @@
+Sort: 5
+
+----
+
+Author:
+-
+	text: Virtual Museums of Małopolska
+	link: https://sketchfab.com/WirtualneMuzeaMalopolski
+
+----
+
+License:
+-
+  text: CC0-1.0
+	link: http://creativecommons.org/publicdomain/zero/1.0/
+
+----
+
+Uuid: tcscjievg3lnveud
