@@ -1,0 +1,10 @@
+title: Vuew buttons
+
+buttons:
+  - applause
+  - settings
+
+sections:
+  info:
+    type: info
+    text: See the custom view button for giving some applause on the top right
