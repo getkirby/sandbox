@@ -11,6 +11,20 @@ return [
 			'system',
 			'-',
 			'environments',
+		],
+		'viewButtons' => [
+			'site' => [
+				'preview',
+				'reference' => [
+					'props' => [
+						'text'   => 'Reference',
+						'link'   => 'https://getkirby.com/docs/reference',
+						'target' => '_blank',
+						'icon'   => 'book'
+					]
+				],
+				'languages',
+			]
 		]
 	],
 	'languages' => true,
