@@ -1,6 +1,14 @@
 title: Vuew buttons
 
 buttons:
+  - preview
+  music:
+    props:
+      icon: audio
+      link: https://www.youtube.com/watch?v=ZgtL1pWdbYA
+      text: Tune
+      target: _blank
+      theme: aqua
   - applause
   - settings
 
