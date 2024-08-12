@@ -37,6 +37,18 @@ tabs:
         type: files
         layout: cards
 
+  customImagePreview:
+    label: Image Preview
+    fields:
+      customImagePreview:
+        label: Custom Image Preview
+        type: files
+        layout: cards
+        image:
+          color: black
+          cover: false
+          back: yellow
+
   widths:
     fields:
       oneHalf1:
