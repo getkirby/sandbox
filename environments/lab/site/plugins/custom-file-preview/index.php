@@ -1,5 +1,9 @@
 <?php
 
+if (class_exists('Kirby\Panel\Ui\FilePreview') === false) {
+	return;
+}
+
 use Kirby\Cms\File;
 use Kirby\Panel\Ui\FilePreview;
 
