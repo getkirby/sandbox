@@ -1,0 +1,13 @@
+num: date
+
+icon: 🗓️
+
+create:
+  status: listed
+  fields:
+    - date
+  redirect: false
+
+fields:
+  date:
+    type: date

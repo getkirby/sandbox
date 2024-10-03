@@ -1,0 +1,53 @@
+title: Artist Gallery
+icon: preview
+
+buttons:
+  instagram:
+    icon: instagram
+    text: Instagram
+    theme: pink-icon
+  pinterest:
+    icon: pinterest
+    text: Pinterest
+    theme: orange-icon
+  shop:
+    icon: cart
+    text: Shop
+    theme: purple-icon
+
+columns:
+  - width: 2/3
+    sections:
+      featured-art:
+        type: files
+        label: Featured Artwork
+        create: false
+        template: artwork
+        layout: cards
+        image:
+          cover: true
+        text: "{{ file.title }}"
+        info: "{{ file.artist }}"
+
+      text-content:
+        type: fields
+        fields:
+          introduction:
+            type: blocks
+
+  - width: 1/3
+    sections:
+      exhibitions:
+        type: pages
+        headline: Upcoming Exhibitions
+        layout: list
+        parent: site.find('exhibitions')
+        template: exhibition
+
+      artists:
+        type: pages
+        headline: Artists
+        layout: cardlets
+        parent: site.find('artists')
+        image:
+          cover: true

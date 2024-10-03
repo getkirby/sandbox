@@ -1,0 +1,5 @@
+fields:
+  title:
+    type: text
+  artist:
+    type: text

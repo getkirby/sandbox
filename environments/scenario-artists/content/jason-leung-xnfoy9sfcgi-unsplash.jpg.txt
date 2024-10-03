@@ -1,0 +1,17 @@
+Title: Parallel Shift 42
+
+----
+
+Artist: Luca Velasco
+
+----
+
+Sort: 2
+
+----
+
+Uuid: 3za5hqe5bz5idgwt
+
+----
+
+Template: artwork
