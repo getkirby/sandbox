@@ -1,0 +1,50 @@
+title: Site
+
+columns:
+  - width: 1/2
+    sections:
+      stats:
+        type: stats
+        label: Ticketing system
+        reports:
+          - label: Tickets sold
+            value: 653
+            info: +74 today
+            theme: positive
+          - label: Tickets left
+            value: 97
+            info: Early bird ending in 4 days
+            theme: blue
+      programme:
+        type: fields
+        fields:
+          day1:
+            label: Talks
+            type: structure
+            columns:
+              talk:
+                mobile: true
+              speaker:
+                mobile: true
+            fields:
+              talk:
+                label: Talk
+                type: text
+              speaker:
+                type: pages
+      marketing:
+        type: pages
+        parent: page('marketing')
+
+  - width: 1/2
+    sections:
+      speakers:
+        label: Speakers
+        type: pages
+        parent: page('speakers')
+        layout: cards
+        create: speaker
+        size: small
+        info: "{{ page.slot }}"
+        image:
+          cover: true

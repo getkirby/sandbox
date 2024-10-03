@@ -1,0 +1,56 @@
+title: Site
+
+buttons:
+  - icon: store
+  - icon: book
+  - text: Lead CRM
+    icon: open
+
+columns:
+  - width: 1/1
+    sections:
+      stats:
+        label: Fall Term 2024
+        type: stats
+        size: huge
+        reports:
+          - label: Enrolments
+            value: 315
+            info: +32.5%
+            theme: positive
+          - label: Applications
+            value: 1256
+            info: +22.8%
+            theme: positive
+          - label: Courses
+            value: 56
+            info: for undergraduates
+            theme: info
+          - label: Courses
+            value: 31
+            info: for grad students
+            theme: info
+          - label: Days until
+            value: 12
+            info: start of the semester
+  - width: 1/3
+    sections:
+      pages:
+        label: Quick access
+        type: pages
+        image: false
+        status: listed
+        help: "Find the brand guidelines as well as all brand assets (link: https://getkirby.com text: on the campus intranet)."
+  - width: 2/3
+    sections:
+      centres:
+        label: Departments
+        type: pages
+        layout: cardlets
+        parent: page('departments')
+      news:
+        label: Updates
+        type: pages
+        layout: list
+        parent: page('news')
+        info: "{{ page.published.toDate('d.m.Y') }}"

@@ -1,0 +1,21 @@
+Title: Savvy Soiree 2025
+
+----
+
+Day1:
+
+- 
+  talk: Harmony in the Hustle
+  speaker:
+    - page://vsi6ytbi6cuyp5oz
+  title: Harmony in the Hustle
+  time: 2024-08-04 20:00:00
+- 
+  talk: Carnival of Cultures
+  speaker:
+    - page://xjnpiankvpf9k2yy
+    - page://58dlnz2qabryjd1l
+- 
+  talk: Beyond Buzzwords
+  speaker:
+    - page://6fxaamluax8xqm3s
