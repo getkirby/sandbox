@@ -106,11 +106,6 @@ class Environment
 			);
 		}
 
-		// remove pre-installed users
-		if (is_dir($public . '/site/accounts') === true) {
-			Dir::remove($public . '/site/accounts');
-		}
-
 		// link the submodules to the environment directory
 		static::linkSubmodules($public, $root);
 
