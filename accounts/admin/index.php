@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'email' => 'test@getkirby.com',
+    'email' => 'admin@getkirby.com',
     'language' => 'en',
-    'name' => 'test',
+    'name' => 'admin',
     'role' => 'admin'
 ];
