@@ -1,0 +1,78 @@
+title: When Queries
+
+tabs:
+  general:
+    fields:
+      text:
+        label: Text
+        type: text
+        help: Show field below if text is "foo"
+      whenText:
+        label: When Text is "foo"
+        type: text
+        when:
+          text: "foo"
+
+      toggle:
+        label: Toggle
+        type: toggle
+        help: Show field below if toggle is on
+      whenToggle:
+        label: When Toggle is "on"
+        type: text
+        when:
+          toggle: true
+
+      number:
+        label: Number
+        type: number
+        help: Show field below if number is "5"
+      whenNumber:
+        label: When Toggle is "5"
+        type: text
+        when:
+          number: 5
+
+      select:
+        label: Select
+        type: select
+        help: Show field below if option is "B"
+        options:
+          - A
+          - B
+          - C
+      whenSelect:
+        label: When Select is "B"
+        type: text
+        when:
+          select: B
+  validation:
+    fields:
+      required:
+        type: toggle
+        help: Show field below if toggle is on
+      whenRequired:
+        label: Conditionally required
+        type: text
+        required: true
+        when:
+          required: true
+
+      minlength:
+        type: toggle
+        help: Show field below if toggle is on
+      whenMinLength:
+        label: Conditional minlength of 5
+        type: text
+        minlength: 5
+        when:
+          minlength: true
+
+      email:
+        type: toggle
+        help: Show field below if toggle is on
+      whenEmail:
+        label: Conditional email
+        type: email
+        when:
+          email: true
