@@ -14,7 +14,7 @@ return [
 			'accounts' => [
 				'label'  => 'Switch accounts',
 				'dialog' => 'accounts/switch',
-				'icon' 	 => 'refresh'
+				'icon' 	 => 'user-switch'
 			],
 		],
 		'viewButtons' => [
