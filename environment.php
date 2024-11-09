@@ -188,7 +188,6 @@ class Environment
 		static::linkSubmodules($public, $root);
 
 		// remove directories that should not be stored
-		Dir::remove($root . '/site/accounts');
 		Dir::remove($root . '/site/cache');
 		Dir::remove($root . '/site/plugins/sandbox');
 		Dir::remove($root . '/site/plugins/ray');
