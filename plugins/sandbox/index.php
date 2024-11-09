@@ -87,7 +87,6 @@ App::plugin('getkirby/sandbox', [
 						'pattern' => 'environments/(:any)/switch',
 						'action'  => function (string $env) {
 							Environment::install($env);
-							Environment::user('admin');
 							go(url('env/auth/admin@getkirby.com?panel'));
 						}
 					]
@@ -118,12 +117,12 @@ App::plugin('getkirby/sandbox', [
 									]
 								]
 							];
-						}, 
+						},
 						'submit' => function () {
 							kirby()->user(get('account'))->loginPasswordless();
 							return true;
 						}
-					],					
+					],
 					'environments/create' => [
 						'load'   => function () {
 							return [

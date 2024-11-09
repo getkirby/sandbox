@@ -106,6 +106,9 @@ class Environment
 			);
 		}
 
+		// ensure installing the admin user
+		static::user('admin');
+
 		// link the submodules to the environment directory
 		static::linkSubmodules($public, $root);
 
