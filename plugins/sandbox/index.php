@@ -13,6 +13,7 @@ App::plugin('getkirby/sandbox', [
 						'action'  => function () use ($kirby) {
 							$system = $kirby->system();
 							$status = $kirby->auth()->status();
+
 							return [
 								'component' => 'k-login-view',
 								'props'     => [
@@ -99,10 +100,10 @@ App::plugin('getkirby/sandbox', [
 								'props' => [
 									'fields' => [
 										'account' => [
-											'type' => 'select',
-											'label' => 'Account',
-											'empty' => false,
-											'options' => kirby()->users()->sortBy('email')->values(fn ($user) => [
+											'type'     => 'select',
+											'label'    => 'Account',
+											'required' => true,
+											'options'  => kirby()->users()->sortBy('email')->values(fn ($user) => [
 												'text'  => $user->email() . ' - (' . $user->role() . ')',
 												'value' => $user->id()
 											])
