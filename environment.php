@@ -106,16 +106,40 @@ class Environment
 			);
 		}
 
-		// remove pre-installed users
-		if (is_dir($public . '/site/accounts') === true) {
-			Dir::remove($public . '/site/accounts');
-		}
+		// ensure installing the admin user
+		static::installAdminUser();
 
 		// link the submodules to the environment directory
 		static::linkSubmodules($public, $root);
 
 		// store the name of the environment for switching later
 		F::write($public . '/.environment', $environment);
+
+		return true;
+	}
+
+	/**
+	 * Copies the admin user preset from `accounts` to the `public` folder
+	 */
+	public static function installAdminUser(): bool
+	{
+		$accounts = __DIR__ . '/accounts';
+		$account  = $accounts . '/admin';
+		$public   = __DIR__ . '/public';
+		$dest     = $public . '/site/accounts/admin';
+
+		if (is_dir($account) === false) {
+			throw new Exception('The user does not exist');
+		}
+
+		// remove previous versions of the admin user
+		Dir::remove($dest);
+
+		// create the account folder if it does not exist
+		Dir::make(dirname($dest));
+
+		// copy the account
+		static::copyDirectory($account, $dest);
 
 		return true;
 	}
@@ -193,7 +217,7 @@ class Environment
 		static::linkSubmodules($public, $root);
 
 		// remove directories that should not be stored
-		Dir::remove($root . '/site/accounts');
+		Dir::remove($root . '/site/accounts/admin');
 		Dir::remove($root . '/site/cache');
 		Dir::remove($root . '/site/plugins/sandbox');
 		Dir::remove($root . '/site/plugins/ray');
@@ -201,32 +225,6 @@ class Environment
 
 		// store the name of the environment for switching later
 		F::write($public . '/.environment', $environment);
-
-		return true;
-	}
-
-	/**
-	 * Copies a user preset from `accounts` to the `public` folder
-	 */
-	public static function user(string $username): bool
-	{
-		$accounts = __DIR__ . '/accounts';
-		$account  = $accounts . '/' . basename($username);
-		$public   = __DIR__ . '/public';
-		$dest     = $public . '/site/accounts/' . basename($username);
-
-		if (is_dir($account) === false) {
-			throw new Exception('The user does not exist');
-		}
-
-		// remove previous versions of the user
-		Dir::remove($dest);
-
-		// create the account folder if it does not exist
-		Dir::make(dirname($dest));
-
-		// copy the account
-		static::copyDirectory($account, $dest);
 
 		return true;
 	}

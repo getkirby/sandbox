@@ -11,6 +11,11 @@ return [
 			'system',
 			'-',
 			'environments',
+			'accounts' => [
+				'label'  => 'Switch accounts',
+				'dialog' => 'accounts/switch',
+				'icon' 	 => 'user-switch'
+			],
 		],
 		'viewButtons' => [
 			'site' => [

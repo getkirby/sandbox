@@ -13,6 +13,7 @@ App::plugin('getkirby/sandbox', [
 						'action'  => function () use ($kirby) {
 							$system = $kirby->system();
 							$status = $kirby->auth()->status();
+
 							return [
 								'component' => 'k-login-view',
 								'props'     => [
@@ -22,13 +23,13 @@ App::plugin('getkirby/sandbox', [
 										'challenge' => $status->challenge()
 									],
 									'value' => [
-										'email'    => 'test@getkirby.com',
+										'email'    => 'admin@getkirby.com',
 										'password' => '12345678'
 									]
 								],
 							];
 						}
-					],
+					]
 				]
 			];
 		},
@@ -87,12 +88,42 @@ App::plugin('getkirby/sandbox', [
 						'pattern' => 'environments/(:any)/switch',
 						'action'  => function (string $env) {
 							Environment::install($env);
-							Environment::user('test');
-							go(url('env/auth/test@getkirby.com?panel'));
+							go(url('env/auth/admin@getkirby.com?panel'));
 						}
 					]
 				],
 				'dialogs' => [
+					'accounts/switch' => [
+						'load' => function () {
+							return [
+								'component' => 'k-form-dialog',
+								'props' => [
+									'fields' => [
+										'account' => [
+											'type'     => 'select',
+											'label'    => 'Account',
+											'required' => true,
+											'options'  => kirby()->users()->sortBy('email')->values(fn ($user) => [
+												'text'  => $user->email() . ' - (' . $user->role() . ')',
+												'value' => $user->id()
+											])
+										]
+									],
+									'value' => [
+										'account' => kirby()->user()->id()
+									],
+									'submitButton' => [
+										'icon' => 'refresh',
+										'text' => 'Switch'
+									]
+								]
+							];
+						},
+						'submit' => function () {
+							kirby()->user(get('account'))->loginPasswordless();
+							return true;
+						}
+					],
 					'environments/create' => [
 						'load'   => function () {
 							return [
