@@ -2,13 +2,16 @@ title: Vuew buttons
 
 buttons:
   - preview
-  music:
-    icon: audio
-    link: https://www.youtube.com/watch?v=ZgtL1pWdbYA
-    text: Tune
+  stats:
+    icon: chart
+    link: "https://example.com/stats/{{ page.uuid.id }}"
+    text:
+      en: Stats
+      de: KPIs
     target: _blank
     theme: aqua
-  - applause
+  applause:
+    theme: purple
   - settings
 
 sections:
