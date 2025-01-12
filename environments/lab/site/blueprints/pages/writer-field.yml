@@ -105,7 +105,8 @@ tabs:
         label: Custom Nodes
         type: writer
         nodes:
-          - quote
+          - advert
+          - marker
         toolbar:
           inline: false
 
