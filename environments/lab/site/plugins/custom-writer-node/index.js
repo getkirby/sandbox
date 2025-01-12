@@ -1,10 +1,10 @@
 panel.plugin("getkirby/custom-writer-node", {
 	writerNodes: {
-		quote: {
+		advert: {
 			get button() {
 				return {
-					icon: "quote",
-					label: window.panel.$t("field.blocks.quote.name"),
+					icon: "megaphone",
+					label: "Advert",
 				};
 			},
 
@@ -13,7 +13,7 @@ panel.plugin("getkirby/custom-writer-node", {
 			},
 
 			get name() {
-				return "quote";
+				return "advert";
 			},
 
 			get schema() {
@@ -29,6 +29,19 @@ panel.plugin("getkirby/custom-writer-node", {
 					],
 					toDOM: () => ["blockquote", 0],
 				};
+			},
+		},
+		marker: {
+			get button() {
+				return {
+					icon: "bookmark",
+					label: "Mark",
+					inline: true,
+				};
+			},
+
+			get name() {
+				return "marker";
 			},
 		},
 	},
