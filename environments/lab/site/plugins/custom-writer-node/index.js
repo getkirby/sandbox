@@ -40,6 +40,10 @@ panel.plugin("getkirby/custom-writer-node", {
 				};
 			},
 
+			commands({ type, utils }) {
+				return () => alert("Bookmarked");
+			},
+
 			get name() {
 				return "marker";
 			},
