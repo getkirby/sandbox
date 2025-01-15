@@ -15,6 +15,9 @@ tabs:
       listWithSearch:
         type: files
         search: true
+      listWithBatch:
+        type: files
+        batch: true
 
   cardlets:
     sections:
@@ -33,6 +36,10 @@ tabs:
         type: files
         layout: cardlets
         search: true
+      cardletsWithBatch:
+        type: files
+        layout: cardlets
+        batch: true
 
   cards:
     sections:
@@ -51,6 +58,10 @@ tabs:
         type: files
         layout: cards
         search: true
+      cardsWithBatch:
+        type: files
+        layout: cards
+        batch: true
 
   table:
     sections:
@@ -69,6 +80,10 @@ tabs:
         type: files
         layout: table
         search: true
+      tableWithBatch:
+        type: files
+        layout: table
+        batch: true
 
   cardSizes:
     sections:

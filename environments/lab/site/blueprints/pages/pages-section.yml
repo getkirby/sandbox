@@ -19,6 +19,10 @@ tabs:
         type: pages
         template: page
         search: true
+      listWithBatch:
+        type: pages
+        template: page
+        batch: true
 
   cardlets:
     sections:
@@ -41,6 +45,11 @@ tabs:
         layout: cardlets
         template: page
         search: true
+      cardletsWithBatch:
+        type: pages
+        layout: cardlets
+        template: page
+        batch: true
 
   cards:
     sections:
@@ -63,6 +72,11 @@ tabs:
         layout: cards
         template: page
         search: true
+      cardsWithBatch:
+        type: pages
+        layout: cards
+        template: page
+        batch: true
 
   table:
     sections:
@@ -91,6 +105,11 @@ tabs:
         layout: table
         template: page
         search: true
+      tableWithBatch:
+        type: pages
+        layout: table
+        template: page
+        batch: true
       tableWithCustomDefaultColumns:
         type: pages
         layout: table
