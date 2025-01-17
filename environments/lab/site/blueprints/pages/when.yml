@@ -76,3 +76,14 @@ tabs:
         type: email
         when:
           email: true
+
+  uploads:
+    fields:
+      uploadToggle:
+        label: Upload
+        type: toggle
+      uploadField:
+        label: Upload an image
+        type: files
+        when:
+          uploadToggle: true
