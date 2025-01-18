@@ -138,13 +138,14 @@ tabs:
         type: files
         limit: 1
         help: This is some nice help for this files section
-      paginationNoDetails:
-        type: files
-        limit: 1
       paginationWithSearch:
         type: files
         search: true
         limit: 1
+      paginationWithPage:
+        type: files
+        limit: 1
+        page: 2
 
   widths:
     columns:
