@@ -191,13 +191,14 @@ tabs:
         type: pages
         limit: 1
         help: This is some nice help for this pages section
-      paginationNoDetails:
-        type: pages
-        limit: 1
       paginationWithSearch:
         type: pages
         search: true
         limit: 1
+      paginationWithPage:
+        type: pages
+        limit: 1
+        page: 2
 
   widths:
     columns:
