@@ -1,4 +1,4 @@
-panel.plugin("getkirby/custom-file-preview", {
+panel.plugin("plugins/custom-file-preview", {
 	components: {
 		"k-glb-file-preview": {
 			template: `

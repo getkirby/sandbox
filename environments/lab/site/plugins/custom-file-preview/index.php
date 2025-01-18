@@ -44,7 +44,7 @@ class GlbFilePreview extends FilePreview
 	}
 }
 
-Kirby::plugin('getkirby/custom-file-preview', [
+Kirby::plugin('plugins/custom-file-preview', [
 	'filePreviews' => [
 		GlbFilePreview::class
 	]
