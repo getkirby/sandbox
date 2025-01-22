@@ -1,10 +1,10 @@
 title: Vuew buttons
 
 buttons:
-  - preview
+  preview: true
   stats:
     icon: chart
-    link: "https://example.com/stats/{{ page.uuid.id }}"
+    dialog: "users/create"
     text:
       en: Stats
       de: KPIs
@@ -12,6 +12,8 @@ buttons:
     theme: aqua
   applause:
     theme: purple
+    text: Praise
+    praise: Awesome job!
   - settings
 
 sections:
