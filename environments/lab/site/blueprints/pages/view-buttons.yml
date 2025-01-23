@@ -1,10 +1,10 @@
-title: Vuew buttons
+title: View buttons
 
 buttons:
   preview: true
   stats:
     icon: chart
-    dialog: "users/create"
+    link: "https://my-analytics.com/page/{{ page.uuid.id }}"
     text:
       en: Stats
       de: KPIs
