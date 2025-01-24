@@ -39,7 +39,7 @@ class GlbFilePreview extends FilePreview
 	{
 		return [
 			...parent::props(),
-			'asset' => $this->file->kirby()->plugin('getkirby/custom-file-preview')->asset('model-viewer.min.js')->mediaUrl()
+			'asset' => $this->file->kirby()->plugin('plugins/custom-file-preview')->asset('model-viewer.min.js')->mediaUrl()
 		];
 	}
 }
