@@ -15,60 +15,23 @@ tabs:
 
   types:
     fields:
-      color:
+      email:
         type: entries
-        field: color
-      date:
-        type: entries
-        field: date
-      list:
-        type: entries
-        field: list
-      multiselect:
-        type: entries
-        field:
-          type: multiselect
-          options:
-            - a
-            - b
-            - c
+        field: email
       number:
         type: entries
         field: number
-      range:
-        type: entries
-        field: range
-      select:
-        type: entries
-        field:
-          type: select
-          options:
-            - a
-            - b
-            - c
       slug:
         type: entries
         field: slug
-      tags:
-        type: entries
-        field: tags
       tel:
         type: entries
         field: tel
       text:
         type: entries
-      textarea:
-        type: entries
-        field: textarea
-      time:
-        type: entries
-        field: time
       url:
         type: entries
         field: url
-      writer:
-        type: entries
-        field: writer
 
   validation:
     fields:
