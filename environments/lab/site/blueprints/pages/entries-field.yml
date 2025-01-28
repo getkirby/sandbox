@@ -21,6 +21,14 @@ tabs:
       number:
         type: entries
         field: number
+      select:
+        type: entries
+        field:
+          type: select
+          options:
+            - a
+            - b
+            - c
       slug:
         type: entries
         field: slug
