@@ -15,6 +15,12 @@ tabs:
 
   types:
     fields:
+      color:
+        type: entries
+        field: color
+      date:
+        type: entries
+        field: date
       email:
         type: entries
         field: email
@@ -35,6 +41,9 @@ tabs:
       tel:
         type: entries
         field: tel
+      time:
+        type: entries
+        field: time
       text:
         type: entries
       url:
