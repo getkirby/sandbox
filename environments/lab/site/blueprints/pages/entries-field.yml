@@ -35,7 +35,7 @@ tabs:
             - a
             - b
             - c
-      slug:
+      slugField:
         type: entries
         field: slug
       tel:
