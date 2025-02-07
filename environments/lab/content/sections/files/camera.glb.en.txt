@@ -2,6 +2,10 @@ Sort: 5
 
 ----
 
+Template: undeletable-file
+
+----
+
 Author:
 -
 	text: Virtual Museums of Małopolska

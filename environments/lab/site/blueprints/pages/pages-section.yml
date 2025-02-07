@@ -5,23 +5,33 @@ tabs:
     sections:
       list:
         type: pages
-        template: page
+        templates:
+          - page
+          - undeletable-page
       listWithInfo:
         type: pages
         info: "{{ page.slug }}"
-        template: page
+        templates:
+          - page
+          - undeletable-page
       listWithoutImage:
         type: pages
         layout: list
         image: false
-        template: page
+        templates:
+          - page
+          - undeletable-page
       listWithSearch:
         type: pages
-        template: page
+        templates:
+          - page
+          - undeletable-page
         search: true
       listWithBatch:
         type: pages
-        template: page
+        templates:
+          - page
+          - undeletable-page
         batch: true
 
   cardlets:
@@ -29,26 +39,36 @@ tabs:
       cardlets:
         type: pages
         layout: cardlets
-        template: page
+        templates:
+          - page
+          - undeletable-page
       cardletsWithInfo:
         type: pages
         layout: cardlets
         info: "{{ page.slug }}"
-        template: page
+        templates:
+          - page
+          - undeletable-page
       cardletsWithoutImage:
         type: pages
         layout: cardlets
         image: false
-        template: page
+        templates:
+          - page
+          - undeletable-page
       cardletsWithSearch:
         type: pages
         layout: cardlets
-        template: page
+        templates:
+          - page
+          - undeletable-page
         search: true
       cardletsWithBatch:
         type: pages
         layout: cardlets
-        template: page
+        templates:
+          - page
+          - undeletable-page
         batch: true
 
   cards:
@@ -56,26 +76,36 @@ tabs:
       cards:
         type: pages
         layout: cards
-        template: page
+        templates:
+          - page
+          - undeletable-page
       cardsWithInfo:
         type: pages
         layout: cards
         info: "{{ page.slug }}"
-        template: page
+        templates:
+          - page
+          - undeletable-page
       cardsWithoutImage:
         type: pages
         layout: cards
         image: false
-        template: page
+        templates:
+          - page
+          - undeletable-page
       cardsWithSearch:
         type: pages
         layout: cards
-        template: page
+        templates:
+          - page
+          - undeletable-page
         search: true
       cardsWithBatch:
         type: pages
         layout: cards
-        template: page
+        templates:
+          - page
+          - undeletable-page
         batch: true
 
   table:
@@ -83,37 +113,51 @@ tabs:
       table:
         type: pages
         layout: table
-        template: page
+        templates:
+          - page
+          - undeletable-page
       tableWithInfo:
         type: pages
         layout: table
         info: "{{ page.slug }}"
-        template: page
+        templates:
+          - page
+          - undeletable-page
       tableWithoutImage:
         type: pages
         layout: table
         image: false
-        template: page
+        templates:
+          - page
+          - undeletable-page
       tableWithoutTitle:
         type: pages
         layout: table
         text: false
-        template: page
+        templates:
+          - page
+          - undeletable-page
         info: "{{ page.slug }}"
       tableWithSearch:
         type: pages
         layout: table
-        template: page
+        templates:
+          - page
+          - undeletable-page
         search: true
       tableWithBatch:
         type: pages
         layout: table
-        template: page
+        templates:
+          - page
+          - undeletable-page
         batch: true
       tableWithCustomDefaultColumns:
         type: pages
         layout: table
-        template: page
+        templates:
+          - page
+          - undeletable-page
         text: "Custom {{ page.title }}"
         info: "{{ page.slug }}"
         columns:
@@ -126,7 +170,9 @@ tabs:
       tableWithCustomDefaultColumnValues:
         type: pages
         layout: table
-        template: page
+        templates:
+          - page
+          - undeletable-page
         columns:
           title:
             value: Custom Title Value
@@ -140,25 +186,33 @@ tabs:
         type: pages
         layout: cards
         size: tiny
-        template: page
+        templates:
+          - page
+          - undeletable-page
 
       cardsSmall:
         type: pages
         layout: cards
         size: small
-        template: page
+        templates:
+          - page
+          - undeletable-page
 
       cardsMedium:
         type: pages
         layout: cards
         size: medium
-        template: page
+        templates:
+          - page
+          - undeletable-page
 
       cardsLarge:
         type: pages
         layout: cards
         size: large
-        template: page
+        templates:
+          - page
+          - undeletable-page
 
   imageSettings:
     sections:
@@ -167,33 +221,43 @@ tabs:
         layout: cards
         image:
           cover: true
-        template: page
+        templates:
+          - page
+          - undeletable-page
       backBlack:
         type: pages
         layout: cards
         image:
           back: black
-        template: page
+        templates:
+          - page
+          - undeletable-page
       backWhite:
         type: pages
         layout: cards
         image:
           back: white
-        template: page
+        templates:
+          - page
+          - undeletable-page
       ratio4by5:
         type: pages
         layout: cards
         image:
           ratio: 4/5
           cover: true
-        template: page
+        templates:
+          - page
+          - undeletable-page
       ratio16by9:
         type: pages
         layout: cards
         image:
           ratio: 16/9
           cover: true
-        template: page
+        templates:
+          - page
+          - undeletable-page
   invalid:
     sections:
       invalid:
