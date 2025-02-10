@@ -6,9 +6,6 @@ tabs:
       disabled:
         type: entries
         disabled: true
-      disabledCounter:
-        type: entries
-        counter: false
       help:
         type: entries
         help: Some help text
