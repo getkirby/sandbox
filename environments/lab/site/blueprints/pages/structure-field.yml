@@ -32,6 +32,11 @@ tabs:
         fields:
           children:
             extends: fields/object/simple
+      nestedFiles:
+        type: structure
+        fields:
+          files:
+            type: files
 
   sorting:
     fields:
