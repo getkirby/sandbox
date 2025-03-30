@@ -13,10 +13,12 @@ $kirby = new Kirby([
         'debug' => true,
         'email' => [
             'transport' => [
-                'type' => 'smtp',
-                'host' => 'localhost',
-                'port' => 1025,
-                'security' => false
+                'type'     => 'smtp',
+                'host'     => '127.0.0.1',
+                'port'     => 2525,
+                'security' => false,
+                'username' => 'sandbox.test',
+                'password' => null
             ]
         ],
         'panel' => [
