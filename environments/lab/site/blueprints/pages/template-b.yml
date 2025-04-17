@@ -1,0 +1,22 @@
+title: Template B
+
+options:
+  changeTemplate:
+    - template-a
+
+fields:
+  info:
+    type: info
+    text: "Current template: {{ page.intendedTemplate }}"
+  onlyInTemplateB:
+    label: Only in Template B
+    type: text
+    help: This field exists only in Template B
+  inBothTemplates:
+    label: In both templates
+    type: text
+    help: This field exists in both templates
+  differentFieldType:
+    label: Different field type
+    type: number
+    help: This field is a text field in Template A and a number field in Template B
