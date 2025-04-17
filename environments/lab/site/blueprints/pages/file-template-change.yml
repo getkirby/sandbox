@@ -1,0 +1,15 @@
+title: File Template Change
+
+columns:
+  - width: 1/2
+    sections:
+      filesWithTemplateA:
+        label: Files with Template A
+        type: files
+        template: file-template-a
+  - width: 1/2
+    sections:
+      filesWithTemplateB:
+        label: Files with Template B
+        type: files
+        template: file-template-b
