@@ -76,6 +76,12 @@ tabs:
         extends: fields/structure/simple
         min: 1
         max: 2
+      fieldValidation:
+        type: structure
+        fields:
+          text:
+            type: text
+            required: true
 
   previews:
     fields:
