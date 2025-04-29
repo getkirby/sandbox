@@ -36,14 +36,6 @@ tabs:
           - "#C06C84"
           - "#6C5B7B"
           - "#355C7D"
-      optionsFromValuesAndKeys:
-        type: color
-        options:
-          "Sunny rays": "#F8B195"
-          "First-love blush": "#F67280"
-          "Cherry blossom": "#C06C84"
-          "Morning gloom": "#6C5B7B"
-          "Midnight rain": "#355C7D"
       optionsFromKeysAndValues:
         type: color
         options:
