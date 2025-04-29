@@ -9,7 +9,7 @@ sections:
   titleLabel:
     label: Custom title field label
     type: pages
-    template: page-creation-title-field
+    template: page-creation-title-label
 
   noRedirect:
     label: No redirect after creation
