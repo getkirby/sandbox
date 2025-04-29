@@ -25,8 +25,13 @@ tabs:
         after: After
         icon: edit
       step:
+        label: "Step: 0.05"
         type: number
-        step: 0.1
+        step: 0.05
+      stepAny:
+        label: "Step: any"
+        type: number
+        step: any
       disabled:
         type: number
         disabled: true
