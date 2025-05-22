@@ -15,6 +15,24 @@ tabs:
         extends: fields/structure/simple
         help: This is some test help text
 
+  defaults:
+    fields:
+      fieldWithDefaultValue:
+        label: Field with default value
+        type: structure
+        fields:
+          text:
+            type: text
+            default: Some default text
+      disabledFieldWithDefaultValue:
+        label: Disabled field with default value
+        type: structure
+        fields:
+          text:
+            type: text
+            default: Some default text
+            disabled: true
+
   nested:
     fields:
       nestedStructure:
