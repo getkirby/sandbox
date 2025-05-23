@@ -20,6 +20,24 @@ tabs:
         extends: fields/object/simple
         help: Custom help text
 
+  defaults:
+    fields:
+      fieldWithDefaultValue:
+        label: Field with default value
+        type: object
+        fields:
+          text:
+            type: text
+            default: Some default text
+      disabledFieldWithDefaultValue:
+        label: Disabled field with default value
+        type: object
+        fields:
+          text:
+            type: text
+            default: Some default text
+            disabled: true
+
   nested:
     fields:
       nestedStructure:
