@@ -29,6 +29,32 @@ tabs:
               text:
                 type: writer
 
+  defaults:
+    fields:
+      fieldWithDefaultValue:
+        label: Field with default value
+        type: blocks
+        fieldsets:
+          test:
+            wysiwyg: true
+            preview: fields
+            fields:
+              text:
+                type: text
+                default: Some default text
+      disabledFieldWithDefaultValue:
+        label: Disabled field with default value
+        type: blocks
+        fieldsets:
+          test:
+            wysiwyg: true
+            preview: fields
+            fields:
+              text:
+                type: text
+                default: Some default text
+                disabled: true
+
   validation:
     fields:
       required:
@@ -87,7 +113,6 @@ tabs:
             fields:
               rows:
                 extends: fields/structure/simple
-
 
   widths:
     fields:
