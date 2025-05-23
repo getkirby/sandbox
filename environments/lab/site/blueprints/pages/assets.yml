@@ -1,0 +1,6 @@
+title: Assets
+
+sections:
+  info:
+    type: info
+    text: "(link: other/assets text: Visit the page) to see the assets methods in action. Assets are stored in `public/assets`"
