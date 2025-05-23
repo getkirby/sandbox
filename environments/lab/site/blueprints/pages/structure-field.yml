@@ -14,7 +14,17 @@ tabs:
       help:
         extends: fields/structure/simple
         help: This is some test help text
-
+      fieldNameCases:
+        label: Field name cases
+        help: Field names in camelCase or other cases should not lead to any issues.
+        type: structure
+        fields:
+          camelCase:
+            type: text
+          kebab-case:
+            type: text
+          snake_case:
+            type: text
   defaults:
     fields:
       fieldWithDefaultValue:
