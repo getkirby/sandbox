@@ -10,6 +10,24 @@ tabs:
         type: entries
         help: Some help text
 
+  defaults:
+    fields:
+      fieldWithDefaultValue:
+        label: Field with default value
+        type: object
+        fields:
+          text:
+            type: text
+            default: Some default text
+      disabledFieldWithDefaultValue:
+        label: Disabled field with default value
+        type: object
+        fields:
+          text:
+            type: text
+            default: Some default text
+            disabled: true
+
   types:
     fields:
       color:
