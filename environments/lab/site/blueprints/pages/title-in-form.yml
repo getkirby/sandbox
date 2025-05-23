@@ -1,0 +1,7 @@
+title: Title in form
+
+fields:
+  title:
+    type: text
+  text:
+    type: textarea
