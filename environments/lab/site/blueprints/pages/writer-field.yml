@@ -21,6 +21,10 @@ tabs:
       inline:
         type: writer
         inline: true
+      inlineWithoutMarks:
+        type: writer
+        marks: false
+        inline: true
 
   toolbar:
     fields:
