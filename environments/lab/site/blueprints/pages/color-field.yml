@@ -48,7 +48,7 @@ tabs:
         type: color
         options:
           type: api
-          url: "{{ site.url }}/colors.json"
+          url: "{{ site.file('colors.json').url }}"
           text: "{{ item.name }}"
           value: "{{ item.value }}"
       optionsFromQuery:
