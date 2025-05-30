@@ -1,0 +1,51 @@
+title: Uploads
+
+tabs:
+  textarea:
+    sections:
+      textareaFields:
+        type: fields
+        fields:
+          text:
+            type: textarea
+      textareaFiles:
+        type: files
+        batch: true
+
+  filePicker:
+    sections:
+      filePickerFields:
+        type: fields
+        fields:
+          files:
+            type: files
+      filePickerFiles:
+        type: files
+        batch: true
+
+  blocks:
+    sections:
+      blocksFields:
+        type: fields
+        fields:
+          blocks:
+            type: blocks
+            fieldsets:
+              - image
+      blocksFiles:
+        type: files
+        batch: true
+
+  structure:
+    sections:
+      structureFields:
+        type: fields
+        fields:
+          structure:
+            type: structure
+            fields:
+              files:
+                type: files
+      structureFiles:
+        type: files
+        batch: true
