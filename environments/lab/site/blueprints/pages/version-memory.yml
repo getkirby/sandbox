@@ -1,7 +1,0 @@
-title: Version Memory
-
-sections:
-  info:
-    type: info
-    text: |
-      (link: {{ page.url }} text: Go to the frontend) to see the version memory feature in action
