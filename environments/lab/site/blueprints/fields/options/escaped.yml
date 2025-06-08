@@ -1,6 +1,6 @@
 options:
   type: api
-  url: "{{ site.url }}/options.json"
+  url: "{{ site.file('options.json').url }}"
   query: Html
   text: "{{ item.name }}"
   value: "{{ item.short }}"
