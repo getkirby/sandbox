@@ -102,11 +102,11 @@ tabs:
         type: structure
         fields:
           radio:
-            extends: fields/options/simple
+            extends: fields/options/key-value
             type: radio
       objectPreview:
         type: object
         fields:
           radio:
-            extends: fields/options/simple
+            extends: fields/options/key-value
             type: radio

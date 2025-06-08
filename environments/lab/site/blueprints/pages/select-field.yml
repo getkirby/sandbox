@@ -100,13 +100,13 @@ tabs:
         type: structure
         fields:
           select:
-            extends: fields/options/simple
+            extends: fields/options/key-value
             type: select
       objectPreview:
         type: object
         fields:
           select:
-            extends: fields/options/simple
+            extends: fields/options/key-value
             type: select
 
   comparison:
@@ -118,4 +118,3 @@ tabs:
       textForComparison:
         type: text
         width: 1/2
-

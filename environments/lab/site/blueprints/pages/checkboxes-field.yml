@@ -115,11 +115,11 @@ tabs:
         type: structure
         fields:
           checkboxes:
-            extends: fields/options/simple
+            extends: fields/options/key-value
             type: checkboxes
       objectPreview:
         type: object
         fields:
           checkboxes:
-            extends: fields/options/simple
+            extends: fields/options/key-value
             type: checkboxes

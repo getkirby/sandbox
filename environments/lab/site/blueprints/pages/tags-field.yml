@@ -149,13 +149,13 @@ tabs:
         type: structure
         fields:
           tags:
-            extends: fields/options/simple
+            extends: fields/options/key-value
             type: tags
       objectPreview:
         type: object
         fields:
           tags:
-            extends: fields/options/simple
+            extends: fields/options/key-value
             type: tags
 
   comparison:
