@@ -1,0 +1,12 @@
+title: Plugins
+
+tabs:
+  extends:
+    sections:
+      customSectionExtendsString:
+        type: extends-string
+        text: This section is extended referencing a component name
+        icon: check
+        theme: positive
+      customSectionExtendsSfc:
+        type: extends-sfc
