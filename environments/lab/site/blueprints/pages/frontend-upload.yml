@@ -1,0 +1,8 @@
+title: Frontend Upload
+
+sections:
+  info:
+    type: info
+    text: "(link: other/frontend-upload text: Visit the page) to see the uploader in action. Uploads can be viewed here afterwards."
+  uploads:
+    type: files
