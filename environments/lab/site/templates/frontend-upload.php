@@ -1,3 +1,5 @@
+<!doctype html>
+
 <h1>Frontend Upload</h1>
 
 <form>
@@ -12,26 +14,30 @@
 	<?php endforeach; ?>
 </ul>
 
-<script>
-
-document.querySelector('form').addEventListener('submit', (e) => {
+<script type="module">
+document.querySelector('form').addEventListener('submit', async (e) => {
 	e.preventDefault();
 
 	let formData = new FormData(e.target);
 
-	// We can now send the POT request
-	fetch('/uploads', {
-		method : 'POST',
-		body   : formData
-	})
-	.then(response => response.json())
-	.then(data => {
-		console.log('Upload successful:', data);
+	// We can now send the POST request
+	try {
+		const response = await fetch('/uploads', {
+			method : 'POST',
+			body   : formData
+		})
+
+		const data = await response.json();
+
+		if (data.status === 'error') {
+			throw new Error(data.message);
+		}
+
+		console.log('Upload successful:', data.filename);
 		window.location.reload();
-	})
-	.catch(error => {
+	} catch (error) {
 		console.error('Upload error:', error);
-		alert('Upload failed');
-	});
+		alert(error.message);
+	}
 });
 </script>
