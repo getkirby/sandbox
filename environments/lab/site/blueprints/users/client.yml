@@ -2,4 +2,4 @@ title: Client
 
 permissions:
   users:
-    *: false
+    "*": false
