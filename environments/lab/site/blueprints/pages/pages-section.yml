@@ -283,6 +283,20 @@ tabs:
         limit: 1
         page: 2
 
+  sorting:
+    sections:
+      unsortable:
+        type: pages
+        sortable: false
+      sortBy:
+        type: pages
+        sortBy: uuid desc
+        info: "{{ page.uuid }}"
+        help: Sorted by uuid
+      flip:
+        type: pages
+        flip: true
+
   widths:
     columns:
       # list
