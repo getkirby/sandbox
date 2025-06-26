@@ -162,6 +162,21 @@ tabs:
         limit: 1
         page: 2
 
+  sorting:
+    sections:
+      unsortable:
+        type: files
+        sortable: false
+        help: The sorting option in the dropdown should be disabled as well.
+      sortBy:
+        type: files
+        sortBy: size desc
+        info: "{{ file.size }}"
+        help: Sorted by file size
+      flip:
+        type: files
+        flip: true
+
   widths:
     columns:
       # list
