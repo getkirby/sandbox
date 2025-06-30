@@ -1,0 +1,20 @@
+title: Animal
+
+options:
+  list: true
+  update: false
+  delete: false
+  changeStatus: false
+  changeTitle: false
+  changeSlug: false
+  sort: false
+  move: false
+  duplicate: false
+
+fields:
+  commonName:
+    label: Common Name
+    type: text
+  description:
+    label: Description
+    type: textarea

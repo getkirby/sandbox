@@ -1,0 +1,9 @@
+title: Animal (mixed)
+
+fields:
+  commonName:
+    label: Common Name
+    type: text
+  description:
+    label: Description
+    type: textarea
