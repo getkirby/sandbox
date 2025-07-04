@@ -277,6 +277,22 @@ class Environment
 	}
 
 	/**
+	 * Checks if the current environment is healthy
+	 */
+	public static function healthcheck(): void
+	{
+		$active      = static::active();
+		$contentRoot = __DIR__ . '/public/content';
+		$siteRoot    = __DIR__ . '/public/site';
+
+		if ($active !== '' && is_dir($contentRoot) && is_dir($siteRoot)) {
+			return;
+		}
+
+		static::install('lab');
+	}
+
+	/**
 	 * Updates all `.git` files of submodules recursively to point to the new
 	 * submodule path
 	 *

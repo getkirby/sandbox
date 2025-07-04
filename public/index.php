@@ -58,4 +58,6 @@ $kirby = new Kirby([
 	]
 ]);
 
+Environment::healthcheck();
+
 echo $kirby->render();
