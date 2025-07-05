@@ -68,6 +68,22 @@ class Environment
 	}
 
 	/**
+	 * Checks if the current environment is healthy
+	 */
+	public static function healthcheck(): void
+	{
+		$active      = static::active();
+		$contentRoot = __DIR__ . '/public/content';
+		$siteRoot    = __DIR__ . '/public/site';
+
+		if ($active !== '' || is_dir($contentRoot) || is_dir($siteRoot)) {
+			return;
+		}
+
+		static::install('lab');
+	}
+
+	/**
 	 * Copies an environment into the `public` dir
 	 * and prepares it for use
 	 */
@@ -274,22 +290,6 @@ class Environment
 			$dir = dirname($fileinfo->getPathname());
 			return file_exists($dir . '/.git') === false;
 		});
-	}
-
-	/**
-	 * Checks if the current environment is healthy
-	 */
-	public static function healthcheck(): void
-	{
-		$active      = static::active();
-		$contentRoot = __DIR__ . '/public/content';
-		$siteRoot    = __DIR__ . '/public/site';
-
-		if ($active !== '' || is_dir($contentRoot) || is_dir($siteRoot)) {
-			return;
-		}
-
-		static::install('lab');
 	}
 
 	/**
