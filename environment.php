@@ -285,7 +285,7 @@ class Environment
 		$contentRoot = __DIR__ . '/public/content';
 		$siteRoot    = __DIR__ . '/public/site';
 
-		if ($active !== '' && is_dir($contentRoot) && is_dir($siteRoot)) {
+		if ($active !== '' || is_dir($contentRoot) || is_dir($siteRoot)) {
 			return;
 		}
 
