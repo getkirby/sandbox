@@ -29,6 +29,9 @@ tabs:
         type: date
         disabled: true
         label: Disabled
+      dateDisabledWithValue:
+        type: date
+        disabled: true
       dateDisabledDropdown:
         type: date
         label: Disabled dropdown
@@ -79,6 +82,10 @@ tabs:
         time: true
         disabled: true
         label: Disabled
+      timeDisabledWithValue:
+        type: date
+        time: true
+        disabled: true
       timeDisabledDropdowns:
         type: date
         label: Disabled dropdowns
@@ -309,11 +316,3 @@ tabs:
       textForComparison:
         type: text
         width: 1/2
-
-
-
-
-
-
-
-

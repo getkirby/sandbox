@@ -18,6 +18,10 @@ tabs:
         extends: fields/toggles/icons-and-labels
         label: Disabled
         disabled: true
+      disabledWithValue:
+        extends: fields/toggles/icons-and-labels
+        label: Disabled with value
+        disabled: true
 
   autosize:
     fields:

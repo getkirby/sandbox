@@ -35,6 +35,9 @@ tabs:
       disabled:
         type: number
         disabled: true
+      disabledWithValue:
+        type: number
+        disabled: true
       help:
         type: number
         help: Some help text

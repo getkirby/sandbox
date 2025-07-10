@@ -2,4 +2,8 @@ Title: URL
 
 ----
 
+Disabledwithvalue: https://getkirby.com
+
+----
+
 Uuid: 8RSe5892AebsMTXV

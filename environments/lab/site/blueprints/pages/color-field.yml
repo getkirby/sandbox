@@ -23,6 +23,9 @@ tabs:
           disabled:
             type: color
             disabled: true
+          disabledWithValue:
+            type: color
+            disabled: true
           help:
             type: color
             help: Some help text

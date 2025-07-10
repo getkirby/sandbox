@@ -10,6 +10,9 @@ tabs:
       disabled:
         type: users
         disabled: true
+      disabledWithValue:
+        type: users
+        disabled: true
       help:
         type: users
         help: This is some nice help

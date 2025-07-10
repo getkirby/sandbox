@@ -2,4 +2,8 @@ Title: Object
 
 ----
 
+Disabledwithvalue: text: This is a value
+
+----
+
 Uuid: kQkEqJaCKSsiaiUS

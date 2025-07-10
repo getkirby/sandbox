@@ -15,6 +15,10 @@ tabs:
         extends: fields/options/simple
         type: tags
         disabled: true
+      disabledWithValue:
+        extends: fields/options/simple
+        type: tags
+        disabled: true
       help:
         extends: fields/options/simple
         type: tags

@@ -2,4 +2,11 @@ Title: Structure
 
 ----
 
-Uuid: ecm2EkUS2y2bCAzJ
+Disabledwithvalue:
+
+-
+  text: This is a value
+
+----
+
+Uuid: emagxqnwgjgxo0zh

@@ -28,6 +28,9 @@ tabs:
       disabled:
         type: tel
         disabled: true
+      disabledWithValue:
+        type: tel
+        disabled: true
       disabledCounter:
         type: tel
         counter: false
@@ -93,5 +96,3 @@ tabs:
         type: object
         fields:
           tel: true
-
-

@@ -12,6 +12,9 @@ tabs:
       disabled:
         type: list
         disabled: true
+      disabledWithValue:
+        type: list
+        disabled: true
       help:
         type: list
         help: Some help text

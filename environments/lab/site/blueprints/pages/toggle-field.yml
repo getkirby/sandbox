@@ -24,6 +24,9 @@ tabs:
       disabled:
         type: toggle
         disabled: true
+      disabledWithValue:
+        type: toggle
+        disabled: true
       help:
         type: toggle
         help: Some help text
@@ -38,12 +41,10 @@ tabs:
       textTranslated:
         type: toggle
         text:
-          -
-              en: Nope
-              de: Och nö
-          -
-              en: Yay
-              de: Juhu
+          - en: Nope
+            de: Och nö
+          - en: Yay
+            de: Juhu
 
   validation:
     fields:
@@ -103,5 +104,3 @@ tabs:
         type: object
         fields:
           toggle: true
-
-

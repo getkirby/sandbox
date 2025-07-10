@@ -2,4 +2,8 @@ Title: Multiselect
 
 ----
 
+Disabledwithvalue: a, b
+
+----
+
 Uuid: McyPXhwOCRWVgtyA

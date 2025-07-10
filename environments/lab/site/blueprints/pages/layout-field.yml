@@ -22,6 +22,9 @@ tabs:
       disabled:
         extends: fields/layout/default
         disabled: true
+      disabledWithValue:
+        extends: fields/layout/default
+        disabled: true
       help:
         extends: fields/layout/default
         help: This is some help text

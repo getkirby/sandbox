@@ -27,6 +27,9 @@ tabs:
       disabled:
         type: email
         disabled: true
+      disabledWithValue:
+        type: email
+        disabled: true
       disabledCounter:
         type: email
         counter: false

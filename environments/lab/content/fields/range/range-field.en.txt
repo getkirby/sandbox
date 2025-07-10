@@ -2,4 +2,8 @@ Title: Range
 
 ----
 
+Disabledwithvalue: 10
+
+----
+
 Uuid: ce322e7QZBBPTXBg

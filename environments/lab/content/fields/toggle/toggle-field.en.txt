@@ -2,4 +2,8 @@ Title: Toggle
 
 ----
 
+Disabledwithvalue: true
+
+----
+
 Uuid: 7Mux0dzfabScpPgD

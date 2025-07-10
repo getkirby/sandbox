@@ -20,6 +20,9 @@ tabs:
       disabled:
         type: time
         disabled: true
+      disabledWithValue:
+        type: time
+        disabled: true
       disabledDropdown:
         type: time
         times: false
@@ -127,6 +130,3 @@ tabs:
           timeDisplay:
             type: time
             display: hh:mm a
-
-
-

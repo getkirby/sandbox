@@ -2,4 +2,8 @@ Title: Slug
 
 ----
 
+Disabledwithvalue: this-is-a-slug
+
+----
+
 Uuid: 1EXLeF1NnhEv5khW

@@ -2,4 +2,8 @@ Title: Writer
 
 ----
 
+Disabledwithvalue: <p>This is a value</p>
+
+----
+
 Uuid: KvP81EDVm8BElGhT

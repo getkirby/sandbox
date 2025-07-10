@@ -2,4 +2,8 @@ Title: Link
 
 ----
 
+Disabledwithvalue: https://getkirby.com
+
+----
+
 Uuid: Asy6coS3Iq7VOsNB

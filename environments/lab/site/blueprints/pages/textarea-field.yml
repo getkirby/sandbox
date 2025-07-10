@@ -18,6 +18,9 @@ tabs:
       disabled:
         type: textarea
         disabled: true
+      disabledWithValue:
+        type: textarea
+        disabled: true
       disabledCounter:
         type: textarea
         counter: false

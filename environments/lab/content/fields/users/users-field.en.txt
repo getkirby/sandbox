@@ -2,4 +2,8 @@ Title: Users
 
 ----
 
+Disabledwithvalue: - user://editor
+
+----
+
 Uuid: zMI6Qs36o5nMC9Ng

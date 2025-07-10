@@ -28,6 +28,9 @@ tabs:
       disabled:
         type: url
         disabled: true
+      disabledWithValue:
+        type: url
+        disabled: true
       disabledCounter:
         type: url
         counter: false
@@ -93,4 +96,3 @@ tabs:
         type: object
         fields:
           url: true
-

@@ -2,4 +2,8 @@ Title: Number
 
 ----
 
+Disabledwithvalue: 1
+
+----
+
 Uuid: hcQkUQYq49Kx5Yqr

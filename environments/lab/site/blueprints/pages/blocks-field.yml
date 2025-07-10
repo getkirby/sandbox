@@ -13,6 +13,9 @@ tabs:
       disabled:
         type: blocks
         disabled: true
+      disabledWithValue:
+        type: blocks
+        disabled: true
       tabs:
         type: blocks
         fieldsets:

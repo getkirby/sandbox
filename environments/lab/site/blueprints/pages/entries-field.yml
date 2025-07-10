@@ -6,6 +6,9 @@ tabs:
       disabled:
         type: entries
         disabled: true
+      disabledWithValue:
+        type: entries
+        disabled: true
       help:
         type: entries
         help: Some help text

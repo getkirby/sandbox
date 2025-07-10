@@ -2,4 +2,8 @@ Title: Layout
 
 ----
 
+Disabledwithvalue: [{"attrs":[],"columns":[{"blocks":[{"content":{"level":"h2","text":"This is a value"},"id":"f25673a2-b56e-4b89-8db7-010f2d8e3d43","isHidden":false,"type":"heading"}],"id":"2ccc3ace-3e6d-4369-8019-07c0c1283566","width":"1/2"},{"blocks":[{"content":{"text":"<p>With some text</p>"},"id":"b758daf3-8452-4942-8cea-f1a01cf34a4d","isHidden":false,"type":"text"}],"id":"d48e8af9-30e7-417b-b8a2-c72424013c77","width":"1/2"}],"id":"68eb8c2c-cc98-4b1e-a32a-c67a11d7e5f6"}]
+
+----
+
 Uuid: KCdKmuIQ8FqMPTJJ

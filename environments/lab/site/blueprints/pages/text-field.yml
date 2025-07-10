@@ -28,6 +28,9 @@ tabs:
       disabled:
         type: text
         disabled: true
+      disabledWithValue:
+        type: text
+        disabled: true
       disabledCounter:
         type: text
         counter: false
@@ -99,4 +102,3 @@ tabs:
         type: object
         fields:
           text: true
-

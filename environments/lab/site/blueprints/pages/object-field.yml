@@ -16,6 +16,12 @@ tabs:
       empty:
         extends: fields/object/simple
         empty: Custom empty text
+      disabled:
+        extends: fields/object/simple
+        disabled: true
+      disabledWithValue:
+        extends: fields/object/simple
+        disabled: true
       help:
         extends: fields/object/simple
         help: Custom help text

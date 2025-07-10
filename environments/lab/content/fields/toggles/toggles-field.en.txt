@@ -2,4 +2,8 @@ Title: Toggles
 
 ----
 
+Disabledwithvalue: center
+
+----
+
 Uuid: zZCBSkfYdehAnwos

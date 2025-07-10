@@ -28,6 +28,9 @@ tabs:
       disabled:
         type: slug
         disabled: true
+      disabledWithValue:
+        type: slug
+        disabled: true
       help:
         type: slug
         help: Some help text

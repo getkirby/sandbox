@@ -11,6 +11,9 @@ tabs:
       disabled:
         extends: fields/structure/simple
         disabled: true
+      disabledWithValue:
+        extends: fields/structure/simple
+        disabled: true
       help:
         extends: fields/structure/simple
         help: This is some test help text

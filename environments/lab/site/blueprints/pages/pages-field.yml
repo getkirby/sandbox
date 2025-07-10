@@ -10,6 +10,9 @@ tabs:
       disabled:
         type: pages
         disabled: true
+      disabledWithValue:
+        type: pages
+        disabled: true
       help:
         type: pages
         help: This is some nice help

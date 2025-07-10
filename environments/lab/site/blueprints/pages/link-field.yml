@@ -20,6 +20,9 @@ tabs:
       disabled:
         type: link
         disabled: true
+      disabledWithValue:
+        type: link
+        disabled: true
       help:
         type: link
         help: Some help text

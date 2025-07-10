@@ -12,6 +12,9 @@ tabs:
       disabled:
         type: writer
         disabled: true
+      disabledWithValue:
+        type: writer
+        disabled: true
       disabledCounter:
         type: writer
         counter: false

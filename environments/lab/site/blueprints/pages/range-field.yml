@@ -30,6 +30,9 @@ tabs:
       disabled:
         type: range
         disabled: true
+      disabledWithValue:
+        type: range
+        disabled: true
       help:
         type: range
         help: Some help text
@@ -129,4 +132,3 @@ tabs:
       textForComparison:
         type: text
         width: 1/2
-

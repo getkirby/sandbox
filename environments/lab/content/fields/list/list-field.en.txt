@@ -2,4 +2,8 @@ Title: List
 
 ----
 
+Disabledwithvalue: <ul><li>This is a value</li><li>And another one</li></ul>
+
+----
+
 Uuid: 9TvbrciQ7XvOOjT5
