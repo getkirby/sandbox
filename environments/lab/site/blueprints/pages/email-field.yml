@@ -30,6 +30,10 @@ tabs:
       disabledWithValue:
         type: email
         disabled: true
+      disabledWithPlaceholder:
+        type: email
+        disabled: true
+        placeholder: Disabled with placeholder
       disabledCounter:
         type: email
         counter: false

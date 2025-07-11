@@ -31,6 +31,10 @@ tabs:
       disabledWithValue:
         type: text
         disabled: true
+      disabledWithPlaceholder:
+        type: text
+        disabled: true
+        placeholder: Disabled with placeholder
       disabledCounter:
         type: text
         counter: false

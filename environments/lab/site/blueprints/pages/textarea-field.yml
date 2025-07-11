@@ -21,6 +21,10 @@ tabs:
       disabledWithValue:
         type: textarea
         disabled: true
+      disabledWithPlaceholder:
+        type: textarea
+        disabled: true
+        placeholder: Disabled with placeholder
       disabledCounter:
         type: textarea
         counter: false

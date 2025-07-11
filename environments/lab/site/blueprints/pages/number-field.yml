@@ -38,6 +38,10 @@ tabs:
       disabledWithValue:
         type: number
         disabled: true
+      disabledWithPlaceholder:
+        type: number
+        disabled: true
+        placeholder: Disabled with placeholder
       help:
         type: number
         help: Some help text
