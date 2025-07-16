@@ -1,0 +1,102 @@
+title: Stats
+
+tabs:
+  general:
+    fields:
+      stats: true
+
+      simple:
+        type: stats
+        reports:
+          - label: Revenue
+            value: €29,682
+
+      info:
+        type: stats
+        reports:
+          - label: Revenue
+            info: +112.5%
+            value: €29,682
+
+      themes:
+        type: stats
+        reports:
+          - label: None
+            info: +112.5%
+            value: €29,682
+          - label: Positive
+            info: +112.5%
+            value: €29,682
+            theme: positive
+          - label: Warning
+            info: +112.5%
+            value: €29,682
+            theme: warning
+          - label: Notice
+            info: +112.5%
+            value: €29,682
+            theme: notice
+          - label: Negative
+            info: +112.5%
+            value: €29,682
+            theme: negative
+          - label: Info
+            info: +112.5%
+            value: €29,682
+            theme: info
+
+      linked:
+        type: stats
+        reports:
+          - label: Revenue
+            value: €29,682
+            link: https://getkirby.com/buy
+
+  sizes:
+    fields:
+      tiny:
+        extends: sections/stats
+        size: tiny
+      small:
+        extends: sections/stats
+        size: small
+      medium:
+        extends: sections/stats
+        size: medium
+      large:
+        extends: sections/stats
+        size: large
+      huge:
+        extends: sections/stats
+        size: huge
+
+
+  widths:
+    fields:
+      oneHalf1:
+        extends: fields/stats/default
+        width: 1/2
+      oneHalf2:
+        extends: fields/stats/default
+        width: 1/2
+      oneThird1:
+        extends: fields/stats/default
+        width: 1/3
+      oneThird2:
+        extends: fields/stats/default
+        width: 1/3
+      oneThird3:
+        extends: fields/stats/default
+        width: 1/3
+      oneQuarter1:
+        extends: fields/stats/default
+        width: 1/4
+      oneQuarter2:
+        extends: fields/stats/default
+        width: 1/4
+      oneQuarter3:
+        extends: fields/stats/default
+        width: 1/4
+      oneQuarter4:
+        extends: fields/stats/default
+        width: 1/4
