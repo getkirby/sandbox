@@ -8,6 +8,9 @@ tabs:
       empty:
         extends: fields/structure/simple
         empty: This is some custom empty text
+      batch:
+        extends: fields/structure/simple
+        batch: true
       disabled:
         extends: fields/structure/simple
         disabled: true
