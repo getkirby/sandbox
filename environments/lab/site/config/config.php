@@ -34,6 +34,7 @@ return [
 			]
 		]
 	],
+	'yaml.handler' => 'symfony',
 	'languages' => true,
 	'colors' => [
 		'#F8B195' => 'Sunny rays',
