@@ -34,6 +34,11 @@ tabs:
       optionsWithInfo:
         extends: fields/options/info
         type: multiselect
+      optionsWithInfoAndSearchableInfo:
+        extends: fields/options/info
+        type: multiselect
+        search:
+          info: true
       optionsWithTranslatedLabel:
         extends: fields/options/translated
         type: multiselect
