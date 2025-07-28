@@ -180,6 +180,15 @@ tabs:
           info:
             value: Custom Info Value
 
+  queries:
+    sections:
+      queryDrafts:
+        type: pages
+        query: page.drafts
+      queryListed:
+        type: pages
+        query: page.children.filterBy('status', 'listed')
+
   cardSizes:
     sections:
       cardsTiny:

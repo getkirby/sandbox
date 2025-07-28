@@ -85,6 +85,15 @@ tabs:
         layout: table
         batch: true
 
+  queries:
+    sections:
+      queryImages:
+        type: files
+        query: page.files.filterBy('type', 'image')
+      queryDocuments:
+        type: files
+        query: page.files.filterBy('type', 'document')
+
   cardSizes:
     sections:
       cardsTiny:
