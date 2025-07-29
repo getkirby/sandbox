@@ -58,6 +58,11 @@ sections:
     type: pages
     template: page-creation-with-custom-title-and-slug
 
+  customTitleAndSlugWithUUIDs:
+    label: Create with UUIDs in custom title and slug
+    type: pages
+    template: page-creation-with-uuids
+
   statusDraftFilteredListed:
     label: Create draft in section only showing listed (should not show Add button)
     type: pages

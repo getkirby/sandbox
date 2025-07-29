@@ -1,0 +1,12 @@
+title: Page Creation with UUIDs
+
+create:
+  title: "Test {{ page.uuid.id }}"
+  slug: "{{ page.uuid.id }}"
+
+
+fields:
+  test:
+    type: text
+    default: "{{ page.uuid.id }}"
+    help: The UUID needs to be the same as slug and the UUID in the title.
