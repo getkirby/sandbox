@@ -1,0 +1,10 @@
+title: Default
+tabs:
+  content:
+    fields:
+      bio:
+        type: textarea
+  files:
+    sections:
+      files:
+        type: files

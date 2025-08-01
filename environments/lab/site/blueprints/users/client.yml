@@ -1,4 +1,5 @@
 title: Client
+extends: users/default
 
 permissions:
   users:

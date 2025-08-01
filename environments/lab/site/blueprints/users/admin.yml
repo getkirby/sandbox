@@ -1,1 +1,2 @@
 title: Admin
+extends: users/default

@@ -1,1 +1,2 @@
 title: Editor
+extends: users/default
