@@ -1,0 +1,9 @@
+sections:
+  fields:
+    type: fields
+    fields:
+      test:
+        label: Field with dialogs and drawers
+        type: field-with-dialogs-drawers
+  section:
+    type: section-with-dialogs-drawers
