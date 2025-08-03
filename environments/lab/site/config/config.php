@@ -84,5 +84,10 @@ return [
                 }
 			}
 		]
+	],
+	'updates' => [
+		'plugins' => [
+			'plugins/*' => false
+		]
 	]
 ];
