@@ -23,6 +23,11 @@ $kirby = new Kirby([
 		],
 		'panel' => [
 			'dev' => true
+		],
+		'updates' => [
+			'plugins' => [
+				'getkirby/sandbox' => false
+			]
 		]
 	],
 	'roots' => [
