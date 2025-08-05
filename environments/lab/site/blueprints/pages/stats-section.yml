@@ -54,9 +54,6 @@ tabs:
 
   sizes:
     sections:
-      tiny:
-        extends: sections/stats
-        size: tiny
       small:
         extends: sections/stats
         size: small

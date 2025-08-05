@@ -54,9 +54,6 @@ tabs:
 
   sizes:
     fields:
-      tiny:
-        extends: sections/stats
-        size: tiny
       small:
         extends: sections/stats
         size: small
@@ -69,7 +66,6 @@ tabs:
       huge:
         extends: sections/stats
         size: huge
-
 
   widths:
     fields:
