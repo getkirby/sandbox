@@ -72,14 +72,14 @@ tabs:
 
   nested:
     fields:
-      nestedStructure:
+      nestedBlocks:
         label: Nested Blocks
         type: blocks
         fieldsets:
           test:
             fields:
               blocks: true
-      nestedBlocks:
+      nestedBlocksWithFieldPreview:
         label: Nested Blocks
         type: blocks
         fieldsets:
@@ -89,6 +89,17 @@ tabs:
             fields:
               blocks:
                 type: blocks
+      nestedStructure:
+        label: Nested Structure
+        type: blocks
+        fieldsets:
+          test:
+            fields:
+              structure:
+                type: structure
+                fields:
+                  text:
+                    type: text
 
   blocktypes:
     fields:
