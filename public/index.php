@@ -10,6 +10,20 @@ $kirby = new Kirby([
 		'api' => [
 			'csrf' => 'dev'
 		],
+		'cache' => [
+			'changes' => [
+				'prefix' => 'changes'
+			],
+			'pages' => [
+				'prefix' => 'pages'
+			],
+			'updates' => [
+				'prefix' => 'updates'
+			],
+			'uuid' => [
+				'prefix' => 'uuid'
+			]
+		],
 		'debug' => true,
 		'email' => [
 			'transport' => [
