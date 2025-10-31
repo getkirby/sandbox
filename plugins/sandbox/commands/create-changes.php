@@ -62,6 +62,9 @@ return [
 			}
 		}
 
+		// this should not be needed, but unfortunately is
+		$changes->generateCache();
+
 		$cli->success('Changes created');
 	}
 ];
