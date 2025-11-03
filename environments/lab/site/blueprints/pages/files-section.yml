@@ -18,6 +18,9 @@ tabs:
       listWithBatch:
         type: files
         batch: true
+      listWithoutCreate:
+        type: files
+        create: false
 
   cardlets:
     sections:
@@ -40,6 +43,10 @@ tabs:
         type: files
         layout: cardlets
         batch: true
+      cardletsWithoutCreate:
+        type: files
+        layout: cardlets
+        create: false
 
   cards:
     sections:
@@ -62,6 +69,10 @@ tabs:
         type: files
         layout: cards
         batch: true
+      cardsWithoutCreate:
+        type: files
+        layout: cards
+        create: false
 
   table:
     sections:
@@ -84,6 +95,10 @@ tabs:
         type: files
         layout: table
         batch: true
+      tableWithoutCreate:
+        type: files
+        layout: table
+        create: false
 
   queries:
     sections:
