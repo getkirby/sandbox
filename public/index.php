@@ -1,28 +1,20 @@
 <?php
 
-$root = dirname(__DIR__);
+$root    = dirname(__DIR__);
+$config  = $root . '/sandbox.config.php';
+$options = [];
 
 require $root . '/kirby/bootstrap.php';
 require $root . '/environment.php';
 
+if (is_file($config) === true) {
+	$options = require $config;
+}
+
 $kirby = new Kirby([
-	'options' => [
+	'options' => array_replace_recursive([
 		'api' => [
 			'csrf' => 'dev'
-		],
-		'cache' => [
-			'changes' => [
-				'prefix' => 'changes'
-			],
-			'pages' => [
-				'prefix' => 'pages'
-			],
-			'updates' => [
-				'prefix' => 'updates'
-			],
-			'uuid' => [
-				'prefix' => 'uuid'
-			]
 		],
 		'debug' => true,
 		'email' => [
@@ -42,8 +34,9 @@ $kirby = new Kirby([
 			'plugins' => [
 				'getkirby/sandbox' => false
 			]
-		]
-	],
+		],
+		'url' => 'https://sandbox.test',
+	], $options),
 	'roots' => [
 		'index' => __DIR__
 	],

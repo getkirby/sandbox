@@ -11,6 +11,7 @@ public
 !public/.htaccess
 !public/index.php
 /site
+/sandbox.config.php
 
 # custom environments
 environments/custom-*
