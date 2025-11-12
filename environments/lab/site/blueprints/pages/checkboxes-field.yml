@@ -54,6 +54,15 @@ tabs:
         type: checkboxes
         extends: fields/options/html
 
+  batchSelect:
+    label: Batch
+    fields:
+      countries:
+        extends: fields/options/countries
+        type: checkboxes
+        columns: 2
+        batch: true
+
   validation:
     fields:
       required:
