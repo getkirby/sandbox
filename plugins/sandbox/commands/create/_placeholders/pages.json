@@ -1,0 +1,982 @@
+[
+  {
+    "title": "Creative Portfolio Showcase",
+    "slug": "creative-portfolio-showcase",
+    "tags": "design, portfolio, creative",
+    "date": "2024-03-15",
+    "email": "sarah.miller@example.com",
+    "url": "https://creativestudio.design",
+    "toggle": true,
+    "color": "#FF6B6B"
+  },
+  {
+    "title": "Wildlife Through the Lens",
+    "slug": "wildlife-through-the-lens",
+    "tags": "photography, nature, wildlife",
+    "date": "2023-11-22",
+    "email": "john.parks@wildlife.org",
+    "url": "https://naturelens.photo",
+    "toggle": false,
+    "color": "#4ECDC4"
+  },
+  {
+    "title": "Modern Web Development Guide",
+    "slug": "modern-web-development-guide",
+    "tags": "tech, development, coding",
+    "date": "2024-01-08",
+    "email": "alex.chen@devhub.io",
+    "url": "https://codeforge.dev",
+    "toggle": true,
+    "color": "#95E1D3"
+  },
+  {
+    "title": "Jazz Nights Downtown",
+    "slug": "jazz-nights-downtown",
+    "tags": "music, jazz, events",
+    "date": "2023-09-30",
+    "email": "maria.santos@jazzclub.net",
+    "url": "https://smoothjazz.live",
+    "toggle": true,
+    "color": "#F38181"
+  },
+  {
+    "title": "Comfort Food Recipes",
+    "slug": "comfort-food-recipes",
+    "tags": "food, recipes, cooking",
+    "date": "2024-02-14",
+    "email": "chef.thomas@culinary.com",
+    "url": "https://tastebuds.kitchen",
+    "toggle": false,
+    "color": "#AA96DA"
+  },
+  {
+    "title": "Mountain Trail Adventures",
+    "slug": "mountain-trail-adventures",
+    "tags": "travel, adventure, hiking",
+    "date": "2023-12-05",
+    "email": "emma.travels@wanderlust.co",
+    "url": "https://trailblazers.journey",
+    "toggle": true,
+    "color": "#FCBAD3"
+  },
+  {
+    "title": "Contemporary Art Exhibition",
+    "slug": "contemporary-art-exhibition",
+    "tags": "art, modern, gallery",
+    "date": "2024-03-20",
+    "email": "curator@modernart.museum",
+    "url": "https://artspace.gallery",
+    "toggle": false,
+    "color": "#FFFFD2"
+  },
+  {
+    "title": "Total Body Transformation",
+    "slug": "total-body-transformation",
+    "tags": "fitness, health, wellness",
+    "date": "2023-10-18",
+    "email": "coach.mike@fitlife.gym",
+    "url": "https://healthylife.fitness",
+    "toggle": true,
+    "color": "#A8D8EA"
+  },
+  {
+    "title": "Quantum Physics Explained",
+    "slug": "quantum-physics-explained",
+    "tags": "education, science, research",
+    "date": "2024-01-25",
+    "email": "dr.wilson@university.edu",
+    "url": "https://sciencelab.research",
+    "toggle": true,
+    "color": "#FFAAA5"
+  },
+  {
+    "title": "Spring Fashion Trends",
+    "slug": "spring-fashion-trends",
+    "tags": "fashion, style, trends",
+    "date": "2023-11-12",
+    "email": "style@fashionweek.com",
+    "url": "https://trendsetters.fashion",
+    "toggle": false,
+    "color": "#FF8B94"
+  },
+  {
+    "title": "Sustainable Urban Design",
+    "slug": "sustainable-urban-design",
+    "tags": "architecture, design, urban",
+    "date": "2024-02-28",
+    "email": "architect@citydesign.studio",
+    "url": "https://urbanscape.archi",
+    "toggle": true,
+    "color": "#C7CEEA"
+  },
+  {
+    "title": "Pro Gaming Tournament Recap",
+    "slug": "pro-gaming-tournament-recap",
+    "tags": "gaming, esports, streaming",
+    "date": "2023-12-20",
+    "email": "gamer.pro@twitch.stream",
+    "url": "https://gamehub.gg",
+    "toggle": true,
+    "color": "#B5EAD7"
+  },
+  {
+    "title": "Best Books of the Year",
+    "slug": "best-books-of-the-year",
+    "tags": "books, literature, reviews",
+    "date": "2024-01-15",
+    "email": "bookworm@library.read",
+    "url": "https://pageturn.books",
+    "toggle": false,
+    "color": "#FFD93D"
+  },
+  {
+    "title": "Electric Vehicle Revolution",
+    "slug": "electric-vehicle-revolution",
+    "tags": "automotive, cars, reviews",
+    "date": "2023-10-05",
+    "email": "editor@carenthusiast.mag",
+    "url": "https://speedster.auto",
+    "toggle": true,
+    "color": "#6BCB77"
+  },
+  {
+    "title": "Complete Pet Care Guide",
+    "slug": "complete-pet-care-guide",
+    "tags": "pets, animals, care",
+    "date": "2024-03-10",
+    "email": "vet@petscare.clinic",
+    "url": "https://furryfriends.pet",
+    "toggle": true,
+    "color": "#4D96FF"
+  },
+  {
+    "title": "Smart Investment Strategies",
+    "slug": "smart-investment-strategies",
+    "tags": "finance, investing, stocks",
+    "date": "2023-11-28",
+    "email": "advisor@wealth.finance",
+    "url": "https://investsmart.money",
+    "toggle": false,
+    "color": "#FFB6B9"
+  },
+  {
+    "title": "Organic Gardening Basics",
+    "slug": "organic-gardening-basics",
+    "tags": "gardening, plants, organic",
+    "date": "2024-02-08",
+    "email": "green.thumb@garden.grow",
+    "url": "https://bloominglife.garden",
+    "toggle": true,
+    "color": "#8FD6E1"
+  },
+  {
+    "title": "Perfect Espresso Techniques",
+    "slug": "perfect-espresso-techniques",
+    "tags": "coffee, cafe, brewing",
+    "date": "2023-12-15",
+    "email": "barista@coffeehouse.brew",
+    "url": "https://beanscene.coffee",
+    "toggle": true,
+    "color": "#D4A5A5"
+  },
+  {
+    "title": "Mindfulness Meditation Journey",
+    "slug": "mindfulness-meditation-journey",
+    "tags": "yoga, meditation, mindfulness",
+    "date": "2024-01-30",
+    "email": "instructor@zenspace.yoga",
+    "url": "https://innerpeace.om",
+    "toggle": false,
+    "color": "#9FD3C7"
+  },
+  {
+    "title": "Vineyard Tour Experience",
+    "slug": "vineyard-tour-experience",
+    "tags": "wine, tasting, vineyard",
+    "date": "2023-10-22",
+    "email": "sommelier@winery.estate",
+    "url": "https://grapevine.wine",
+    "toggle": true,
+    "color": "#E85D75"
+  },
+  {
+    "title": "Cross Country Cycling Routes",
+    "slug": "cross-country-cycling-routes",
+    "tags": "cycling, sports, outdoor",
+    "date": "2024-03-05",
+    "email": "rider@bikeclub.team",
+    "url": "https://pedalpower.bike",
+    "toggle": true,
+    "color": "#FEC8D8"
+  },
+  {
+    "title": "Shakespeare Festival Returns",
+    "slug": "shakespeare-festival-returns",
+    "tags": "theater, performance, drama",
+    "date": "2023-11-08",
+    "email": "director@playhouse.theater",
+    "url": "https://stagelights.show",
+    "toggle": false,
+    "color": "#957DAD"
+  },
+  {
+    "title": "Exploring the Night Sky",
+    "slug": "exploring-the-night-sky",
+    "tags": "astronomy, space, stars",
+    "date": "2024-02-18",
+    "email": "astronomer@observatory.space",
+    "url": "https://stargazer.cosmos",
+    "toggle": true,
+    "color": "#E0BBE4"
+  },
+  {
+    "title": "French Pastry Masterclass",
+    "slug": "french-pastry-masterclass",
+    "tags": "baking, pastry, desserts",
+    "date": "2023-12-28",
+    "email": "baker@sweetshop.bakery",
+    "url": "https://sugarcraft.bake",
+    "toggle": true,
+    "color": "#FFDFD3"
+  },
+  {
+    "title": "Handmade Craft Projects",
+    "slug": "handmade-craft-projects",
+    "tags": "crafts, DIY, handmade",
+    "date": "2024-01-12",
+    "email": "crafter@makerspace.craft",
+    "url": "https://artisanhands.make",
+    "toggle": false,
+    "color": "#A8E6CF"
+  },
+  {
+    "title": "Coastal Sailing Adventures",
+    "slug": "coastal-sailing-adventures",
+    "tags": "sailing, ocean, boats",
+    "date": "2023-10-14",
+    "email": "captain@yacht.club",
+    "url": "https://seaside.sail",
+    "toggle": true,
+    "color": "#77BFC7"
+  },
+  {
+    "title": "Pottery Wheel Techniques",
+    "slug": "pottery-wheel-techniques",
+    "tags": "ceramics, pottery, clay",
+    "date": "2024-03-01",
+    "email": "potter@claystudio.art",
+    "url": "https://earthenware.pottery",
+    "toggle": true,
+    "color": "#F6A6B2"
+  },
+  {
+    "title": "Ancient Civilizations Uncovered",
+    "slug": "ancient-civilizations-uncovered",
+    "tags": "history, museum, heritage",
+    "date": "2023-11-19",
+    "email": "historian@heritage.museum",
+    "url": "https://timecapsule.history",
+    "toggle": false,
+    "color": "#D4ADCF"
+  },
+  {
+    "title": "Learn Python from Scratch",
+    "slug": "learn-python-from-scratch",
+    "tags": "coding, tutorials, programming",
+    "date": "2024-02-22",
+    "email": "dev@codecamp.learn",
+    "url": "https://syntax.code",
+    "toggle": true,
+    "color": "#C5E3F6"
+  },
+  {
+    "title": "Classical Ballet Performance",
+    "slug": "classical-ballet-performance",
+    "tags": "dance, ballet, choreography",
+    "date": "2023-12-10",
+    "email": "dancer@balletschool.dance",
+    "url": "https://gracemovement.ballet",
+    "toggle": true,
+    "color": "#FFE5E5"
+  },
+  {
+    "title": "Independent Film Reviews",
+    "slug": "independent-film-reviews",
+    "tags": "film, cinema, movies",
+    "date": "2024-01-20",
+    "email": "critic@filmreview.cinema",
+    "url": "https://silverscreen.film",
+    "toggle": false,
+    "color": "#B8E0D2"
+  },
+  {
+    "title": "Future of Robotics",
+    "slug": "future-of-robotics",
+    "tags": "robotics, AI, automation",
+    "date": "2023-10-28",
+    "email": "engineer@robotics.tech",
+    "url": "https://futuretech.ai",
+    "toggle": true,
+    "color": "#D6EADF"
+  },
+  {
+    "title": "Standup Comedy Night",
+    "slug": "standup-comedy-night",
+    "tags": "comedy, standup, entertainment",
+    "date": "2024-03-12",
+    "email": "comedian@laughclub.show",
+    "url": "https://punchline.comedy",
+    "toggle": true,
+    "color": "#EAC4D5"
+  },
+  {
+    "title": "Natural Skincare Routine",
+    "slug": "natural-skincare-routine",
+    "tags": "skincare, beauty, cosmetics",
+    "date": "2023-11-25",
+    "email": "expert@skincare.beauty",
+    "url": "https://glowup.skin",
+    "toggle": false,
+    "color": "#FFE0F7"
+  },
+  {
+    "title": "Zero Waste Lifestyle",
+    "slug": "zero-waste-lifestyle",
+    "tags": "sustainability, eco, green",
+    "date": "2024-02-05",
+    "email": "activist@ecofriendly.org",
+    "url": "https://greenearth.eco",
+    "toggle": true,
+    "color": "#B4E7CE"
+  },
+  {
+    "title": "Wilderness Camping Essentials",
+    "slug": "wilderness-camping-essentials",
+    "tags": "camping, outdoor, adventure",
+    "date": "2023-12-18",
+    "email": "ranger@wilderness.camp",
+    "url": "https://wildtrails.outdoor",
+    "toggle": true,
+    "color": "#FFD6A5"
+  },
+  {
+    "title": "Digital Illustration Portfolio",
+    "slug": "digital-illustration-portfolio",
+    "tags": "illustration, drawing, digital",
+    "date": "2024-01-28",
+    "email": "artist@drawstudio.ink",
+    "url": "https://sketchbook.draw",
+    "toggle": false,
+    "color": "#CAFFBF"
+  },
+  {
+    "title": "Brand Strategy Workshop",
+    "slug": "brand-strategy-workshop",
+    "tags": "marketing, branding, strategy",
+    "date": "2023-10-12",
+    "email": "strategist@brandlab.agency",
+    "url": "https://marketmind.brand",
+    "toggle": true,
+    "color": "#9BF6FF"
+  },
+  {
+    "title": "Vintage Furniture Collection",
+    "slug": "vintage-furniture-collection",
+    "tags": "vintage, antiques, collecting",
+    "date": "2024-03-08",
+    "email": "collector@antiqueshop.vintage",
+    "url": "https://timeless.antique",
+    "toggle": true,
+    "color": "#BDB2FF"
+  },
+  {
+    "title": "Marathon Training Program",
+    "slug": "marathon-training-program",
+    "tags": "running, marathon, fitness",
+    "date": "2023-11-15",
+    "email": "runner@trackclub.run",
+    "url": "https://milesahead.running",
+    "toggle": false,
+    "color": "#FFC6FF"
+  },
+  {
+    "title": "Custom Furniture Building",
+    "slug": "custom-furniture-building",
+    "tags": "woodworking, carpentry, furniture",
+    "date": "2024-02-12",
+    "email": "carpenter@woodshop.build",
+    "url": "https://timbercraft.wood",
+    "toggle": true,
+    "color": "#FFFFFC"
+  },
+  {
+    "title": "Understanding Anxiety Relief",
+    "slug": "understanding-anxiety-relief",
+    "tags": "psychology, therapy, mental health",
+    "date": "2023-12-22",
+    "email": "therapist@wellness.psych",
+    "url": "https://mindcare.therapy",
+    "toggle": true,
+    "color": "#A0C4FF"
+  },
+  {
+    "title": "Big Wave Surfing Guide",
+    "slug": "big-wave-surfing-guide",
+    "tags": "surfing, beach, waves",
+    "date": "2024-01-18",
+    "email": "surfer@waveclub.surf",
+    "url": "https://oceancrest.surf",
+    "toggle": false,
+    "color": "#FDFFB6"
+  },
+  {
+    "title": "Craft Cocktail Recipes",
+    "slug": "craft-cocktail-recipes",
+    "tags": "cocktails, mixology, bar",
+    "date": "2023-10-25",
+    "email": "bartender@craftbar.mix",
+    "url": "https://shakenup.cocktail",
+    "toggle": true,
+    "color": "#FFADAD"
+  },
+  {
+    "title": "Artisan Jewelry Design",
+    "slug": "artisan-jewelry-design",
+    "tags": "jewelry, design, handcraft",
+    "date": "2024-03-18",
+    "email": "jeweler@gemstone.jewelry",
+    "url": "https://sparkledesign.gems",
+    "toggle": true,
+    "color": "#FFD6A5"
+  },
+  {
+    "title": "True Crime Podcast Series",
+    "slug": "true-crime-podcast-series",
+    "tags": "podcast, audio, broadcasting",
+    "date": "2023-11-30",
+    "email": "host@podcast.audio",
+    "url": "https://voicewaves.podcast",
+    "toggle": false,
+    "color": "#CAFFBF"
+  },
+  {
+    "title": "Advanced Chess Strategies",
+    "slug": "advanced-chess-strategies",
+    "tags": "chess, strategy, tournament",
+    "date": "2024-02-25",
+    "email": "master@chessclub.game",
+    "url": "https://checkmate.chess",
+    "toggle": true,
+    "color": "#9BF6FF"
+  },
+  {
+    "title": "Modern Calligraphy Workshop",
+    "slug": "modern-calligraphy-workshop",
+    "tags": "calligraphy, lettering, art",
+    "date": "2023-12-08",
+    "email": "scribe@letterart.ink",
+    "url": "https://elegantscript.calligraphy",
+    "toggle": true,
+    "color": "#A0C4FF"
+  },
+  {
+    "title": "Motion Graphics Tutorial",
+    "slug": "motion-graphics-tutorial",
+    "tags": "animation, motion, graphics",
+    "date": "2024-01-22",
+    "email": "animator@motionstudio.animate",
+    "url": "https://framebyframe.motion",
+    "toggle": false,
+    "color": "#BDB2FF"
+  },
+  {
+    "title": "Community Outreach Programs",
+    "slug": "community-outreach-programs",
+    "tags": "volunteering, charity, community",
+    "date": "2023-10-20",
+    "email": "coordinator@helpinghands.org",
+    "url": "https://giveback.volunteer",
+    "toggle": true,
+    "color": "#FFC6FF"
+  },
+  {
+    "title": "Indoor Rock Climbing Tips",
+    "slug": "indoor-rock-climbing-tips",
+    "tags": "climbing, bouldering, rocks",
+    "date": "2024-03-14",
+    "email": "climber@peakclub.climb",
+    "url": "https://verticalpath.climbing",
+    "toggle": true,
+    "color": "#FFFFFC"
+  },
+  {
+    "title": "Fermentation Science Basics",
+    "slug": "fermentation-science-basics",
+    "tags": "fermentation, kombucha, probiotics",
+    "date": "2023-11-18",
+    "email": "brewer@fermentlab.culture",
+    "url": "https://livebrew.ferment",
+    "toggle": false,
+    "color": "#E4C1F9"
+  },
+  {
+    "title": "Sustainable Fashion Design",
+    "slug": "sustainable-fashion-design",
+    "tags": "sewing, textiles, fabric",
+    "date": "2024-02-16",
+    "email": "tailor@stitchwork.sew",
+    "url": "https://fabriccraft.textile",
+    "toggle": true,
+    "color": "#FFE5D9"
+  },
+  {
+    "title": "Investigative Journalism Today",
+    "slug": "investigative-journalism-today",
+    "tags": "journalism, news, reporting",
+    "date": "2023-12-12",
+    "email": "reporter@dailynews.press",
+    "url": "https://truthtelling.news",
+    "toggle": true,
+    "color": "#C9E4CA"
+  },
+  {
+    "title": "Magic Show Spectacular",
+    "slug": "magic-show-spectacular",
+    "tags": "magic, illusion, performance",
+    "date": "2024-01-26",
+    "email": "magician@wondershow.magic",
+    "url": "https://mysteryact.illusion",
+    "toggle": false,
+    "color": "#C6DEF1"
+  },
+  {
+    "title": "Backyard Beekeeping Guide",
+    "slug": "backyard-beekeeping-guide",
+    "tags": "beekeeping, honey, apiary",
+    "date": "2023-10-16",
+    "email": "beekeeper@honeyfarm.bee",
+    "url": "https://buzzingbees.apiary",
+    "toggle": true,
+    "color": "#F2C6DE"
+  },
+  {
+    "title": "Philosophy of Consciousness",
+    "slug": "philosophy-of-consciousness",
+    "tags": "philosophy, ethics, thinking",
+    "date": "2024-03-22",
+    "email": "professor@philosophy.edu",
+    "url": "https://deepthought.philosophy",
+    "toggle": true,
+    "color": "#F7D9C4"
+  },
+  {
+    "title": "Whitewater Kayaking Journey",
+    "slug": "whitewater-kayaking-journey",
+    "tags": "kayaking, rivers, paddling",
+    "date": "2023-11-22",
+    "email": "guide@riveradventure.kayak",
+    "url": "https://paddlestream.kayak",
+    "toggle": false,
+    "color": "#FAEDCB"
+  },
+  {
+    "title": "Abstract Sculpture Exhibition",
+    "slug": "abstract-sculpture-exhibition",
+    "tags": "sculpture, 3D, art",
+    "date": "2024-02-20",
+    "email": "sculptor@artspace.sculpture",
+    "url": "https://formandshape.sculpt",
+    "toggle": true,
+    "color": "#C9E4DE"
+  },
+  {
+    "title": "Japanese Tea Ceremony",
+    "slug": "japanese-tea-ceremony",
+    "tags": "tea, ceremony, brewing",
+    "date": "2023-12-26",
+    "email": "master@teahouse.brew",
+    "url": "https://leafandsteep.tea",
+    "toggle": true,
+    "color": "#DBE7E4"
+  },
+  {
+    "title": "Brand Identity Design",
+    "slug": "brand-identity-design",
+    "tags": "graphic design, visual, creative",
+    "date": "2024-01-14",
+    "email": "designer@pixelstudio.design",
+    "url": "https://visualcraft.graphics",
+    "toggle": false,
+    "color": "#F0EFEB"
+  },
+  {
+    "title": "Powder Snow Adventures",
+    "slug": "powder-snow-adventures",
+    "tags": "snowboarding, winter, mountain",
+    "date": "2023-10-30",
+    "email": "rider@snowpeak.board",
+    "url": "https://powderdays.snowboard",
+    "toggle": true,
+    "color": "#D6E2E9"
+  },
+  {
+    "title": "Paper Folding Art",
+    "slug": "paper-folding-art",
+    "tags": "origami, paper, folding",
+    "date": "2024-03-16",
+    "email": "artist@papercraft.origami",
+    "url": "https://folded.paper",
+    "toggle": true,
+    "color": "#BCD4E6"
+  },
+  {
+    "title": "Balanced Nutrition Plan",
+    "slug": "balanced-nutrition-plan",
+    "tags": "nutrition, diet, health",
+    "date": "2023-11-28",
+    "email": "nutritionist@healthyfood.diet",
+    "url": "https://eatwell.nutrition",
+    "toggle": false,
+    "color": "#99C1DE"
+  },
+  {
+    "title": "Street Skateboarding Culture",
+    "slug": "street-skateboarding-culture",
+    "tags": "skateboarding, street, tricks",
+    "date": "2024-02-10",
+    "email": "skater@streetpark.skate",
+    "url": "https://grindlife.skateboard",
+    "toggle": true,
+    "color": "#FCD5CE"
+  },
+  {
+    "title": "Creative Writing Workshop",
+    "slug": "creative-writing-workshop",
+    "tags": "writing, author, novels",
+    "date": "2023-12-16",
+    "email": "author@bookwriter.write",
+    "url": "https://penandpage.author",
+    "toggle": true,
+    "color": "#F8EDEB"
+  },
+  {
+    "title": "Virtual Reality Gaming",
+    "slug": "virtual-reality-gaming",
+    "tags": "virtual reality, VR, immersive",
+    "date": "2024-01-24",
+    "email": "developer@vrworld.tech",
+    "url": "https://immersivetech.vr",
+    "toggle": false,
+    "color": "#E8E8E4"
+  },
+  {
+    "title": "Deep Sea Fishing Expedition",
+    "slug": "deep-sea-fishing-expedition",
+    "tags": "fishing, angling, water",
+    "date": "2023-10-18",
+    "email": "angler@fishclub.catch",
+    "url": "https://hookandline.fishing",
+    "toggle": true,
+    "color": "#D8E2DC"
+  },
+  {
+    "title": "Blacksmith Forge Workshop",
+    "slug": "blacksmith-forge-workshop",
+    "tags": "metalworking, forge, craft",
+    "date": "2024-03-24",
+    "email": "smith@ironworks.forge",
+    "url": "https://metalcraft.forge",
+    "toggle": true,
+    "color": "#FFE5D9"
+  },
+  {
+    "title": "Startup Success Stories",
+    "slug": "startup-success-stories",
+    "tags": "startups, entrepreneurship, business",
+    "date": "2023-11-20",
+    "email": "founder@startup.ventures",
+    "url": "https://innovatehub.startup",
+    "toggle": false,
+    "color": "#FFCAD4"
+  },
+  {
+    "title": "Bird Watching Essentials",
+    "slug": "bird-watching-essentials",
+    "tags": "birding, ornithology, nature",
+    "date": "2024-02-28",
+    "email": "watcher@birdclub.observe",
+    "url": "https://featherfriends.birds",
+    "toggle": true,
+    "color": "#F4ACB7"
+  },
+  {
+    "title": "Blockchain Technology Explained",
+    "slug": "blockchain-technology-explained",
+    "tags": "blockchain, crypto, technology",
+    "date": "2023-12-03",
+    "email": "developer@blockchain.tech",
+    "url": "https://cryptochain.digital",
+    "toggle": true,
+    "color": "#9CADCE"
+  },
+  {
+    "title": "Minimalist Interior Design",
+    "slug": "minimalist-interior-design",
+    "tags": "interior, design, minimalism",
+    "date": "2024-03-11",
+    "email": "designer@interiors.space",
+    "url": "https://cleanspaces.interior",
+    "toggle": false,
+    "color": "#7FCDCD"
+  },
+  {
+    "title": "Home Brewing Beer Guide",
+    "slug": "home-brewing-beer-guide",
+    "tags": "brewing, beer, craft",
+    "date": "2023-11-07",
+    "email": "brewer@craftbeer.brew",
+    "url": "https://hopshaven.beer",
+    "toggle": true,
+    "color": "#DFCC74"
+  },
+  {
+    "title": "Portrait Photography Mastery",
+    "slug": "portrait-photography-mastery",
+    "tags": "photography, portrait, studio",
+    "date": "2024-02-19",
+    "email": "photographer@studio.lens",
+    "url": "https://capturedfaces.photo",
+    "toggle": true,
+    "color": "#F5B7B1"
+  },
+  {
+    "title": "Urban Sketching Adventures",
+    "slug": "urban-sketching-adventures",
+    "tags": "sketching, urban, drawing",
+    "date": "2023-10-29",
+    "email": "artist@urbansketch.art",
+    "url": "https://citylines.sketch",
+    "toggle": false,
+    "color": "#D7BDE2"
+  },
+  {
+    "title": "Electric Guitar Lessons",
+    "slug": "electric-guitar-lessons",
+    "tags": "music, guitar, lessons",
+    "date": "2024-01-17",
+    "email": "instructor@guitarschool.music",
+    "url": "https://stringmaster.guitar",
+    "toggle": true,
+    "color": "#AED6F1"
+  },
+  {
+    "title": "Vegan Cooking Simplified",
+    "slug": "vegan-cooking-simplified",
+    "tags": "vegan, cooking, recipes",
+    "date": "2023-12-21",
+    "email": "chef@vegankitchen.food",
+    "url": "https://plantbased.vegan",
+    "toggle": true,
+    "color": "#A2D9CE"
+  },
+  {
+    "title": "Documentary Filmmaking Course",
+    "slug": "documentary-filmmaking-course",
+    "tags": "film, documentary, production",
+    "date": "2024-03-07",
+    "email": "director@docfilms.studio",
+    "url": "https://realstories.documentary",
+    "toggle": false,
+    "color": "#FAD7A0"
+  },
+  {
+    "title": "Solar Energy Solutions",
+    "slug": "solar-energy-solutions",
+    "tags": "energy, solar, renewable",
+    "date": "2023-11-14",
+    "email": "engineer@solarpower.energy",
+    "url": "https://sunharvest.solar",
+    "toggle": true,
+    "color": "#F9E79F"
+  },
+  {
+    "title": "Landscape Watercolor Painting",
+    "slug": "landscape-watercolor-painting",
+    "tags": "painting, watercolor, landscape",
+    "date": "2024-02-11",
+    "email": "artist@watercolor.paint",
+    "url": "https://brushstrokes.watercolor",
+    "toggle": true,
+    "color": "#ABEBC6"
+  },
+  {
+    "title": "Mediterranean Diet Plan",
+    "slug": "mediterranean-diet-plan",
+    "tags": "diet, health, mediterranean",
+    "date": "2023-12-19",
+    "email": "nutritionist@medfood.health",
+    "url": "https://oliveoil.mediterranean",
+    "toggle": false,
+    "color": "#A9CCE3"
+  },
+  {
+    "title": "Digital Marketing Trends",
+    "slug": "digital-marketing-trends",
+    "tags": "marketing, digital, trends",
+    "date": "2024-01-29",
+    "email": "strategist@digitalmarket.agency",
+    "url": "https://clickthrough.marketing",
+    "toggle": true,
+    "color": "#D2B4DE"
+  },
+  {
+    "title": "Mountain Biking Trails",
+    "slug": "mountain-biking-trails",
+    "tags": "biking, mountain, trails",
+    "date": "2023-10-26",
+    "email": "rider@mtbclub.bike",
+    "url": "https://trailrides.mtb",
+    "toggle": true,
+    "color": "#F5CBA7"
+  },
+  {
+    "title": "Classical Piano Repertoire",
+    "slug": "classical-piano-repertoire",
+    "tags": "piano, classical, music",
+    "date": "2024-03-13",
+    "email": "pianist@conservatory.music",
+    "url": "https://keyboardmasters.piano",
+    "toggle": false,
+    "color": "#FADBD8"
+  },
+  {
+    "title": "Sustainable Architecture Today",
+    "slug": "sustainable-architecture-today",
+    "tags": "architecture, sustainable, green",
+    "date": "2023-11-26",
+    "email": "architect@greenbuilding.design",
+    "url": "https://ecostructures.architecture",
+    "toggle": true,
+    "color": "#D5F4E6"
+  },
+  {
+    "title": "Street Food World Tour",
+    "slug": "street-food-world-tour",
+    "tags": "food, street, travel",
+    "date": "2024-02-15",
+    "email": "foodie@streetbites.food",
+    "url": "https://globalflavors.street",
+    "toggle": true,
+    "color": "#FCF3CF"
+  },
+  {
+    "title": "Drone Photography Guide",
+    "slug": "drone-photography-guide",
+    "tags": "photography, drone, aerial",
+    "date": "2023-12-30",
+    "email": "pilot@aerialphoto.drone",
+    "url": "https://skyview.aerial",
+    "toggle": false,
+    "color": "#D6EAF8"
+  },
+  {
+    "title": "Permaculture Garden Design",
+    "slug": "permaculture-garden-design",
+    "tags": "permaculture, garden, sustainable",
+    "date": "2024-01-11",
+    "email": "designer@permaculture.garden",
+    "url": "https://earthsystems.permaculture",
+    "toggle": true,
+    "color": "#E8DAEF"
+  },
+  {
+    "title": "Jazz Improvisation Workshop",
+    "slug": "jazz-improvisation-workshop",
+    "tags": "jazz, music, improvisation",
+    "date": "2023-10-31",
+    "email": "musician@jazzacademy.music",
+    "url": "https://bluenotes.jazz",
+    "toggle": true,
+    "color": "#EDBB99"
+  },
+  {
+    "title": "Smart Home Automation",
+    "slug": "smart-home-automation",
+    "tags": "technology, smart home, automation",
+    "date": "2024-03-19",
+    "email": "tech@smarthome.tech",
+    "url": "https://connectedliving.automation",
+    "toggle": false,
+    "color": "#F6DDCC"
+  },
+  {
+    "title": "Landscape Design Portfolio",
+    "slug": "landscape-design-portfolio",
+    "tags": "landscape, design, outdoor",
+    "date": "2023-11-09",
+    "email": "designer@landscapedesign.studio",
+    "url": "https://gardenscapes.landscape",
+    "toggle": true,
+    "color": "#D5DBDB"
+  },
+  {
+    "title": "Artisan Bread Baking",
+    "slug": "artisan-bread-baking",
+    "tags": "baking, bread, artisan",
+    "date": "2024-02-24",
+    "email": "baker@breadoven.bakery",
+    "url": "https://crustcraft.bread",
+    "toggle": true,
+    "color": "#E59866"
+  },
+  {
+    "title": "Astrophotography Techniques",
+    "slug": "astrophotography-techniques",
+    "tags": "photography, astronomy, night",
+    "date": "2023-12-14",
+    "email": "photographer@nightsky.photo",
+    "url": "https://starimages.astro",
+    "toggle": false,
+    "color": "#BB8FCE"
+  },
+  {
+    "title": "Pilates Core Strength",
+    "slug": "pilates-core-strength",
+    "tags": "pilates, fitness, core",
+    "date": "2024-01-23",
+    "email": "instructor@pilatesstudio.fitness",
+    "url": "https://corestability.pilates",
+    "toggle": true,
+    "color": "#85C1E2"
+  },
+  {
+    "title": "Mixology Masterclass",
+    "slug": "mixology-masterclass",
+    "tags": "cocktails, mixology, bartending",
+    "date": "2023-10-19",
+    "email": "mixologist@cocktailbar.drink",
+    "url": "https://spiritcraft.mixology",
+    "toggle": true,
+    "color": "#F8B4D9"
+  },
+  {
+    "title": "Wildlife Conservation Efforts",
+    "slug": "wildlife-conservation-efforts",
+    "tags": "wildlife, conservation, nature",
+    "date": "2024-03-21",
+    "email": "biologist@conservation.wildlife",
+    "url": "https://savespecies.conservation",
+    "toggle": false,
+    "color": "#AED581"
+  },
+  {
+    "title": "Mobile App Development",
+    "slug": "mobile-app-development",
+    "tags": "development, mobile, apps",
+    "date": "2023-11-17",
+    "email": "developer@appstudio.dev",
+    "url": "https://mobileforge.apps",
+    "toggle": true,
+    "color": "#81D4FA"
+  }
+]

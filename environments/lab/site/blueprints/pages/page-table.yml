@@ -5,6 +5,7 @@ sections:
     type: pages
     layout: table
     image: false
+    limit: 100
     columns:
       tags: true
       date: true
