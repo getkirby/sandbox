@@ -8,5 +8,8 @@
 			"name": "Nico Hoffmann",
 			"email": "nico@getkirby.com"
 		}
-	]
+	],
+	"require": {
+		"phpunit/php-timer": "^8.0"
+	}
 }
