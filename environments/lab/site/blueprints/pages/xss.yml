@@ -86,7 +86,7 @@ tabs:
             type: checkboxes
             options:
               type: api
-              url: "{{ site.url }}/options.json"
+              url: "{{ site.file('options.json').url }}"
               query: Companies
               text: "{{ item.name }}"
               value: "{{ item.short }}"
@@ -96,7 +96,7 @@ tabs:
             type: checkboxes
             options:
               type: api
-              url: "{{ site.url }}/options.json"
+              url: "{{ site.file('options.json').url }}"
               query: Html
               text: "{< item.name >}"
               value: "{{ item.short }}"
@@ -147,7 +147,7 @@ tabs:
             type: color
             options:
               type: api
-              url: "{{ site.url }}/options.json"
+              url: "{{ site.file('options.json').url }}"
               query: Companies
               text: "{{ item.name }}"
               value: "{{ item.color }}"
@@ -157,7 +157,7 @@ tabs:
             type: color
             options:
               type: api
-              url: "{{ site.url }}/options.json"
+              url: "{{ site.file('options.json').url }}"
               query: Html
               text: "{< item.name >}"
               value: "{{ item.color }}"
@@ -209,7 +209,7 @@ tabs:
             type: multiselect
             options:
               type: api
-              url: "{{ site.url }}/options.json"
+              url: "{{ site.file('options.json').url }}"
               query: Companies
               text: "{{ item.name }}"
               value: "{{ item.short }}"
@@ -219,7 +219,7 @@ tabs:
             type: multiselect
             options:
               type: api
-              url: "{{ site.url }}/options.json"
+              url: "{{ site.file('options.json').url }}"
               query: Html
               text: "{< item.name >}"
               value: "{{ item.short }}"
@@ -269,7 +269,7 @@ tabs:
             type: radio
             options:
               type: api
-              url: "{{ site.url }}/options.json"
+              url: "{{ site.file('options.json').url }}"
               query: Companies
               text: "{{ item.name }}"
               value: "{{ item.short }}"
@@ -279,7 +279,7 @@ tabs:
             type: radio
             options:
               type: api
-              url: "{{ site.url }}/options.json"
+              url: "{{ site.file('options.json').url }}"
               query: Html
               text: "{< item.name >}"
               value: "{{ item.short }}"
@@ -329,7 +329,7 @@ tabs:
             type: tags
             options:
               type: api
-              url: "{{ site.url }}/options.json"
+              url: "{{ site.file('options.json').url }}"
               query: Companies
               text: "{{ item.name }}"
               value: "{{ item.short }}"
@@ -339,7 +339,7 @@ tabs:
             type: tags
             options:
               type: api
-              url: "{{ site.url }}/options.json"
+              url: "{{ site.file('options.json').url }}"
               query: Html
               text: "{< item.name >}"
               value: "{{ item.short }}"
@@ -389,7 +389,7 @@ tabs:
             type: toggles
             options:
               type: api
-              url: "{{ site.url }}/options.json"
+              url: "{{ site.file('options.json').url }}"
               query: Companies
               text: "{{ item.name }}"
               value: "{{ item.short }}"
@@ -399,7 +399,7 @@ tabs:
             type: toggles
             options:
               type: api
-              url: "{{ site.url }}/options.json"
+              url: "{{ site.file('options.json').url }}"
               query: Html
               text: "{< item.name >}"
               value: "{{ item.short }}"
@@ -439,7 +439,7 @@ tabs:
             type: select
             options:
               type: api
-              url: "{{ site.url }}/options.json"
+              url: "{{ site.file('options.json').url }}"
               query: Companies
               text: "{{ item.name }}"
               value: "{{ item.short }}"
@@ -610,7 +610,7 @@ tabs:
             type: multiselect
             options:
               type: api
-              url: "{{ site.url }}/options.json"
+              url: "{{ site.file('options.json').url }}"
               query: Companies
               text: "{{ item.name }}"
               value: "{{ item.short }}"
@@ -623,7 +623,7 @@ tabs:
             type: multiselect
             options:
               type: api
-              url: "{{ site.url }}/options.json"
+              url: "{{ site.file('options.json').url }}"
               query: Html
               text: "{< item.name >}"
               value: "{{ item.short }}"
@@ -688,7 +688,7 @@ tabs:
             type: tags
             options:
               type: api
-              url: "{{ site.url }}/options.json"
+              url: "{{ site.file('options.json').url }}"
               query: Companies
               text: "{{ item.name }}"
               value: "{{ item.short }}"
@@ -701,7 +701,7 @@ tabs:
             type: tags
             options:
               type: api
-              url: "{{ site.url }}/options.json"
+              url: "{{ site.file('options.json').url }}"
               query: Html
               text: "{< item.name >}"
               value: "{{ item.short }}"
