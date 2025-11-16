@@ -1,18 +1,20 @@
 <?php
 
-use Kirby\Form\Form;
 use SebastianBergmann\Timer\ResourceUsageFormatter;
 use SebastianBergmann\Timer\Timer;
 
 return [
 	'description' => 'Benchmark fields',
 	'command' => function ($cli) {
-		$kirby = $cli->kirby();
+		$iterations = 10;
+		$progress   = $cli->lightBlue()->progress()->total($iterations);
 
 		$timer = new Timer;
 		$timer->start();
 
-		foreach (range(0,10) as $i) {
+		foreach (range(0, $iterations) as $i) {
+			$progress->current($i);
+
 			foreach (page('fields')->children() as $fieldPage) {
 				$fieldPage->panel()->view();
 			}
