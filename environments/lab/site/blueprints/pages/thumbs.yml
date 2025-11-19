@@ -1,0 +1,6 @@
+title: Thumbs
+
+fields:
+  info:
+    text: Go to "{{ page.url }}" to test thumb results
+
