@@ -10,6 +10,7 @@ tabs:
         sections:
           sections: sections/sections
           other: sections/other
+          benchmarks: sections/benchmarks
   content:
     label: Site Content
     fields:

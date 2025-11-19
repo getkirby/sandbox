@@ -1,0 +1,7 @@
+label: Benchmarks
+parent: page('benchmarks')
+type: pages
+layout: list
+image: false
+create: false
+limit: 50

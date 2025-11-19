@@ -1,0 +1,11 @@
+title: Snippets Benchmark
+
+fields:
+  test:
+    type: info
+    theme: code
+    text: Loading a lot of snippets
+  command:
+    type: info
+    theme: code
+    text: kirby sandbox:bench:snippets
