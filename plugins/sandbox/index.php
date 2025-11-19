@@ -8,10 +8,7 @@ App::plugin('getkirby/sandbox', [
 		'environments' => require __DIR__ . '/areas/environments.php'
 	],
 	'commands' => [
-		'sandbox:bench:fields'      => require __DIR__ . '/commands/bench/fields.php',
-		'sandbox:bench:views'       => require __DIR__ . '/commands/bench/views.php',
-		'sandbox:create:changes'    => require __DIR__ . '/commands/create/changes.php',
-		'sandbox:create:page-table' => require __DIR__ . '/commands/create/page-table.php',
-		'sandbox:create:users'      => require __DIR__ . '/commands/create/users.php'
+		'sandbox:create:changes' => require __DIR__ . '/commands/create/changes.php',
+		'sandbox:create:users'   => require __DIR__ . '/commands/create/users.php'
 	]
 ]);
