@@ -48,7 +48,8 @@ class MyCustomTinkerwellDriver extends TinkerwellDriver
 				],
 				'panel' => [
 					'dev' => true
-				]
+				],
+				'url' => 'https://sandbox.test',
 			],
 			'roots' => [
 				'index' => $projectPath . '/public'

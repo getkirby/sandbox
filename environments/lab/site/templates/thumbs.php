@@ -3,6 +3,7 @@
 use Kirby\Cms\File;
 use Kirby\Filesystem\F;
 use Kirby\Image\Darkroom;
+use Kirby\Image\Gravity;
 
 $landscape = $page->image('landscape.jpg');
 $square    = $page->image('square.jpg');
@@ -16,25 +17,36 @@ function createThumb(string $driverName, File $file, array $params, string $id)
 		]
 	];
 
-	$driver = Darkroom::factory($driverName, $settings[$driverName] ?? []);
-	$name   = $file->name();
+	$driver    = Darkroom::factory($driverName, $settings[$driverName] ?? []);
+	$name      = $file->name();
+	$extension = 'jpg';
 
-	F::copy($file->root(), $root = $file->kirby()->root('index') . '/thumbs/' . $name . '-' . $id . '-' . $driverName . '.jpg', true);
+	if ($format = ($params['format'] ?? null)) {
+		$extension = $format;
+	}
+
+	F::copy($file->root(), $root = $file->kirby()->root('index') . '/thumbs/' . $name . '-' . $id . '-' . $driverName . '.' . $extension, true);
 
 	$driver->process($root, $params);
 }
 
-function createThumbs(File $file, array $params, string $id)
+function img(string $name, string $driver, string $id, string $extension = 'jpg')
 {
-	createThumb('gd', $file, $params, $id);
-	createThumb('im', $file, $params, $id);
-	createThumb('imagick', $file, $params, $id);
+	$url = '/thumbs/' . $name . '-' . $id . '-' . $driver . '.' . $extension . '?v=' . time();
+	return '<a href="' . $url . '" target="_blank"><img src="' . $url . '" title="' . $id . '"></a>';
 }
 
-function img(string $name, string $driver, string $id)
-{
-	return '<img src="/thumbs/landscape-' . $id . '-' . $driver . '.jpg?v=' . time() . '">';
-}
+$gravities = [
+	'top left',
+	'top',
+	'top right',
+	'left',
+	'center',
+	'right',
+	'bottom left',
+	'bottom',
+	'bottom right',
+];
 
 $drivers = [
 	'gd',
@@ -42,87 +54,178 @@ $drivers = [
 	'imagick'
 ];
 
+$images = [
+	'landscape' => $landscape,
+	'portrait'  => $portrait,
+	'square'    => $square
+];
+
+$driver = 'im';
+
 ?>
 
 <style>
+* {
+	margin: 0;
+	padding: 0;
+}
+h1, h2, h3, h4 {
+	margin-bottom: .75rem;
+}
 body {
-	padding: 3rem;
+	padding: 1.5rem;
+	font-family: system-ui;
 }
 stack {
 	display: flex;
 	flex-direction: column;
-	gap: 3rem;
+	gap: 1.5rem;
 }
 grid {
 	display: grid;
-	display: flex;
-	gap: 3rem;
+	grid-template-columns: repeat(3, 1fr);
+	gap: .25rem;
 }
+grid column a {
+	aspect-ratio: 1/1;
+	display: grid;
+	place-items: center;
+	background: #000;
+	position: relative;
+}
+grid img {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
+drivers {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-gap: 1.5rem;
+}
+
+imagetype {
+	display: block;
+	border: 1px solid #dedede;
+	padding: 1.5rem;
+	border-radius: .5rem;
+}
+
+
 </style>
 
 <h1>Thumbs</h1>
 
-<stack>
-	<section>
-		<h2>Cropping</h2>
-		<?php
+<drivers>
 
-		createThumbs($landscape, [
-			'crop'   => true,
-			'width'  => 300,
-			'height' => 300
-		], 'crop');
+	<?php foreach ($drivers as $driver): ?>
+	<driver>
+		<h2>Driver: <?= $driver ?></h2>
+		<stack>
+			<?php foreach ($images as $imageName => $image): ?>
+			<imagetype>
+				<stack>
+					<section>
+						<h3><?=  ucfirst($imageName) ?></h3>
+						<grid>
+							<column>
+								<a href="<?=  $image->url() ?>" target="_blank">
+									<img src="<?=  $image->url() ?>">
+								</a>
+							</column>
+						</grid>
+					</section>
 
-		?>
-		<grid>
-			<?php foreach ($drivers as $driver): ?>
-			<column>
-				<h3><?= $driver ?></h3>
-				<?= img('landscape', $driver, 'crop') ?>
-			</column>
+					<section>
+						<h3>Gravities</h3>
+						<grid>
+							<?php foreach ($gravities as $gravity): ?>
+							<?php createThumb($driver, $image, [
+								'crop'   => $gravity,
+								'width'  => 300,
+								'height' => 300
+							], $id = 'crop-' . $gravity) ?>
+							<column>
+								<?= img($imageName, $driver, $id) ?>
+							</column>
+							<?php endforeach ?>
+						</grid>
+					</section>
+
+					<section>
+						<grid>
+							<column>
+								<?php createThumb($driver, $image, [
+									'width'  => 300,
+									'height' => 300
+								], $id = 'resize-width-and-height') ?>
+								<h3>Resize: w & h</h3>
+								<?= img($imageName, $driver, $id) ?>
+							</column>
+							<column>
+								<?php createThumb($driver, $image, [
+									'width'  => 300,
+								], $id = 'resize-width') ?>
+								<h3>Resize: w</h3>
+								<?= img($imageName, $driver, $id) ?>
+							</column>
+							<column>
+								<?php createThumb($driver, $image, [
+									'height' => 300,
+								], $id = 'resize-height') ?>
+								<h3>Resize: h</h3>
+								<?= img($imageName, $driver, $id) ?>
+							</column>
+						</grid>
+					</section>
+
+					<section>
+						<grid>
+							<column>
+								<?php createThumb($driver, $image, [
+									'grayscale' => true,
+								], $id = 'grayscale') ?>
+								<h3>Grayscale</h3>
+								<?= img($imageName, $driver, $id) ?>
+							</column>
+							<column>
+								<?php createThumb($driver, $image, [
+									'blur' => true,
+								], $id = 'blur') ?>
+								<h3>Blur</h3>
+								<?= img($imageName, $driver, $id) ?>
+							</column>
+						</grid>
+					</section>
+
+					<section>
+						<grid>
+							<column>
+								<?php createThumb($driver, $image, [
+									'format' => 'webp',
+								], $id = 'webp') ?>
+								<h3>WebP</h3>
+								<?= img($imageName, $driver, $id, 'webp') ?>
+							</column>
+							<?php if ($driver !== 'gd'): ?>
+							<column>
+								<?php createThumb($driver, $image, [
+									'format' => 'avif',
+								], $id = 'avif') ?>
+								<h3>AVIF</h3>
+								<?= img($imageName, $driver, $id, 'avif') ?>
+							</column>
+							<?php endif ?>
+						</grid>
+					</section>
+				</stack>
+			</imagetype>
 			<?php endforeach ?>
-		</grid>
-	</section>
+		</stack>
 
-	<section>
-		<h2>Cropping & Gravity (bottom right)</h2>
-		<?php
-
-		createThumbs($landscape, [
-			'crop'   => 'bottom right',
-			'width'  => 300,
-			'height' => 300
-		], 'crop-gravity');
-
-		?>
-		<grid>
-			<?php foreach ($drivers as $driver): ?>
-			<column>
-				<h3><?= $driver ?></h3>
-				<?= img('landscape', $driver, 'crop-gravity') ?>
-			</column>
-			<?php endforeach ?>
-		</grid>
-	</section>
-
-	<section>
-		<h2>Focus Point (25% 0%)</h2>
-		<?php
-
-		createThumbs($landscape, [
-			'crop'   => '25% 0%',
-			'width'  => 300,
-			'height' => 300
-		], 'crop-focuspoint');
-
-		?>
-		<grid>
-			<?php foreach ($drivers as $driver): ?>
-			<column>
-				<h3><?= $driver ?></h3>
-				<?= img('landscape', $driver, 'crop-focuspoint') ?>
-			</column>
-			<?php endforeach ?>
-		</grid>
-	</section>
-</stack>
+	</driver>
+	<?php endforeach ?>
+</drivers>
