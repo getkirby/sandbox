@@ -13,7 +13,7 @@ function createThumb(string $driverName, File $file, array $params, string $id)
 {
 	$settings = [
 		'im' => [
-			'bin' => '/opt/homebrew/bin/convert'
+			'bin' => kirby()->option('thumbs.bin', 'convert')
 		]
 	];
 
