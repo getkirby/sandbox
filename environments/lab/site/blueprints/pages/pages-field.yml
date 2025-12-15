@@ -40,6 +40,17 @@ tabs:
         type: pages
         layout: cards
 
+  picker:
+    fields:
+      pickerLayoutCards:
+        type: pages
+        picker:
+          layout: cards
+      pickerSizeLarge:
+        type: pages
+        picker:
+          size: large
+
   customImagePreview:
     label: Image Preview
     fields:
