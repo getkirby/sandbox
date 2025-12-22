@@ -33,7 +33,7 @@ dd {
 	<dt>UUID</dt>
 	<dd><?= $page->uuid() ?></dd>
 	<dt>UUID-URL</dt>
-	<dd><?= $page->uuid()->url() ?></dd>
+	<dd><?= $page->uuid()->toPermalink() ?></dd>
 	<dt>Language</dt>
 	<dd><?= $kirby->language()->code() ?></dd>
 </dl>
