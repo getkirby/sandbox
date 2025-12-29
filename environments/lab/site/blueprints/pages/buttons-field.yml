@@ -1,0 +1,102 @@
+title: Buttons
+
+tabs:
+  general:
+    fields:
+      buttons: true
+
+      simple:
+        type: buttons
+        buttons:
+          - text: Button A
+            link: https://getkirby.com
+          - text: Button B
+            link: https://getkirby.com
+          - text: Button C
+            link: https://getkirby.com
+
+      icons:
+        type: buttons
+        buttons:
+          - text: Button A
+            icon: heart
+            link: https://getkirby.com
+          - text: Button B
+            icon: star
+            link: https://getkirby.com
+          - text: Button C
+            icon: badge
+            link: https://getkirby.com
+
+      themes:
+        type: buttons
+        buttons:
+          - text: Button A
+            icon: check
+            link: https://getkirby.com
+            theme: positive
+          - text: Button B
+            icon: heart
+            link: https://getkirby.com
+            theme: negative
+          - text: Button C
+            icon: info
+            link: https://getkirby.com
+            theme: info
+
+      themesIcon:
+        type: buttons
+        buttons:
+          - text: Button A
+            icon: check
+            link: https://getkirby.com
+            theme: positive-icon
+          - text: Button B
+            icon: heart
+            link: https://getkirby.com
+            theme: negative-icon
+          - text: Button C
+            icon: info
+            link: https://getkirby.com
+            theme: info-icon
+
+  widths:
+    fields:
+      oneHalf1:
+        extends: fields/buttons/default
+        width: 1/2
+      oneHalf2:
+        extends: fields/buttons/default
+        width: 1/2
+      oneThird1:
+        extends: fields/buttons/default
+        width: 1/3
+      oneThird2:
+        extends: fields/buttons/default
+        width: 1/3
+      oneThird3:
+        extends: fields/buttons/default
+        width: 1/3
+      oneQuarter1:
+        extends: fields/buttons/default
+        width: 1/4
+      oneQuarter2:
+        extends: fields/buttons/default
+        width: 1/4
+      oneQuarter3:
+        extends: fields/buttons/default
+        width: 1/4
+      oneQuarter4:
+        extends: fields/buttons/default
+        width: 1/4
+
+  comparison:
+    fields:
+      buttonsForComparison:
+        type: buttons
+        buttons:
+          - text: Button
+        width: 1/2
+      textForComparison:
+        type: text
+        width: 1/2

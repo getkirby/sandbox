@@ -1,0 +1,8 @@
+type: buttons
+buttons:
+  - text: Button A
+    link: https://getkirby.com
+  - text: Button B
+    link: https://getkirby.com
+  - text: Button C
+    link: https://getkirby.com
