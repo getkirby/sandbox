@@ -1,27 +1,19 @@
 <?php
 
-return function ($kirby) {
+use Kirby\Panel\Controller\View\LoginViewController;
+
+return function () {
 	return [
 		'views' => [
 			'login' => [
-				'action'  => function () use ($kirby) {
-					$system = $kirby->system();
-					$status = $kirby->auth()->status();
-
-					return [
-						'component' => 'k-login-view',
-						'props'     => [
-							'methods' => array_keys($system->loginMethods()),
-							'pending' => [
-								'email'     => $status->email(),
-								'challenge' => $status->challenge()
-							],
-							'value' => [
-								'email'    => 'admin@getkirby.com',
-								'password' => '12345678'
-							]
-						],
-					];
+				'action'  => fn () => new class () extends LoginViewController {
+					public function value(): array
+					{
+						return [
+							'email'    => 'admin@getkirby.com',
+							'password' => '12345678'
+						];
+					}
 				}
 			]
 		]
