@@ -2,7 +2,7 @@
 
 <?php push('style') ?>
 body {
-    background-color: red;
+background-color: red;
 }
 <?php endpush() ?>
 
@@ -14,3 +14,5 @@ alert('Stacks are working');
 
 <h1>Stacks</h1>
 
+<?php push('header', 'Hello') ?>
+<?php push('header', 'World') ?>
