@@ -43,6 +43,13 @@ return [
 		'#6C5B7B' => 'Morning gloom',
 		'#355C7D' => 'Midnight rain',
 	],
+	'thumbs' => [
+		'srcsets' => [
+			'default' => [300, 600, 900, 1200],
+			'small'   => [200, 400],
+			'hero'    => [800, 1200, 1600, 2000],
+		]
+	],
 	'routes' => [
 		[
 			'pattern' => 'uploads',

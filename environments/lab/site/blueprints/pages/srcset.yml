@@ -1,0 +1,5 @@
+title: Srcset
+
+fields:
+  info:
+    text: Go to "{{ page.url }}" to test srcset results
