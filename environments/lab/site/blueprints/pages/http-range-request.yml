@@ -1,0 +1,5 @@
+title: HTTP Range Request
+
+fields:
+  info:
+    text: Go to "{{ page.url }}" to test srcset results
