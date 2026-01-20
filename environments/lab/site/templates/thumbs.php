@@ -75,6 +75,7 @@ h1, h2, h3, h4 {
 body {
 	padding: 1.5rem;
 	font-family: system-ui;
+	background: #efefef;
 }
 stack {
 	display: flex;
@@ -105,13 +106,14 @@ drivers {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-gap: 1.5rem;
+	margin-top: 3rem;
 }
 
 imagetype {
 	display: block;
-	border: 1px solid #dedede;
 	padding: 1.5rem;
 	border-radius: .5rem;
+	background: #fff;
 }
 
 
