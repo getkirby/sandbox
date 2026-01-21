@@ -56,7 +56,7 @@ $video = $page->file('test-video.mp4');
 		<h2>preload="metadata"</h2>
 		<figure>
 			<video controls preload="metadata">
-				<source src="<?= $video->mediaUrl() ?>" type="<?= $video->mime() ?>">
+				<source src="<?= $video->mediaUrl() ?>?id=<?= Str::random() ?>" type="<?= $video->mime() ?>">
 				Your browser doesn't support video playback.
 			</video>
 		</figure>
@@ -66,7 +66,7 @@ $video = $page->file('test-video.mp4');
 		<h2>preload="auto"</h2>
 		<figure>
 			<video controls autoplay muted loop preload="auto">
-				<source src="<?= $video->mediaUrl() ?>" type="<?= $video->mime() ?>">
+				<source src="<?= $video->mediaUrl() ?>?id=<?= Str::random() ?>" type="<?= $video->mime() ?>">
 				Your browser doesn't support video playback.
 			</video>
 		</figure>
@@ -76,7 +76,7 @@ $video = $page->file('test-video.mp4');
 		<h2>preload="none"</h2>
 		<figure>
 			<video controls preload="none">
-				<source src="<?= $video->mediaUrl() ?>" type="<?= $video->mime() ?>">
+				<source src="<?= $video->mediaUrl() ?>?id=<?= Str::random() ?>" type="<?= $video->mime() ?>">
 				Your browser doesn't support video playback.
 			</video>
 		</figure>
