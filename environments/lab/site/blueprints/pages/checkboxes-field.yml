@@ -35,6 +35,9 @@ tabs:
       optionsWithInfo:
         extends: fields/options/info
         type: checkboxes
+      optionsWithIcon:
+        extends: fields/options/icon
+        type: checkboxes
       optionsWithTranslatedLabel:
         extends: fields/options/translated
         type: checkboxes

@@ -35,6 +35,9 @@ tabs:
       optionsWithInfo:
         extends: fields/options/info
         type: radio
+      optionsWithIcon:
+        extends: fields/options/icon
+        type: radio
       optionsWithTranslatedLabel:
         extends: fields/options/translated
         type: radio

@@ -1,0 +1,13 @@
+options:
+  - value: a
+    text: Option A
+    info: This is the first option
+    icon: heart
+  - value: b
+    text: Option B
+    info: This is the second option
+    icon: badge
+  - value: c
+    text: Option C
+    info: This is the third option
+    icon: star
