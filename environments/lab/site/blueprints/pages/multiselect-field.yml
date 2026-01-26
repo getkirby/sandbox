@@ -34,6 +34,9 @@ tabs:
       optionsWithInfo:
         extends: fields/options/info
         type: multiselect
+      optionsWithIcon:
+        extends: fields/options/icon
+        type: multiselect
       optionsWithInfoAndSearchableInfo:
         extends: fields/options/info
         type: multiselect

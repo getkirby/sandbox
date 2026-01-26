@@ -34,6 +34,9 @@ tabs:
       optionsWithInfo:
         extends: fields/options/info
         type: tags
+      optionsWithIcon:
+        extends: fields/options/icon
+        type: tags
       optionsWithTranslatedLabel:
         extends: fields/options/translated
         type: tags
