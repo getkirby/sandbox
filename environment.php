@@ -1,6 +1,7 @@
 <?php
 
 use Kirby\Cms\App;
+use Kirby\Cms\LicenseType;
 use Kirby\Filesystem\Dir;
 use Kirby\Filesystem\F;
 
@@ -130,6 +131,10 @@ class Environment
 
 		// store the name of the environment for switching later
 		F::write($public . '/.environment', $environment);
+
+		App::instance()->system()->register(
+			license: LicenseType::Free->prefix()
+		);
 
 		return true;
 	}
