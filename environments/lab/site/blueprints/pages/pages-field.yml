@@ -16,6 +16,9 @@ tabs:
       help:
         type: pages
         help: This is some nice help
+      searchFalse:
+        type: pages
+        search: false
 
   validation:
     fields:

@@ -16,6 +16,9 @@ tabs:
       help:
         type: users
         help: This is some nice help
+      searchFalse:
+        type: users
+        search: false
 
   validation:
     fields:
