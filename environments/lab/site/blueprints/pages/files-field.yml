@@ -16,6 +16,9 @@ tabs:
       help:
         type: files
         help: This is some nice help
+      searchFalse:
+        type: files
+        search: false
 
   validation:
     fields:
