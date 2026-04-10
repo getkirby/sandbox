@@ -1,0 +1,20 @@
+title: Page Creation with custom fields custom options
+
+create:
+  fields:
+    fieldA:
+      required: false
+      help: This field is optional during creation
+    fieldB: true
+  status: listed
+
+fields:
+  fieldA:
+    type: text
+    label: Field A
+    required: true
+    help: This field is required on the page
+
+  fieldB:
+    type: text
+    label: Field B
