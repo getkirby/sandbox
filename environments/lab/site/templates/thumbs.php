@@ -8,6 +8,7 @@ use Kirby\Image\Gravity;
 $landscape = $page->image('landscape.jpg');
 $square    = $page->image('square.jpg');
 $portrait  = $page->image('portrait.jpg');
+$animated  = $page->image('animated.gif');
 
 function createThumb(string $driverName, File $file, array $params, string $id)
 {
@@ -57,7 +58,8 @@ $drivers = [
 $images = [
 	'landscape' => $landscape,
 	'portrait'  => $portrait,
-	'square'    => $square
+	'square'    => $square,
+	'animated'  => $animated
 ];
 
 $driver = 'im';
@@ -203,6 +205,8 @@ imagetype {
 						</grid>
 					</section>
 
+					<?php if ($imageName !== 'animated'): ?>
+
 					<section>
 						<grid>
 							<column>
@@ -223,9 +227,13 @@ imagetype {
 							<?php endif ?>
 						</grid>
 					</section>
+
+					<?php endif ?>
+
 				</stack>
 			</imagetype>
 			<?php endforeach ?>
+
 		</stack>
 
 	</driver>
