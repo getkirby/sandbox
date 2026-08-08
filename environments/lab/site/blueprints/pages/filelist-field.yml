@@ -1,0 +1,345 @@
+title: Filelist
+
+tabs:
+  list:
+    fields:
+      list:
+        type: filelist
+      listWithInfo:
+        type: filelist
+        info: "{{ file.dimensions }}"
+      listWithoutImage:
+        type: filelist
+        layout: list
+        image: false
+      listWithSearch:
+        type: filelist
+        search: true
+      listWithBatch:
+        type: filelist
+        batch: true
+      listWithoutCreate:
+        type: filelist
+        create: false
+
+  cardlets:
+    fields:
+      cardlets:
+        type: filelist
+        layout: cardlets
+      cardletsWithInfo:
+        type: filelist
+        layout: cardlets
+        info: "{{ file.dimensions }}"
+      cardletsWithoutImage:
+        type: filelist
+        layout: cardlets
+        image: false
+      cardletsWithSearch:
+        type: filelist
+        layout: cardlets
+        search: true
+      cardletsWithBatch:
+        type: filelist
+        layout: cardlets
+        batch: true
+      cardletsWithoutCreate:
+        type: filelist
+        layout: cardlets
+        create: false
+
+  cards:
+    fields:
+      cards:
+        type: filelist
+        layout: cards
+      cardsWithInfo:
+        type: filelist
+        layout: cards
+        info: "{{ file.dimensions }}"
+      cardsWithoutImage:
+        type: filelist
+        layout: cards
+        image: false
+      cardsWithSearch:
+        type: filelist
+        layout: cards
+        search: true
+      cardsWithBatch:
+        type: filelist
+        layout: cards
+        batch: true
+      cardsWithoutCreate:
+        type: filelist
+        layout: cards
+        create: false
+
+  table:
+    fields:
+      table:
+        type: filelist
+        layout: table
+      tableWithInfo:
+        type: filelist
+        layout: table
+        info: "{{ file.dimensions }}"
+      tableWithoutImage:
+        type: filelist
+        layout: table
+        image: false
+      tableWithSearch:
+        type: filelist
+        layout: table
+        search: true
+      tableWithBatch:
+        type: filelist
+        layout: table
+        batch: true
+      tableWithoutCreate:
+        type: filelist
+        layout: table
+        create: false
+
+  queries:
+    fields:
+      queryImages:
+        type: filelist
+        query: page.files.filterBy('type', 'image')
+      queryDocuments:
+        type: filelist
+        query: page.files.filterBy('type', 'document')
+
+  cardSizes:
+    fields:
+      cardsTiny:
+        type: filelist
+        layout: cards
+        size: tiny
+
+      cardsSmall:
+        type: filelist
+        layout: cards
+        size: small
+
+      cardsMedium:
+        type: filelist
+        layout: cards
+        size: medium
+
+      cardsLarge:
+        type: filelist
+        layout: cards
+        size: large
+
+  imageSettings:
+    fields:
+      cover:
+        type: filelist
+        layout: cards
+        image:
+          cover: true
+      backBlack:
+        type: filelist
+        layout: cards
+        image:
+          back: black
+      backWhite:
+        type: filelist
+        layout: cards
+        image:
+          back: white
+      ratio4by5:
+        type: filelist
+        layout: cards
+        image:
+          ratio: 4/5
+          cover: true
+      ratio16by9:
+        type: filelist
+        layout: cards
+        image:
+          ratio: 16/9
+          cover: true
+
+  invalid:
+    fields:
+      invalid:
+        type: filelist
+        template: does-not-exist
+        min: 2
+
+  pagination:
+    fields:
+      pagination:
+        type: filelist
+        limit: 1
+      paginationAndHelp:
+        type: filelist
+        limit: 1
+        help: This is some nice help for this files section
+      paginationWithSearch:
+        type: filelist
+        search: true
+        limit: 1
+      paginationWithPage:
+        type: filelist
+        limit: 1
+        page: 2
+
+  sorting:
+    fields:
+      unsortable:
+        type: filelist
+        sortable: false
+        help: The sorting option in the dropdown should be disabled as well.
+      sortBy:
+        type: filelist
+        sortBy: size desc
+        info: "{{ file.size }}"
+        help: Sorted by file size
+      flip:
+        type: filelist
+        flip: true
+
+  widths:
+    columns:
+      # list
+      - width: 1/2
+        fields:
+          oneHalf1:
+            type: filelist
+      - width: 1/2
+        fields:
+          oneHalf2:
+            type: filelist
+      - width: 1/3
+        fields:
+          oneThird1:
+            type: filelist
+      - width: 1/3
+        fields:
+          oneThird2:
+            type: filelist
+      - width: 1/3
+        fields:
+          oneThird3:
+            type: filelist
+      - width: 1/4
+        fields:
+          oneQuarter1:
+            type: filelist
+      - width: 1/4
+        fields:
+          oneQuarter2:
+            type: filelist
+      - width: 1/4
+        fields:
+          oneQuarter3:
+            type: filelist
+      - width: 1/4
+        fields:
+          oneQuarter4:
+            type: filelist
+
+      # cardlets
+      - width: 1/2
+        fields:
+          cardletsOneHalf1:
+            type: filelist
+            layout: cardlets
+      - width: 1/2
+        fields:
+          cardletsOneHalf2:
+            type: filelist
+            layout: cardlets
+      - width: 1/3
+        fields:
+          cardletsOneThird1:
+            type: filelist
+            layout: cardlets
+      - width: 1/3
+        fields:
+          cardletsOneThird2:
+            type: filelist
+            layout: cardlets
+      - width: 1/3
+        fields:
+          cardletsOneThird3:
+            type: filelist
+            layout: cardlets
+      - width: 1/4
+        fields:
+          cardletsOneQuarter1:
+            type: filelist
+            layout: cardlets
+      - width: 1/4
+        fields:
+          cardletsOneQuarter2:
+            type: filelist
+            layout: cardlets
+      - width: 1/4
+        fields:
+          cardletsOneQuarter3:
+            type: filelist
+            layout: cardlets
+      - width: 1/4
+        fields:
+          cardletsOneQuarter4:
+            type: filelist
+            layout: cardlets
+
+      # cards
+      - width: 1/2
+        fields:
+          cardsOneHalf1:
+            type: filelist
+            layout: cards
+            size: small
+      - width: 1/2
+        fields:
+          cardsOneHalf2:
+            type: filelist
+            layout: cards
+            size: small
+      - width: 1/3
+        fields:
+          cardsOneThird1:
+            type: filelist
+            layout: cards
+            size: small
+      - width: 1/3
+        fields:
+          cardsOneThird2:
+            type: filelist
+            layout: cards
+            size: small
+      - width: 1/3
+        fields:
+          cardsOneThird3:
+            type: filelist
+            layout: cards
+            size: small
+      - width: 1/4
+        fields:
+          cardsOneQuarter1:
+            type: filelist
+            layout: cards
+            size: small
+      - width: 1/4
+        fields:
+          cardsOneQuarter2:
+            type: filelist
+            layout: cards
+            size: small
+      - width: 1/4
+        fields:
+          cardsOneQuarter3:
+            type: filelist
+            layout: cards
+            size: small
+      - width: 1/4
+        fields:
+          cardsOneQuarter4:
+            type: filelist
+            layout: cards
+            size: small
