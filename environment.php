@@ -244,6 +244,10 @@ class Environment
 		Dir::remove($root . '/site/plugins/ray');
 		Dir::remove($root . '/site/sessions');
 
+		// the license is generated for the installation, not for the
+		// environment, which installing it will register again anyway
+		F::remove($root . '/site/config/.license');
+
 		// store the name of the environment for switching later
 		F::write($public . '/.environment', $environment);
 
