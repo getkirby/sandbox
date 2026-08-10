@@ -53,6 +53,11 @@ sections:
     type: pages
     template: page-creation-with-validating-custom-fields
 
+  customFieldsWithCustomOptions:
+    label: Create with custom options for custom fields
+    type: pages
+    template: page-creation-field-options
+
   customTitleAndSlug:
     label: Create with custom title and slug
     type: pages
