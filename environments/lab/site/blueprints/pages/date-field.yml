@@ -111,19 +111,31 @@ tabs:
       dateMin:
         type: date
         label: Min
-        min: "2022-01-01"
-        help: "min: 2022-01-01"
+        min: "2026-01-01"
+        help: "min: 2026-01-01"
       dateMax:
         type: date
         label: Max
-        max: "2022-01-01"
-        help: "max: 2022-01-01"
+        max: "2028-01-01"
+        help: "max: 2028-01-01"
       dateMinMax:
         type: date
         label: Min & max
-        min: "2022-01-01"
-        max: "2022-02-01"
-        help: "min: 2022-01-01 max: 2022-02-01"
+        min: "2026-01-01"
+        max: "2028-02-01"
+        help: "min: 2026-01-01 max: 2028-02-01"
+      dateMinFuture:
+        type: date
+        label: Min in the future
+        min: "2030-01-01"
+        help: "The placeholder of the empty field shows the earliest allowed date, not today"
+      dateTimeMinMax:
+        type: date
+        label: Min & max with time
+        time: true
+        min: "2022-01-01 08:00:00"
+        max: "2022-02-01 18:00:00"
+        help: "Boundaries carry a time part, the date input still has to read them"
 
   display:
     fields:
@@ -163,6 +175,48 @@ tabs:
         time:
           display: hh:mm:ss a
           notation: 12
+      displayEscaped:
+        type: date
+        label: Escaped text
+        display: "[Am] D. MMMM YYYY"
+        time:
+          display: HH[h]mm
+        help: "`Am` and `h` are printed as they are – never uppercased, read or selected"
+      displayVariableWidth:
+        type: date
+        label: Variable width
+        display: D. MMMM YYYY
+        help: "Tab through the parts and step them with ↑/↓ while the rendering grows and shrinks"
+
+  parsing:
+    fields:
+      parseMonthFirst:
+        type: date
+        label: Month first
+        display: MM/DD/YYYY
+        width: 1/2
+        help: "Type `05-03-2021` – May 3rd here, March 5th next to it"
+      parseDayFirst:
+        type: date
+        label: Day first
+        display: DD.MM.YYYY
+        width: 1/2
+        help: "The same input, read in this field's own format"
+      parseFree:
+        type: date
+        label: Free input
+        display: DD.MM.YYYY
+        help: "`5`, `5.3`, `5/3/21`, `02032024` – separators and padding are free"
+      parseInvalid:
+        type: date
+        label: Invalid input
+        display: DD.MM.YYYY
+        help: "Type `nonsense` and leave: the text stays and the field goes invalid. Enter must not save it"
+      parseEmpty:
+        type: date
+        label: Empty
+        display: MM/DD/YYYY
+        help: "↑/↓ in the empty field fills in today, the next press steps the selected month"
 
   steps:
     fields:

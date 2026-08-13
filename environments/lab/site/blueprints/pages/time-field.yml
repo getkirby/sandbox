@@ -54,6 +54,44 @@ tabs:
         step:
           unit: second
           size: 1
+      displayEscaped:
+        type: time
+        label: Escaped text
+        display: HH[h]mm
+        help: "French notation – the `h` is printed, never read as an hour marker"
+      displayVariableWidth:
+        type: time
+        label: Variable width
+        display: h:mm a
+        notation: 12
+        help: "The hour is one or two characters wide – Tab and ↑/↓ have to follow it"
+
+  parsing:
+    fields:
+      parseFree:
+        type: time
+        label: Free input
+        display: HH:mm
+        help: "`9`, `5:12`, `1234` – separators and padding are free"
+      parseMeridiem:
+        type: time
+        label: Meridiem
+        display: h:mm a
+        notation: 12
+        help: "Type `5:12 pm`, then ↑/↓ on `pm` – it toggles am/pm instead of stepping a day"
+      parseInvalid:
+        type: time
+        label: Invalid input
+        display: HH:mm
+        help: "Type `25:61` and leave: the text stays and the field goes invalid"
+      parseEmpty:
+        type: time
+        label: Empty
+        display: HH:mm
+        step:
+          unit: minute
+          size: 15
+        help: "↑/↓ in the empty field fills in now, rounded to the 15-minute step"
 
   step:
     fields:

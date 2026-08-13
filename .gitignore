@@ -5,6 +5,7 @@
 *.sublime-project
 *.sublime-workspace
 /.idea
+/.claude
 
 # public folder
 public
