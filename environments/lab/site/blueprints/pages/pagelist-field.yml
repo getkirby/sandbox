@@ -1,0 +1,450 @@
+title: Pagelist
+
+tabs:
+  list:
+    fields:
+      list:
+        type: pagelist
+        templates:
+          - page
+          - undeletable-page
+      listWithInfo:
+        type: pagelist
+        info: "{{ page.slug }}"
+        templates:
+          - page
+          - undeletable-page
+      listWithoutImage:
+        type: pagelist
+        layout: list
+        image: false
+        templates:
+          - page
+          - undeletable-page
+      listWithSearch:
+        type: pagelist
+        templates:
+          - page
+          - undeletable-page
+        search: true
+      listWithBatch:
+        type: pagelist
+        templates:
+          - page
+          - undeletable-page
+        batch: true
+
+  cardlets:
+    fields:
+      cardlets:
+        type: pagelist
+        layout: cardlets
+        templates:
+          - page
+          - undeletable-page
+      cardletsWithInfo:
+        type: pagelist
+        layout: cardlets
+        info: "{{ page.slug }}"
+        templates:
+          - page
+          - undeletable-page
+      cardletsWithoutImage:
+        type: pagelist
+        layout: cardlets
+        image: false
+        templates:
+          - page
+          - undeletable-page
+      cardletsWithSearch:
+        type: pagelist
+        layout: cardlets
+        templates:
+          - page
+          - undeletable-page
+        search: true
+      cardletsWithBatch:
+        type: pagelist
+        layout: cardlets
+        templates:
+          - page
+          - undeletable-page
+        batch: true
+
+  cards:
+    fields:
+      cards:
+        type: pagelist
+        layout: cards
+        templates:
+          - page
+          - undeletable-page
+      cardsWithInfo:
+        type: pagelist
+        layout: cards
+        info: "{{ page.slug }}"
+        templates:
+          - page
+          - undeletable-page
+      cardsWithoutImage:
+        type: pagelist
+        layout: cards
+        image: false
+        templates:
+          - page
+          - undeletable-page
+      cardsWithSearch:
+        type: pagelist
+        layout: cards
+        templates:
+          - page
+          - undeletable-page
+        search: true
+      cardsWithBatch:
+        type: pagelist
+        layout: cards
+        templates:
+          - page
+          - undeletable-page
+        batch: true
+
+  table:
+    fields:
+      table:
+        type: pagelist
+        layout: table
+        templates:
+          - page
+          - undeletable-page
+      tableWithInfo:
+        type: pagelist
+        layout: table
+        info: "{{ page.slug }}"
+        templates:
+          - page
+          - undeletable-page
+      tableWithoutImage:
+        type: pagelist
+        layout: table
+        image: false
+        templates:
+          - page
+          - undeletable-page
+      tableWithoutTitle:
+        type: pagelist
+        layout: table
+        text: false
+        templates:
+          - page
+          - undeletable-page
+        info: "{{ page.slug }}"
+      tableWithSearch:
+        type: pagelist
+        layout: table
+        templates:
+          - page
+          - undeletable-page
+        search: true
+      tableWithBatch:
+        type: pagelist
+        layout: table
+        templates:
+          - page
+          - undeletable-page
+        batch: true
+      tableWithCustomDefaultColumns:
+        type: pagelist
+        layout: table
+        templates:
+          - page
+          - undeletable-page
+        text: "Custom {{ page.title }}"
+        info: "{{ page.slug }}"
+        columns:
+          title:
+            label: Custom Title
+          info:
+            label: Custom Slug
+            width: 10rem
+            mobile: true
+      tableWithCustomDefaultColumnValues:
+        type: pagelist
+        layout: table
+        templates:
+          - page
+          - undeletable-page
+        columns:
+          title:
+            value: Custom Title Value
+            type: text
+          info:
+            value: Custom Info Value
+
+  queries:
+    fields:
+      queryDrafts:
+        type: pagelist
+        query: page.drafts
+      queryListed:
+        type: pagelist
+        query: page.children.filterBy('status', 'listed')
+
+  cardSizes:
+    fields:
+      cardsTiny:
+        type: pagelist
+        layout: cards
+        size: tiny
+        templates:
+          - page
+          - undeletable-page
+
+      cardsSmall:
+        type: pagelist
+        layout: cards
+        size: small
+        templates:
+          - page
+          - undeletable-page
+
+      cardsMedium:
+        type: pagelist
+        layout: cards
+        size: medium
+        templates:
+          - page
+          - undeletable-page
+
+      cardsLarge:
+        type: pagelist
+        layout: cards
+        size: large
+        templates:
+          - page
+          - undeletable-page
+
+  imageSettings:
+    fields:
+      cover:
+        type: pagelist
+        layout: cards
+        image:
+          cover: true
+        templates:
+          - page
+          - undeletable-page
+      backBlack:
+        type: pagelist
+        layout: cards
+        image:
+          back: black
+        templates:
+          - page
+          - undeletable-page
+      backWhite:
+        type: pagelist
+        layout: cards
+        image:
+          back: white
+        templates:
+          - page
+          - undeletable-page
+      ratio4by5:
+        type: pagelist
+        layout: cards
+        image:
+          ratio: 4/5
+          cover: true
+        templates:
+          - page
+          - undeletable-page
+      ratio16by9:
+        type: pagelist
+        layout: cards
+        image:
+          ratio: 16/9
+          cover: true
+        templates:
+          - page
+          - undeletable-page
+  invalid:
+    fields:
+      invalid:
+        type: pagelist
+        min: 2
+        template: does-not-exist
+
+  pagination:
+    fields:
+      pagination:
+        type: pagelist
+        limit: 1
+      paginationAndHelp:
+        type: pagelist
+        limit: 1
+        help: This is some nice help for this pagelist field
+      paginationWithSearch:
+        type: pagelist
+        search: true
+        limit: 1
+      paginationWithPage:
+        type: pagelist
+        limit: 1
+        page: 2
+
+  sorting:
+    fields:
+      unsortable:
+        type: pagelist
+        sortable: false
+      sortBy:
+        type: pagelist
+        sortBy: uuid desc
+        info: "{{ page.uuid }}"
+        help: Sorted by uuid
+      flip:
+        type: pagelist
+        flip: true
+
+  widths:
+    columns:
+      # list
+      - width: 1/2
+        fields:
+          oneHalf1:
+            type: pagelist
+      - width: 1/2
+        fields:
+          oneHalf2:
+            type: pagelist
+      - width: 1/3
+        fields:
+          oneThird1:
+            type: pagelist
+      - width: 1/3
+        fields:
+          oneThird2:
+            type: pagelist
+      - width: 1/3
+        fields:
+          oneThird3:
+            type: pagelist
+      - width: 1/4
+        fields:
+          oneQuarter1:
+            type: pagelist
+      - width: 1/4
+        fields:
+          oneQuarter2:
+            type: pagelist
+      - width: 1/4
+        fields:
+          oneQuarter3:
+            type: pagelist
+      - width: 1/4
+        fields:
+          oneQuarter4:
+            type: pagelist
+
+      # cardlets
+      - width: 1/2
+        fields:
+          cardletsOneHalf1:
+            type: pagelist
+            layout: cardlets
+      - width: 1/2
+        fields:
+          cardletsOneHalf2:
+            type: pagelist
+            layout: cardlets
+      - width: 1/3
+        fields:
+          cardletsOneThird1:
+            type: pagelist
+            layout: cardlets
+      - width: 1/3
+        fields:
+          cardletsOneThird2:
+            type: pagelist
+            layout: cardlets
+      - width: 1/3
+        fields:
+          cardletsOneThird3:
+            type: pagelist
+            layout: cardlets
+      - width: 1/4
+        fields:
+          cardletsOneQuarter1:
+            type: pagelist
+            layout: cardlets
+      - width: 1/4
+        fields:
+          cardletsOneQuarter2:
+            type: pagelist
+            layout: cardlets
+      - width: 1/4
+        fields:
+          cardletsOneQuarter3:
+            type: pagelist
+            layout: cardlets
+      - width: 1/4
+        fields:
+          cardletsOneQuarter4:
+            type: pagelist
+            layout: cardlets
+
+      # cards
+      - width: 1/2
+        fields:
+          cardsOneHalf1:
+            type: pagelist
+            layout: cards
+            size: small
+      - width: 1/2
+        fields:
+          cardsOneHalf2:
+            type: pagelist
+            layout: cards
+            size: small
+      - width: 1/3
+        fields:
+          cardsOneThird1:
+            type: pagelist
+            layout: cards
+            size: small
+      - width: 1/3
+        fields:
+          cardsOneThird2:
+            type: pagelist
+            layout: cards
+            size: small
+      - width: 1/3
+        fields:
+          cardsOneThird3:
+            type: pagelist
+            layout: cards
+            size: small
+      - width: 1/4
+        fields:
+          cardsOneQuarter1:
+            type: pagelist
+            layout: cards
+            size: small
+      - width: 1/4
+        fields:
+          cardsOneQuarter2:
+            type: pagelist
+            layout: cards
+            size: small
+      - width: 1/4
+        fields:
+          cardsOneQuarter3:
+            type: pagelist
+            layout: cards
+            size: small
+      - width: 1/4
+        fields:
+          cardsOneQuarter4:
+            type: pagelist
+            layout: cards
+            size: small
