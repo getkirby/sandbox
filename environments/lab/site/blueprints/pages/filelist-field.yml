@@ -176,7 +176,7 @@ tabs:
       paginationAndHelp:
         type: filelist
         limit: 1
-        help: This is some nice help for this files section
+        help: This is some nice help for this filelist field
       paginationWithSearch:
         type: filelist
         search: true
