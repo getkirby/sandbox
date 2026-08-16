@@ -56,15 +56,15 @@ tabs:
           size: 1
       displayEscaped:
         type: time
-        label: Escaped text
+        label: Escaped display text
         display: HH[h]mm
-        help: "French notation – the `h` is printed, never read as an hour marker"
+        help: "French notation: the `h` is printed, never read as an hour marker"
       displayVariableWidth:
         type: time
-        label: Variable width
+        label: Variable hour width
         display: h:mm a
         notation: 12
-        help: "The hour is one or two characters wide – Tab and ↑/↓ have to follow it"
+        help: "The hour is one or two characters wide. Tab and ↑/↓ have to follow it"
 
   parsing:
     fields:

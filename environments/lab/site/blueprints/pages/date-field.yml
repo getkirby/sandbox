@@ -177,14 +177,14 @@ tabs:
           notation: 12
       displayEscaped:
         type: date
-        label: Escaped text
+        label: Escaped display text
         display: "[Am] D. MMMM YYYY"
         time:
           display: HH[h]mm
         help: "`Am` and `h` are printed as they are – never uppercased, read or selected"
       displayVariableWidth:
         type: date
-        label: Variable width
+        label: Variable month name width
         display: D. MMMM YYYY
         help: "Tab through the parts and step them with ↑/↓ while the rendering grows and shrinks"
 
