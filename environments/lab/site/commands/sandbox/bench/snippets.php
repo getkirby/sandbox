@@ -1,16 +1,13 @@
 <?php
 
 use Kirby\CLI\CLI;
-use SebastianBergmann\Timer\ResourceUsageFormatter;
-use SebastianBergmann\Timer\Timer;
 
 return [
+	'description' => 'Benchmark snippets',
 	'command' => function (CLI $cli) {
 		$iterations = 1000;
 		$progress   = $cli->lightBlue()->progress()->total($iterations);
-
-		$timer = new Timer;
-		$timer->start();
+		$start      = hrtime(true);
 
 		$page = page('benchmarks/snippets');
 
@@ -20,8 +17,6 @@ return [
 			$page->render();
 		}
 
-		$result = (new ResourceUsageFormatter)->resourceUsage($timer->stop());
-
-		$cli->out('Bench: ' . $result);
+		$cli->out('Bench: ' . bench($start));
 	}
 ];

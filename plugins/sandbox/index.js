@@ -2,28 +2,17 @@ panel.plugin("getkirby/sandbox", {
 	components: {
 		"k-environments-view": {
 			props: {
+				buttons: Array,
 				environments: Array,
+				title: String,
 			},
 			template: `
 				<k-panel-inside class="k-environments-view">
-					<k-header class="k-users-view-header">
-						Sandbox
+					<k-header>
+						{{ title }}
 
 						<template #buttons>
-							<k-button
-								:link="$panel.urls.site"
-								target="_blank"
-								icon="open"
-								size="sm"
-								variant="filled"
-							 />
-							<k-button
-								dialog="environments/create"
-								icon="add"
-								text="New environment"
-								size="sm"
-								variant="filled"
-							 />
+							<k-view-buttons :buttons="buttons" />
 						</template>
 					</k-header>
 
