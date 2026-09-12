@@ -1,0 +1,11 @@
+title: Breadcrumb
+
+sections:
+  children:
+    type: pages
+    label: With a protected ancestor
+    query: page.children.children
+    info: "{{ page.parent.slug }}"
+    layout: list
+    image: false
+    create: false
