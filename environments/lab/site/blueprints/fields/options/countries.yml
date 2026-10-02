@@ -1,5 +1,5 @@
 options:
   type: api
-  url: "{{ site.file('countries.json').url }}"
+  url: "{{ site.file('countries.json').root }}"
   text: "{{ item.name }}"
   value: "{{ item.alpha2 }}"
