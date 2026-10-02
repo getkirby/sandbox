@@ -1,0 +1,11 @@
+title: Ancestor without list
+
+options:
+  list:
+    editor: false
+    client: false
+
+sections:
+  children:
+    type: pages
+    create: false
