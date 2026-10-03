@@ -1,0 +1,10 @@
+title: "Page status: Listed page, but blueprint has no listed status"
+
+status:
+  draft:
+    label: Idea
+    icon: 💡
+  unlisted:
+    label: In review
+    icon: preview
+    theme: purple

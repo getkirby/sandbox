@@ -1,0 +1,18 @@
+title: "Page status: Label, text, icon and theme"
+
+status:
+  draft:
+    label: Idea
+    text: Only an idea so far
+    icon: bolt
+    theme: notice
+  unlisted:
+    label: In review
+    text: Waiting for an editor
+    icon: preview
+    theme: purple
+  listed:
+    label: Published
+    text: Visible for everyone
+    icon: globe
+    theme: positive

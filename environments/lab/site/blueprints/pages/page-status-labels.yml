@@ -1,0 +1,12 @@
+title: "Page status: Custom labels"
+
+status:
+  draft:
+    label: Idea
+    text: Only an idea so far
+  unlisted:
+    label: In review
+    text: Waiting for an editor
+  listed:
+    label: Published
+    text: Visible for everyone
