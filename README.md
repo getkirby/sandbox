@@ -61,6 +61,18 @@ In practice, you will probably need to change branches of the kirby submodule qu
 
 When the submodule shows up as untracked, you can right click on it in Tower and select `Mark > Set Assume Unchanged`
 
+### Switching between Kirby 5 and 6
+
+```console
+kirby sandbox:switch v6
+kirby sandbox:switch v5
+```
+
+This checks out the matching branches of the sandbox (`main`/`feat/v6`), the kirby submodule (`develop-minor`/`v6/develop`) and the demokit (`main`/`v6`), reinstalls the active environment and runs `npm i` in `kirby/panel` if the panel dependencies changed. All affected repos need to be free of uncommitted changes.
+
+> [!CAUTION]
+> Reinstalling the environment will delete all unstored content, accounts and sessions in your sandbox.
+
 ### Storing the current state
 
 If you want to store the changes inside the environment, you can use the "Store" buttons in the environment UI.

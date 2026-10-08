@@ -18,6 +18,7 @@ App::plugin('getkirby/sandbox', [
 	],
 	'commands' => [
 		'sandbox:create:changes' => require __DIR__ . '/commands/create/changes.php',
-		'sandbox:create:users'   => require __DIR__ . '/commands/create/users.php'
+		'sandbox:create:users'   => require __DIR__ . '/commands/create/users.php',
+		'sandbox:switch'         => require __DIR__ . '/commands/switch.php'
 	]
 ]);
