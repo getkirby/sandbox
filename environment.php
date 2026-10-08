@@ -69,19 +69,23 @@ class Environment
 	}
 
 	/**
-	 * Checks if the current environment is healthy
+	 * Checks if the current environment is healthy and
+	 * (re)installs the active environment if the site is missing
+	 * (falls back to the lab if there's no usable active environment)
 	 */
 	public static function healthcheck(): void
 	{
-		$active      = static::active();
-		$contentRoot = __DIR__ . '/public/content';
-		$siteRoot    = __DIR__ . '/public/site';
-
-		if ($active !== '' || is_dir($contentRoot) || is_dir($siteRoot)) {
+		if (is_dir(__DIR__ . '/public/site') === true) {
 			return;
 		}
 
-		static::install('lab');
+		$active = static::active();
+
+		if ($active === '' || static::exists($active) === false) {
+			$active = 'lab';
+		}
+
+		static::install($active);
 	}
 
 	/**
