@@ -108,6 +108,10 @@ return [
 			$cli->out(($repo === '.' ? 'sandbox' : $repo) . ' → ' . $branch);
 		}
 
+		// the running dev server belongs to the previous version,
+		// so the panel must not try to load assets from it anymore
+		F::remove($root . '/kirby/panel/.vite-running');
+
 		// reset the public folder, but keep the
 		// .environment file to reinstall the same environment
 		foreach (['assets', 'content', 'media', 'site'] as $dir) {
@@ -135,10 +139,9 @@ return [
 			if ($code !== 0) {
 				throw new Exception('npm i failed in kirby/panel');
 			}
-
-			$cli->info('Panel dependencies changed. Please restart `npm run dev`');
 		}
 
 		$cli->success('Switched to Kirby ' . substr($version, 1));
+		$cli->info('Please restart `npm run dev` in kirby/panel');
 	}
 ];
