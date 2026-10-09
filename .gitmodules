@@ -9,6 +9,7 @@
 [submodule "environments/plainkit"]
 	path = environments/plainkit
 	url = https://github.com/getkirby/plainkit.git
+	ignore = all
 [submodule "environments/demokit"]
 	path = environments/demokit
 	url = https://github.com/getkirby/demokit.git
