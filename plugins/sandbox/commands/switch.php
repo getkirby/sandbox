@@ -101,8 +101,7 @@ return [
 			throw new Exception('Nothing has been switched');
 		}
 
-		$kirbyHead   = $git('kirby', 'rev-parse HEAD')['output'][0];
-		$environment = trim(F::read($public . '/.environment') ?: '');
+		$kirbyHead = $git('kirby', 'rev-parse HEAD')['output'][0];
 
 		// switch all repos
 		foreach ($todo as $repo => $branch) {
@@ -114,13 +113,15 @@ return [
 		// so the panel must not try to load assets from it anymore
 		F::remove($root . '/kirby/panel/.vite-running');
 
-		// reset the public folder, but keep the
-		// .environment file to reinstall the same environment
+		// reset the public folder and mark the lab
+		// as the environment to install
 		foreach (['assets', 'content', 'media', 'site'] as $dir) {
 			Dir::remove($public . '/' . $dir);
 		}
 
-		// reinstall the environment in a fresh process with the
+		F::write($public . '/.environment', 'lab');
+
+		// install the lab in a fresh process with the
 		// new Kirby version (the health check takes care of it)
 		$bin    = realpath($_SERVER['argv'][0]);
 		$result = $run(
@@ -128,7 +129,7 @@ return [
 			command: escapeshellarg(PHP_BINARY) . ' ' . escapeshellarg($bin) . ' version'
 		);
 
-		$cli->out('Reinstalled the ' . ($environment ?: 'lab') . ' environment');
+		$cli->out('Installed the lab environment');
 		$cli->out('Kirby ' . trim(implode(' ', $result['output'])));
 
 		// install panel dependencies if they changed

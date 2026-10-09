@@ -68,7 +68,7 @@ kirby sandbox:switch v6
 kirby sandbox:switch v5
 ```
 
-This checks out the matching branches of the sandbox (`main`/`feat/v6`), the kirby submodule (`develop-minor`/`v6/develop`) and the demokit (`main`/`v6`), reinstalls the active environment, always removes `kirby/panel/.vite-running` and runs `npm i` in `kirby/panel` if the panel dependencies changed. Restart `npm run dev` afterwards. All affected repos need to be free of uncommitted changes.
+This checks out the matching branches of the sandbox (`main`/`feat/v6`), the kirby submodule (`develop-minor`/`v6/develop`), the demokit and the starterkit (`main`/`v6`), installs the lab environment, always removes `kirby/panel/.vite-running` and runs `npm i` in `kirby/panel` if the panel dependencies changed. Restart `npm run dev` afterwards. All affected repos need to be free of uncommitted changes.
 
 > [!CAUTION]
 > Reinstalling the environment will delete all unstored content, accounts and sessions in your sandbox.
