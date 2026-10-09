@@ -5,12 +5,15 @@
 [submodule "environments/starterkit"]
 	path = environments/starterkit
 	url = https://github.com/getkirby/starterkit.git
+	ignore = all
 [submodule "environments/plainkit"]
 	path = environments/plainkit
 	url = https://github.com/getkirby/plainkit.git
 [submodule "environments/demokit"]
 	path = environments/demokit
 	url = https://github.com/getkirby/demokit.git
+	ignore = all
 [submodule "environments/plugin-staticache/site/plugins/staticache"]
 	path = environments/plugin-staticache/site/plugins/staticache
 	url = https://github.com/getkirby/staticache.git
+	ignore = all
