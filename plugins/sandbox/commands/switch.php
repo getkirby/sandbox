@@ -13,14 +13,16 @@ return [
 	'command' => function ($cli) {
 		$branches = [
 			'v5' => [
-				'.'                    => 'main',
-				'kirby'                => 'develop-minor',
-				'environments/demokit' => 'main'
+				'.'                       => 'main',
+				'kirby'                   => 'develop-minor',
+				'environments/demokit'    => 'main',
+				'environments/starterkit' => 'main'
 			],
 			'v6' => [
-				'.'                    => 'feat/v6',
-				'kirby'                => 'v6/develop',
-				'environments/demokit' => 'v6'
+				'.'                       => 'feat/v6',
+				'kirby'                   => 'v6/develop',
+				'environments/demokit'    => 'v6',
+				'environments/starterkit' => 'v6'
 			]
 		];
 

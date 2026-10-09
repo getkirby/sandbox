@@ -1,0 +1,6 @@
+title: "Page status: Only draft and listed"
+
+status:
+  draft: true
+  listed:
+    icon: globe

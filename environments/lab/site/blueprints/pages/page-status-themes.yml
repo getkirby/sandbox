@@ -1,0 +1,9 @@
+title: "Page status: Custom themes"
+
+status:
+  draft:
+    theme: notice
+  unlisted:
+    theme: purple
+  listed:
+    theme: aqua

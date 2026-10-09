@@ -1,0 +1,9 @@
+title: "Page status: Custom icons"
+
+status:
+  draft:
+    icon: edit
+  unlisted:
+    icon: hidden
+  listed:
+    icon: globe

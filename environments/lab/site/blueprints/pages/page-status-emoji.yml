@@ -1,0 +1,12 @@
+title: "Page status: Emoji icons"
+
+status:
+  draft:
+    label: Idea
+    icon: 💡
+  unlisted:
+    label: In review
+    icon: 👀
+  listed:
+    label: Published
+    icon: 🚀
