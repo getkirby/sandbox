@@ -1,7 +1,7 @@
 options:
   a:
-    *: option.a
+    "*": option.a
   b:
-    *: option.b
+    "*": option.b
   c:
-    *: option.c
+    "*": option.c
