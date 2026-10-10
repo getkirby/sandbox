@@ -1,8 +1,8 @@
 title: Breadcrumb
 
-sections:
+fields:
   children:
-    type: pages
+    type: pagelist
     label: With a protected ancestor
     query: page.children.children
     info: "{{ page.parent.slug }}"

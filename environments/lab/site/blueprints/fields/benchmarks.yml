@@ -1,6 +1,6 @@
 label: Benchmarks
 parent: page('benchmarks')
-type: pages
+type: pagelist
 layout: list
 image: false
 create: false

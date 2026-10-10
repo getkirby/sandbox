@@ -5,6 +5,6 @@ tabs:
       bio:
         type: textarea
   files:
-    sections:
+    fields:
       files:
-        type: files
+        type: filelist

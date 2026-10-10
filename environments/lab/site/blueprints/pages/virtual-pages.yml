@@ -1,6 +1,6 @@
 title: Virtual Pages
 
-sections:
+fields:
   pages:
-    type: pages
+    type: pagelist
     label: Examples

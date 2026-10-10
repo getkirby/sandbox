@@ -1,6 +1,6 @@
 label: Other
 parent: page('other')
-type: pages
+type: pagelist
 layout: list
 image: false
 create: false

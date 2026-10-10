@@ -1,5 +1,5 @@
 title: Animals
 
-sections:
+fields:
   children:
-    type: pages
+    type: pagelist

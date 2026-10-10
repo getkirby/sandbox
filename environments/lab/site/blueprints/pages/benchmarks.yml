@@ -1,4 +1,4 @@
 title: Benchmarks
 
-sections:
-  benchmarks: sections/benchmarks
+fields:
+  benchmarks: fields/benchmarks

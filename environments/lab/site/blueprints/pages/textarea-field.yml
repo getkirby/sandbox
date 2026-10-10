@@ -33,16 +33,13 @@ tabs:
         help: Some help text
 
   uploads:
-    sections:
-      uploadFields:
-        type: fields
-        fields:
-          upload:
-            type: textarea
-            label: Drop files here
+    fields:
+      upload:
+        type: textarea
+        label: Drop files here
       uploadFiles:
         label: All uploaded files
-        type: files
+        type: filelist
 
   buttons:
     fields:

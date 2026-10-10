@@ -1,8 +1,8 @@
 title: Page Table
 
-sections:
+fields:
   table:
-    type: pages
+    type: pagelist
     layout: table
     image: false
     limit: 100

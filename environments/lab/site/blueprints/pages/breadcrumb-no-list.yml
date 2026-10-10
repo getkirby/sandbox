@@ -5,7 +5,7 @@ options:
     editor: false
     client: false
 
-sections:
+fields:
   children:
-    type: pages
+    type: pagelist
     create: false

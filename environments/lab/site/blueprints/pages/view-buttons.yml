@@ -16,7 +16,7 @@ buttons:
     praise: Awesome job!
   settings: true
 
-sections:
+fields:
   info:
     type: info
     text: See the custom view button for giving some applause on the top right

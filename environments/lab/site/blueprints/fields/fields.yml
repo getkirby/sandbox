@@ -1,6 +1,6 @@
 label: Fields
 parent: page('fields')
-type: pages
+type: pagelist
 layout: list
 image: false
 limit: 50

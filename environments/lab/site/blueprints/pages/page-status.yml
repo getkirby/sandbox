@@ -1,76 +1,76 @@
 title: Page Status
 
-sections:
+fields:
   info:
     type: info
     text: Open a page to check the status button and the change status dialog
 
   default:
     label: Default
-    type: pages
+    type: pagelist
     template: page-status-default
     layout: list
     image: false
 
   labels:
     label: Custom labels
-    type: pages
+    type: pagelist
     template: page-status-labels
     layout: list
     image: false
 
   icons:
     label: Custom icons
-    type: pages
+    type: pagelist
     template: page-status-icons
     layout: list
     image: false
 
   emoji:
     label: Emoji icons
-    type: pages
+    type: pagelist
     template: page-status-emoji
     layout: list
     image: false
 
   themes:
     label: Custom themes
-    type: pages
+    type: pagelist
     template: page-status-themes
     layout: list
     image: false
 
   workflow:
     label: Label, text, icon and theme
-    type: pages
+    type: pagelist
     template: page-status-workflow
     layout: list
     image: false
 
   two:
     label: Only draft and listed
-    type: pages
+    type: pagelist
     template: page-status-two
     layout: list
     image: false
 
   fallback:
     label: Listed page, but blueprint has no listed status
-    type: pages
+    type: pagelist
     template: page-status-fallback
     layout: list
     image: false
 
   workflowCards:
     label: Label, text, icon and theme (cards)
-    type: pages
+    type: pagelist
     template: page-status-workflow
     layout: cards
     image: false
 
   workflowTable:
     label: Label, text, icon and theme (table)
-    type: pages
+    type: pagelist
     template: page-status-workflow
     layout: table
     image: false

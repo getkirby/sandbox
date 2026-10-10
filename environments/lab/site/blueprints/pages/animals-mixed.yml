@@ -1,5 +1,5 @@
 title: Animals (mixed)
 
-sections:
+fields:
   children:
-    type: pages
+    type: pagelist

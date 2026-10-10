@@ -4,12 +4,12 @@ tabs:
   overview:
     columns:
       - width: 1/2
-        sections:
-          fields: sections/fields
+        fields:
+          fields: fields/fields
       - width: 1/2
-        sections:
-          other: sections/other
-          benchmarks: sections/benchmarks
+        fields:
+          other: fields/other
+          benchmarks: fields/benchmarks
   content:
     label: Site Content
     fields:
@@ -19,6 +19,6 @@ tabs:
         type: textarea
   files:
     label: Site Files
-    sections:
+    fields:
       files:
-        type: files
+        type: filelist

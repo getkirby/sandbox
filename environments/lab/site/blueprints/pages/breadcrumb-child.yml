@@ -1,5 +1,5 @@
 title: Visible child
 
-sections:
+fields:
   files:
-    type: files
+    type: filelist

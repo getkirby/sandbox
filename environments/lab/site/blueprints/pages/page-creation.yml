@@ -1,88 +1,88 @@
 title: Page Creation
 
-sections:
+fields:
   simpleFields:
     label: Simple custom fields
-    type: pages
+    type: pagelist
     template: page-creation-simple-fields
 
   titleLabel:
     label: Custom title field label
-    type: pages
+    type: pagelist
     template: page-creation-title-label
 
   noRedirect:
     label: No redirect after creation
-    type: pages
+    type: pagelist
     template: page-creation-no-redirect
 
   statusListed:
     label: Create as listed
-    type: pages
+    type: pagelist
     template: page-creation-status-listed
 
   statusListedRequired:
     label: Create as listed with required fields
-    type: pages
+    type: pagelist
     template: page-creation-status-listed-required
 
   statusListedFiltered:
     label: Create as listed in section only showing listed
-    type: pages
+    type: pagelist
     status: listed
     template: page-creation-status-listed
 
   statusUnlisted:
     label: Create as unlisted
-    type: pages
+    type: pagelist
     template: page-creation-status-unlisted
 
   statusUnlistedFiltered:
     label: Create as unlisted in section only showing unlisted
-    type: pages
+    type: pagelist
     status: unlisted
     template: page-creation-status-unlisted
 
   defaultValues:
     label: Create with default values
-    type: pages
+    type: pagelist
     template: page-creation-with-default-values
 
   validateCustomFields:
     label: Create with validating custom fields
-    type: pages
+    type: pagelist
     template: page-creation-with-validating-custom-fields
 
   customTitleAndSlug:
     label: Create with custom title and slug
-    type: pages
+    type: pagelist
     template: page-creation-with-custom-title-and-slug
 
   customTitleAndSlugWithUUIDs:
     label: Create with UUIDs in custom title and slug
-    type: pages
+    type: pagelist
     template: page-creation-with-uuids
 
   statusDraftFilteredListed:
     label: Create draft in section only showing listed (should not show Add button)
-    type: pages
+    type: pagelist
     status: listed
 
   statusListedFilteredUnlisted:
     label: Create listed in section only showing unlisted (should not show Add button)
-    type: pages
+    type: pagelist
     status: unlisted
     template: page-creation-status-listed
 
   statusUnlistedFilteredListed:
     label: Create unlisted in section only showing listed (should not show Add button)
-    type: pages
+    type: pagelist
     status: listed
     template: page-creation-status-unlisted
 
   statusListedUnlistedFilteredListed:
     label: Create listed or unlisted in section only showing listed (should not show Add button)
-    type: pages
+    type: pagelist
     status: listed
     templates:
       - page-creation-status-listed

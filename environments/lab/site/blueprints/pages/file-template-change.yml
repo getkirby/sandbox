@@ -2,14 +2,14 @@ title: File Template Change
 
 columns:
   - width: 1/2
-    sections:
+    fields:
       filesWithTemplateA:
         label: Files with Template A
-        type: files
+        type: filelist
         template: file-template-a
   - width: 1/2
-    sections:
+    fields:
       filesWithTemplateB:
         label: Files with Template B
-        type: files
+        type: filelist
         template: file-template-b
