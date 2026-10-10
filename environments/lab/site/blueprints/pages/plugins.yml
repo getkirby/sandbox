@@ -2,11 +2,11 @@ title: Plugins
 
 tabs:
   extends:
-    sections:
-      customSectionExtendsString:
-        type: extends-string
-        text: This section is extended referencing a component name
+    fields:
+      customFieldExtendsString:
+        type: extendsstring
+        text: This field is extended referencing a component name
         icon: check
         theme: positive
-      customSectionExtendsSfc:
-        type: extends-sfc
+      customFieldExtendsSfc:
+        type: extendssfc

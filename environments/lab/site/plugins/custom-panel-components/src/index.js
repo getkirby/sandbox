@@ -1,12 +1,12 @@
-import Section from "./Section.vue";
+import Field from "./Field.vue";
 
 panel.plugin("plugins/custom-panel-components", {
-	sections: {
-		"extends-string": {
-			extends: "k-info-section",
+	fields: {
+		extendsstring: {
+			extends: "k-info-field",
 		},
-		"extends-sfc": {
-			extends: Section,
+		extendssfc: {
+			extends: Field,
 		},
 	},
 });
