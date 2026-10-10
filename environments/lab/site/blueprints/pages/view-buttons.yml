@@ -14,7 +14,7 @@ buttons:
     theme: purple
     text: Praise
     praise: Awesome job!
-  - settings
+  settings: true
 
 sections:
   info:
