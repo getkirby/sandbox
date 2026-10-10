@@ -124,6 +124,88 @@ tabs:
         extends: fields/info/text
         width: 1/4
 
+  columns:
+    columns:
+      - width: 1/2
+        fields:
+          columnOneHalf1:
+            extends: fields/info/long
+      - width: 1/2
+        fields:
+          columnOneHalf2:
+            extends: fields/info/long
+
+      - width: 1/3
+        fields:
+          columnOneThird1:
+            extends: fields/info/long
+      - width: 1/3
+        fields:
+          columnOneThird2:
+            extends: fields/info/long
+      - width: 1/3
+        fields:
+          columnOneThird3:
+            extends: fields/info/long
+
+      - width: 1/4
+        fields:
+          columnOneQuarter1:
+            extends: fields/info/long
+      - width: 1/4
+        fields:
+          columnOneQuarter2:
+            extends: fields/info/long
+      - width: 1/4
+        fields:
+          columnOneQuarter3:
+            extends: fields/info/long
+      - width: 1/4
+        fields:
+          columnOneQuarter4:
+            extends: fields/info/long
+
+      # text
+
+      - width: 1/2
+        fields:
+          columnTextOneHalf1:
+            extends: fields/info/text
+      - width: 1/2
+        fields:
+          columnTextOneHalf2:
+            extends: fields/info/text
+
+      - width: 1/3
+        fields:
+          columnTextOneThird1:
+            extends: fields/info/text
+      - width: 1/3
+        fields:
+          columnTextOneThird2:
+            extends: fields/info/text
+      - width: 1/3
+        fields:
+          columnTextOneThird3:
+            extends: fields/info/text
+
+      - width: 1/4
+        fields:
+          columnTextOneQuarter1:
+            extends: fields/info/text
+      - width: 1/4
+        fields:
+          columnTextOneQuarter2:
+            extends: fields/info/text
+      - width: 1/4
+        fields:
+          columnTextOneQuarter3:
+            extends: fields/info/text
+      - width: 1/4
+        fields:
+          columnTextOneQuarter4:
+            extends: fields/info/text
+
   icons:
     fields:
       infoIcon:
