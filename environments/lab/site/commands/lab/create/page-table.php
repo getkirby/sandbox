@@ -3,7 +3,7 @@
 use Kirby\Data\Data;
 
 return [
-	'description' => 'Create random pages to test the performance of the table layout for the pages section',
+	'description' => 'Create random pages to test the performance of the table layout for the pagelist field',
 	'command' => function ($cli) {
 
 		$kirby = $cli->kirby();

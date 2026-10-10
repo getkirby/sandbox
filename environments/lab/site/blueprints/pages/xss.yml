@@ -9,30 +9,30 @@ tabs:
         text: |
           The examples in this tab would immediately trigger alert boxes when visiting the page (please reload to verify).
           <span style="color: var(--color-red-700)">Red text</span> must not appear, <span style="color: var(--color-green-700)">green text</span> is expected.
+      headline1:
+        label: Collection fields
+        type: headline
       pagelist1:
-        label: Collection section (defaults)
+        label: Pagelist (defaults)
         type: pagelist
       pagelist2:
-        label: Collection section (custom queries)
+        label: Pagelist (custom queries)
         type: pagelist
         text: "{{ page.title }}"
         info: "{{ page.title }}"
         help: "{{ page.title }}"
       pagelist3:
-        label: Collection section (custom HTML queries)
+        label: Pagelist (custom HTML queries)
         type: pagelist
         text: "{< page.safestring >}"
         info: "{< page.safestring >}"
-      headline1:
-        label: Collection fields
-        type: headline
       pages1:
-        label: Collection field (defaults)
+        label: Pagepicker (defaults)
         type: pages
         query: site.find('other/xss')
         width: 1/3
       pages2:
-        label: Collection field (custom queries)
+        label: Pagepicker (custom queries)
         type: pages
         query: site.find('other/xss')
         text: "{{ page.title }}"
@@ -40,7 +40,7 @@ tabs:
         help: "{{ page.title }}"
         width: 1/3
       pages3:
-        label: Collection field (custom HTML queries)
+        label: Pagepicker (custom HTML queries)
         type: pages
         query: site.find('other/xss')
         text: "{< page.safestring >}"
@@ -532,12 +532,12 @@ tabs:
       info5:
         label: Usage
         type: info
-        text: Do what the help text for each section/field says.
+        text: Do what the help text for each field says.
       headline9:
         label: Collection fields
         type: headline
       pages4:
-        label: Collection field (defaults)
+        label: Pagepicker (defaults)
         type: pages
         query: site.find('other/xss')
         help: |
@@ -545,7 +545,7 @@ tabs:
           **Expected result:** HTML must *not* have been rendered in the dialog
         width: 1/3
       pages5:
-        label: Collection field (custom queries)
+        label: Pagepicker (custom queries)
         type: pages
         query: site.find('other/xss')
         text: "{{ page.title }}"
@@ -555,7 +555,7 @@ tabs:
           **Expected result:** HTML must *not* have been rendered in the dialog
         width: 1/3
       pages6:
-        label: Collection field (custom HTML queries)
+        label: Pagepicker (custom HTML queries)
         type: pages
         query: site.find('other/xss')
         text: "{< page.safestring >}"

@@ -27,7 +27,7 @@ fields:
     template: page-creation-status-listed-required
 
   statusListedFiltered:
-    label: Create as listed in section only showing listed
+    label: Create as listed in a list of listed pages
     type: pagelist
     status: listed
     template: page-creation-status-listed
@@ -38,7 +38,7 @@ fields:
     template: page-creation-status-unlisted
 
   statusUnlistedFiltered:
-    label: Create as unlisted in section only showing unlisted
+    label: Create as unlisted in a list of unlisted pages
     type: pagelist
     status: unlisted
     template: page-creation-status-unlisted
@@ -64,24 +64,24 @@ fields:
     template: page-creation-with-uuids
 
   statusDraftFilteredListed:
-    label: Create draft in section only showing listed (should not show Add button)
+    label: Create as draft in a list of listed pages (should not show Add button)
     type: pagelist
     status: listed
 
   statusListedFilteredUnlisted:
-    label: Create listed in section only showing unlisted (should not show Add button)
+    label: Create as listed in a list of unlisted pages (should not show Add button)
     type: pagelist
     status: unlisted
     template: page-creation-status-listed
 
   statusUnlistedFilteredListed:
-    label: Create unlisted in section only showing listed (should not show Add button)
+    label: Create as unlisted in a list of listed pages (should not show Add button)
     type: pagelist
     status: listed
     template: page-creation-status-unlisted
 
   statusListedUnlistedFilteredListed:
-    label: Create listed or unlisted in section only showing listed (should not show Add button)
+    label: Create as listed or unlisted in a list of listed pages (should not show Add button)
     type: pagelist
     status: listed
     templates:
