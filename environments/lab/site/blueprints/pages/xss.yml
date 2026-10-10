@@ -9,32 +9,20 @@ tabs:
         text: |
           The examples in this tab would immediately trigger alert boxes when visiting the page (please reload to verify).
           <span style="color: var(--color-red-700)">Red text</span> must not appear, <span style="color: var(--color-green-700)">green text</span> is expected.
-      pages1:
+      pagelist1:
         label: Collection section (defaults)
         type: pages
-      pages2:
+      pagelist2:
         label: Collection section (custom queries)
         type: pages
         text: "{{ page.title }}"
         info: "{{ page.title }}"
         help: "{{ page.title }}"
-      pages3:
+      pagelist3:
         label: Collection section (custom HTML queries)
         type: pages
         text: "{< page.safestring >}"
         info: "{< page.safestring >}"
-      info2:
-        label: Info section (hardcoded text)
-        type: info
-        text: '<strong style="color: var(--color-green-700)">This is OK</strong>'
-      info3:
-        label: Info section (custom query)
-        type: info
-        text: "{{ page.children.first.title }}"
-      info4:
-        label: Info section (custom HTML query)
-        type: info
-        text: "{< page.children.first.safestring >}"
       fields1:
         type: fields
         fields:
@@ -524,19 +512,19 @@ tabs:
             type: text
             help: "{< page.children.first.safestring >}"
             width: 1/3
-          info1:
+          info2:
             label: Info field (with hardcoded text and help)
             type: info
             text: '<strong style="color: var(--color-green-700)">This is OK</strong>'
             help: '<strong style="color: var(--color-green-700)">This is OK</strong>'
             width: 1/3
-          info2:
+          info3:
             label: Info field (with queries in text and help)
             type: info
             text: "{{ page.children.first.title }}"
             help: "{{ page.children.first.title }}"
             width: 1/3
-          info3:
+          info4:
             label: Info field (with HTML queries in text and help)
             type: info
             text: "{< page.children.first.safestring >}"
