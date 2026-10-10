@@ -55,16 +55,16 @@ tabs:
   sizes:
     fields:
       small:
-        extends: sections/stats
+        extends: fields/stats/default
         size: small
       medium:
-        extends: sections/stats
+        extends: fields/stats/default
         size: medium
       large:
-        extends: sections/stats
+        extends: fields/stats/default
         size: large
       huge:
-        extends: sections/stats
+        extends: fields/stats/default
         size: huge
 
   widths:

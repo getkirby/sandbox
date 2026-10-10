@@ -1,7 +1,0 @@
-label: Sections
-parent: page('sections')
-type: pages
-layout: list
-image: false
-create: false
-limit: 50
