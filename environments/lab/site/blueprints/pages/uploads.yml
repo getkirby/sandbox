@@ -11,8 +11,7 @@ tabs:
 
   filePicker:
     fields:
-      files:
-        type: files
+      filepicker: true
       filePickerFiles:
         type: filelist
         batch: true
@@ -32,8 +31,7 @@ tabs:
       structure:
         type: structure
         fields:
-          files:
-            type: files
+          filepicker: true
       structureFiles:
         type: filelist
         batch: true

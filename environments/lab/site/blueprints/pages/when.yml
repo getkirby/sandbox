@@ -84,6 +84,6 @@ tabs:
         type: toggle
       uploadField:
         label: Upload an image
-        type: files
+        type: filepicker
         when:
           uploadToggle: true

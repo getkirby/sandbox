@@ -69,8 +69,7 @@ tabs:
       nestedFiles:
         type: structure
         fields:
-          files:
-            type: files
+          filepicker: true
 
   sorting:
     fields:
@@ -131,9 +130,9 @@ tabs:
         fields:
           date: true
           email: true
-          files: true
+          filepicker: true
           list: true
-          pages: true
+          pagepicker: true
           tags: true
       columnPreviewsB:
         type: structure
@@ -141,7 +140,7 @@ tabs:
           time: true
           toggle: true
           url: true
-          users: true
+          userpicker: true
           writer: true
       columnPreviewsC:
         type: structure

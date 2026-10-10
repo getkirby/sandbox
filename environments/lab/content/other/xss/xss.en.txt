@@ -201,7 +201,7 @@ Toggle4: false
 Structure:
 
 - 
-  pages:
+  pagepicker:
     - page://FgbmZTko9JE0u1Q1
 
 ----

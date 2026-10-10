@@ -28,12 +28,12 @@ tabs:
         info: "{< page.safestring >}"
       pages1:
         label: Pagepicker (defaults)
-        type: pages
+        type: pagepicker
         query: site.find('other/xss')
         width: 1/3
       pages2:
         label: Pagepicker (custom queries)
-        type: pages
+        type: pagepicker
         query: site.find('other/xss')
         text: "{{ page.title }}"
         info: "{{ page.title }}"
@@ -41,7 +41,7 @@ tabs:
         width: 1/3
       pages3:
         label: Pagepicker (custom HTML queries)
-        type: pages
+        type: pagepicker
         query: site.find('other/xss')
         text: "{< page.safestring >}"
         info: "{< page.safestring >}"
@@ -476,7 +476,7 @@ tabs:
         type: headline
       structure:
         fields:
-          pages:
+          pagepicker:
             query: site.find('other/xss')
       headline5:
         label: Writer field with malicious stored content
@@ -538,7 +538,7 @@ tabs:
         type: headline
       pages4:
         label: Pagepicker (defaults)
-        type: pages
+        type: pagepicker
         query: site.find('other/xss')
         help: |
           **Task:** Click the "Select" button
@@ -546,7 +546,7 @@ tabs:
         width: 1/3
       pages5:
         label: Pagepicker (custom queries)
-        type: pages
+        type: pagepicker
         query: site.find('other/xss')
         text: "{{ page.title }}"
         info: "{{ page.title }}"
@@ -556,7 +556,7 @@ tabs:
         width: 1/3
       pages6:
         label: Pagepicker (custom HTML queries)
-        type: pages
+        type: pagepicker
         query: site.find('other/xss')
         text: "{< page.safestring >}"
         info: "{< page.safestring >}"
