@@ -1,0 +1,4 @@
+fields:
+  test:
+    label: Field with dialogs and drawers
+    type: dialogsdrawers
