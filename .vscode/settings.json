@@ -14,6 +14,7 @@
     },
     "oxc.path.oxfmt": "kirby/panel/node_modules/.bin/oxfmt",
     "eslint.workingDirectories": ["./kirby/panel"],
+    "vitest.rootConfig": "kirby/panel/vite.config.js",
     "phpunit.command": "composer --working-dir=${workspaceFolder}/kirby test -- ${phpunitargs}",
     "phpunit.args": ["--configuration=${workspaceFolder}/kirby/phpunit.dist.xml"],
     "phpunit.environment": {
