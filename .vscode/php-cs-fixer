@@ -1,0 +1,24 @@
+#!/bin/sh
+
+# php-cs-fixer for the VS Code extension, using the config and
+# pinned version of the repository that contains the saved file
+
+# the extension fails on empty as well as on multi-line stderr output
+echo >&2
+
+root=$(git rev-parse --show-toplevel 2>/dev/null)
+version=$(grep -o 'friendsofphp/php-cs-fixer:[0-9.]*' "$root/composer.json" 2>/dev/null | head -1 | cut -d: -f2)
+
+# leave files untouched in repositories without a php-cs-fixer setup
+if [ -z "$version" ] || [ ! -f "$root/.php-cs-fixer.dist.php" ]; then
+	echo '{"files":[]}'
+	exit 0
+fi
+
+binary="$HOME/.cpx/friendsofphp/php-cs-fixer/$version/vendor/bin/php-cs-fixer"
+
+if [ ! -x "$binary" ]; then
+	cpx "friendsofphp/php-cs-fixer:$version" --version > /dev/null
+fi
+
+cd "$root" && exec "$binary" "$@" --config=.php-cs-fixer.dist.php 2> /dev/null

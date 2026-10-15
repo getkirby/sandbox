@@ -1,6 +1,7 @@
 {
     "recommendations": [
         "dbaeumer.vscode-eslint",
+        "junstyle.php-cs-fixer",
         "oxc.oxc-vscode",
         "recca0120.vscode-phpunit",
         "vitest.explorer"
