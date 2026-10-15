@@ -3,6 +3,13 @@
         "environments": true
     },
     "editor.formatOnSave": true,
+    "intelephense.format.enable": false,
+    "[php]": {
+        "editor.defaultFormatter": "junstyle.php-cs-fixer"
+    },
+    "php-cs-fixer.executablePath": "${workspaceFolder}/.vscode/php-cs-fixer",
+    "php-cs-fixer.config": "",
+    "php-cs-fixer.rules": "",
     "[javascript]": {
         "editor.defaultFormatter": "oxc.oxc-vscode"
     },
