@@ -15,6 +15,11 @@ class ThumbsPage extends Page
 	 */
 	protected const BUDGET = 20;
 
+	/**
+	 * Largest acceptable difference of a frame to its reference
+	 */
+	protected const DIFFERENCE = 0.1;
+
 	protected const FORMATS = ['jpg', 'png', 'gif', 'webp', 'avif'];
 
 	protected const GD = [
@@ -25,16 +30,19 @@ class ThumbsPage extends Page
 		'webp' => IMG_WEBP,
 	];
 
+	/**
+	 * Crop positions with their ImageMagick gravity
+	 */
 	protected const GRAVITIES = [
-		'top left',
-		'top',
-		'top right',
-		'left',
-		'center',
-		'right',
-		'bottom left',
-		'bottom',
-		'bottom right',
+		'top left'     => 'NorthWest',
+		'top'          => 'North',
+		'top right'    => 'NorthEast',
+		'left'         => 'West',
+		'center'       => 'Center',
+		'right'        => 'East',
+		'bottom left'  => 'SouthWest',
+		'bottom'       => 'South',
+		'bottom right' => 'SouthEast',
 	];
 
 	protected const MIMES = [
@@ -97,7 +105,7 @@ class ThumbsPage extends Page
 		$crop    = [];
 		$formats = [];
 
-		foreach (static::GRAVITIES as $gravity) {
+		foreach (array_keys(static::GRAVITIES) as $gravity) {
 			$crop[Str::slug($gravity)] = [
 				'crop'   => $gravity,
 				'width'  => 300,
@@ -166,6 +174,56 @@ class ThumbsPage extends Page
 	}
 
 	/**
+	 * Most different frame of a thumb compared to its reference
+	 */
+	protected function difference(
+		File $file,
+		array $options,
+		array $data,
+		string $dir
+	): array|null {
+		// a blur differs by design
+		if (($options['blur'] ?? false) !== false || class_exists('Imagick') === false) {
+			return null;
+		}
+
+		$reference = $this->reference($file, $options, $data, $dir);
+
+		if ($reference === null) {
+			return null;
+		}
+
+		// JPG fills transparency with black
+		$back   = $this->format($file, $options) === 'jpg' ? '#000000' : '#ff00ff';
+		$worst  = ['value' => 0, 'frame' => 1];
+
+		try {
+			$thumb  = (new Imagick($dir . '/' . $data['file']))->coalesceImages();
+			$expect = new Imagick($reference);
+			$frames = min($thumb->getNumberImages(), $expect->getNumberImages());
+
+			for ($i = 0; $i < $frames; $i++) {
+				$a = $this->flatten($thumb, $i, $back);
+				$b = $this->flatten($expect, $i, $back);
+
+				if ($a->getImageGeometry() !== $b->getImageGeometry()) {
+					continue;
+				}
+
+				$value = $a->compareImages($b, Imagick::METRIC_ROOTMEANSQUAREDERROR)[1];
+
+				if ($value > $worst['value']) {
+					$worst = ['value' => round($value, 4), 'frame' => $i + 1];
+				}
+			}
+		} catch (Throwable) {
+			return null;
+		}
+
+		return $worst;
+	}
+
+	/**
 	 * Drivers, filtered by `?driver=`
 	 */
 	public function drivers(): array
@@ -228,6 +286,22 @@ class ThumbsPage extends Page
 		]));
 
 		return $this->environment;
+	}
+
+	/**
+	 * Single frame on a solid background
+	 */
+	protected function flatten(Imagick $image, int $index, string $back): Imagick
+	{
+		$image->setIteratorIndex($index);
+
+		$frame = $image->getImage();
+		$frame->setImagePage(0, 0, 0, 0);
+		$frame->setImageBackgroundColor($back);
+		$frame = $frame->mergeImageLayers(Imagick::LAYERMETHOD_FLATTEN);
+		$frame->transformImageColorspace(Imagick::COLORSPACE_SRGB);
+
+		return $frame;
 	}
 
 	/**
@@ -320,6 +394,10 @@ class ThumbsPage extends Page
 		};
 
 		$data['ms'] = round((hrtime(true) - $start) / 1e6);
+
+		if (isset($data['file']) === true) {
+			$data['difference'] = $this->difference($file, $options, $data, $dir);
+		}
 
 		F::write($dir . '/meta.json', json_encode($data, JSON_INVALID_UTF8_SUBSTITUTE));
 
@@ -419,6 +497,12 @@ class ThumbsPage extends Page
 			$info['frames'] > 1
 		) {
 			$issues[] = 'stills, not an animation: browsers show frame 1 only';
+		}
+
+		$difference = $info['difference'] ?? null;
+
+		if ($difference !== null && $difference['value'] > static::DIFFERENCE) {
+			$issues[] = 'frame ' . $difference['frame'] . ' differs from the source by ' . round($difference['value'] * 100) . '%';
 		}
 
 		if ($expected['stray'] !== []) {
@@ -559,6 +643,47 @@ class ThumbsPage extends Page
 	}
 
 	/**
+	 * Expected frames, built from the source with the ImageMagick CLI
+	 */
+	protected function reference(
+		File $file,
+		array $options,
+		array $data,
+		string $dir
+	): string|null {
+		$root = dirname($dir) . '/reference.miff';
+
+		if (is_file($root) === true) {
+			return $root;
+		}
+
+		$size = $data['width'] . 'x' . $data['height'];
+		$args = [escapeshellarg($file->root()), '-auto-orient', '-coalesce'];
+
+		if (is_string($options['crop'] ?? null) === true) {
+			$args[] = '-resize ' . escapeshellarg($size . '^');
+			$args[] = '-gravity ' . static::GRAVITIES[$options['crop']];
+			$args[] = '-extent ' . $size;
+		} else {
+			$args[] = '-resize ' . escapeshellarg($size . '!');
+		}
+
+		if (($options['grayscale'] ?? false) === true) {
+			$args[] = '-colorspace gray';
+		}
+
+		$args[] = '-colorspace sRGB +repage';
+
+		exec(
+			escapeshellarg($this->bin()) . ' ' . implode(' ', $args) . ' ' . escapeshellarg($root) . ' 2>/dev/null',
+			$output,
+			$code
+		);
+
+		return $code === 0 && is_file($root) === true ? $root : null;
+	}
+
+	/**
 	 * Thumb with its inspection and issues
 	 */
 	protected function result(
@@ -583,8 +708,9 @@ class ThumbsPage extends Page
 			];
 		}
 
-		$info     = $this->inspect($root);
-		$expected = [
+		$info               = $this->inspect($root);
+		$info['difference'] = $data['difference'] ?? null;
+		$expected           = [
 			'format' => $format,
 			'width'  => $data['width'],
 			'height' => $data['height'],

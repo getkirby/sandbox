@@ -205,6 +205,9 @@ h3.k-label { margin-top: var(--spacing-6); }
 							· <?= $result['info']['frames'] ?? '?' ?> fr
 							· <?= F::niceSize($result['info']['bytes']) ?>
 							· <?= $result['ms'] ?> ms
+							<?php if (($result['difference'] ?? null) !== null): ?>
+							· Δ <?= round($result['difference']['value'] * 100, 1) ?>%
+							<?php endif ?>
 						</p>
 						<?php endif ?>
 						<?php foreach ($result['issues'] as $issue): ?>
