@@ -1,0 +1,13 @@
+Sort: 6
+
+----
+
+Template: thumbs-source
+
+----
+
+Description: JPG stored sideways with EXIF orientation 6: the arrow must point up, red corner top left
+
+----
+
+Cases: crop, resize, formats, pipeline

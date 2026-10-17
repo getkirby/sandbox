@@ -1,0 +1,13 @@
+Sort: 8
+
+----
+
+Template: thumbs-source
+
+----
+
+Description: JPG in CMYK: colors must match the landscape image
+
+----
+
+Cases: resize, formats

@@ -1,0 +1,13 @@
+Sort: 10
+
+----
+
+Template: thumbs-source
+
+----
+
+Description: Static GIF on a transparent background: the full canvas must stay
+
+----
+
+Cases: resize, formats, pipeline

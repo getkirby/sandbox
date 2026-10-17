@@ -1,0 +1,13 @@
+Sort: 14
+
+----
+
+Template: thumbs-source
+
+----
+
+Description: Animated GIF, 16 layer-optimized frames: the ball moves right, the bar grows
+
+----
+
+Cases: crop, resize, effects, formats, pipeline

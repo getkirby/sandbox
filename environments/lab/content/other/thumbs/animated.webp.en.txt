@@ -1,0 +1,13 @@
+Sort: 16
+
+----
+
+Template: thumbs-source
+
+----
+
+Description: Animated WebP, 16 frames with partial updates
+
+----
+
+Cases: crop, resize, formats

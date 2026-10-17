@@ -1,0 +1,13 @@
+Sort: 2
+
+----
+
+Template: thumbs-source
+
+----
+
+Description: JPG, portrait
+
+----
+
+Cases: crop, resize, effects, formats, pipeline
