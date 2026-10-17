@@ -1,0 +1,23 @@
+title: Thumbs source
+
+accept:
+  type: image
+
+fields:
+  description:
+    label: Description
+    type: text
+    help: What to look for in the thumbs of this source
+  cases:
+    label: Cases
+    type: tags
+    accept: options
+    options:
+      crop: Crop gravities
+      resize: Resize
+      effects: Effects
+      formats: Output formats
+      pipeline: Kirby pipeline
+    default:
+      - resize
+      - formats

@@ -1,6 +1,25 @@
 title: Thumbs
 
-fields:
+sections:
   info:
-    text: Go to "{{ page.url }}" to test thumb results
-
+    type: fields
+    fields:
+      info:
+        type: info
+        text: Go to "{{ page.url }}" to test thumb results. Every image uploaded here becomes a source.
+  sources:
+    label: Sources
+    type: files
+    template: thumbs-source
+    layout: table
+    columns:
+      description:
+        width: 5/12
+      cases:
+        type: tags
+        width: 1/4
+      playground:
+        type: html
+        align: center
+        width: 1/12
+        value: '<a href="{{ file.parent.url }}?source={{ file.filename }}" target="_blank" title="Open in the playground"><svg class="k-icon" data-type="preview" style="--icon-size: 14px"><use href="#icon-preview"></use></svg></a>'

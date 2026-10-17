@@ -1,0 +1,13 @@
+Sort: 11
+
+----
+
+Template: thumbs-source
+
+----
+
+Description: WebP source
+
+----
+
+Cases: resize, formats

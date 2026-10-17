@@ -1,0 +1,13 @@
+Sort: 3
+
+----
+
+Template: thumbs-source
+
+----
+
+Description: JPG, square
+
+----
+
+Cases: crop, resize, effects, formats, pipeline

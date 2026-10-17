@@ -1,0 +1,13 @@
+Sort: 15
+
+----
+
+Template: thumbs-source
+
+----
+
+Description: Animated GIF on a transparent background: the spinner must stay centered
+
+----
+
+Cases: crop, resize, formats, pipeline

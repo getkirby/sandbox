@@ -1,0 +1,13 @@
+Sort: 13
+
+----
+
+Template: thumbs-source
+
+----
+
+Description: Animated GIF, 2 frames: the second only covers the changed area
+
+----
+
+Cases: crop, resize, effects, formats, pipeline

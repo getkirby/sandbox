@@ -1,0 +1,13 @@
+Sort: 12
+
+----
+
+Template: thumbs-source
+
+----
+
+Description: AVIF source
+
+----
+
+Cases: resize, formats

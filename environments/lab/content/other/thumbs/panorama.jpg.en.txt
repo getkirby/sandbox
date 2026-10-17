@@ -1,0 +1,13 @@
+Sort: 4
+
+----
+
+Template: thumbs-source
+
+----
+
+Description: JPG, 7:1 panorama
+
+----
+
+Cases: crop, resize

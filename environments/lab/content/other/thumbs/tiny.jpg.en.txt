@@ -1,0 +1,13 @@
+Sort: 5
+
+----
+
+Template: thumbs-source
+
+----
+
+Description: JPG, 80×60: must never be upscaled
+
+----
+
+Cases: crop, resize, formats

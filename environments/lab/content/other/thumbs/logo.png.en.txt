@@ -1,0 +1,13 @@
+Sort: 9
+
+----
+
+Template: thumbs-source
+
+----
+
+Description: PNG with alpha channel and a soft shadow: transparency and the full canvas must stay
+
+----
+
+Cases: crop, resize, formats, pipeline
