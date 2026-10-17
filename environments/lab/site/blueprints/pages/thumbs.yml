@@ -1,15 +1,12 @@
 title: Thumbs
 
-sections:
+fields:
   info:
-    type: fields
-    fields:
-      info:
-        type: info
-        text: Go to "{{ page.url }}" to test thumb results. Every image uploaded here becomes a source.
+    type: info
+    text: Go to "{{ page.url }}" to test thumb results. Every image uploaded here becomes a source.
   sources:
     label: Sources
-    type: files
+    type: filelist
     template: thumbs-source
     layout: table
     columns:
