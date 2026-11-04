@@ -1,0 +1,18 @@
+type: filter
+fields:
+  title:
+    label: Title
+    type: text
+  status:
+    label: Status
+    type: select
+    options:
+      draft: Draft
+      unlisted: Unlisted
+      listed: Listed
+  date:
+    label: Date
+    type: date
+  views:
+    label: Views
+    type: number
