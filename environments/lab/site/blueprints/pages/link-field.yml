@@ -23,6 +23,11 @@ tabs:
       disabledWithValue:
         type: link
         disabled: true
+      overflow:
+        type: link
+        options:
+          - file
+          - page
       help:
         type: link
         help: Some help text
