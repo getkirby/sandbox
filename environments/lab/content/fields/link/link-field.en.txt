@@ -6,4 +6,25 @@ Disabledwithvalue: https://getkirby.com
 
 ----
 
+Overflow: file://longFilenameLnk1
+
+----
+
+Structurepreview:
+
+-
+  link: page://longTitlePageLnk
+-
+  link: file://longFilenameLnk1
+-
+  link: https://getkirby.com/a/very/long/url/to/test/how/the/link/field/preview/handles/overflow
+
+----
+
+Objectpreview:
+
+link: file://longFilenameLnk1
+
+----
+
 Uuid: Asy6coS3Iq7VOsNB
