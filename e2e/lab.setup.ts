@@ -3,8 +3,11 @@ import { authFile } from "../playwright.config.ts";
 
 setup("install the lab environment", async ({ request }) => {
 	const response = await request.get("/env/install/lab");
-	expect(response.ok()).toBe(true);
-	expect(await response.text()).toContain("has been installed");
+	const body = await response.text();
+
+	// show the server's response if the installation fails
+	expect(response.ok(), body).toBe(true);
+	expect(body).toContain("has been installed");
 });
 
 setup("authenticate as admin", async ({ page }) => {
