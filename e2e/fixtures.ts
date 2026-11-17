@@ -168,6 +168,20 @@ export const expectWidths = async (page: Page) => {
 export const field = (page: Page, name: string) =>
 	page.locator(`.k-field-name-${name.toLowerCase()}`).first();
 
+/**
+ * Runs the tests of the current describe block in their own
+ * session, signed in as the given user. Tests that change
+ * passwords or switch accounts renew the session token, which
+ * would otherwise sign out the session shared by all tests.
+ */
+export const isolatedSession = (email: string) => {
+	test.use({ storageState: { cookies: [], origins: [] } });
+
+	test.beforeEach(async ({ page }) => {
+		await page.goto(`/env/auth/${email}?panel`);
+	});
+};
+
 export const heading = (page: Page, name: string, level: number) =>
 	page.getByRole("main").getByRole("heading", { exact: true, level, name });
 

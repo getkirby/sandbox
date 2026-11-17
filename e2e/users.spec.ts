@@ -1,6 +1,6 @@
 import { cpSync, readdirSync, rmSync } from "node:fs";
 import type { Page } from "@playwright/test";
-import { expect, heading, test } from "./fixtures.ts";
+import { expect, heading, isolatedSession, test } from "./fixtures.ts";
 
 const source = "environments/lab/site/accounts";
 const target = "public/site/accounts";
@@ -61,20 +61,6 @@ const create = async (
 		.getAttribute("href");
 
 	return href!.split("/").pop()!;
-};
-
-/**
- * Runs the tests of the current describe block in their own
- * session, signed in as the given user. Tests that change
- * passwords or switch accounts renew the session token, which
- * would otherwise sign out the session shared by all tests.
- */
-const isolatedSession = (email: string) => {
-	test.use({ storageState: { cookies: [], origins: [] } });
-
-	test.beforeEach(async ({ page }) => {
-		await page.goto(`/env/auth/${email}?panel`);
-	});
 };
 
 /**
