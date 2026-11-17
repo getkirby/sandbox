@@ -24,6 +24,9 @@ export default defineConfig({
 	use: {
 		baseURL: process.env.SANDBOX_URL ?? "https://sandbox.test",
 		ignoreHTTPSErrors: true,
+		// DOM snapshots in the trace viewer cannot render the Panel's
+		// external icon sprite, real screenshots can
+		screenshot: "on",
 		trace: "on-first-retry"
 	},
 	// all tests share the same sandbox installation
