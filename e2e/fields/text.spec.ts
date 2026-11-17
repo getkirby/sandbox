@@ -3,6 +3,7 @@ import {
 	expectWidths,
 	field,
 	heading,
+	invalid,
 	tab,
 	test,
 	textbox
@@ -104,25 +105,23 @@ test.describe("validation", () => {
 
 	test("validates required fields", async ({ page }) => {
 		const required = field(page, "required");
-		const invalid = required.locator(".k-label-invalid");
 
 		await expect(required.getByTitle("The field is required")).toBeAttached();
-		await expect(invalid).toBeVisible();
+		await expect(invalid(page, "required")).toBeVisible();
 
 		await textbox(page, "required").fill("Kirby");
-		await expect(invalid).toBeHidden();
+		await expect(invalid(page, "required")).toBeHidden();
 	});
 
 	test("validates the minimum length", async ({ page }) => {
 		const minlength = field(page, "minlength");
 		const input = textbox(page, "minlength");
-		const invalid = minlength.locator(".k-label-invalid");
 
 		// empty optional fields are valid
-		await expect(invalid).toBeHidden();
+		await expect(invalid(page, "minlength")).toBeHidden();
 
 		await input.fill("Kirby");
-		await expect(invalid).toBeVisible();
+		await expect(invalid(page, "minlength")).toBeVisible();
 		await expect(minlength.locator(".k-counter")).toHaveText("5≥ 10");
 		await expect(minlength.locator(".k-counter")).toHaveAttribute(
 			"data-invalid",
@@ -130,7 +129,7 @@ test.describe("validation", () => {
 		);
 
 		await input.fill("Kirby rocks");
-		await expect(invalid).toBeHidden();
+		await expect(invalid(page, "minlength")).toBeHidden();
 	});
 
 	test("limits the maximum length", async ({ page }) => {
@@ -140,7 +139,7 @@ test.describe("validation", () => {
 		await input.pressSequentially("Kirby is awesome");
 		await expect(input).toHaveValue("Kirby is a");
 		await expect(maxlength.locator(".k-counter")).toHaveText("10≤ 10");
-		await expect(maxlength.locator(".k-label-invalid")).toBeHidden();
+		await expect(invalid(page, "maxlength")).toBeHidden();
 	});
 });
 

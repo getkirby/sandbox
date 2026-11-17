@@ -1,12 +1,12 @@
-import { expect, test } from "../fixtures.ts";
+import type { Page } from "@playwright/test";
 import {
 	dialog,
-	exists,
-	folders,
-	openAction,
-	restoreScenario,
-	url
-} from "./helpers.ts";
+	expect,
+	openSettingsDialog,
+	test,
+	titles
+} from "../fixtures.ts";
+import { exists, folders, restoreScenario, url } from "./helpers.ts";
 
 restoreScenario();
 
@@ -14,11 +14,14 @@ restoreScenario();
 // request for it, which fails with a 404 (see issues/unlock-after-delete.md)
 test.use({ ignoreErrors: [/status of 404/] });
 
-const remove = (page) => dialog(page).getByRole("button", { name: "Delete" });
+const parent = /\/panel\/pages\/other\+page-actions$/;
+
+const remove = (page: Page) =>
+	dialog(page).getByRole("button", { name: "Delete" });
 
 test("deletes pages after confirmation", async ({ page }) => {
 	await page.goto(url("page-to-delete"));
-	await openAction(page, "Delete");
+	await openSettingsDialog(page, "Delete");
 
 	await expect(dialog(page)).toContainText(
 		"Do you really want to delete Page to delete?"
@@ -26,16 +29,14 @@ test("deletes pages after confirmation", async ({ page }) => {
 	await remove(page).click();
 
 	// redirects to the parent page
-	await expect(page).toHaveURL(/\/panel\/pages\/other\+page-actions$/);
+	await expect(page).toHaveURL(parent);
 	expect(exists("page-to-delete")).toBe(false);
-	await expect(
-		page.locator(".k-field-name-pages .k-item-title")
-	).not.toContainText(["Page to delete"]);
+	await expect(titles(page, "pages")).not.toContainText(["Page to delete"]);
 });
 
 test("cancels the deletion", async ({ page }) => {
 	await page.goto(url("page-to-delete"));
-	await openAction(page, "Delete");
+	await openSettingsDialog(page, "Delete");
 	await dialog(page).getByRole("button", { name: "Cancel" }).click();
 
 	await expect(dialog(page)).toBeHidden();
@@ -46,10 +47,12 @@ test.describe("pages with subpages", () => {
 	// the rejected request is logged to the console by the Panel
 	test.use({ ignoreErrors: [/status of 40[04]|enter the page title/] });
 
-	test("requires the title to delete pages with subpages", async ({ page }) => {
+	test.beforeEach(async ({ page }) => {
 		await page.goto(url("page-with-children-and-files"));
-		await openAction(page, "Delete");
+		await openSettingsDialog(page, "Delete");
+	});
 
+	test("requires the title to delete pages with subpages", async ({ page }) => {
 		await expect(dialog(page)).toContainText(
 			"This page has subpages. All subpages will be deleted as well."
 		);
@@ -66,18 +69,16 @@ test.describe("pages with subpages", () => {
 			.fill("Page with children and files");
 		await remove(page).click();
 
-		await expect(page).toHaveURL(/\/panel\/pages\/other\+page-actions$/);
+		await expect(page).toHaveURL(parent);
 		expect(exists("1_page-with-children-and-files")).toBe(false);
 	});
 
 	test("renumbers the remaining listed pages", async ({ page }) => {
-		await page.goto(url("page-with-children-and-files"));
-		await openAction(page, "Delete");
 		await dialog(page)
 			.getByRole("textbox")
 			.fill("Page with children and files");
 		await remove(page).click();
-		await expect(page).toHaveURL(/\/panel\/pages\/other\+page-actions$/);
+		await expect(page).toHaveURL(parent);
 
 		expect(folders().filter((folder) => /^\d+_/.test(folder))).toEqual([
 			"1_page-to-rename",
@@ -90,21 +91,9 @@ test.describe("pages with subpages", () => {
 
 test("deletes drafts", async ({ page }) => {
 	await page.goto(url("draft-to-duplicate"));
-	await openAction(page, "Delete");
+	await openSettingsDialog(page, "Delete");
 	await remove(page).click();
 
-	await expect(page).toHaveURL(/\/panel\/pages\/other\+page-actions$/);
+	await expect(page).toHaveURL(parent);
 	expect(exists("_drafts/draft-to-duplicate")).toBe(false);
-});
-
-test("prevents deleting pages without the delete option", async ({ page }) => {
-	await page.goto(url("page-without-actions"));
-	await page
-		.locator(".k-view-buttons")
-		.getByRole("button", { name: "Settings" })
-		.click();
-
-	await expect(
-		page.locator("dialog[open]").last().getByRole("button", { name: "Delete" })
-	).toBeDisabled();
 });

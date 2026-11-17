@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import type { Page } from "@playwright/test";
-import { expect, heading, test } from "./fixtures.ts";
+import { dialog, expect, heading, test } from "./fixtures.ts";
 
 const version: string = JSON.parse(
 	readFileSync("kirby/composer.json", "utf8")
@@ -25,8 +25,6 @@ const security = [
 	"The content salt has not been changed from its default value",
 	"The cookie signing key has not been changed from its default value"
 ];
-
-const dialog = (page: Page) => page.locator(".k-dialog");
 
 const section = (page: Page, name: string) =>
 	page

@@ -1,51 +1,47 @@
-import {
-	copyFileSync,
-	existsSync,
-	readdirSync,
-	readFileSync,
-	rmSync
-} from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import type { Page } from "@playwright/test";
-import { expect, field, heading, tab, test } from "./fixtures.ts";
+import {
+	dialog,
+	discard,
+	dropdown,
+	expect,
+	field,
+	heading,
+	restoreAfterEach,
+	save,
+	tab,
+	test,
+	titles
+} from "./fixtures.ts";
 
-const source = "environments/lab/content";
-const target = "public/content";
-
-const text = (page: Page) => field(page, "text").locator("textarea");
-
-const save = (page: Page) =>
-	page.getByRole("main").getByRole("button", { exact: true, name: "Save" });
-
-const discard = (page: Page) =>
-	page.getByRole("main").getByRole("button", { exact: true, name: "Discard" });
+/**
+ * Restores the site content files after each test
+ */
+restoreAfterEach("content", (file) => /^site\..+\.txt$/.test(file));
 
 const breadcrumb = (page: Page) =>
 	page.getByRole("navigation", { name: "Breadcrumb" });
 
-const stored = (language = "en") =>
-	readFileSync(`${target}/site.${language}.txt`, "utf8");
+/**
+ * Opens the rename dialog from the title of the site view
+ */
+const openRename = async (page: Page) => {
+	await page
+		.getByRole("main")
+		.getByRole("heading", { level: 1 })
+		.getByRole("button")
+		.click();
+};
 
 const saveChanges = async (page: Page) => {
 	await save(page).click();
 	await expect(save(page)).toBeHidden();
 };
 
-/**
- * Restores the site content files after each test
- */
-test.afterEach(() => {
-	for (const file of readdirSync(target)) {
-		if (/^site\..+\.txt$/.test(file) === true) {
-			rmSync(`${target}/${file}`);
-		}
-	}
+const stored = (language = "en") =>
+	readFileSync(`public/content/site.${language}.txt`, "utf8");
 
-	for (const file of readdirSync(source)) {
-		if (/^site\..+\.txt$/.test(file) === true) {
-			copyFileSync(`${source}/${file}`, `${target}/${file}`);
-		}
-	}
-});
+const text = (page: Page) => field(page, "text").locator("textarea");
 
 test.describe("overview", () => {
 	test.beforeEach(async ({ page }) => {
@@ -77,9 +73,7 @@ test.describe("overview", () => {
 			await expect(field(page, name).locator(".k-item").first()).toBeVisible();
 		}
 
-		await expect(
-			field(page, "fields").locator(".k-item-title").first()
-		).toHaveText("Blocks");
+		await expect(titles(page, "fields").first()).toHaveText("Blocks");
 
 		// only the fields section allows new pages
 		await expect(
@@ -126,10 +120,7 @@ test.describe("content", () => {
 	test("discards changes", async ({ page }) => {
 		await text(page).fill("Never saved");
 		await discard(page).click();
-		await page
-			.locator(".k-dialog")
-			.getByRole("button", { name: "Discard" })
-			.click();
+		await dialog(page).getByRole("button", { name: "Discard" }).click();
 
 		await expect(text(page)).toHaveValue("");
 		await expect(save(page)).toBeHidden();
@@ -137,18 +128,12 @@ test.describe("content", () => {
 	});
 
 	test("renames the site from the title", async ({ page }) => {
-		await page
-			.getByRole("main")
-			.getByRole("heading", { level: 1 })
-			.getByRole("button")
-			.click();
+		await openRename(page);
+		await expect(dialog(page).locator("input")).toHaveValue("Lab");
 
-		const dialog = page.locator(".k-dialog");
-		await expect(dialog.locator("input")).toHaveValue("Lab");
-
-		await dialog.locator("input").fill("Lab Renamed");
-		await dialog.getByRole("button", { name: "Rename" }).click();
-		await expect(dialog).toBeHidden();
+		await dialog(page).locator("input").fill("Lab Renamed");
+		await dialog(page).getByRole("button", { name: "Rename" }).click();
+		await expect(dialog(page)).toBeHidden();
 
 		await expect(heading(page, "Lab Renamed", 1)).toBeVisible();
 		await expect(breadcrumb(page)).toHaveText("Lab Renamed");
@@ -158,16 +143,9 @@ test.describe("content", () => {
 	test("updates the site name in the window title after renaming", async ({
 		page
 	}) => {
-		await page
-			.getByRole("main")
-			.getByRole("heading", { level: 1 })
-			.getByRole("button")
-			.click();
-		await page.locator(".k-dialog input").fill("Lab Renamed");
-		await page
-			.locator(".k-dialog")
-			.getByRole("button", { name: "Rename" })
-			.click();
+		await openRename(page);
+		await dialog(page).locator("input").fill("Lab Renamed");
+		await dialog(page).getByRole("button", { name: "Rename" }).click();
 		await expect(heading(page, "Lab Renamed", 1)).toBeVisible();
 
 		// Known bug: the site name part of the window title is not
@@ -180,18 +158,12 @@ test.describe("content", () => {
 	});
 
 	test("requires a title when renaming", async ({ page }) => {
-		await page
-			.getByRole("main")
-			.getByRole("heading", { level: 1 })
-			.getByRole("button")
-			.click();
+		await openRename(page);
+		await dialog(page).locator("input").fill("");
+		await expect(dialog(page).locator(".k-label-invalid")).toBeVisible();
 
-		const dialog = page.locator(".k-dialog");
-		await dialog.locator("input").fill("");
-		await expect(dialog.locator(".k-label-invalid")).toBeVisible();
-
-		await dialog.getByRole("button", { name: "Rename" }).click();
-		await expect(dialog).toBeVisible();
+		await dialog(page).getByRole("button", { name: "Rename" }).click();
+		await expect(dialog(page)).toBeVisible();
 		expect(stored()).toContain("Title: Lab");
 	});
 });
@@ -201,7 +173,7 @@ test.describe("languages", () => {
 		await page.goto("/panel/site?tab=content");
 		await page.getByRole("main").getByRole("button", { name: "EN" }).click();
 
-		const languages = page.locator("dialog[open]").last();
+		const languages = dropdown(page);
 		await expect(languages.getByRole("button")).toHaveText([
 			"English EN",
 			/Malicious Deutsch.*DE$/,
@@ -220,7 +192,7 @@ test.describe("languages", () => {
 
 		// the default language is used as fallback
 		await expect(heading(page, "Lab", 1)).toBeVisible();
-		expect(existsSync(`${target}/site.de.txt`)).toBe(false);
+		expect(existsSync("public/content/site.de.txt")).toBe(false);
 
 		await text(page).fill("Hallo Welt");
 		await saveChanges(page);
@@ -247,7 +219,7 @@ test.describe("files", () => {
 		await page.goto("/panel/site");
 		await tab(page, "Site Files");
 
-		const files = field(page, "files").locator(".k-item-title");
+		const files = titles(page, "files");
 		await expect(files).toHaveText([
 			"colors.json",
 			"countries.json",

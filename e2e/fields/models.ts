@@ -1,5 +1,14 @@
 import type { Page } from "@playwright/test";
-import { expect, field, heading, tab, test } from "../fixtures.ts";
+import {
+	dropdown,
+	expect,
+	field,
+	heading,
+	invalid,
+	tab,
+	test,
+	titles
+} from "../fixtures.ts";
 
 type Options = {
 	/**
@@ -28,9 +37,6 @@ type Options = {
 
 export const items = (page: Page, name: string) =>
 	field(page, name).locator(".k-item");
-
-export const titles = (page: Page, name: string) =>
-	field(page, name).locator(".k-item-title");
 
 /**
  * Registers the tests shared by the file and page lists
@@ -61,9 +67,7 @@ export const modelListTests = (options: Options) => {
 			.getByRole("button", { name: "Options" })
 			.click();
 
-		await expect(page.locator("dialog[open]").last()).toMatchAriaSnapshot(
-			options.options
-		);
+		await expect(dropdown(page)).toMatchAriaSnapshot(options.options);
 	});
 
 	test("shows custom infos", async ({ page }) => {
@@ -158,18 +162,14 @@ export const modelListTests = (options: Options) => {
 			.click();
 
 		await expect(
-			page
-				.locator("dialog[open]")
-				.last()
-				.getByRole("button", { name: "Change position" })
+			dropdown(page).getByRole("button", { name: "Change position" })
 		).toBeDisabled();
 	});
 
 	test("marks invalid lists", async ({ page }) => {
 		await tab(page, "Invalid");
 
-		const invalid = field(page, "invalid");
-		await expect(invalid.locator(".k-empty")).toBeVisible();
-		await expect(invalid.locator(".k-label-invalid")).toBeVisible();
+		await expect(field(page, "invalid").locator(".k-empty")).toBeVisible();
+		await expect(invalid(page, "invalid")).toBeVisible();
 	});
 };

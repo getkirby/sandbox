@@ -1,20 +1,16 @@
 import type { Page } from "@playwright/test";
 import {
+	dialog,
+	drawer,
+	dropdown,
 	expect,
 	expectWidths,
 	field,
 	heading,
+	invalid,
 	tab,
 	test
 } from "../fixtures.ts";
-
-const dialog = (page: Page) => page.locator(".k-dialog");
-
-const rows = (page: Page, name: string) =>
-	field(page, name).locator(".k-layout");
-
-const columns = (page: Page, name: string, row = 0) =>
-	rows(page, name).nth(row).locator(".k-layout-column");
 
 /**
  * Adds a new row with the given layout
@@ -28,6 +24,9 @@ const add = async (page: Page, name: string, layout: string) => {
 	await expect(dialog(page)).toBeHidden();
 };
 
+const columns = (page: Page, name: string, row = 0) =>
+	rows(page, name).nth(row).locator(".k-layout-column");
+
 const menu = async (page: Page, name: string, row = 0) => {
 	await rows(page, name)
 		.nth(row)
@@ -35,8 +34,11 @@ const menu = async (page: Page, name: string, row = 0) => {
 		.last()
 		.click();
 
-	return page.locator("dialog[open]").last();
+	return dropdown(page);
 };
+
+const rows = (page: Page, name: string) =>
+	field(page, name).locator(".k-layout");
 
 test.beforeEach(async ({ page }) => {
 	await page.goto("/panel/pages/fields+layout");
@@ -182,9 +184,14 @@ test("edits row settings", async ({ changes, page }) => {
 		.getByRole("button", { name: "Settings" })
 		.click();
 
-	const drawer = page.locator(".k-drawer");
-	await drawer.locator(".k-field-name-class").getByRole("textbox").fill("hero");
-	await drawer.locator(".k-field-name-id").getByRole("textbox").fill("intro");
+	await drawer(page)
+		.locator(".k-field-name-class")
+		.getByRole("textbox")
+		.fill("hero");
+	await drawer(page)
+		.locator(".k-field-name-id")
+		.getByRole("textbox")
+		.fill("intro");
 	await page.keyboard.press("Escape");
 
 	const [row] = (await changes.saved()).settings as {
@@ -220,11 +227,9 @@ test("shows the help text", async ({ page }) => {
 test("validates required fields", async ({ page }) => {
 	await tab(page, "Validation");
 
-	const invalid = field(page, "required").locator(".k-label-invalid");
-
-	await expect(invalid).toBeVisible();
+	await expect(invalid(page, "required")).toBeVisible();
 	await add(page, "required", "1/1");
-	await expect(invalid).toBeHidden();
+	await expect(invalid(page, "required")).toBeHidden();
 });
 
 test("aligns fields by width", async ({ page }) => {

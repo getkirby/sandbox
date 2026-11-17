@@ -1,32 +1,20 @@
-import { cpSync, readdirSync, rmSync } from "node:fs";
+import { readdirSync } from "node:fs";
 import type { Locator, Page } from "@playwright/test";
-import { expect, field, heading, test } from "./fixtures.ts";
+import {
+	dropdown,
+	expect,
+	field,
+	heading,
+	restoreAfterEach,
+	test
+} from "./fixtures.ts";
 
-const source = "environments/lab/content/other/page-sorting";
-const target = "public/content/other/page-sorting";
+/**
+ * Restores the pages after each test, as sorting renames the folders
+ */
+restoreAfterEach("content/other/page-sorting");
 
 const order = ["Mercury", "Venus", "Earth", "Mars", "Jupiter"];
-
-/**
- * Returns the items of a list in any layout
- */
-const items = (page: Page, name: string) =>
-	field(page, name).locator(".k-item, tbody tr");
-
-const item = (page: Page, name: string, title: string) =>
-	items(page, name).filter({ hasText: title });
-
-const titles = (page: Page, name: string) =>
-	field(page, name).locator('.k-item-title, td[data-column-id="title"]');
-
-/**
- * Returns the stored order of the listed pages,
- * e.g. `["1_mercury", "2_venus", …]`
- */
-const folders = () =>
-	readdirSync(target)
-		.filter((folder) => /^\d_/.test(folder))
-		.sort();
 
 /**
  * Drags an item by its sort handle onto the position of another item
@@ -47,6 +35,24 @@ const drag = async (page: Page, from: Locator, to: Locator) => {
 };
 
 /**
+ * Returns the stored order of the listed pages,
+ * e.g. `["1_mercury", "2_venus", …]`
+ */
+const folders = () =>
+	readdirSync("public/content/other/page-sorting")
+		.filter((folder) => /^\d_/.test(folder))
+		.sort();
+
+const item = (page: Page, name: string, title: string) =>
+	items(page, name).filter({ hasText: title });
+
+/**
+ * Returns the items of a list in any layout
+ */
+const items = (page: Page, name: string) =>
+	field(page, name).locator(".k-item, tbody tr");
+
+/**
  * Waits for the sort request, which moves
  * the page to its new listed position
  */
@@ -58,12 +64,11 @@ const sorted = (page: Page) =>
 	);
 
 /**
- * Restores the pages after each test, as sorting renames the folders
+ * Returns the item titles of a list in any layout
+ * (unlike the shared `titles()`, this includes table cells)
  */
-test.afterEach(() => {
-	rmSync(target, { force: true, recursive: true });
-	cpSync(source, target, { recursive: true });
-});
+const titles = (page: Page, name: string) =>
+	field(page, name).locator('.k-item-title, td[data-column-id="title"]');
 
 test.beforeEach(async ({ page }) => {
 	await page.goto("/panel/pages/other+page-sorting");
@@ -151,10 +156,7 @@ test.describe("lists", () => {
 			.click();
 
 		await expect(
-			page
-				.locator("dialog[open]")
-				.last()
-				.getByRole("button", { name: "Change position" })
+			dropdown(page).getByRole("button", { name: "Change position" })
 		).toBeDisabled();
 	});
 });

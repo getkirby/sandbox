@@ -1,19 +1,24 @@
 import type { Page } from "@playwright/test";
-import { expect, field, heading, tab, test } from "../fixtures.ts";
+import {
+	dropdown,
+	expect,
+	field,
+	heading,
+	invalid,
+	tab,
+	test
+} from "../fixtures.ts";
 
 const date = (page: Page, name: string) =>
 	field(page, name).locator("input.k-date-input");
-
-const time = (page: Page, name: string) =>
-	field(page, name).getByRole("textbox").nth(1);
-
-const invalid = (page: Page, name: string) =>
-	field(page, name).locator(".k-label-invalid");
 
 const enter = async (page: Page, name: string, value: string) => {
 	await date(page, name).fill(value);
 	await date(page, name).press("Tab");
 };
+
+const time = (page: Page, name: string) =>
+	field(page, name).getByRole("textbox").nth(1);
 
 const today = () => {
 	const now = new Date();
@@ -49,7 +54,7 @@ test("picks dates from the calendar", async ({ page }) => {
 		.getByRole("button", { name: "Select a date" })
 		.click();
 
-	const calendar = page.locator("dialog[open]").last();
+	const calendar = dropdown(page);
 	await expect(calendar.getByRole("combobox", { name: "Month" })).toHaveValue(
 		"2"
 	);

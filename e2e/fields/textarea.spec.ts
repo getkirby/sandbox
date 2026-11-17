@@ -4,16 +4,17 @@ import {
 	expectWidths,
 	field,
 	heading,
+	invalid,
 	tab,
 	test,
 	textbox
 } from "../fixtures.ts";
 
-const toolbar = (page: Page, name: string) =>
-	field(page, name).getByRole("navigation");
-
 const button = (page: Page, name: string, label: string) =>
 	toolbar(page, name).getByRole("button", { exact: true, name: label });
+
+const toolbar = (page: Page, name: string) =>
+	field(page, name).getByRole("navigation");
 
 test.beforeEach(async ({ page }) => {
 	await page.goto("/panel/pages/fields+textarea");
@@ -141,20 +142,16 @@ test.describe("validation", () => {
 	});
 
 	test("validates required fields", async ({ page }) => {
-		const invalid = field(page, "required").locator(".k-label-invalid");
-
-		await expect(invalid).toBeVisible();
+		await expect(invalid(page, "required")).toBeVisible();
 		await textbox(page, "required").fill("Kirby");
-		await expect(invalid).toBeHidden();
+		await expect(invalid(page, "required")).toBeHidden();
 	});
 
 	test("validates the minimum length", async ({ page }) => {
-		const invalid = field(page, "minlength").locator(".k-label-invalid");
-
 		await textbox(page, "minlength").fill("Kirby");
-		await expect(invalid).toBeVisible();
+		await expect(invalid(page, "minlength")).toBeVisible();
 		await textbox(page, "minlength").fill("Kirby rocks");
-		await expect(invalid).toBeHidden();
+		await expect(invalid(page, "minlength")).toBeHidden();
 	});
 
 	test("flags the counter above the maximum length", async ({ page }) => {
@@ -170,9 +167,7 @@ test.describe("validation", () => {
 		await expect(input).toHaveValue("Kirby is awesome");
 		await expect(counter).toHaveText("16≤ 10");
 		await expect(counter).toHaveAttribute("data-invalid", "true");
-		await expect(
-			field(page, "maxlength").locator(".k-label-invalid")
-		).toBeHidden();
+		await expect(invalid(page, "maxlength")).toBeHidden();
 	});
 });
 

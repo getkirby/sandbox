@@ -1,5 +1,5 @@
-import { expect, test } from "../fixtures.ts";
-import { dialog, dialogItems, open, pickerTests } from "./picker.ts";
+import { dialog, expect, test } from "../fixtures.ts";
+import { dialogItems, open, pickerTests } from "./picker.ts";
 
 pickerTests({
 	disabledValue: "File Template Change",

@@ -1,23 +1,22 @@
 import type { Page } from "@playwright/test";
 import {
+	dropdown,
 	expect,
 	expectWidths,
 	field,
 	heading,
+	invalid,
 	tab,
 	test
 } from "../fixtures.ts";
-
-const input = (page: Page, name: string) =>
-	field(page, name).locator("input.k-time-input");
-
-const invalid = (page: Page, name: string) =>
-	field(page, name).locator(".k-label-invalid");
 
 const enter = async (page: Page, name: string, value: string) => {
 	await input(page, name).fill(value);
 	await input(page, name).press("Tab");
 };
+
+const input = (page: Page, name: string) =>
+	field(page, name).locator("input.k-time-input");
 
 test.beforeEach(async ({ page }) => {
 	await page.goto("/panel/pages/fields+time");
@@ -47,7 +46,7 @@ test("rounds times to the default 5-minute step", async ({ page }) => {
 test("picks times from the dropdown", async ({ page }) => {
 	await field(page, "time").getByRole("button").click();
 
-	const times = page.locator("dialog[open]").last();
+	const times = dropdown(page);
 	await expect(times.getByRole("heading", { name: "Day" })).toBeVisible();
 	await expect(times.getByRole("heading", { name: "Night" })).toBeVisible();
 

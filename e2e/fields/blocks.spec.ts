@@ -1,9 +1,12 @@
 import type { Page } from "@playwright/test";
 import {
+	dialog,
+	dropdown,
 	expect,
 	expectWidths,
 	field,
 	heading,
+	invalid,
 	tab,
 	test
 } from "../fixtures.ts";
@@ -16,12 +19,25 @@ const add = async (page: Page, name: string, fieldset?: string) => {
 	await field(page, name).getByRole("button", { name: "Add" }).first().click();
 
 	if (fieldset !== undefined) {
-		await page
-			.locator(".k-dialog")
+		await dialog(page)
 			.getByRole("button", { exact: true, name: fieldset })
 			.click();
 	}
 };
+
+const blocks = (page: Page, name: string) =>
+	field(page, name).locator(".k-block-container");
+
+const more = async (page: Page, name: string, index: number) => {
+	await blocks(page, name).nth(index).click();
+	await options(page, name, index)
+		.getByRole("button", { name: "More" })
+		.click();
+	return dropdown(page);
+};
+
+const options = (page: Page, name: string, index: number) =>
+	blocks(page, name).nth(index).locator(".k-block-options");
 
 /**
  * Types into the focused writer of the last added block
@@ -29,20 +45,6 @@ const add = async (page: Page, name: string, fieldset?: string) => {
 const write = async (page: Page, name: string, text: string) => {
 	await expect(blocks(page, name).last().locator(".ProseMirror")).toBeFocused();
 	await page.keyboard.type(text);
-};
-
-const blocks = (page: Page, name: string) =>
-	field(page, name).locator(".k-block-container");
-
-const options = (page: Page, name: string, index: number) =>
-	blocks(page, name).nth(index).locator(".k-block-options");
-
-const more = async (page: Page, name: string, index: number) => {
-	await blocks(page, name).nth(index).click();
-	await options(page, name, index)
-		.getByRole("button", { name: "More" })
-		.click();
-	return page.locator("dialog[open]").last();
 };
 
 test.beforeEach(async ({ page }) => {
@@ -68,7 +70,7 @@ test("shows the empty state", async ({ page }) => {
 test("lists the default block types", async ({ page }) => {
 	await add(page, "blocks");
 
-	await expect(page.locator(".k-dialog")).toMatchAriaSnapshot(`
+	await expect(dialog(page)).toMatchAriaSnapshot(`
 		- group:
 		  - text: Please select a block type …
 		  - button "Code"
@@ -122,8 +124,7 @@ test("inserts blocks after the current one", async ({ page }) => {
 	await options(page, "blocks", 0)
 		.getByRole("button", { name: "Insert after" })
 		.click();
-	await page
-		.locator(".k-dialog")
+	await dialog(page)
 		.getByRole("button", { exact: true, name: "Heading" })
 		.click();
 
@@ -168,10 +169,7 @@ test("deletes blocks", async ({ page }) => {
 	await options(page, "blocks", 0)
 		.getByRole("button", { name: "Delete" })
 		.click();
-	await page
-		.locator(".k-dialog")
-		.getByRole("button", { name: "Delete" })
-		.click();
+	await dialog(page).getByRole("button", { name: "Delete" }).click();
 
 	await expect(blocks(page, "blocks")).toHaveCount(0);
 	await expect(
@@ -203,7 +201,7 @@ test("shows the help text", async ({ page }) => {
 test("adds the only allowed block type without selector", async ({ page }) => {
 	await add(page, "tabs");
 
-	await expect(page.locator(".k-dialog")).toHaveCount(0);
+	await expect(dialog(page)).toHaveCount(0);
 	await expect(blocks(page, "tabs").first()).toHaveClass(
 		/k-block-container-fieldset-tabs/
 	);
@@ -244,19 +242,15 @@ test.describe("validation", () => {
 	});
 
 	test("validates required fields", async ({ page }) => {
-		const invalid = field(page, "required").locator(".k-label-invalid");
-
-		await expect(invalid).toBeVisible();
+		await expect(invalid(page, "required")).toBeVisible();
 		await add(page, "required", "Text");
-		await expect(invalid).toBeHidden();
+		await expect(invalid(page, "required")).toBeHidden();
 	});
 
 	test("validates the minimum number of blocks", async ({ page }) => {
-		const invalid = field(page, "min").locator(".k-label-invalid");
-
-		await expect(invalid).toBeVisible();
+		await expect(invalid(page, "min")).toBeVisible();
 		await add(page, "min", "Text");
-		await expect(invalid).toBeHidden();
+		await expect(invalid(page, "min")).toBeHidden();
 	});
 
 	test("prevents adding more than the maximum number of blocks", async ({

@@ -1,18 +1,20 @@
-import { expect, heading, test } from "../fixtures.ts";
+import type { Page } from "@playwright/test";
 import {
-	content,
 	dialog,
-	exists,
-	folders,
-	openAction,
-	restoreScenario,
-	url
-} from "./helpers.ts";
+	expect,
+	heading,
+	invalid,
+	openSettings,
+	openSettingsDialog,
+	test
+} from "../fixtures.ts";
+import { content, exists, folders, restoreScenario, url } from "./helpers.ts";
 
 restoreScenario();
 
-const slug = (page) => dialog(page).locator(".k-field-name-slug input");
-const change = (page) => dialog(page).getByRole("button", { name: "Change" });
+const change = (page: Page) =>
+	dialog(page).getByRole("button", { name: "Change" });
+const slug = (page: Page) => dialog(page).locator(".k-field-name-slug input");
 
 test.beforeEach(async ({ page }) => {
 	await page.goto(`${url("page-to-change-url")}?language=en`);
@@ -25,7 +27,7 @@ test.describe("new URL", () => {
 	test.use({ ignoreErrors: [/status of 404/] });
 
 	test("changes the URL", async ({ page }) => {
-		await openAction(page, "Change URL");
+		await openSettingsDialog(page, "Change URL");
 		await expect(slug(page)).toHaveValue("page-to-change-url");
 
 		await slug(page).fill("new-url");
@@ -46,7 +48,7 @@ test.describe("new URL", () => {
 });
 
 test("sanitizes the URL", async ({ page }) => {
-	await openAction(page, "Change URL");
+	await openSettingsDialog(page, "Change URL");
 	await slug(page).fill("");
 	// special characters are covered by the slug field tests
 	await slug(page).pressSequentially("Neue URL & Farben");
@@ -55,7 +57,7 @@ test("sanitizes the URL", async ({ page }) => {
 });
 
 test("creates the URL from the title", async ({ page }) => {
-	await openAction(page, "Change URL");
+	await openSettingsDialog(page, "Change URL");
 	await dialog(page).locator(".k-field-name-title input").fill("Fresh Title");
 	await dialog(page).getByRole("button", { name: "Create from title" }).click();
 
@@ -63,12 +65,10 @@ test("creates the URL from the title", async ({ page }) => {
 });
 
 test("requires a URL", async ({ page }) => {
-	await openAction(page, "Change URL");
+	await openSettingsDialog(page, "Change URL");
 	await slug(page).fill("");
 
-	await expect(
-		dialog(page).locator(".k-field-name-slug .k-label-invalid")
-	).toBeVisible();
+	await expect(invalid(page, "slug")).toBeVisible();
 	await change(page).click();
 	await expect(dialog(page)).toBeVisible();
 	expect(exists("3_page-to-change-url")).toBe(true);
@@ -79,7 +79,7 @@ test.describe("taken URLs", () => {
 	test.use({ ignoreErrors: [/status of 400|already exists/] });
 
 	test("rejects URLs of sibling pages", async ({ page }) => {
-		await openAction(page, "Change URL");
+		await openSettingsDialog(page, "Change URL");
 		await slug(page).fill("page-with-taken-slug");
 		await change(page).click();
 
@@ -92,7 +92,7 @@ test.describe("taken URLs", () => {
 
 test("changes translated URLs separately", async ({ page }) => {
 	await page.goto(`${url("page-to-change-url")}?language=de`);
-	await openAction(page, "Change URL");
+	await openSettingsDialog(page, "Change URL");
 
 	await expect(slug(page)).toHaveValue("url-aendern");
 	await slug(page).fill("neue-adresse");
@@ -110,21 +110,15 @@ test("changes translated URLs separately", async ({ page }) => {
 
 test("keeps the URL of the home page", async ({ page }) => {
 	await page.goto("/panel/pages/home");
-	await page
-		.locator(".k-view-buttons")
-		.getByRole("button", { name: "Settings" })
-		.click();
+	const settings = await openSettings(page);
 
 	await expect(
-		page
-			.locator("dialog[open]")
-			.last()
-			.getByRole("button", { name: "Change URL" })
+		settings.getByRole("button", { name: "Change URL" })
 	).toBeDisabled();
 });
 
 test("focuses the URL when opening the dialog", async ({ page }) => {
-	await openAction(page, "Change URL");
+	await openSettingsDialog(page, "Change URL");
 
 	// Known bug: the `preselect` prop of the field is not exported
 	// by the backend, so the title is focused instead of the URL.

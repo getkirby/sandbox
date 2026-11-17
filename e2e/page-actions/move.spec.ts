@@ -1,13 +1,12 @@
 import type { Page } from "@playwright/test";
-import { expect, heading, test } from "../fixtures.ts";
 import {
-	content,
 	dialog,
-	exists,
-	openAction,
-	restoreScenario,
-	url
-} from "./helpers.ts";
+	expect,
+	heading,
+	openSettingsDialog,
+	test
+} from "../fixtures.ts";
+import { content, exists, restoreScenario, url } from "./helpers.ts";
 
 restoreScenario();
 
@@ -15,15 +14,15 @@ restoreScenario();
 // request for the old path (see issues/unlock-after-delete.md)
 test.use({ ignoreErrors: [/status of 404/] });
 
-const tree = (page: Page, name: string) =>
-	dialog(page).getByRole("button", { exact: true, name });
+const move = (page: Page) =>
+	dialog(page).getByRole("button", { exact: true, name: "Move" });
 
 /**
  * Opens the move dialog and expands the scenario page in the tree
  */
 const openMove = async (page: Page, slug: string) => {
 	await page.goto(url(slug));
-	await openAction(page, "Move page");
+	await openSettingsDialog(page, "Move page");
 
 	await tree(page, "Page Actions")
 		.locator("xpath=preceding-sibling::button[1]")
@@ -31,8 +30,8 @@ const openMove = async (page: Page, slug: string) => {
 	await expect(tree(page, "Allowed move target")).toBeVisible();
 };
 
-const move = (page: Page) =>
-	dialog(page).getByRole("button", { exact: true, name: "Move" });
+const tree = (page: Page, name: string) =>
+	dialog(page).getByRole("button", { exact: true, name });
 
 test("only offers valid targets", async ({ page }) => {
 	await openMove(page, "page-to-move");
@@ -64,6 +63,7 @@ test("moves the page to another parent", async ({ page }) => {
 	expect(exists("5_page-to-move")).toBe(false);
 
 	// the page keeps its sorting number in the new parent
+	// (see issues/move-keeps-sorting-number.md)
 	expect(exists("allowed-move-target/5_page-to-move")).toBe(true);
 });
 
@@ -97,19 +97,4 @@ test("disables targets with a page of the same URL", async ({ page }) => {
 	// the allowed target already contains a page with this URL
 	await openMove(page, "page-with-taken-slug");
 	await expect(tree(page, "Allowed move target")).toBeDisabled();
-});
-
-test("prevents moving pages without the move option", async ({ page }) => {
-	await page.goto(url("page-without-actions"));
-	await page
-		.locator(".k-view-buttons")
-		.getByRole("button", { name: "Settings" })
-		.click();
-
-	await expect(
-		page
-			.locator("dialog[open]")
-			.last()
-			.getByRole("button", { name: "Move page" })
-	).toBeDisabled();
 });

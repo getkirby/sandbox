@@ -1,9 +1,20 @@
-import { cpSync, existsSync, rmSync } from "node:fs";
+import { existsSync } from "node:fs";
 import type { Page } from "@playwright/test";
-import { expect, field, heading, test } from "./fixtures.ts";
+import {
+	dialog,
+	expect,
+	field,
+	heading,
+	restoreAfterEach,
+	test,
+	viewButton
+} from "./fixtures.ts";
 
-const source = "environments/lab/content/other/page-status";
-const target = "public/content/other/page-status";
+/**
+ * Restores the pages after each test, as status changes
+ * move the page folders
+ */
+restoreAfterEach("content/other/page-status");
 
 type Status = {
 	icon: string;
@@ -57,13 +68,17 @@ const expected: Record<string, Status[]> = {
 	]
 };
 
-const statusButtons = (page: Page, name: string) =>
-	field(page, name).getByRole("button", { name: /^Status: / });
+/**
+ * Selects a status in the status dialog
+ */
+const check = (page: Page, status: string) =>
+	dialog(page).locator(`input[value="${status}"]`).check({ force: true });
 
-const dialog = (page: Page) => page.locator(".k-dialog");
-
-const options = (page: Page) =>
-	dialog(page).locator(".k-field-name-status .k-choice-input-label");
+/**
+ * Checks if a page folder exists, e.g. `exists("_drafts/default-draft")`
+ */
+const exists = (path: string) =>
+	existsSync(`public/content/other/page-status/${path}`);
 
 const expectStatus = async (page: Page, name: string, statuses: Status[]) => {
 	const buttons = statusButtons(page, name);
@@ -88,18 +103,21 @@ const expectStatus = async (page: Page, name: string, statuses: Status[]) => {
 	}
 };
 
+const options = (page: Page) =>
+	dialog(page).locator(".k-field-name-status .k-choice-input-label");
+
+const statusButtons = (page: Page, name: string) =>
+	field(page, name).getByRole("button", { name: /^Status: / });
+
 /**
- * Restores the pages after each test, as status changes
- * move the page folders
+ * Panel URL of the lab page or one of its subpages
  */
-test.afterEach(() => {
-	rmSync(target, { force: true, recursive: true });
-	cpSync(source, target, { recursive: true });
-});
+const url = (slug?: string) =>
+	["/panel/pages/other+page-status", slug].filter(Boolean).join("+");
 
 test.describe("lists", () => {
 	test.beforeEach(async ({ page }) => {
-		await page.goto("/panel/pages/other+page-status");
+		await page.goto(url());
 		await expect(heading(page, "Page Status", 1)).toBeVisible();
 	});
 
@@ -117,11 +135,9 @@ test.describe("lists", () => {
 
 test.describe("page view", () => {
 	test("shows the status button", async ({ page }) => {
-		await page.goto("/panel/pages/other+page-status+workflow-listed");
+		await page.goto(url("workflow-listed"));
 
-		const button = page
-			.locator(".k-view-buttons")
-			.getByRole("button", { name: "Published" });
+		const button = viewButton(page, "Published");
 
 		await expect(button).toHaveAttribute("title", "Status: Published");
 		await expect(button).toHaveAttribute("data-theme", "positive-icon");
@@ -132,11 +148,8 @@ test.describe("page view", () => {
 	});
 
 	test("shows custom labels and texts in the dialog", async ({ page }) => {
-		await page.goto("/panel/pages/other+page-status+workflow-unlisted");
-		await page
-			.locator(".k-view-buttons")
-			.getByRole("button", { name: "In review" })
-			.click();
+		await page.goto(url("workflow-unlisted"));
+		await viewButton(page, "In review").click();
 
 		await expect(
 			options(page).locator(".k-choice-input-label-text")
@@ -154,11 +167,8 @@ test.describe("page view", () => {
 	});
 
 	test("only offers the statuses of the blueprint", async ({ page }) => {
-		await page.goto("/panel/pages/other+page-status+two-draft");
-		await page
-			.locator(".k-view-buttons")
-			.getByRole("button", { name: "Draft" })
-			.click();
+		await page.goto(url("two-draft"));
+		await viewButton(page, "Draft").click();
 
 		await expect(
 			options(page).locator(".k-choice-input-label-text")
@@ -168,11 +178,8 @@ test.describe("page view", () => {
 
 test("labels the fallback status in the dialog", async ({ page }) => {
 	// the page is listed, but the blueprint has no listed status
-	await page.goto("/panel/pages/other+page-status+fallback-listed");
-	await page
-		.locator(".k-view-buttons")
-		.getByRole("button", { name: "Public" })
-		.click();
+	await page.goto(url("fallback-listed"));
+	await viewButton(page, "Public").click();
 
 	const labels = options(page).locator(".k-choice-input-label-text");
 	await expect(labels).toHaveCount(3);
@@ -189,13 +196,10 @@ test("labels the fallback status in the dialog", async ({ page }) => {
 
 test.describe("changing the status", () => {
 	test("publishes drafts at a position", async ({ page }) => {
-		await page.goto("/panel/pages/other+page-status+default-draft");
-		await page
-			.locator(".k-view-buttons")
-			.getByRole("button", { name: "Draft" })
-			.click();
+		await page.goto(url("default-draft"));
+		await viewButton(page, "Draft").click();
 
-		await dialog(page).locator('input[value="listed"]').check({ force: true });
+		await check(page, "listed");
 
 		// listed pages need a position
 		const position = dialog(page).locator(".k-field-name-position select");
@@ -205,39 +209,30 @@ test.describe("changing the status", () => {
 		await dialog(page).getByRole("button", { name: "Change" }).click();
 		await expect(dialog(page)).toBeHidden();
 
-		await expect(
-			page.locator(".k-view-buttons").getByRole("button", { name: "Public" })
-		).toBeVisible();
-		expect(existsSync(`${target}/1_default-draft`)).toBe(true);
-		expect(existsSync(`${target}/_drafts/default-draft`)).toBe(false);
+		await expect(viewButton(page, "Public")).toBeVisible();
+		expect(exists("1_default-draft")).toBe(true);
+		expect(exists("_drafts/default-draft")).toBe(false);
 	});
 
 	test("unlists listed pages", async ({ page }) => {
-		await page.goto("/panel/pages/other+page-status+default-listed");
-		await page
-			.locator(".k-view-buttons")
-			.getByRole("button", { name: "Public" })
-			.click();
+		await page.goto(url("default-listed"));
+		await viewButton(page, "Public").click();
 
-		await dialog(page)
-			.locator('input[value="unlisted"]')
-			.check({ force: true });
+		await check(page, "unlisted");
 		await expect(dialog(page).locator(".k-field-name-position")).toHaveCount(0);
 		await dialog(page).getByRole("button", { name: "Change" }).click();
 		await expect(dialog(page)).toBeHidden();
 
-		await expect(
-			page.locator(".k-view-buttons").getByRole("button", { name: "Unlisted" })
-		).toBeVisible();
-		expect(existsSync(`${target}/default-listed`)).toBe(true);
-		expect(existsSync(`${target}/1_default-listed`)).toBe(false);
+		await expect(viewButton(page, "Unlisted")).toBeVisible();
+		expect(exists("default-listed")).toBe(true);
+		expect(exists("1_default-listed")).toBe(false);
 	});
 
 	test("changes the status from the list", async ({ page }) => {
-		await page.goto("/panel/pages/other+page-status");
+		await page.goto(url());
 
 		await statusButtons(page, "labels").nth(1).click();
-		await dialog(page).locator('input[value="draft"]').check({ force: true });
+		await check(page, "draft");
 		await dialog(page).getByRole("button", { name: "Change" }).click();
 		await expect(dialog(page)).toBeHidden();
 
@@ -245,22 +240,17 @@ test.describe("changing the status", () => {
 		await expect(
 			field(page, "labels").getByRole("button", { name: "Status: Idea" })
 		).toHaveCount(2);
-		expect(existsSync(`${target}/_drafts/labels-unlisted`)).toBe(true);
+		expect(exists("_drafts/labels-unlisted")).toBe(true);
 	});
 
 	test("cancels the status change", async ({ page }) => {
-		await page.goto("/panel/pages/other+page-status+default-unlisted");
-		await page
-			.locator(".k-view-buttons")
-			.getByRole("button", { name: "Unlisted" })
-			.click();
+		await page.goto(url("default-unlisted"));
+		await viewButton(page, "Unlisted").click();
 
-		await dialog(page).locator('input[value="draft"]').check({ force: true });
+		await check(page, "draft");
 		await dialog(page).getByRole("button", { name: "Cancel" }).click();
 
-		await expect(
-			page.locator(".k-view-buttons").getByRole("button", { name: "Unlisted" })
-		).toBeVisible();
-		expect(existsSync(`${target}/default-unlisted`)).toBe(true);
+		await expect(viewButton(page, "Unlisted")).toBeVisible();
+		expect(exists("default-unlisted")).toBe(true);
 	});
 });

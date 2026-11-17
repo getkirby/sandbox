@@ -4,6 +4,7 @@ import {
 	expectWidths,
 	field,
 	heading,
+	invalid,
 	tab,
 	test
 } from "../fixtures.ts";
@@ -96,11 +97,9 @@ test("shows the help text", async ({ page }) => {
 test("validates required fields", async ({ page }) => {
 	await tab(page, "Validation");
 
-	const invalid = field(page, "required").locator(".k-label-invalid");
-
-	await expect(invalid).toBeVisible();
+	await expect(invalid(page, "required")).toBeVisible();
 	await write(page, "required", "One");
-	await expect(invalid).toBeHidden();
+	await expect(invalid(page, "required")).toBeHidden();
 });
 
 test("aligns fields by width", async ({ page }) => {

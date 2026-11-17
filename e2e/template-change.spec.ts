@@ -1,52 +1,24 @@
-import { cpSync, readdirSync, readFileSync, rmSync } from "node:fs";
+import { readdirSync } from "node:fs";
 import type { Page } from "@playwright/test";
-import { expect, field, heading, test, textbox } from "./fixtures.ts";
+import {
+	dialog,
+	expect,
+	field,
+	heading,
+	openSettingsDialog,
+	readContent,
+	restoreAfterEach,
+	save,
+	test,
+	textbox
+} from "./fixtures.ts";
 
-const source = "environments/lab/content/other/template-change";
-const target = "public/content/other/template-change";
+const scenario = "other/template-change";
 
-const dialog = (page: Page) => page.locator(".k-dialog");
-
-const info = (page: Page) => page.locator(".k-info-field .k-box");
-
-const save = (page: Page) =>
-	page.getByRole("main").getByRole("button", { exact: true, name: "Save" });
-
-/**
- * Returns the template and the stored fields of the page
- */
-const stored = () => {
-	const file = readdirSync(target).find((f) => f.endsWith(".txt"))!;
-	const content: Record<string, string> = {};
-
-	for (const entry of readFileSync(`${target}/${file}`, "utf8").split(
-		/\n----\n/
-	)) {
-		const match = entry.trim().match(/^([^:]+):\s*([\s\S]*)$/);
-
-		if (match !== null) {
-			content[match[1].toLowerCase()] = match[2].trim();
-		}
-	}
-
-	return { content, template: file.replace(/\.en\.txt$/, "") };
-};
-
-const openDialog = async (page: Page) => {
-	await page
-		.getByRole("main")
-		.getByRole("button", { name: "Settings" })
-		.click();
-	await page
-		.locator("dialog[open]")
-		.last()
-		.getByRole("button", { name: "Change template" })
-		.click();
-	await expect(dialog(page)).toBeVisible();
-};
+restoreAfterEach(`content/${scenario}`);
 
 const changeTemplate = async (page: Page, label: string) => {
-	await openDialog(page);
+	await openSettingsDialog(page, "Change template");
 	await dialog(page).getByRole("combobox").selectOption({ label });
 	await dialog(page).getByRole("button", { name: "Change" }).click();
 	await expect(dialog(page)).toBeHidden();
@@ -63,13 +35,24 @@ const fillTemplateA = async (page: Page) => {
 	await expect(save(page)).toBeHidden();
 };
 
+const info = (page: Page) => page.locator(".k-info-field .k-box");
+
 /**
- * Restores the content of the lab page after each test
+ * Returns the content files of the page
  */
-test.afterEach(() => {
-	rmSync(target, { force: true, recursive: true });
-	cpSync(source, target, { recursive: true });
-});
+const files = () => readdirSync(`public/content/${scenario}`);
+
+/**
+ * Returns the template and the stored fields of the page
+ */
+const stored = () => {
+	const file = files().find((f) => f.endsWith(".txt"))!;
+
+	return {
+		content: readContent(`${scenario}/${file}`),
+		template: file.replace(/\.en\.txt$/, "")
+	};
+};
 
 test.beforeEach(async ({ page }) => {
 	await page.goto("/panel/pages/other+template-change");
@@ -88,7 +71,7 @@ test("shows the fields of the current template", async ({ page }) => {
 });
 
 test("offers the allowed templates", async ({ page }) => {
-	await openDialog(page);
+	await openSettingsDialog(page, "Change template");
 
 	await expect(dialog(page)).toContainText(
 		"Changing the page's template will remove content for fields that don't match in type. Use with caution."
@@ -103,7 +86,7 @@ test("offers the allowed templates", async ({ page }) => {
 });
 
 test("cancels the template change", async ({ page }) => {
-	await openDialog(page);
+	await openSettingsDialog(page, "Change template");
 	await dialog(page)
 		.getByRole("combobox")
 		.selectOption({ label: "Template B" });
@@ -125,7 +108,7 @@ test("switches to the other template", async ({ page }) => {
 	).toHaveAttribute("type", "number");
 
 	expect(stored().template).toBe("template-b");
-	expect(readdirSync(target)).not.toContain("template-a.en.txt");
+	expect(files()).not.toContain("template-a.en.txt");
 });
 
 test("converts the content to the new template", async ({ page }) => {

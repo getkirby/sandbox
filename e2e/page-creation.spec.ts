@@ -1,23 +1,27 @@
-import { cpSync, existsSync, readdirSync, readFileSync, rmSync } from "node:fs";
+import { existsSync, readdirSync } from "node:fs";
 import type { Page } from "@playwright/test";
-import { expect, field, heading, test } from "./fixtures.ts";
+import {
+	dialog,
+	expect,
+	field,
+	heading,
+	invalid,
+	readContent,
+	restoreAfterEach,
+	test,
+	titles
+} from "./fixtures.ts";
 
-const source = "environments/lab/content/other/page-creation";
-const target = "public/content/other/page-creation";
+const scenario = "other/page-creation";
+const source = `environments/lab/content/${scenario}`;
+const target = `public/content/${scenario}`;
+const url = "/panel/pages/other+page-creation";
 
-const dialog = (page: Page) => page.locator(".k-dialog");
-
-const add = (page: Page, name: string) =>
-	field(page, name).locator("header").getByRole("button", { name: "Add" });
-
-const input = (page: Page, label: string | RegExp) =>
-	dialog(page)
-		.locator(".k-field")
-		.filter({ has: page.locator(".k-label-text", { hasText: label }) })
-		.getByRole("textbox");
-
-const create = (page: Page) =>
-	dialog(page).getByRole("button", { name: /^Create as/ });
+/**
+ * Restores the content of the lab page after each test,
+ * which removes all pages created by the test
+ */
+restoreAfterEach(`content/${scenario}`);
 
 type Stored = {
 	content: Record<string, string>;
@@ -25,13 +29,25 @@ type Stored = {
 	template: string;
 };
 
+const add = (page: Page, name: string) =>
+	field(page, name).locator("header").getByRole("button", { name: "Add" });
+
+const create = (page: Page) =>
+	dialog(page).getByRole("button", { name: /^Create as/ });
+
+const input = (page: Page, label: string | RegExp) =>
+	dialog(page)
+		.locator(".k-field")
+		.filter({ has: page.locator(".k-label-text", { hasText: label }) })
+		.getByRole("textbox");
+
 /**
  * Reads the stored page with the given slug
  * from the content folder of the lab page
  */
 const stored = (slug: string): Stored | null => {
 	const candidates = [
-		...(existsSync(`${target}/_drafts`)
+		...(existsSync(`${target}/_drafts`) === true
 			? readdirSync(`${target}/_drafts`).map((dir) => `_drafts/${dir}`)
 			: []),
 		...readdirSync(target)
@@ -46,20 +62,9 @@ const stored = (slug: string): Stored | null => {
 	}
 
 	const file = readdirSync(`${target}/${dir}`).find((f) => f.endsWith(".txt"))!;
-	const content: Record<string, string> = {};
-
-	for (const entry of readFileSync(`${target}/${dir}/${file}`, "utf8").split(
-		/\n----\n/
-	)) {
-		const match = entry.trim().match(/^([^:]+):\s*([\s\S]*)$/);
-
-		if (match !== null) {
-			content[match[1].toLowerCase()] = match[2].trim();
-		}
-	}
 
 	return {
-		content,
+		content: readContent(`${scenario}/${dir}/${file}`),
 		status: dir.startsWith("_drafts/")
 			? "draft"
 			: /^\d+_/.test(dir)
@@ -69,17 +74,8 @@ const stored = (slug: string): Stored | null => {
 	};
 };
 
-/**
- * Restores the content of the lab page after each test,
- * which removes all pages created by the test
- */
-test.afterEach(() => {
-	rmSync(target, { force: true, recursive: true });
-	cpSync(source, target, { recursive: true });
-});
-
 test.beforeEach(async ({ page }) => {
-	await page.goto("/panel/pages/other+page-creation");
+	await page.goto(url);
 	await expect(heading(page, "Page Creation", 1)).toBeVisible();
 });
 
@@ -146,12 +142,8 @@ test("uses a custom slug", async ({ page }) => {
 test("requires a title and a slug", async ({ page }) => {
 	await add(page, "simpleFields").click();
 
-	await expect(
-		dialog(page).locator(".k-field-name-title .k-label-invalid")
-	).toBeVisible();
-	await expect(
-		dialog(page).locator(".k-field-name-slug .k-label-invalid")
-	).toBeVisible();
+	await expect(invalid(page, "title")).toBeVisible();
+	await expect(invalid(page, "slug")).toBeVisible();
 
 	await create(page).click();
 	await expect(dialog(page)).toBeVisible();
@@ -172,9 +164,7 @@ test("stays on the current view without redirect", async ({ page }) => {
 
 	await expect(dialog(page)).toBeHidden();
 	await expect(page).toHaveURL(/\/panel\/pages\/other\+page-creation$/);
-	await expect(field(page, "noRedirect").locator(".k-item-title")).toHaveText([
-		"No Redirect"
-	]);
+	await expect(titles(page, "noRedirect")).toHaveText(["No Redirect"]);
 	expect(stored("no-redirect")?.status).toBe("draft");
 });
 
@@ -188,10 +178,10 @@ test("creates listed pages", async ({ page }) => {
 	expect(stored("listed-page")?.status).toBe("listed");
 
 	// the page shows up in the list of listed pages
-	await page.goto("/panel/pages/other+page-creation");
-	await expect(
-		field(page, "statusListedFiltered").locator(".k-item-title")
-	).toHaveText(["Listed Page"]);
+	await page.goto(url);
+	await expect(titles(page, "statusListedFiltered")).toHaveText([
+		"Listed Page"
+	]);
 });
 
 test("creates unlisted pages", async ({ page }) => {
@@ -203,10 +193,10 @@ test("creates unlisted pages", async ({ page }) => {
 	await expect(page).toHaveURL(/\+unlisted-page$/);
 	expect(stored("unlisted-page")?.status).toBe("unlisted");
 
-	await page.goto("/panel/pages/other+page-creation");
-	await expect(
-		field(page, "statusUnlistedFiltered").locator(".k-item-title")
-	).toHaveText(["Unlisted Page"]);
+	await page.goto(url);
+	await expect(titles(page, "statusUnlistedFiltered")).toHaveText([
+		"Unlisted Page"
+	]);
 });
 
 test("asks for required fields of listed pages", async ({ page }) => {
@@ -215,11 +205,8 @@ test("asks for required fields of listed pages", async ({ page }) => {
 	await expect(create(page)).toHaveText("Create as Public");
 
 	// the required fields are part of the dialog
-	const fieldA = dialog(page).locator(".k-field-name-fielda");
-	const fieldB = dialog(page).locator(".k-field-name-fieldb");
-
-	await expect(fieldA.locator(".k-label-invalid")).toBeVisible();
-	await expect(fieldB.locator(".k-label-invalid")).toBeVisible();
+	await expect(invalid(page, "fieldA")).toBeVisible();
+	await expect(invalid(page, "fieldB")).toBeVisible();
 
 	await create(page).click();
 	await expect(dialog(page)).toBeVisible();
@@ -262,24 +249,21 @@ test("validates custom fields in the dialog", async ({ page }) => {
 	await add(page, "validateCustomFields").click();
 	await input(page, "Title").fill("Validated");
 
-	const fieldA = dialog(page).locator(".k-field-name-fielda");
-	const fieldB = dialog(page).locator(".k-field-name-fieldb");
-
 	// field A is required
-	await expect(fieldA.locator(".k-label-invalid")).toBeVisible();
+	await expect(invalid(page, "fieldA")).toBeVisible();
 
 	// field B needs 3 to 5 characters
 	await input(page, "Field a").fill("A");
 	await input(page, "Field b").fill("ab");
-	await expect(fieldA.locator(".k-label-invalid")).toBeHidden();
-	await expect(fieldB.locator(".k-label-invalid")).toBeVisible();
+	await expect(invalid(page, "fieldA")).toBeHidden();
+	await expect(invalid(page, "fieldB")).toBeVisible();
 
 	await create(page).click();
 	await expect(dialog(page)).toBeVisible();
 	expect(stored("validated")).toBeNull();
 
 	await input(page, "Field b").fill("abcd");
-	await expect(fieldB.locator(".k-label-invalid")).toBeHidden();
+	await expect(invalid(page, "fieldB")).toBeHidden();
 	await create(page).click();
 
 	await expect(page).toHaveURL(/\+validated$/);

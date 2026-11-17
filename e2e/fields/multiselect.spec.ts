@@ -1,14 +1,14 @@
 import type { Page } from "@playwright/test";
 import {
+	dropdown,
 	expect,
 	expectWidths,
 	field,
 	heading,
+	invalid,
 	tab,
 	test
 } from "../fixtures.ts";
-
-const dropdown = (page: Page) => page.locator("dialog[open]").last();
 
 const open = async (page: Page, name: string) => {
 	await field(page, name).locator(".k-multiselect-input-toggle").click();
@@ -172,20 +172,16 @@ test.describe("validation", () => {
 	});
 
 	test("validates required fields", async ({ page }) => {
-		const invalid = field(page, "required").locator(".k-label-invalid");
-
-		await expect(invalid).toBeVisible();
+		await expect(invalid(page, "required")).toBeVisible();
 		await pick(page, "required", "a");
-		await expect(invalid).toBeHidden();
+		await expect(invalid(page, "required")).toBeHidden();
 	});
 
 	test("validates the minimum number of options", async ({ page }) => {
-		const invalid = field(page, "min").locator(".k-label-invalid");
-
 		await pick(page, "min", "a");
-		await expect(invalid).toBeVisible();
+		await expect(invalid(page, "min")).toBeVisible();
 		await pick(page, "min", "b");
-		await expect(invalid).toBeHidden();
+		await expect(invalid(page, "min")).toBeHidden();
 	});
 
 	test("prevents selecting more than the maximum", async ({ page }) => {

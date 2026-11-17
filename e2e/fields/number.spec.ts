@@ -4,15 +4,13 @@ import {
 	expectWidths,
 	field,
 	heading,
+	invalid,
 	tab,
 	test
 } from "../fixtures.ts";
 
 const input = (page: Page, name: string) =>
 	field(page, name).locator("input.k-number-input");
-
-const invalid = (page: Page, name: string) =>
-	field(page, name).locator(".k-label-invalid");
 
 test.beforeEach(async ({ page }) => {
 	await page.goto("/panel/pages/fields+number");

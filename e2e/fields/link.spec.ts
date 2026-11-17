@@ -1,25 +1,25 @@
 import type { Page } from "@playwright/test";
 import {
+	dropdown,
 	expect,
 	expectWidths,
 	field,
 	heading,
+	invalid,
 	tab,
 	test,
 	textbox
 } from "../fixtures.ts";
 
-const type = (page: Page, name: string) =>
-	field(page, name).getByRole("button").first();
-
 const switchType = async (page: Page, name: string, label: string) => {
 	await type(page, name).click();
-	await page
-		.locator("dialog[open]")
-		.last()
+	await dropdown(page)
 		.getByRole("button", { exact: true, name: label })
 		.click();
 };
+
+const type = (page: Page, name: string) =>
+	field(page, name).getByRole("button").first();
 
 test.beforeEach(async ({ page }) => {
 	await page.goto("/panel/pages/fields+link");
@@ -43,7 +43,7 @@ test("stores URLs by default", async ({ changes, page }) => {
 
 test("offers all link types", async ({ page }) => {
 	await type(page, "link").click();
-	await expect(page.locator("dialog[open]").last()).toMatchAriaSnapshot(`
+	await expect(dropdown(page)).toMatchAriaSnapshot(`
 		- dialog:
 		  - button "Page"
 		  - button "File"
@@ -68,7 +68,7 @@ test("stores email links", async ({ changes, page }) => {
 
 test("limits the link types", async ({ page }) => {
 	await type(page, "options").click();
-	await expect(page.locator("dialog[open]").last()).toMatchAriaSnapshot(`
+	await expect(dropdown(page)).toMatchAriaSnapshot(`
 		- dialog:
 		  - button "Email"
 	`);
@@ -120,11 +120,9 @@ test("shows the help text", async ({ page }) => {
 test("validates required fields", async ({ page }) => {
 	await tab(page, "Validation");
 
-	const invalid = field(page, "required").locator(".k-label-invalid");
-
-	await expect(invalid).toBeVisible();
+	await expect(invalid(page, "required")).toBeVisible();
 	await textbox(page, "required").fill("https://getkirby.com");
-	await expect(invalid).toBeHidden();
+	await expect(invalid(page, "required")).toBeHidden();
 });
 
 test("aligns fields by width", async ({ page }) => {

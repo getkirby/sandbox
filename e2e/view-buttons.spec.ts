@@ -1,6 +1,13 @@
-import { cpSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import type { Page } from "@playwright/test";
-import { expect, heading, isolatedSession, test } from "./fixtures.ts";
+import {
+	expect,
+	heading,
+	isolatedSession,
+	openSettings,
+	restoreAfterEach,
+	test
+} from "./fixtures.ts";
 
 const url = "/panel/pages/other+view-buttons";
 
@@ -9,10 +16,10 @@ const uuid = readFileSync(
 	"utf8"
 ).match(/Uuid: (\w+)/)![1];
 
-const buttons = (page: Page) => page.locator(".k-view-buttons");
-
 const button = (page: Page, name: string) =>
 	buttons(page).getByRole("button", { exact: true, name });
+
+const buttons = (page: Page) => page.locator(".k-view-buttons");
 
 const link = (page: Page, name: string) =>
 	buttons(page).getByRole("link", { exact: true, name });
@@ -78,9 +85,8 @@ test.describe("configured buttons", () => {
 	});
 
 	test("opens the settings dropdown", async ({ page }) => {
-		await button(page, "Settings").click();
+		const dropdown = await openSettings(page);
 
-		const dropdown = page.locator("dialog[open]").last();
 		await expect(
 			dropdown.getByRole("button", { name: "Rename" })
 		).toBeVisible();
@@ -126,12 +132,7 @@ test.describe("translated texts", () => {
 
 	isolatedSession("editor@getkirby.com");
 
-	test.afterEach(() => {
-		rmSync(account, { force: true, recursive: true });
-		cpSync("environments/lab/site/accounts/editor", account, {
-			recursive: true
-		});
-	});
+	restoreAfterEach("site/accounts/editor");
 
 	test("uses the interface language for button texts", async ({ page }) => {
 		await page.goto(url);

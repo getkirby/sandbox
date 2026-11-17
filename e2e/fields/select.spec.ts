@@ -4,15 +4,16 @@ import {
 	expectWidths,
 	field,
 	heading,
+	invalid,
 	tab,
 	test
 } from "../fixtures.ts";
 
-const select = (page: Page, name: string) =>
-	field(page, name).getByRole("combobox");
-
 const options = (page: Page, name: string) =>
 	select(page, name).locator("option");
+
+const select = (page: Page, name: string) =>
+	field(page, name).getByRole("combobox");
 
 test.beforeEach(async ({ page }) => {
 	await page.goto("/panel/pages/fields+select");
@@ -127,11 +128,9 @@ test.describe("options", () => {
 test("validates required fields", async ({ page }) => {
 	await tab(page, "Validation");
 
-	const invalid = field(page, "required").locator(".k-label-invalid");
-
-	await expect(invalid).toBeVisible();
+	await expect(invalid(page, "required")).toBeVisible();
 	await select(page, "required").selectOption("a");
-	await expect(invalid).toBeHidden();
+	await expect(invalid(page, "required")).toBeHidden();
 });
 
 test("aligns fields by width", async ({ page }) => {

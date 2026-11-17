@@ -1,33 +1,25 @@
-import { cpSync, readdirSync, rmSync } from "node:fs";
 import type { Page } from "@playwright/test";
-import { expect, heading, isolatedSession, test } from "./fixtures.ts";
-
-const source = "environments/lab/site/accounts";
-const target = "public/site/accounts";
-
-const dialog = (page: Page) => page.locator(".k-dialog");
-
-const dropdown = (page: Page) => page.locator("dialog[open]").last();
-
-const item = (page: Page, name: string) =>
-	page
-		.locator(".k-item")
-		.filter({ has: page.getByRole("heading", { exact: true, name }) });
-
-const header = (page: Page, name: string) =>
-	page.getByRole("main").getByRole("button", { exact: true, name });
+import {
+	dialog,
+	drawer,
+	dropdown,
+	expect,
+	heading,
+	isolatedSession,
+	item,
+	openSettings,
+	restoreAfterEach,
+	save,
+	test
+} from "./fixtures.ts";
 
 /**
- * Opens the settings dropdown of the current user view
- * and picks the given option
+ * Restores the lab accounts after each test and removes
+ * all accounts created by the test (the admin account
+ * is not part of the lab and stays untouched to keep
+ * the session alive)
  */
-const settings = async (page: Page, option: string) => {
-	await page
-		.getByRole("main")
-		.getByRole("button", { name: "Settings" })
-		.click();
-	await dropdown(page).getByRole("button", { name: option }).click();
-};
+restoreAfterEach("site/accounts", (account) => account !== "admin");
 
 /**
  * Creates a new user via the dialog and returns its id
@@ -41,8 +33,7 @@ const create = async (
 		role = "Editor"
 	}: { email: string; name?: string; password?: string; role?: string }
 ) => {
-	await page.goto("/panel/users");
-	await page.getByRole("button", { name: "Add a new user" }).click();
+	await openCreate(page);
 
 	const inputs = dialog(page).getByRole("textbox");
 	await inputs.nth(0).fill(name);
@@ -64,24 +55,30 @@ const create = async (
 };
 
 /**
- * Restores the lab accounts after each test and removes
- * all accounts created by the test (the admin account
- * stays untouched to keep the session alive)
+ * Returns a button in the header of the user view
+ * (exact names, as "Editor" is part of the email address)
  */
-test.afterEach(() => {
-	const originals = readdirSync(source);
+const header = (page: Page, name: string) =>
+	page.getByRole("main").getByRole("button", { exact: true, name });
 
-	for (const account of readdirSync(target)) {
-		if (account !== "admin" && originals.includes(account) === false) {
-			rmSync(`${target}/${account}`, { force: true, recursive: true });
-		}
-	}
+/**
+ * Opens the dialog to create a new user
+ */
+const openCreate = async (page: Page) => {
+	await page.goto("/panel/users");
+	await page.getByRole("button", { name: "Add a new user" }).click();
+};
 
-	for (const account of originals) {
-		rmSync(`${target}/${account}`, { force: true, recursive: true });
-		cpSync(`${source}/${account}`, `${target}/${account}`, { recursive: true });
-	}
-});
+/**
+ * Opens the settings dropdown of the current user view
+ * and picks the given option
+ */
+const settings = async (page: Page, option: string) => {
+	const menu = await openSettings(page);
+	await menu.getByRole("button", { name: option }).click();
+};
+
+const titles = (page: Page) => page.locator(".k-item-title");
 
 test.describe("list", () => {
 	test.beforeEach(async ({ page }) => {
@@ -89,11 +86,7 @@ test.describe("list", () => {
 	});
 
 	test("lists all users with their roles", async ({ page }) => {
-		await expect(page.locator(".k-item-title")).toHaveText([
-			"admin",
-			"client",
-			"editor"
-		]);
+		await expect(titles(page)).toHaveText(["admin", "client", "editor"]);
 		await expect(page.locator(".k-item-info")).toHaveText([
 			"Admin",
 			"Client",
@@ -125,7 +118,7 @@ test.describe("list", () => {
 		]) {
 			await tabs.getByRole("link", { exact: true, name: role }).click();
 			await expect(page).toHaveURL(new RegExp(`role=${role.toLowerCase()}`));
-			await expect(page.locator(".k-item-title")).toHaveText([user]);
+			await expect(titles(page)).toHaveText([user]);
 		}
 
 		await tabs.getByRole("link", { exact: true, name: "All" }).click();
@@ -166,8 +159,7 @@ test.describe("list", () => {
 
 test.describe("create", () => {
 	test("offers all roles and languages", async ({ page }) => {
-		await page.goto("/panel/users");
-		await page.getByRole("button", { name: "Add a new user" }).click();
+		await openCreate(page);
 
 		await expect(dialog(page).locator(".k-choice-input-label")).toHaveText([
 			/^Admin/,
@@ -205,8 +197,7 @@ test.describe("create", () => {
 	});
 
 	test("requires a valid email address", async ({ page }) => {
-		await page.goto("/panel/users");
-		await page.getByRole("button", { name: "Add a new user" }).click();
+		await openCreate(page);
 
 		const email = dialog(page).locator(".k-field").nth(1);
 		await expect(email.locator(".k-label-invalid")).toBeVisible();
@@ -223,8 +214,7 @@ test.describe("create", () => {
 		test.use({ ignoreErrors: [/status of 400|already exists/] });
 
 		test("rejects existing email addresses", async ({ page }) => {
-			await page.goto("/panel/users");
-			await page.getByRole("button", { name: "Add a new user" }).click();
+			await openCreate(page);
 
 			await dialog(page)
 				.getByRole("textbox")
@@ -304,10 +294,7 @@ test.describe("user view", () => {
 		await expect(header(page, "Client")).toBeVisible();
 
 		await page.goto("/panel/users?role=client");
-		await expect(page.locator(".k-item-title")).toHaveText([
-			"client",
-			"editor"
-		]);
+		await expect(titles(page)).toHaveText(["client", "editor"]);
 	});
 
 	test("changes the language", async ({ page }) => {
@@ -323,8 +310,8 @@ test.describe("user view", () => {
 		const bio = page.locator(".k-field-name-bio textarea");
 
 		await bio.fill("Hi-diddly-ho, neighborino!");
-		await page.getByRole("button", { name: "Save" }).click();
-		await expect(page.getByRole("button", { name: "Save" })).toBeHidden();
+		await save(page).click();
+		await expect(save(page)).toBeHidden();
 
 		await page.reload();
 		await expect(bio).toHaveValue("Hi-diddly-ho, neighborino!");
@@ -350,16 +337,15 @@ test.describe("user view", () => {
 	test("shows the security settings", async ({ page }) => {
 		await settings(page, "Security");
 
-		const drawer = page.locator(".k-drawer");
-		await expect(drawer.getByRole("heading", { level: 2 })).toHaveText(
+		await expect(drawer(page).getByRole("heading", { level: 2 })).toHaveText(
 			["Account", "Sign in methods", "Two-factor methods"],
 			{ useInnerText: true }
 		);
 		await expect(
-			drawer.getByRole("button", { name: "Password" })
+			drawer(page).getByRole("button", { name: "Password" })
 		).toBeVisible();
 		await expect(
-			drawer.getByRole("button", { name: "Authenticator app" })
+			drawer(page).getByRole("button", { name: "Authenticator app" })
 		).toBeVisible();
 	});
 
@@ -377,10 +363,7 @@ test.describe("user view", () => {
 			await dialog(page).getByRole("button", { name: "Delete" }).click();
 
 			await expect(page).toHaveURL(/\/panel\/users$/);
-			await expect(page.locator(".k-item-title")).toHaveText([
-				"admin",
-				"client"
-			]);
+			await expect(titles(page)).toHaveText(["admin", "client"]);
 		});
 	});
 
@@ -396,15 +379,10 @@ test.describe("user view", () => {
 test.describe("password", () => {
 	isolatedSession("admin@getkirby.com");
 
-	test("changes the password", async ({ page, playwright }) => {
-		const { request } = playwright;
-
+	test("changes the password", async ({ page, session }) => {
 		await page.goto("/panel/users/editor");
 		await settings(page, "Security");
-		await page
-			.locator(".k-drawer")
-			.getByRole("button", { name: "Password" })
-			.click();
+		await drawer(page).getByRole("button", { name: "Password" }).click();
 
 		const inputs = dialog(page).getByRole("textbox");
 		await expect(dialog(page)).toContainText("Account: admin@getkirby.com");
@@ -418,21 +396,13 @@ test.describe("password", () => {
 
 		// sign in with the new password in a separate session
 		// (logging out here would end the shared admin session)
-		const session = await request.newContext({
-			baseURL: test.info().project.use.baseURL,
-			ignoreHTTPSErrors: true
+		const login = await (
+			await session()
+		).post("/api/auth/login", {
+			data: { email: "editor@getkirby.com", password: "okilydokily" }
 		});
 
-		try {
-			const login = await session.post("/api/auth/login", {
-				data: { email: "editor@getkirby.com", password: "okilydokily" },
-				headers: { "x-csrf": "dev" }
-			});
-
-			expect(login.ok()).toBe(true);
-		} finally {
-			await session.dispose();
-		}
+		expect(login.ok()).toBe(true);
 	});
 });
 
@@ -459,7 +429,7 @@ test.describe("permissions", () => {
 	});
 
 	test("only lists the own account for clients", async ({ page }) => {
-		await expect(page.locator(".k-item-title")).toHaveText(["client"]);
+		await expect(titles(page)).toHaveText(["client"]);
 		await expect(
 			page.getByRole("button", { name: "Add a new user" })
 		).toBeDisabled();

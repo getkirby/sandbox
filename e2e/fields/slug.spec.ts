@@ -3,6 +3,7 @@ import {
 	expectWidths,
 	field,
 	heading,
+	invalid,
 	tab,
 	test,
 	textbox
@@ -88,20 +89,16 @@ test.describe("validation", () => {
 	});
 
 	test("validates required fields", async ({ page }) => {
-		const invalid = field(page, "required").locator(".k-label-invalid");
-
-		await expect(invalid).toBeVisible();
+		await expect(invalid(page, "required")).toBeVisible();
 		await textbox(page, "required").pressSequentially("kirby");
-		await expect(invalid).toBeHidden();
+		await expect(invalid(page, "required")).toBeHidden();
 	});
 
 	test("validates the minimum length", async ({ page }) => {
-		const invalid = field(page, "minlength").locator(".k-label-invalid");
-
 		await textbox(page, "minlength").pressSequentially("kirby");
-		await expect(invalid).toBeVisible();
+		await expect(invalid(page, "minlength")).toBeVisible();
 		await textbox(page, "minlength").pressSequentially("-rocks");
-		await expect(invalid).toBeHidden();
+		await expect(invalid(page, "minlength")).toBeHidden();
 	});
 
 	test("limits the maximum length", async ({ page }) => {

@@ -1,37 +1,20 @@
-import { copyFileSync, readdirSync, rmSync } from "node:fs";
 import type { Page } from "@playwright/test";
-import { expect, heading, test } from "./fixtures.ts";
+import {
+	dialog,
+	dropdown,
+	expect,
+	heading,
+	item,
+	restoreAfterEach,
+	test,
+	viewButton
+} from "./fixtures.ts";
 
-const source = "environments/lab/site/languages";
-const target = "public/site/languages";
-
-const dialog = (page: Page) => page.locator(".k-dialog");
-
-const item = (page: Page, name: string) =>
-	page
-		.locator(".k-item")
-		.filter({ has: page.getByRole("heading", { exact: true, name }) });
-
-const options = async (page: Page, name: string) => {
-	await item(page, name).getByRole("button", { name: "Options" }).click();
-	return page.locator("dialog[open]").last();
-};
-
-const definition = (page: Page, term: string) =>
-	page
-		.getByRole("main")
-		.locator(".k-stat")
-		.filter({
-			has: page.locator("dt", { hasText: new RegExp(`^\\s*${term}\\s*$`) })
-		})
-		.locator("dd");
-
-const variables = (page: Page) => page.getByRole("main").locator("tbody tr");
-
-const variable = (page: Page, key: string) =>
-	variables(page).filter({
-		has: page.getByRole("cell", { exact: true, name: key })
-	});
+/**
+ * Restores the language files of the lab after each test,
+ * which also removes all languages created by the test
+ */
+restoreAfterEach("site/languages");
 
 /**
  * Creates a new language via the dialog
@@ -61,23 +44,34 @@ const create = async (
 	await expect(dialog(page)).toBeHidden();
 };
 
+const definition = (page: Page, term: string) =>
+	page
+		.getByRole("main")
+		.locator(".k-stat")
+		.filter({
+			has: page.locator("dt", { hasText: new RegExp(`^\\s*${term}\\s*$`) })
+		})
+		.locator("dd");
+
+const options = async (page: Page, name: string) => {
+	await item(page, name).getByRole("button", { name: "Options" }).click();
+	return dropdown(page);
+};
+
+const variable = (page: Page, key: string) =>
+	variables(page).filter({
+		has: page.getByRole("cell", { exact: true, name: key })
+	});
+
 /**
- * Restores the language files of the lab after each test,
- * which also removes all languages created by the test
+ * Opens the options dropdown of a variable and picks the given option
  */
-test.afterEach(() => {
-	const originals = readdirSync(source);
+const variableOption = async (page: Page, key: string, option: string) => {
+	await variable(page, key).getByRole("button", { name: "Options" }).click();
+	await dropdown(page).getByRole("button", { name: option }).click();
+};
 
-	for (const file of readdirSync(target)) {
-		if (originals.includes(file) === false) {
-			rmSync(`${target}/${file}`);
-		}
-	}
-
-	for (const file of originals) {
-		copyFileSync(`${source}/${file}`, `${target}/${file}`);
-	}
-});
+const variables = (page: Page) => page.getByRole("main").locator("tbody tr");
 
 test.describe("list", () => {
 	test.beforeEach(async ({ page }) => {
@@ -245,10 +239,7 @@ test.describe("edit", () => {
 	test("changes the language settings", async ({ page }) => {
 		await create(page, "Français");
 		await page.goto("/panel/languages/fr");
-		await page
-			.getByRole("main")
-			.getByRole("button", { name: "Settings" })
-			.click();
+		await viewButton(page, "Settings").click();
 
 		const inputs = dialog(page).getByRole("textbox");
 		await expect(inputs.nth(1)).toBeDisabled();
@@ -320,14 +311,7 @@ test.describe("variables", () => {
 		await expect(variables(page)).toHaveCount(4);
 
 		// edit
-		await variable(page, "greeting")
-			.getByRole("button", { name: "Options" })
-			.click();
-		await page
-			.locator("dialog[open]")
-			.last()
-			.getByRole("button", { name: "Edit" })
-			.click();
+		await variableOption(page, "greeting", "Edit");
 		await expect(dialog(page).getByRole("textbox").nth(0)).toBeDisabled();
 		await dialog(page).getByRole("textbox").nth(1).fill("Howdy");
 		await dialog(page).getByRole("button", { name: "Save" }).click();
@@ -335,14 +319,7 @@ test.describe("variables", () => {
 		await expect(variable(page, "greeting")).toContainText("Howdy");
 
 		// delete
-		await variable(page, "greeting")
-			.getByRole("button", { name: "Options" })
-			.click();
-		await page
-			.locator("dialog[open]")
-			.last()
-			.getByRole("button", { name: "Delete" })
-			.click();
+		await variableOption(page, "greeting", "Delete");
 		await dialog(page).getByRole("button", { name: "Delete" }).click();
 
 		await expect(variable(page, "greeting")).toHaveCount(0);
@@ -378,7 +355,7 @@ test.describe("variables", () => {
 			.getByRole("button", { name: "Options" })
 			.click();
 
-		const menu = page.locator("dialog[open]").last();
+		const menu = dropdown(page);
 		// keys are managed by the default language
 		await expect(menu.getByRole("button", { name: "Delete" })).toBeDisabled();
 		await menu.getByRole("button", { name: "Edit" }).click();

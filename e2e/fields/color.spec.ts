@@ -1,9 +1,11 @@
 import type { Page } from "@playwright/test";
 import {
+	dropdown,
 	expect,
 	expectWidths,
 	field,
 	heading,
+	invalid,
 	tab,
 	test,
 	textbox
@@ -14,13 +16,13 @@ const enter = async (page: Page, name: string, value: string) => {
 	await textbox(page, name).press("Tab");
 };
 
-const swatch = (page: Page, name: string) =>
-	field(page, name).locator(".k-color-field-picker-toggle .k-color-frame");
-
 const picker = async (page: Page, name: string) => {
 	await field(page, name).locator(".k-color-field-picker-toggle").click();
-	return page.locator("dialog[open]").last();
+	return dropdown(page);
 };
+
+const swatch = (page: Page, name: string) =>
+	field(page, name).locator(".k-color-field-picker-toggle .k-color-frame");
 
 test.beforeEach(async ({ page }) => {
 	await page.goto("/panel/pages/fields+color");
@@ -69,16 +71,14 @@ test("falls back to black for unknown colors", async ({ changes, page }) => {
 	await enter(page, "color", "notacolor");
 
 	await expect(textbox(page, "color")).toHaveValue("#000000");
-	await expect(field(page, "color").locator(".k-label-invalid")).toBeHidden();
+	await expect(invalid(page, "color")).toBeHidden();
 	expect((await changes.saved()).color).toBe("#000000");
 });
 
 test("validates required fields", async ({ page }) => {
-	const invalid = field(page, "required").locator(".k-label-invalid");
-
-	await expect(invalid).toBeVisible();
+	await expect(invalid(page, "required")).toBeVisible();
 	await enter(page, "required", "#336699");
-	await expect(invalid).toBeHidden();
+	await expect(invalid(page, "required")).toBeHidden();
 });
 
 test("shows placeholder and help", async ({ page }) => {

@@ -9,16 +9,16 @@ test.use({ storageState: { cookies: [], origins: [] } });
 // out (401) are logged to the console by the Panel
 test.use({ ignoreErrors: [/status of 40[13]/] });
 
-const email = (page: Page) => page.locator('input[name="email"]');
-const password = (page: Page) => page.locator('input[name="password"]');
-const submit = (page: Page) => page.getByRole("button", { name: "Log in" });
 const alert = (page: Page) => page.locator(".k-login-alert");
+const email = (page: Page) => page.locator('input[name="email"]');
 
 const login = async (page: Page, user: string, pass: string) => {
 	await email(page).fill(user);
 	await password(page).fill(pass);
 	await submit(page).click();
 };
+
+const password = (page: Page) => page.locator('input[name="password"]');
 
 /**
  * The time in seconds until the session cookie expires
@@ -30,6 +30,8 @@ const sessionLifetime = async (page: Page) => {
 	expect(session).toBeDefined();
 	return session!.expires - Date.now() / 1000;
 };
+
+const submit = (page: Page) => page.getByRole("button", { name: "Log in" });
 
 /**
  * Removes the log of failed login attempts, so that

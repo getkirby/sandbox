@@ -1,23 +1,26 @@
-import { cpSync, readFileSync, rmSync } from "node:fs";
 import type { Page } from "@playwright/test";
-import { expect, field, heading, tab, test, textbox } from "./fixtures.ts";
+import {
+	expect,
+	field,
+	heading,
+	invalid,
+	readContent,
+	restoreAfterEach,
+	save,
+	tab,
+	test,
+	textbox
+} from "./fixtures.ts";
 
-const source = "environments/lab/content/other/when";
-const target = "public/content/other/when";
+restoreAfterEach("content/other/when");
+
+/**
+ * Returns the stored fields of the lab page
+ */
+const stored = () => readContent("other/when/when.en.txt");
 
 const toggle = (page: Page, name: string) =>
 	field(page, name).locator(".k-choice-input-label");
-
-const save = (page: Page) =>
-	page.getByRole("main").getByRole("button", { exact: true, name: "Save" });
-
-/**
- * Restores the content of the lab page after each test
- */
-test.afterEach(() => {
-	rmSync(target, { force: true, recursive: true });
-	cpSync(source, target, { recursive: true });
-});
 
 test.beforeEach(async ({ page }) => {
 	await page.goto("/panel/pages/other+when");
@@ -105,35 +108,35 @@ test.describe("validation", () => {
 
 		await toggle(page, "required").click();
 
-		const invalid = field(page, "whenRequired").locator(".k-label-invalid");
-		await expect(invalid).toBeVisible();
+		const marker = invalid(page, "whenRequired");
+		await expect(marker).toBeVisible();
 
 		await textbox(page, "whenRequired").fill("Kirby");
-		await expect(invalid).toBeHidden();
+		await expect(marker).toBeHidden();
 	});
 
 	test("validates conditional minimum lengths", async ({ page }) => {
 		await toggle(page, "minlength").click();
 
-		const invalid = field(page, "whenMinLength").locator(".k-label-invalid");
+		const marker = invalid(page, "whenMinLength");
 
 		await textbox(page, "whenMinLength").fill("abc");
-		await expect(invalid).toBeVisible();
+		await expect(marker).toBeVisible();
 
 		await textbox(page, "whenMinLength").fill("abcdef");
-		await expect(invalid).toBeHidden();
+		await expect(marker).toBeHidden();
 	});
 
 	test("validates conditional email fields", async ({ page }) => {
 		await toggle(page, "email").click();
 
-		const invalid = field(page, "whenEmail").locator(".k-label-invalid");
+		const marker = invalid(page, "whenEmail");
 
 		await textbox(page, "whenEmail").fill("homer");
-		await expect(invalid).toBeVisible();
+		await expect(marker).toBeVisible();
 
 		await textbox(page, "whenEmail").fill("homer@simpson.com");
-		await expect(invalid).toBeHidden();
+		await expect(marker).toBeHidden();
 	});
 
 	test("ignores hidden required fields when saving", async ({ page }) => {
@@ -146,9 +149,7 @@ test.describe("validation", () => {
 		await save(page).click();
 		await expect(save(page)).toBeHidden();
 
-		expect(readFileSync(`${target}/when.en.txt`, "utf8")).toContain(
-			"Email: true"
-		);
+		expect(stored().email).toBe("true");
 	});
 
 	test.describe("visible required fields", () => {
@@ -166,9 +167,7 @@ test.describe("validation", () => {
 			await expect(issues.locator("dd")).toHaveText(["Please enter something"]);
 
 			// the changes are not saved
-			expect(readFileSync(`${target}/when.en.txt`, "utf8")).not.toContain(
-				"Required: true"
-			);
+			expect(stored().required).not.toBe("true");
 
 			await page.keyboard.press("Escape");
 			await expect(issues).toBeHidden();
@@ -176,9 +175,10 @@ test.describe("validation", () => {
 			await save(page).click();
 			await expect(save(page)).toBeHidden();
 
-			const content = readFileSync(`${target}/when.en.txt`, "utf8");
-			expect(content).toContain("Required: true");
-			expect(content).toContain("Whenrequired: Kirby");
+			expect(stored()).toMatchObject({
+				required: "true",
+				whenrequired: "Kirby"
+			});
 		});
 	});
 });

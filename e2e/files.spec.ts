@@ -1,16 +1,19 @@
-import { cpSync, existsSync, readFileSync, rmSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import type { Page } from "@playwright/test";
-import { expect, heading, test } from "./fixtures.ts";
+import {
+	dialog,
+	expect,
+	heading,
+	openSettings,
+	openSettingsDialog,
+	restoreAfterEach,
+	save,
+	test
+} from "./fixtures.ts";
 
 const source = "environments/lab/content/fields/filelist";
 const target = "public/content/fields/filelist";
 const base = "/panel/pages/fields+filelist/files";
-
-const dialog = (page: Page) => page.locator(".k-dialog");
-
-const viewButtons = (page: Page) => page.locator(".k-view-buttons");
-
-const preview = (page: Page) => page.locator(".k-file-preview");
 
 /**
  * Returns the file details as `{ term: value }`
@@ -30,21 +33,10 @@ const details = async (page: Page) => {
 	);
 };
 
-const settings = async (page: Page) => {
-	await viewButtons(page).getByRole("button", { name: "Settings" }).click();
-	return page.locator("dialog[open]").last();
-};
-
 const meta = (filename: string) =>
 	readFileSync(`${target}/${filename}.en.txt`, "utf8");
 
-/**
- * Restores the files of the lab page
- */
-const restore = () => {
-	rmSync(target, { force: true, recursive: true });
-	cpSync(source, target, { recursive: true });
-};
+const preview = (page: Page) => page.locator(".k-file-preview");
 
 test.describe("previews", () => {
 	test("shows images with their details", async ({ page }) => {
@@ -130,7 +122,9 @@ test.describe("navigation", () => {
 	});
 
 	test("links to the file", async ({ page }) => {
-		const open = viewButtons(page).getByRole("link", { name: "Open" });
+		const open = page
+			.locator(".k-view-buttons")
+			.getByRole("link", { name: "Open" });
 		await expect(open).toHaveAttribute(
 			"href",
 			/\/media\/pages\/fields\/filelist\/.+\/creatious-labs-1\.jpg$/
@@ -162,7 +156,7 @@ test.describe("options", () => {
 	test("shows the file options", async ({ page }) => {
 		await page.goto(`${base}/creatious-labs-1.jpg`);
 
-		await expect(await settings(page)).toMatchAriaSnapshot(`
+		await expect(await openSettings(page)).toMatchAriaSnapshot(`
 			- dialog:
 			  - button "Rename"
 			  - button "Change template"
@@ -176,7 +170,7 @@ test.describe("options", () => {
 	test("prevents deleting undeletable files", async ({ page }) => {
 		await page.goto(`${base}/camera.glb`);
 
-		const dropdown = await settings(page);
+		const dropdown = await openSettings(page);
 		await expect(
 			dropdown.getByRole("button", { name: "Delete" })
 		).toBeDisabled();
@@ -187,7 +181,7 @@ test.describe("options", () => {
 });
 
 test.describe("changes", () => {
-	test.afterEach(restore);
+	restoreAfterEach("content/fields/filelist");
 
 	// leaving the view of a renamed or deleted file still sends an
 	// unlock request for the old path, which fails with a 404
@@ -196,11 +190,7 @@ test.describe("changes", () => {
 
 	test("renames files", async ({ page }) => {
 		await page.goto(`${base}/kirby.pdf`);
-		await (
-			await settings(page)
-		)
-			.getByRole("button", { name: "Rename" })
-			.click();
+		await openSettingsDialog(page, "Rename");
 
 		const input = dialog(page).getByRole("textbox");
 		await expect(input).toHaveValue("kirby");
@@ -221,11 +211,7 @@ test.describe("changes", () => {
 
 	test("deletes files", async ({ page }) => {
 		await page.goto(`${base}/kirby.pdf`);
-		await (
-			await settings(page)
-		)
-			.getByRole("button", { name: "Delete" })
-			.click();
+		await openSettingsDialog(page, "Delete");
 
 		await expect(dialog(page)).toContainText("kirby.pdf");
 		await dialog(page).getByRole("button", { name: "Delete" }).click();
@@ -247,9 +233,8 @@ test.describe("changes", () => {
 			.toMatch(/^\d+% \d+%$/);
 
 		// it's an unsaved change like any other content change
-		const save = page.getByRole("button", { exact: true, name: "Save" });
-		await save.click();
-		await expect(save).toBeHidden();
+		await save(page).click();
+		await expect(save(page)).toBeHidden();
 		expect(meta("creatious-labs-1.jpg")).toMatch(/Focus: [\d.]+% [\d.]+%/);
 
 		await preview(page)
@@ -266,7 +251,7 @@ test.describe("changes", () => {
 
 		const chooser = page.waitForEvent("filechooser");
 		await (
-			await settings(page)
+			await openSettings(page)
 		)
 			.getByRole("button", { name: "Replace" })
 			.click();

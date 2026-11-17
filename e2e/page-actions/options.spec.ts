@@ -1,17 +1,18 @@
 import type { Page } from "@playwright/test";
-import { expect, isolatedSession, test } from "../fixtures.ts";
+import {
+	expect,
+	isolatedSession,
+	openSettings,
+	test,
+	viewButton
+} from "../fixtures.ts";
 import { restoreScenario, url } from "./helpers.ts";
 
 restoreScenario();
 
 const settings = async (page: Page, slug: string) => {
 	await page.goto(url(slug));
-	await page
-		.locator(".k-view-buttons")
-		.getByRole("button", { name: "Settings" })
-		.click();
-
-	return page.locator("dialog[open]").last();
+	return openSettings(page);
 };
 
 test("disables all actions via blueprint options", async ({ page }) => {
@@ -52,12 +53,11 @@ test.describe("editors", () => {
 		}
 
 		// all other actions are still available
-		await expect(
-			dropdown.getByRole("button", { name: "Rename" })
-		).toBeEnabled();
-		await expect(
-			dropdown.getByRole("button", { name: "Change URL" })
-		).toBeEnabled();
+		for (const action of ["Rename", "Change URL"]) {
+			await expect(
+				dropdown.getByRole("button", { name: action })
+			).toBeEnabled();
+		}
 	});
 
 	test("can use all actions on regular pages", async ({ page }) => {
@@ -71,54 +71,31 @@ test.describe("editors", () => {
 	});
 });
 
-test.describe("changes of other users", () => {
-	const api = "/api/pages/other+page-actions+page-to-rename/changes";
-	const headers = { "x-csrf": "dev" };
+test("locks pages with unsaved changes of another user", async ({
+	changes,
+	page,
+	session
+}) => {
+	await changes.store(
+		"pages/other+page-actions+page-to-rename",
+		{ text: "Editor change" },
+		{ request: await session("editor@getkirby.com") }
+	);
 
-	test("locks pages with unsaved changes of another user", async ({
-		page,
-		playwright
-	}) => {
-		// store unsaved changes as editor in a separate session
-		// (request contexts inherit the admin's storage state by default,
-		// so logging in would switch the shared admin session to the editor)
-		const editor = await playwright.request.newContext({
-			storageState: { cookies: [], origins: [] }
-		});
+	await page.goto(`${url("page-to-rename")}?language=en`);
 
-		try {
-			await editor.get("/env/auth/editor@getkirby.com");
-			const response = await editor.post(`${api}/save?language=en`, {
-				data: { text: "Editor change" },
-				headers
-			});
-			expect(response.ok()).toBe(true);
+	// the lock shows the editing user
+	await expect(page.locator(".k-form-controls").getByRole("button")).toHaveText(
+		"editor@getkirby.com"
+	);
 
-			await page.goto(`${url("page-to-rename")}?language=en`);
+	// the form shows the editor's changes, but can't be edited
+	await expect(page.locator(".k-field-name-text input")).toHaveValue(
+		"Editor change"
+	);
+	await expect(page.locator(".k-field-name-text input")).toBeDisabled();
 
-			// the lock shows the editing user
-			await expect(
-				page.locator(".k-form-controls").getByRole("button")
-			).toHaveText("editor@getkirby.com");
-
-			// the form shows the editor's changes, but can't be edited
-			await expect(page.locator(".k-field-name-text input")).toHaveValue(
-				"Editor change"
-			);
-			await expect(page.locator(".k-field-name-text input")).toBeDisabled();
-
-			// all page actions are blocked
-			await expect(
-				page
-					.locator(".k-view-buttons")
-					.getByRole("button", { name: "Settings" })
-			).toBeDisabled();
-			await expect(
-				page.locator(".k-view-buttons").getByRole("button", { name: "Public" })
-			).toBeDisabled();
-		} finally {
-			await editor.post(`${api}/discard?language=en`, { headers });
-			await editor.dispose();
-		}
-	});
+	// all page actions are blocked
+	await expect(viewButton(page, "Settings")).toBeDisabled();
+	await expect(viewButton(page, "Public")).toBeDisabled();
 });

@@ -4,15 +4,16 @@ import {
 	expectWidths,
 	field,
 	heading,
+	invalid,
 	tab,
 	test
 } from "../fixtures.ts";
 
-const toggle = (page: Page, name: string) =>
-	field(page, name).locator("input.k-toggle-input");
-
 const text = (page: Page, name: string) =>
 	field(page, name).locator(".k-choice-input-label-text");
+
+const toggle = (page: Page, name: string) =>
+	field(page, name).locator("input.k-toggle-input");
 
 test.beforeEach(async ({ page }) => {
 	await page.goto("/panel/pages/fields+toggle");
@@ -65,11 +66,9 @@ test("shows custom texts", async ({ page }) => {
 test("validates required fields", async ({ page }) => {
 	await tab(page, "Validation");
 
-	const invalid = field(page, "required").locator(".k-label-invalid");
-
-	await expect(invalid).toBeVisible();
+	await expect(invalid(page, "required")).toBeVisible();
 	await text(page, "required").click();
-	await expect(invalid).toBeHidden();
+	await expect(invalid(page, "required")).toBeHidden();
 });
 
 test("aligns fields by width", async ({ page }) => {

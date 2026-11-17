@@ -4,12 +4,17 @@ import {
 	expectWidths,
 	field,
 	heading,
+	invalid,
 	tab,
 	test
 } from "../fixtures.ts";
 
 const editor = (page: Page, name: string) =>
 	field(page, name).locator(".ProseMirror");
+
+const selectAll = async (page: Page) => {
+	await page.keyboard.press("ControlOrMeta+a");
+};
 
 const toolbar = (page: Page, name: string) =>
 	field(page, name).locator(".k-writer-toolbar");
@@ -20,10 +25,6 @@ const value = (page: Page, name: string) =>
 const write = async (page: Page, name: string, text: string) => {
 	await editor(page, name).click();
 	await page.keyboard.type(text);
-};
-
-const selectAll = async (page: Page) => {
-	await page.keyboard.press("ControlOrMeta+a");
 };
 
 test.beforeEach(async ({ page }) => {
@@ -278,30 +279,24 @@ test.describe("validation", () => {
 	});
 
 	test("validates required fields", async ({ page }) => {
-		const invalid = field(page, "required").locator(".k-label-invalid");
-
-		await expect(invalid).toBeVisible();
+		await expect(invalid(page, "required")).toBeVisible();
 		await write(page, "required", "Kirby");
-		await expect(invalid).toBeHidden();
+		await expect(invalid(page, "required")).toBeHidden();
 	});
 
 	test("validates the minimum length", async ({ page }) => {
-		const invalid = field(page, "minlength").locator(".k-label-invalid");
-
-		await expect(invalid).toBeHidden();
+		await expect(invalid(page, "minlength")).toBeHidden();
 		await write(page, "minlength", "Kirby");
-		await expect(invalid).toBeVisible();
+		await expect(invalid(page, "minlength")).toBeVisible();
 		await page.keyboard.type(" rocks");
-		await expect(invalid).toBeHidden();
+		await expect(invalid(page, "minlength")).toBeHidden();
 	});
 
 	test("validates the maximum length", async ({ page }) => {
-		const invalid = field(page, "maxlength").locator(".k-label-invalid");
-
 		await write(page, "maxlength", "Kirby");
-		await expect(invalid).toBeHidden();
+		await expect(invalid(page, "maxlength")).toBeHidden();
 		await page.keyboard.type(" is awesome");
-		await expect(invalid).toBeVisible();
+		await expect(invalid(page, "maxlength")).toBeVisible();
 	});
 });
 

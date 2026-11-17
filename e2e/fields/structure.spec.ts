@@ -1,9 +1,13 @@
 import type { Page } from "@playwright/test";
 import {
+	dialog,
+	drawer,
+	dropdown,
 	expect,
 	expectWidths,
 	field,
 	heading,
+	invalid,
 	tab,
 	test
 } from "../fixtures.ts";
@@ -14,22 +18,15 @@ import {
 const add = async (page: Page, name: string, text?: string) => {
 	await field(page, name).getByRole("button", { name: "Add" }).first().click();
 
-	const drawer = page.locator(".k-drawer");
-	await expect(drawer).toBeVisible();
+	await expect(drawer(page)).toBeVisible();
 
 	if (text !== undefined) {
-		await drawer.getByRole("textbox").first().fill(text);
+		await drawer(page).getByRole("textbox").first().fill(text);
 	}
 
 	await page.keyboard.press("Escape");
-	await expect(drawer).toBeHidden();
+	await expect(drawer(page)).toBeHidden();
 };
-
-/**
- * Returns the text of all body rows of the given structure field
- */
-const rows = (page: Page, name: string) =>
-	field(page, name).locator("tbody tr .k-table-column");
 
 const rowOptions = async (page: Page, name: string, index: number) => {
 	await field(page, name)
@@ -38,8 +35,14 @@ const rowOptions = async (page: Page, name: string, index: number) => {
 		.getByRole("button", { name: "Options" })
 		.click();
 
-	return page.locator("dialog[open]").last();
+	return dropdown(page);
 };
+
+/**
+ * Returns the text of all body rows of the given structure field
+ */
+const rows = (page: Page, name: string) =>
+	field(page, name).locator("tbody tr .k-table-column");
 
 test.beforeEach(async ({ page }) => {
 	await page.goto("/panel/pages/fields+structure");
@@ -76,7 +79,7 @@ test("adds rows from the empty state", async ({ page }) => {
 	await field(page, "simple")
 		.getByRole("button", { name: "No entries yet" })
 		.click();
-	await expect(page.locator(".k-drawer")).toBeVisible();
+	await expect(drawer(page)).toBeVisible();
 });
 
 test("edits rows", async ({ page }) => {
@@ -92,7 +95,7 @@ test("edits rows", async ({ page }) => {
 	`);
 
 	await options.getByRole("button", { name: "Edit" }).click();
-	await page.locator(".k-drawer").getByRole("textbox").first().fill("Edited");
+	await drawer(page).getByRole("textbox").first().fill("Edited");
 	await page.keyboard.press("Escape");
 
 	await expect(rows(page, "simple")).toHaveText(["Edited"]);
@@ -113,10 +116,7 @@ test("deletes rows", async ({ page }) => {
 
 	const options = await rowOptions(page, "simple", 0);
 	await options.getByRole("button", { name: "Delete" }).click();
-	await page
-		.locator(".k-dialog")
-		.getByRole("button", { name: "Delete" })
-		.click();
+	await dialog(page).getByRole("button", { name: "Delete" }).click();
 
 	await expect(rows(page, "simple")).toHaveText(["Second"]);
 });
@@ -130,15 +130,8 @@ test("deletes all rows", async ({ page }) => {
 		.getByRole("button")
 		.nth(1)
 		.click();
-	await page
-		.locator("dialog[open]")
-		.last()
-		.getByRole("button", { name: "Delete all" })
-		.click();
-	await page
-		.locator(".k-dialog")
-		.getByRole("button", { name: "Delete" })
-		.click();
+	await dropdown(page).getByRole("button", { name: "Delete all" }).click();
+	await dialog(page).getByRole("button", { name: "Delete" }).click();
 
 	await expect(rows(page, "simple")).toHaveCount(0);
 	await expect(
@@ -170,7 +163,7 @@ test("supports field names in any case", async ({ page }) => {
 		.first()
 		.click();
 
-	const inputs = page.locator(".k-drawer").getByRole("textbox");
+	const inputs = drawer(page).getByRole("textbox");
 	await inputs.nth(0).fill("camel");
 	await inputs.nth(1).fill("kebab");
 	await inputs.nth(2).fill("snake");
@@ -216,19 +209,15 @@ test.describe("validation", () => {
 	});
 
 	test("validates required fields", async ({ page }) => {
-		const invalid = field(page, "required").locator(".k-label-invalid");
-
-		await expect(invalid).toBeVisible();
+		await expect(invalid(page, "required")).toBeVisible();
 		await add(page, "required", "First");
-		await expect(invalid).toBeHidden();
+		await expect(invalid(page, "required")).toBeHidden();
 	});
 
 	test("validates the minimum number of rows", async ({ page }) => {
-		const invalid = field(page, "min").locator(".k-label-invalid");
-
-		await expect(invalid).toBeVisible();
+		await expect(invalid(page, "min")).toBeVisible();
 		await add(page, "min", "First");
-		await expect(invalid).toBeHidden();
+		await expect(invalid(page, "min")).toBeHidden();
 	});
 
 	test("prevents adding more than the maximum number of rows", async ({
@@ -243,14 +232,13 @@ test.describe("validation", () => {
 	});
 
 	test("validates the min/max range", async ({ page }) => {
-		const invalid = field(page, "minmax").locator(".k-label-invalid");
 		const button = field(page, "minmax")
 			.getByRole("button", { name: "Add" })
 			.first();
 
-		await expect(invalid).toBeVisible();
+		await expect(invalid(page, "minmax")).toBeVisible();
 		await add(page, "minmax", "First");
-		await expect(invalid).toBeHidden();
+		await expect(invalid(page, "minmax")).toBeHidden();
 		await add(page, "minmax", "Second");
 		await expect(button).toBeDisabled();
 	});

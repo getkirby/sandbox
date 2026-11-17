@@ -3,6 +3,7 @@ import {
 	expectWidths,
 	field,
 	heading,
+	invalid,
 	tab,
 	test,
 	textbox
@@ -33,13 +34,11 @@ test("uses an email input with defaults", async ({ page }) => {
 });
 
 test("validates email addresses", async ({ page }) => {
-	const invalid = field(page, "email").locator(".k-label-invalid");
-
 	await textbox(page, "email").fill("homer");
-	await expect(invalid).toBeVisible();
+	await expect(invalid(page, "email")).toBeVisible();
 
 	await textbox(page, "email").fill("homer@simpson.com");
-	await expect(invalid).toBeHidden();
+	await expect(invalid(page, "email")).toBeHidden();
 	await expect(field(page, "email").locator(".k-label")).toHaveAttribute(
 		"data-has-diff",
 		"true"
@@ -83,20 +82,16 @@ test.describe("validation", () => {
 	});
 
 	test("validates required fields", async ({ page }) => {
-		const invalid = field(page, "required").locator(".k-label-invalid");
-
-		await expect(invalid).toBeVisible();
+		await expect(invalid(page, "required")).toBeVisible();
 		await textbox(page, "required").fill("homer@simpson.com");
-		await expect(invalid).toBeHidden();
+		await expect(invalid(page, "required")).toBeHidden();
 	});
 
 	test("validates the minimum length", async ({ page }) => {
-		const invalid = field(page, "minlength").locator(".k-label-invalid");
-
 		await textbox(page, "minlength").fill("a@b.de");
-		await expect(invalid).toBeVisible();
+		await expect(invalid(page, "minlength")).toBeVisible();
 		await textbox(page, "minlength").fill("homer@simpson.com");
-		await expect(invalid).toBeHidden();
+		await expect(invalid(page, "minlength")).toBeHidden();
 	});
 
 	test("limits the maximum length", async ({ page }) => {

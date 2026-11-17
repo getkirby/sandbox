@@ -1,6 +1,15 @@
 import { mkdirSync, rmSync, writeFileSync } from "node:fs";
 import type { Locator, Page } from "@playwright/test";
-import { expect, field, tab, test } from "./fixtures.ts";
+import {
+	csrf,
+	dialog,
+	dropdown,
+	expect,
+	field,
+	openChanges,
+	tab,
+	test
+} from "./fixtures.ts";
 
 /**
  * Payload stored as title of the `other/xss/xss-title` page
@@ -171,22 +180,20 @@ test.describe("interaction", () => {
 	});
 
 	test("escapes page titles in picker dialogs", async ({ page }) => {
-		const dialog = page.locator(".k-dialog");
-
 		for (const name of ["pages4", "pages5"]) {
 			await field(page, name)
 				.getByRole("button", { exact: true, name: "Select" })
 				.click();
-			await expect(dialog.locator(".k-item-title")).toHaveText([title]);
+			await expect(dialog(page).locator(".k-item-title")).toHaveText([title]);
 			await expectNoInjection(page);
-			await dialog.getByRole("button", { name: "Cancel" }).click();
+			await dialog(page).getByRole("button", { name: "Cancel" }).click();
 		}
 
 		await field(page, "pages6")
 			.getByRole("button", { exact: true, name: "Select" })
 			.click();
-		await expectRendered(dialog.locator(".k-item-title"));
-		await expectRendered(dialog.locator(".k-item-info"));
+		await expectRendered(dialog(page).locator(".k-item-title"));
+		await expectRendered(dialog(page).locator(".k-item-info"));
 	});
 
 	for (const type of ["multiselect", "tags"]) {
@@ -197,17 +204,16 @@ test.describe("interaction", () => {
 					.first()
 					.click();
 
-				const dropdown = page.locator("dialog[open]").last();
-				await expect(dropdown).toBeVisible();
-				return dropdown;
+				await expect(dropdown(page)).toBeVisible();
+				return dropdown(page);
 			};
 
 			test("strips hardcoded HTML from texts, but not infos", async ({
 				page
 			}) => {
-				const dropdown = await open(page, `${type}7`);
-				const texts = dropdown.locator(".k-choice-input-label-text");
-				const infos = dropdown.locator(".k-choice-input-label-info");
+				const menu = await open(page, `${type}7`);
+				const texts = menu.locator(".k-choice-input-label-text");
+				const infos = menu.locator(".k-choice-input-label-info");
 
 				await expect(texts).toHaveText([ok, title, ok]);
 				await expect(texts.locator("strong")).toHaveCount(0);
@@ -218,16 +224,16 @@ test.describe("interaction", () => {
 			});
 
 			test("escapes options from APIs", async ({ page }) => {
-				const dropdown = await open(page, `${type}8`);
+				const menu = await open(page, `${type}8`);
 				await expect(
-					dropdown.locator(".k-choice-input-label-text").last()
+					menu.locator(".k-choice-input-label-text").last()
 				).toHaveText(option);
 				await expectNoInjection(page);
 			});
 
 			test("strips HTML from API options", async ({ page }) => {
-				const dropdown = await open(page, `${type}9`);
-				const texts = dropdown.locator(".k-choice-input-label-text");
+				const menu = await open(page, `${type}9`);
+				const texts = menu.locator(".k-choice-input-label-text");
 
 				await expect(texts).toHaveText(["Apple", "Microsoft", "Kirby"]);
 				await expect(texts.locator("b")).toHaveCount(0);
@@ -235,10 +241,10 @@ test.describe("interaction", () => {
 
 			test("escapes options from queries", async ({ page }) => {
 				for (const name of [`${type}10`, `${type}11`]) {
-					const dropdown = await open(page, name);
-					await expect(
-						dropdown.locator(".k-choice-input-label-text")
-					).toHaveText([title]);
+					const menu = await open(page, name);
+					await expect(menu.locator(".k-choice-input-label-text")).toHaveText([
+						title
+					]);
 					await expectNoInjection(page);
 					await page.keyboard.press("Escape");
 					await page.keyboard.press("Escape");
@@ -246,8 +252,8 @@ test.describe("interaction", () => {
 			});
 
 			test("strips HTML from HTML queries", async ({ page }) => {
-				const dropdown = await open(page, `${type}12`);
-				const texts = dropdown.locator(".k-choice-input-label-text");
+				const menu = await open(page, `${type}12`);
+				const texts = menu.locator(".k-choice-input-label-text");
 
 				await expect(texts).toHaveText([ok]);
 				await expect(texts.locator("strong")).toHaveCount(0);
@@ -280,31 +286,21 @@ test.describe("other views", () => {
 		await expectNoInjection(page);
 	});
 
-	test("escapes page titles in the changes dialog", async ({ page }) => {
-		const model = "/api/pages/other+xss+xss-title/changes";
-		const options = { headers: { "x-csrf": "dev" } };
-
-		await page.request.post(`${model}/save?language=en`, {
-			...options,
-			data: { safestring: "changed" }
+	test("escapes page titles in the changes dialog", async ({
+		changes,
+		page
+	}) => {
+		await changes.store("pages/other+xss+xss-title", {
+			safestring: "changed"
 		});
 
-		try {
-			await page.goto("/panel/site");
-			await page
-				.getByRole("navigation", { name: "Menu" })
-				.getByRole("button", { name: "Changes" })
-				.click();
+		await page.goto("/panel/site");
+		await openChanges(page);
 
-			await expect(
-				page
-					.locator(".k-dialog")
-					.getByRole("heading", { exact: true, level: 3, name: title })
-			).toBeVisible();
-			await expectNoInjection(page);
-		} finally {
-			await page.request.post(`${model}/discard?language=en`, options);
-		}
+		await expect(
+			dialog(page).getByRole("heading", { exact: true, level: 3, name: title })
+		).toBeVisible();
+		await expectNoInjection(page);
 	});
 
 	test("escapes the language name", async ({ page }) => {
@@ -370,7 +366,7 @@ test.describe("other views", () => {
 					password: "12345678",
 					role: "editor"
 				},
-				headers: { "x-csrf": "dev" }
+				headers: csrf
 			});
 
 			try {
@@ -379,7 +375,7 @@ test.describe("other views", () => {
 				expect(data.name).toBe(`">Malicious string`);
 			} finally {
 				await page.request.delete("/api/users/xss-api@getkirby.com", {
-					headers: { "x-csrf": "dev" }
+					headers: csrf
 				});
 			}
 		});

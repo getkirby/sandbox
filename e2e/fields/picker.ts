@@ -1,11 +1,14 @@
 import type { Page } from "@playwright/test";
 import {
+	dialog,
 	expect,
 	expectWidths,
 	field,
 	heading,
+	invalid,
 	tab,
-	test
+	test,
+	titles
 } from "../fixtures.ts";
 
 type Options = {
@@ -29,13 +32,8 @@ type Options = {
 	type: string;
 };
 
-export const dialog = (page: Page) => page.locator(".k-dialog");
-
 export const dialogItems = (page: Page) =>
 	dialog(page).locator(".k-item-title");
-
-export const items = (page: Page, name: string) =>
-	field(page, name).locator(".k-item-title");
 
 export const open = async (page: Page, name: string) => {
 	await field(page, name)
@@ -48,10 +46,10 @@ export const open = async (page: Page, name: string) => {
 /**
  * Picks the given items in the dialog and confirms the selection
  */
-export const pick = async (page: Page, name: string, ...titles: string[]) => {
+export const pick = async (page: Page, name: string, ...items: string[]) => {
 	await open(page, name);
 
-	for (const title of titles) {
+	for (const title of items) {
 		await dialog(page)
 			.locator(".k-item")
 			.filter({ has: page.getByRole("heading", { exact: true, name: title }) })
@@ -102,7 +100,7 @@ export const pickerTests = (options: Options) => {
 	test("selects items", async ({ changes, page }) => {
 		await pick(page, type, first);
 
-		await expect(items(page, type)).toHaveText([first]);
+		await expect(titles(page, type)).toHaveText([first]);
 		await expect(field(page, type).locator(".k-label")).toHaveAttribute(
 			"data-has-diff",
 			"true"
@@ -116,7 +114,7 @@ export const pickerTests = (options: Options) => {
 	test("selects multiple items", async ({ changes, page }) => {
 		await pick(page, type, first, second);
 
-		await expect(items(page, type)).toHaveText([first, second]);
+		await expect(titles(page, type)).toHaveText([first, second]);
 		expect((await changes.saved())[type]).toHaveLength(2);
 	});
 
@@ -137,7 +135,7 @@ export const pickerTests = (options: Options) => {
 			.getByRole("button", { name: "Remove" })
 			.click();
 
-		await expect(items(page, type)).toHaveText([second]);
+		await expect(titles(page, type)).toHaveText([second]);
 		expect((await changes.saved())[type]).toHaveLength(1);
 	});
 
@@ -154,7 +152,7 @@ export const pickerTests = (options: Options) => {
 	});
 
 	test("disables the field", async ({ page }) => {
-		await expect(items(page, "disabledWithValue")).toHaveText([
+		await expect(titles(page, "disabledWithValue")).toHaveText([
 			options.disabledValue
 		]);
 		await expect(
@@ -181,19 +179,15 @@ export const pickerTests = (options: Options) => {
 		});
 
 		test("validates required fields", async ({ page }) => {
-			const invalid = field(page, "required").locator(".k-label-invalid");
-
-			await expect(invalid).toBeVisible();
+			await expect(invalid(page, "required")).toBeVisible();
 			await pick(page, "required", first);
-			await expect(invalid).toBeHidden();
+			await expect(invalid(page, "required")).toBeHidden();
 		});
 
 		test("validates the minimum", async ({ page }) => {
-			const invalid = field(page, "min").locator(".k-label-invalid");
-
-			await expect(invalid).toBeVisible();
+			await expect(invalid(page, "min")).toBeVisible();
 			await pick(page, "min", first);
-			await expect(invalid).toBeHidden();
+			await expect(invalid(page, "min")).toBeHidden();
 		});
 
 		test("selects a single item for a maximum of one", async ({ page }) => {
@@ -204,7 +198,7 @@ export const pickerTests = (options: Options) => {
 			await pick(page, "max", first);
 			await pick(page, "max", second);
 
-			await expect(items(page, "max")).toHaveText([second], { timeout: 1000 });
+			await expect(titles(page, "max")).toHaveText([second], { timeout: 1000 });
 		});
 	});
 

@@ -1,4 +1,4 @@
-import { expect, field, test } from "../fixtures.ts";
+import { dialog, expect, field, test } from "../fixtures.ts";
 import { items, modelListTests } from "./models.ts";
 
 modelListTests({
@@ -40,10 +40,9 @@ test("shows the page status", async ({ page }) => {
 test("opens the page creation dialog", async ({ page }) => {
 	await field(page, "list").getByRole("button", { name: "Add" }).click();
 
-	const dialog = page.locator(".k-dialog");
-	await expect(dialog).toBeVisible();
-	await expect(dialog.getByRole("textbox").first()).toBeVisible();
+	await expect(dialog(page)).toBeVisible();
+	await expect(dialog(page).getByRole("textbox").first()).toBeVisible();
 
-	await dialog.getByRole("button", { name: "Cancel" }).click();
-	await expect(dialog).toBeHidden();
+	await dialog(page).getByRole("button", { name: "Cancel" }).click();
+	await expect(dialog(page)).toBeHidden();
 });

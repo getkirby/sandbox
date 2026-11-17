@@ -5,6 +5,7 @@ import {
 	expectWidths,
 	field,
 	heading,
+	invalid,
 	tab,
 	test
 } from "../fixtures.ts";
@@ -118,19 +119,15 @@ test.describe("validation", () => {
 	});
 
 	test("validates required fields", async ({ page }) => {
-		const invalid = field(page, "required").locator(".k-label-invalid");
-
-		await expect(invalid).toBeVisible();
+		await expect(invalid(page, "required")).toBeVisible();
 		await choices(page, "required").first().click();
-		await expect(invalid).toBeHidden();
+		await expect(invalid(page, "required")).toBeHidden();
 	});
 
 	test("validates the minimum number of options", async ({ page }) => {
-		const invalid = field(page, "min").locator(".k-label-invalid");
-
-		await expect(invalid).toBeVisible();
+		await expect(invalid(page, "min")).toBeVisible();
 		await choices(page, "min").first().click();
-		await expect(invalid).toBeHidden();
+		await expect(invalid(page, "min")).toBeHidden();
 	});
 
 	test("prevents selecting more than the maximum", async ({ page }) => {
@@ -140,7 +137,7 @@ test.describe("validation", () => {
 		await choices(page, "max").nth(1).click();
 
 		await expect(choice(page, "max", "c")).toBeDisabled();
-		await expect(field(page, "max").locator(".k-label-invalid")).toBeHidden();
+		await expect(invalid(page, "max")).toBeHidden();
 
 		// deselecting enables the remaining options again
 		await choices(page, "max").nth(0).click();

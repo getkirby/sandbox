@@ -3,6 +3,7 @@ import {
 	expectWidths,
 	field,
 	heading,
+	invalid,
 	tab,
 	test,
 	textbox
@@ -29,13 +30,11 @@ test("uses a url input with defaults", async ({ page }) => {
 });
 
 test("validates URLs", async ({ page }) => {
-	const invalid = field(page, "url").locator(".k-label-invalid");
-
 	await textbox(page, "url").fill("getkirby");
-	await expect(invalid).toBeVisible();
+	await expect(invalid(page, "url")).toBeVisible();
 
 	await textbox(page, "url").fill("https://getkirby.com");
-	await expect(invalid).toBeHidden();
+	await expect(invalid(page, "url")).toBeHidden();
 	await expect(field(page, "url").locator(".k-label")).toHaveAttribute(
 		"data-has-diff",
 		"true"
@@ -80,20 +79,16 @@ test.describe("validation", () => {
 	});
 
 	test("validates required fields", async ({ page }) => {
-		const invalid = field(page, "required").locator(".k-label-invalid");
-
-		await expect(invalid).toBeVisible();
+		await expect(invalid(page, "required")).toBeVisible();
 		await textbox(page, "required").fill("https://getkirby.com");
-		await expect(invalid).toBeHidden();
+		await expect(invalid(page, "required")).toBeHidden();
 	});
 
 	test("validates the minimum length", async ({ page }) => {
-		const invalid = field(page, "minlength").locator(".k-label-invalid");
-
 		await textbox(page, "minlength").fill("https://k");
-		await expect(invalid).toBeVisible();
+		await expect(invalid(page, "minlength")).toBeVisible();
 		await textbox(page, "minlength").fill("https://getkirby.com");
-		await expect(invalid).toBeHidden();
+		await expect(invalid(page, "minlength")).toBeHidden();
 	});
 
 	test("limits the maximum length", async ({ page }) => {

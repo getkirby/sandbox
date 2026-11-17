@@ -1,5 +1,5 @@
-import { expect, field, tab, test } from "../fixtures.ts";
-import { modelListTests, titles } from "./models.ts";
+import { expect, field, tab, test, titles } from "../fixtures.ts";
+import { modelListTests } from "./models.ts";
 
 modelListTests({
 	info: /^\d+ × \d+$/,

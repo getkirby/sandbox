@@ -1,30 +1,29 @@
 import { readdirSync } from "node:fs";
 import type { Page } from "@playwright/test";
-import { expect, heading, readContent, test } from "../fixtures.ts";
 import {
-	content,
 	dialog,
-	exists,
-	openAction,
-	restoreScenario,
-	scenario,
-	url
-} from "./helpers.ts";
+	expect,
+	heading,
+	openSettingsDialog,
+	readContent,
+	test
+} from "../fixtures.ts";
+import { content, exists, restoreScenario, scenario, url } from "./helpers.ts";
 
 restoreScenario();
 
 const source = "1_page-with-children-and-files";
 const copy = "_drafts/page-with-children-and-files-copy";
 
-const toggle = (page: Page, name: string) =>
-	dialog(page).locator(`.k-field-name-${name} .k-choice-input-label`);
+const confirm = (page: Page) =>
+	dialog(page).getByRole("button", { name: "Duplicate" });
 
 const duplicate = async (
 	page: Page,
 	{ children = false, files = false } = {}
 ) => {
 	await page.goto(url("page-with-children-and-files"));
-	await openAction(page, "Duplicate");
+	await openSettingsDialog(page, "Duplicate");
 
 	if (files === true) {
 		await toggle(page, "files").click();
@@ -34,16 +33,19 @@ const duplicate = async (
 		await toggle(page, "children").click();
 	}
 
-	await dialog(page).getByRole("button", { name: "Duplicate" }).click();
+	await confirm(page).click();
 	await expect(dialog(page)).toBeHidden();
 };
 
 const entries = (path: string) =>
 	readdirSync(`public/content/${scenario}/${path}`).sort();
 
+const toggle = (page: Page, name: string) =>
+	dialog(page).locator(`.k-field-name-${name} .k-choice-input-label`);
+
 test("suggests a title and URL for the copy", async ({ page }) => {
 	await page.goto(url("page-with-children-and-files"));
-	await openAction(page, "Duplicate");
+	await openSettingsDialog(page, "Duplicate");
 
 	await expect(dialog(page).locator(".k-field-name-title input")).toHaveValue(
 		"Page with children and files Copy"
@@ -114,8 +116,8 @@ test("copies the children", async ({ page }) => {
 
 test("duplicates drafts", async ({ page }) => {
 	await page.goto(url("draft-to-duplicate"));
-	await openAction(page, "Duplicate");
-	await dialog(page).getByRole("button", { name: "Duplicate" }).click();
+	await openSettingsDialog(page, "Duplicate");
+	await confirm(page).click();
 	await expect(dialog(page)).toBeHidden();
 
 	expect(exists("_drafts/draft-to-duplicate-copy")).toBe(true);
@@ -128,11 +130,11 @@ test.describe("taken URLs", () => {
 
 	test("rejects URLs of existing pages", async ({ page }) => {
 		await page.goto(url("page-with-children-and-files"));
-		await openAction(page, "Duplicate");
+		await openSettingsDialog(page, "Duplicate");
 		await dialog(page)
 			.locator(".k-field-name-slug input")
 			.fill("page-with-taken-slug");
-		await dialog(page).getByRole("button", { name: "Duplicate" }).click();
+		await confirm(page).click();
 
 		await expect(dialog(page)).toContainText("already exists");
 		expect(exists("_drafts/page-with-taken-slug")).toBe(false);

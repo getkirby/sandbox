@@ -4,6 +4,7 @@ import {
 	expectWidths,
 	field,
 	heading,
+	invalid,
 	tab,
 	test
 } from "../fixtures.ts";
@@ -115,11 +116,9 @@ test.describe("validation", () => {
 		// Remove this line once fixed.
 		test.fail();
 
-		const invalid = field(page, "required").locator(".k-label-invalid");
-
-		await expect(invalid).toBeVisible({ timeout: 1000 });
+		await expect(invalid(page, "required")).toBeVisible({ timeout: 1000 });
 		await slider(page, "required").fill("5");
-		await expect(invalid).toBeHidden();
+		await expect(invalid(page, "required")).toBeHidden();
 	});
 
 	test("limits the range to min and max", async ({ page }) => {

@@ -1,24 +1,15 @@
 import type { Page } from "@playwright/test";
 import {
+	dialog,
+	dropdown,
 	expect,
 	expectWidths,
 	field,
 	heading,
+	invalid,
 	tab,
 	test
 } from "../fixtures.ts";
-
-const items = (page: Page, name: string) =>
-	field(page, name).locator(".k-entries-field-item");
-
-const inputs = (page: Page, name: string) =>
-	items(page, name).locator(".k-entries-field-item-input input");
-
-const option = (page: Page, name: string, index: number, label: string) =>
-	items(page, name)
-		.nth(index)
-		.locator(".k-entries-field-item-options")
-		.getByRole("button", { exact: true, name: label });
 
 const add = async (page: Page, name: string) => {
 	await field(page, name)
@@ -36,6 +27,18 @@ const fill = async (page: Page, name: string, ...values: string[]) => {
 		await inputs(page, name).last().fill(value);
 	}
 };
+
+const inputs = (page: Page, name: string) =>
+	items(page, name).locator(".k-entries-field-item-input input");
+
+const items = (page: Page, name: string) =>
+	field(page, name).locator(".k-entries-field-item");
+
+const option = (page: Page, name: string, index: number, label: string) =>
+	items(page, name)
+		.nth(index)
+		.locator(".k-entries-field-item-options")
+		.getByRole("button", { exact: true, name: label });
 
 test.beforeEach(async ({ page }) => {
 	await page.goto("/panel/pages/fields+entries");
@@ -113,7 +116,7 @@ test("deletes all entries", async ({ page }) => {
 		.nth(1)
 		.click();
 
-	const menu = page.locator("dialog[open]").last();
+	const menu = dropdown(page);
 	await expect(menu).toMatchAriaSnapshot(`
 		- dialog:
 		  - button "Copy all"
@@ -122,10 +125,7 @@ test("deletes all entries", async ({ page }) => {
 	`);
 
 	await menu.getByRole("button", { name: "Delete all" }).click();
-	await page
-		.locator(".k-dialog")
-		.getByRole("button", { name: "Delete" })
-		.click();
+	await dialog(page).getByRole("button", { name: "Delete" }).click();
 
 	await expect(field(page, "entries").locator(".k-empty")).toBeVisible();
 });
@@ -208,20 +208,16 @@ test.describe("validation", () => {
 	});
 
 	test("validates required fields", async ({ page }) => {
-		const invalid = field(page, "required").locator(".k-label-invalid");
-
-		await expect(invalid).toBeVisible();
+		await expect(invalid(page, "required")).toBeVisible();
 		await fill(page, "required", "One");
-		await expect(invalid).toBeHidden();
+		await expect(invalid(page, "required")).toBeHidden();
 	});
 
 	test("validates the minimum number of entries", async ({ page }) => {
-		const invalid = field(page, "min").locator(".k-label-invalid");
-
 		await fill(page, "min", "One", "Two");
-		await expect(invalid).toBeVisible();
+		await expect(invalid(page, "min")).toBeVisible();
 		await fill(page, "min", "Three");
-		await expect(invalid).toBeHidden();
+		await expect(invalid(page, "min")).toBeHidden();
 	});
 
 	test("prevents adding more than the maximum", async ({ page }) => {

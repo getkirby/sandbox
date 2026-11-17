@@ -1,61 +1,26 @@
-import { cpSync, readFileSync, rmSync } from "node:fs";
 import type { Page } from "@playwright/test";
-import { expect, field, heading, test, textbox } from "./fixtures.ts";
+import {
+	dialog,
+	expect,
+	field,
+	heading,
+	openSettingsDialog,
+	readContent,
+	restoreAfterEach,
+	save,
+	test,
+	textbox,
+	titles
+} from "./fixtures.ts";
 
-const source = "environments/lab/content/other/file-template-change";
-const target = "public/content/other/file-template-change";
 const filename = "could-be-hawaii.jpg";
-const url = `/panel/pages/other+file-template-change/files/${filename}`;
+const parent = "/panel/pages/other+file-template-change";
+const url = `${parent}/files/${filename}`;
 
-const dialog = (page: Page) => page.locator(".k-dialog");
-
-const info = (page: Page) => page.locator(".k-info-field .k-box");
-
-const save = (page: Page) =>
-	page.getByRole("main").getByRole("button", { exact: true, name: "Save" });
-
-const templateStat = (page: Page) =>
-	page
-		.getByRole("main")
-		.getByRole("term")
-		.filter({ hasText: /^Template$/ })
-		.locator("xpath=following-sibling::dd[1]");
-
-/**
- * Returns the stored meta data of the file
- */
-const stored = () => {
-	const content: Record<string, string> = {};
-
-	for (const entry of readFileSync(
-		`${target}/${filename}.en.txt`,
-		"utf8"
-	).split(/\n----\n/)) {
-		const match = entry.trim().match(/^([^:]+):\s*([\s\S]*)$/);
-
-		if (match !== null) {
-			content[match[1].toLowerCase()] = match[2].trim();
-		}
-	}
-
-	return content;
-};
-
-const openDialog = async (page: Page) => {
-	await page
-		.getByRole("main")
-		.getByRole("button", { name: "Settings" })
-		.click();
-	await page
-		.locator("dialog[open]")
-		.last()
-		.getByRole("button", { name: "Change template" })
-		.click();
-	await expect(dialog(page)).toBeVisible();
-};
+restoreAfterEach("content/other/file-template-change");
 
 const changeTemplate = async (page: Page, template: string) => {
-	await openDialog(page);
+	await openSettingsDialog(page, "Change template");
 	await dialog(page).getByRole("combobox").selectOption(template);
 	await dialog(page).getByRole("button", { name: "Change" }).click();
 	await expect(dialog(page)).toBeHidden();
@@ -72,20 +37,24 @@ const fillTemplateA = async (page: Page) => {
 	await expect(save(page)).toBeHidden();
 };
 
-const titles = (page: Page, name: string) =>
-	field(page, name).locator(".k-item-title");
+const info = (page: Page) => page.locator(".k-info-field .k-box");
 
 /**
- * Restores the page and its file after each test
+ * Returns the stored meta data of the file
  */
-test.afterEach(() => {
-	rmSync(target, { force: true, recursive: true });
-	cpSync(source, target, { recursive: true });
-});
+const stored = () =>
+	readContent(`other/file-template-change/${filename}.en.txt`);
+
+const templateStat = (page: Page) =>
+	page
+		.getByRole("main")
+		.getByRole("term")
+		.filter({ hasText: /^Template$/ })
+		.locator("xpath=following-sibling::dd[1]");
 
 test.describe("page", () => {
 	test("lists the files by template", async ({ page }) => {
-		await page.goto("/panel/pages/other+file-template-change");
+		await page.goto(parent);
 		await expect(heading(page, "File Template Change", 1)).toBeVisible();
 
 		await expect(titles(page, "filesWithTemplateA")).toHaveText([filename]);
@@ -98,7 +67,7 @@ test.describe("page", () => {
 		await page.goto(url);
 		await changeTemplate(page, "file-template-b");
 
-		await page.goto("/panel/pages/other+file-template-change");
+		await page.goto(parent);
 		await expect(titles(page, "filesWithTemplateB")).toHaveText([filename]);
 		await expect(
 			field(page, "filesWithTemplateA").locator(".k-empty")
@@ -124,7 +93,7 @@ test.describe("file", () => {
 	});
 
 	test("offers the allowed templates", async ({ page }) => {
-		await openDialog(page);
+		await openSettingsDialog(page, "Change template");
 
 		await expect(dialog(page)).toContainText(
 			"Changing the file's template will remove content for fields that don't match in type. If the new template defines certain rules, e.g. image dimensions, those will also be applied irreversibly. Use with caution."
@@ -139,7 +108,7 @@ test.describe("file", () => {
 	});
 
 	test("cancels the template change", async ({ page }) => {
-		await openDialog(page);
+		await openSettingsDialog(page, "Change template");
 		await dialog(page).getByRole("combobox").selectOption("file-template-b");
 		await dialog(page).getByRole("button", { name: "Cancel" }).click();
 
