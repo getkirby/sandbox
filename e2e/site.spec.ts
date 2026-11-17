@@ -147,14 +147,15 @@ test.describe("content", () => {
 		await dialog(page).locator("input").fill("Lab Renamed");
 		await dialog(page).getByRole("button", { name: "Rename" }).click();
 		await expect(heading(page, "Lab Renamed", 1)).toBeVisible();
+		await expect(page).toHaveTitle("Lab Renamed | Lab Renamed");
 
-		// Known bug: the site name part of the window title is not
-		// updated after renaming the site. Remove this line once fixed.
-		test.fail();
-
-		await expect(page).toHaveTitle("Lab Renamed | Lab Renamed", {
-			timeout: 1000
-		});
+		// other views use the new site name without reloading the Panel
+		await page
+			.getByRole("navigation", { name: "Menu" })
+			.getByRole("link", { exact: true, name: "Users" })
+			.click();
+		await expect(heading(page, "Users", 1)).toBeVisible();
+		await expect(page).toHaveTitle("Users | Lab Renamed");
 	});
 
 	test("requires a title when renaming", async ({ page }) => {
