@@ -1,9 +1,5 @@
-import { expect, type Page, test } from "@playwright/test";
-
-let errors: string[];
-
-const heading = (page: Page, name: string, level: number) =>
-	page.getByRole("main").getByRole("heading", { exact: true, level, name });
+import type { Page } from "@playwright/test";
+import { expect, heading, test } from "./fixtures.ts";
 
 const open = async (page: Page, label: string) => {
 	await page
@@ -13,28 +9,7 @@ const open = async (page: Page, label: string) => {
 };
 
 test.beforeEach(async ({ page }) => {
-	errors = [];
-
-	page.on("console", (message) => {
-		if (message.type() === "error") {
-			errors.push(`Console error: ${message.text()}`);
-		}
-	});
-
-	page.on("dialog", async (dialog) => {
-		errors.push(`Unexpected dialog: ${dialog.message()}`);
-		await dialog.dismiss();
-	});
-
-	page.on("pageerror", (error) => {
-		errors.push(`Page error: ${error.message}`);
-	});
-
 	await page.goto("/panel");
-});
-
-test.afterEach(() => {
-	expect(errors).toEqual([]);
 });
 
 test("Site", async ({ page }) => {
