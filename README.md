@@ -104,6 +104,8 @@ npm run test:e2e:ui
 
 The tests run against `https://sandbox.test` by default. Use the `SANDBOX_URL` env variable to point them to a different host.
 
+While `npm run dev` is running in `kirby/panel`, the tests run against the current Panel source from the Vite dev server, otherwise against the built files in `kirby/panel/dist`. The setup prints which assets are used. It fails early if the Panel is in dev mode but the dev server doesn't respond, e.g. because a killed Vite process left a stale `kirby/panel/.vite-running` flag behind.
+
 > [!CAUTION]
 > Every test run starts with a fresh install of the lab environment. This will delete all unstored content, accounts and sessions in your sandbox.
 
