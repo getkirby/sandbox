@@ -13,8 +13,6 @@ tabs:
   content:
     label: Site Content
     fields:
-      title:
-        type: text
       text:
         type: textarea
   files:
