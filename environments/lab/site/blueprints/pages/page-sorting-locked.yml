@@ -1,0 +1,9 @@
+title: Unsortable page
+
+options:
+  sort: false
+
+fields:
+  info:
+    type: info
+    text: A listed page that can't be moved, as its blueprint disables sorting.

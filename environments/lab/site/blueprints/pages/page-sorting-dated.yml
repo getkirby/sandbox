@@ -1,0 +1,9 @@
+title: Page sorted by date
+
+num: "{{ page.date.toDate('Ymd') }}"
+
+fields:
+  date:
+    type: date
+    required: true
+    help: The date sets the position of the page.

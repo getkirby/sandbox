@@ -1,0 +1,111 @@
+title: Page Sorting
+
+fields:
+  info:
+    label: Usage
+    type: info
+    text: |
+      Drag and drop the pages in the sortable lists to change their position. Only listed pages carry a sort number. Unlisted pages and drafts can't be sorted.
+      "Earth" uses a blueprint with `options: sort: false` and must keep its position.
+
+  listed:
+    label: Listed pages (sortable)
+    type: pagelist
+    status: listed
+    templates:
+      - page-sorting-item
+      - page-sorting-locked
+    layout: list
+    image: false
+    help: Drag and drop to change the order. "Earth" can't be moved.
+
+  all:
+    label: All pages (sortable, mixed statuses)
+    type: pagelist
+    status: all
+    templates:
+      - page-sorting-item
+      - page-sorting-locked
+    layout: list
+    image: false
+    help: Only the listed pages can be sorted. Unlisted pages and drafts have no sort handle.
+
+  unlisted:
+    label: Unlisted pages (not sortable)
+    type: pagelist
+    status: unlisted
+    templates:
+      - page-sorting-item
+    layout: list
+    image: false
+
+  drafts:
+    label: Drafts (not sortable)
+    type: pagelist
+    status: draft
+    templates:
+      - page-sorting-item
+    layout: list
+    image: false
+
+  notSortable:
+    label: Listed pages with sorting disabled
+    type: pagelist
+    status: listed
+    templates:
+      - page-sorting-item
+      - page-sorting-locked
+    sortable: false
+    layout: list
+    image: false
+
+  sortedByTitle:
+    label: Listed pages sorted by title (not sortable)
+    type: pagelist
+    status: listed
+    templates:
+      - page-sorting-item
+      - page-sorting-locked
+    sortBy: title asc
+    layout: list
+    image: false
+
+  flipped:
+    label: Listed pages in reverse order (not sortable)
+    type: pagelist
+    status: listed
+    templates:
+      - page-sorting-item
+      - page-sorting-locked
+    flip: true
+    layout: list
+    image: false
+
+  cards:
+    label: Listed pages as cards (sortable)
+    type: pagelist
+    status: listed
+    templates:
+      - page-sorting-item
+      - page-sorting-locked
+    layout: cards
+    image: false
+
+  table:
+    label: Listed pages as table (sortable)
+    type: pagelist
+    status: listed
+    templates:
+      - page-sorting-item
+      - page-sorting-locked
+    layout: table
+    image: false
+
+  dated:
+    label: Pages sorted by date (not sortable)
+    type: pagelist
+    status: listed
+    template: page-sorting-dated
+    layout: list
+    image: false
+    help: These pages use `num` with a date, so their position is set by the date field.

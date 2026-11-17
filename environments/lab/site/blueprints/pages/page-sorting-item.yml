@@ -1,0 +1,6 @@
+title: Sortable page
+
+fields:
+  info:
+    type: info
+    text: A page that can be sorted when it's listed.
