@@ -7,7 +7,7 @@ options:
 fields:
   info:
     type: info
-    text: "Current template: {{ file.intendedTemplate }}"
+    text: "Current template: {{ file.template }}"
   onlyInTemplateB:
     label: Only in Template B
     type: text
