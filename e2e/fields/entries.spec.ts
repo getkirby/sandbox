@@ -151,6 +151,20 @@ test("shows the help text", async ({ page }) => {
 	);
 });
 
+test("prefills new entries with the default value", async ({ page }) => {
+	// Known bug: the entry field's `default` is no longer exported
+	// to the Panel, so new entries start empty. Remove this line once fixed.
+	test.fail();
+
+	await tab(page, "Defaults");
+	await add(page, "fieldWithDefaultValue");
+
+	await expect(inputs(page, "fieldWithDefaultValue").first()).toHaveValue(
+		"Some default text",
+		{ timeout: 1000 }
+	);
+});
+
 test.describe("types", () => {
 	test.beforeEach(async ({ page }) => {
 		await tab(page, "Types");

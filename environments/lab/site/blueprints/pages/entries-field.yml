@@ -17,19 +17,10 @@ tabs:
     fields:
       fieldWithDefaultValue:
         label: Field with default value
-        type: object
-        fields:
-          text:
-            type: text
-            default: Some default text
-      disabledFieldWithDefaultValue:
-        label: Disabled field with default value
-        type: object
-        fields:
-          text:
-            type: text
-            default: Some default text
-            disabled: true
+        type: entries
+        field:
+          type: text
+          default: Some default text
 
   types:
     fields:
