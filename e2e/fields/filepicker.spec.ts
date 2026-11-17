@@ -1,10 +1,20 @@
-import { expect, heading, test } from "../fixtures.ts";
+import { expect, field, test } from "../fixtures.ts";
+import { pickerTests } from "./picker.ts";
 
-test.beforeEach(async ({ page }) => {
-	await page.goto("/panel/pages/fields+filepicker");
+pickerTests({
+	disabledValue: "creatious-labs-1.jpg",
+	empty: "No files selected yet",
+	items: ["creatious-labs-1.jpg", "creatious-labs-2.jpg"],
+	scheme: "file",
+	title: "Filepicker",
+	type: "filepicker"
 });
 
-test("renders the filepicker fields", async ({ page }) => {
-	await expect(heading(page, "Filepicker", 1)).toBeVisible();
-	await expect(page.locator(".k-field-type-filepicker").first()).toBeVisible();
+test("offers uploads", async ({ page }) => {
+	await expect(
+		field(page, "filepicker").getByRole("button", { name: "Upload" })
+	).toBeVisible();
+	await expect(
+		field(page, "disabled").getByRole("button", { name: "Upload" })
+	).toHaveCount(0);
 });
