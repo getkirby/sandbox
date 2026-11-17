@@ -1,3 +1,4 @@
+import { cpSync, readFileSync, rmSync } from "node:fs";
 import { test as base, expect, type Page } from "@playwright/test";
 
 type Fixtures = {
@@ -184,6 +185,40 @@ export const isolatedSession = (email: string) => {
 
 export const heading = (page: Page, name: string, level: number) =>
 	page.getByRole("main").getByRole("heading", { exact: true, level, name });
+
+/**
+ * Reads a content file of the installed lab and returns
+ * its fields with lowercase keys, e.g. `{ title: "Lab" }`
+ *
+ * @param file Path relative to `public/content`
+ */
+export const readContent = (file: string): Record<string, string> => {
+	const content: Record<string, string> = {};
+	const text = readFileSync(`public/content/${file}`, "utf8");
+
+	for (const entry of text.split(/\n----\n/)) {
+		const match = entry.trim().match(/^([^:]+):\s*([\s\S]*)$/);
+
+		if (match !== null) {
+			content[match[1].toLowerCase()] = match[2].trim();
+		}
+	}
+
+	return content;
+};
+
+/**
+ * Restores a content folder of the installed lab
+ * from the lab environment
+ *
+ * @param path Path relative to the `content` folder
+ */
+export const restoreContent = (path: string) => {
+	rmSync(`public/content/${path}`, { force: true, recursive: true });
+	cpSync(`environments/lab/content/${path}`, `public/content/${path}`, {
+		recursive: true
+	});
+};
 
 /**
  * Selects a tab of the current model view

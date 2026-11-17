@@ -1,0 +1,5 @@
+Title: Page with admin-only actions
+
+----
+
+Uuid: 14j8tc5bp7la660s

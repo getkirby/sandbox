@@ -1,0 +1,13 @@
+title: Page actions (forbidden move target)
+
+fields:
+  info:
+    type: info
+    text: Pages with the "Page actions (all actions)" template can't be moved here, as this page only accepts subpages with its own template.
+  subpages:
+    label: Subpages
+    type: pagelist
+    templates:
+      - page-actions-forbidden-target
+    layout: list
+    image: false

@@ -1,0 +1,17 @@
+title: Page actions (admin only)
+
+options:
+  delete:
+    admin: true
+    "*": false
+  duplicate:
+    admin: true
+    "*": false
+  move:
+    admin: true
+    "*": false
+
+fields:
+  info:
+    type: info
+    text: Only admins can duplicate, move and delete this page.

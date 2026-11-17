@@ -1,0 +1,29 @@
+title: Page Actions
+
+fields:
+  info:
+    label: Usage
+    type: info
+    text: |
+      Each page is meant for a specific page action (see its title). Use the options of a page to rename, change the URL, duplicate, move or delete it.
+
+  pages:
+    label: Pages
+    type: pagelist
+    status: all
+    templates:
+      - page-actions-default
+      - page-actions-disabled
+      - page-actions-admin-only
+    layout: list
+    image: false
+
+  targets:
+    label: Move targets
+    type: pagelist
+    status: all
+    templates:
+      - page-actions-allowed-target
+      - page-actions-forbidden-target
+    layout: list
+    image: false

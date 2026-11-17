@@ -1,0 +1,13 @@
+title: Page actions (allowed move target)
+
+fields:
+  info:
+    type: info
+    text: Pages with the "Page actions (all actions)" template can be moved here.
+  subpages:
+    label: Subpages
+    type: pagelist
+    templates:
+      - page-actions-default
+    layout: list
+    image: false

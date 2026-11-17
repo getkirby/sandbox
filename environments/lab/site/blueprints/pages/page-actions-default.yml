@@ -1,0 +1,14 @@
+title: Page actions (all actions)
+
+fields:
+  text:
+    type: text
+  subpages:
+    label: Subpages
+    type: pagelist
+    templates:
+      - page-actions-default
+    layout: list
+    image: false
+  files:
+    type: filelist
