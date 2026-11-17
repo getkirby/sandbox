@@ -28,7 +28,7 @@ tabs:
         type: number
         help: Show field below if number is "5"
       whenNumber:
-        label: When Toggle is "5"
+        label: When Number is "5"
         type: text
         when:
           number: 5
