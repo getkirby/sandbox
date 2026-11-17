@@ -26,9 +26,9 @@ We recommend to setup a `sandbox.test` virtual host for your shiny new sandbox a
 
 ## Accounts
 
-The sandbox comes with an admin account with the email `test@getkirby.com` and the password `12345678`.
+The sandbox comes with an admin account with the email `admin@getkirby.com` and the password `12345678`.
 
-You can manually log in with the user or use the route `http://sandbox.test/env/auth/test@getkirby.com` to get logged in automatically.
+You can manually log in with the user or use the route `http://sandbox.test/env/auth/admin@getkirby.com` to get logged in automatically.
 
 ## Switching environments
 
@@ -47,7 +47,7 @@ You can switch between environments via the environment UI at `http://sandbox.te
 
 ### Installing accounts when switching envionments
 
-If you switch the environment using the UI, the `test@getkirby.com` account is automatically installed to the site.
+If you switch the environment using the UI, the `admin@getkirby.com` account is automatically installed to the site.
 
 Other accounts can be installed using the following route:
 
@@ -85,6 +85,27 @@ Clicking just "Store" will store the changes to the selected environment.
 Clicking "Store & Switch" will first store the changes in the _current_ environment and then switch to the selected new environment.
 
 If you want to create an entirely new environment, enter the name in the text field and click "Store".
+
+## E2E tests
+
+The sandbox comes with a [Playwright](https://playwright.dev) setup for end-to-end tests against the lab environment. The tests live in `/e2e`.
+
+```console
+# install Playwright and its browser
+npm i
+npx playwright install chromium
+
+# run the tests
+npm run test:e2e
+
+# or run them in Playwright's UI mode
+npm run test:e2e:ui
+```
+
+The tests run against `https://sandbox.test` by default. Use the `SANDBOX_URL` env variable to point them to a different host.
+
+> [!CAUTION]
+> Every test run starts with a fresh install of the lab environment. This will delete all unstored content, accounts and sessions in your sandbox.
 
 ## Creating environments
 

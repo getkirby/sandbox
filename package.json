@@ -1,0 +1,12 @@
+{
+	"name": "kirby-sandbox",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"test:e2e": "playwright test",
+		"test:e2e:ui": "playwright test --ui"
+	},
+	"devDependencies": {
+		"@playwright/test": "^1.65.1"
+	}
+}
