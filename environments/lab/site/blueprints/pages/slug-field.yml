@@ -45,7 +45,7 @@ tabs:
         maxlength: 10
       minlength:
         type: slug
-        maxlength: 10
+        minlength: 10
 
   widths:
     fields:

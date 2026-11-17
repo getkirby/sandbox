@@ -42,6 +42,14 @@ test("stores the phone number", async ({ page }) => {
 });
 
 test("shows before and after texts", async ({ page }) => {
+	await expect(field(page, "before").locator(".k-input-before")).toHaveText(
+		"Before"
+	);
+	await expect(field(page, "after").locator(".k-input-after")).toHaveText(
+		"After"
+	);
+	await expect(field(page, "after").locator(".k-input-before")).toHaveCount(0);
+
 	const all = field(page, "beforeAndAfterAndIcon");
 	await expect(all.locator(".k-input-before")).toHaveText("Before");
 	await expect(all.locator(".k-input-after")).toHaveText("After");

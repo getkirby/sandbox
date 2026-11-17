@@ -15,7 +15,7 @@ tabs:
         before: Before
       after:
         type: tel
-        before: After
+        after: After
       beforeAndAfter:
         type: tel
         before: Before

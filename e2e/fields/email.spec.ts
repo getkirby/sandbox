@@ -90,6 +90,15 @@ test.describe("validation", () => {
 		await expect(invalid).toBeHidden();
 	});
 
+	test("validates the minimum length", async ({ page }) => {
+		const invalid = field(page, "minlength").locator(".k-label-invalid");
+
+		await textbox(page, "minlength").fill("a@b.de");
+		await expect(invalid).toBeVisible();
+		await textbox(page, "minlength").fill("homer@simpson.com");
+		await expect(invalid).toBeHidden();
+	});
+
 	test("limits the maximum length", async ({ page }) => {
 		await textbox(page, "maxlength").pressSequentially("homer@simpson.com");
 		await expect(textbox(page, "maxlength")).toHaveValue("homer@simp");

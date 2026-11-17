@@ -95,6 +95,15 @@ test.describe("validation", () => {
 		await expect(invalid).toBeHidden();
 	});
 
+	test("validates the minimum length", async ({ page }) => {
+		const invalid = field(page, "minlength").locator(".k-label-invalid");
+
+		await textbox(page, "minlength").pressSequentially("kirby");
+		await expect(invalid).toBeVisible();
+		await textbox(page, "minlength").pressSequentially("-rocks");
+		await expect(invalid).toBeHidden();
+	});
+
 	test("limits the maximum length", async ({ page }) => {
 		await textbox(page, "maxlength").pressSequentially("kirby-is-awesome");
 		await expect(textbox(page, "maxlength")).toHaveValue("kirby-is-a");
