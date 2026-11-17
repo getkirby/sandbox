@@ -2,6 +2,7 @@ import { test as base, expect, type Page } from "@playwright/test";
 
 type Fixtures = {
 	changes: {
+		saved: () => Promise<Record<string, unknown>>;
 		settled: () => Promise<void>;
 	};
 	errors: string[];
@@ -18,6 +19,7 @@ export const test = base.extend<Fixtures>({
 		async ({ page }, use) => {
 			const models = new Map<string, string>();
 			let pending = 0;
+			let values: Record<string, unknown> = {};
 
 			const isSave = (url: string) => url.includes("/changes/save");
 			const done = (url: string) => isSave(url) === true && pending--;
@@ -28,6 +30,7 @@ export const test = base.extend<Fixtures>({
 
 				if (match !== null) {
 					models.set(match[1], url.search);
+					values = { ...values, ...request.postDataJSON() };
 					pending++;
 				}
 			});
@@ -44,7 +47,16 @@ export const test = base.extend<Fixtures>({
 				await expect.poll(() => pending).toBe(0);
 			};
 
-			await use({ settled });
+			/**
+			 * Returns the latest stored values of all fields
+			 * (keys are the lowercase field names)
+			 */
+			const saved = async () => {
+				await settled();
+				return values;
+			};
+
+			await use({ saved, settled });
 
 			if (models.size === 0) {
 				return;

@@ -147,10 +147,10 @@ test("deletes all rows", async ({ page }) => {
 });
 
 test("disables the field", async ({ page }) => {
+	await expect(field(page, "disabled")).toContainText("No entries yet");
 	await expect(
 		field(page, "disabled").getByRole("button", { name: "Add" })
 	).toHaveCount(0);
-	await expect(field(page, "disabled")).toContainText("No entries yet");
 
 	await expect(rows(page, "disabledWithValue")).toHaveText(["This is a value"]);
 	await expect(

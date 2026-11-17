@@ -149,6 +149,7 @@ test.describe("toolbar", () => {
 	});
 
 	test("hides the toolbar when disabled", async ({ page }) => {
+		await expect(editor(page, "toolbarDisabled")).toBeVisible();
 		await expect(toolbar(page, "toolbarDisabled")).toHaveCount(0);
 	});
 });
