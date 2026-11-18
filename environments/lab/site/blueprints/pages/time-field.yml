@@ -168,3 +168,16 @@ tabs:
           timeDisplay:
             type: time
             display: hh:mm a
+      columnPreview:
+        type: pagelist
+        layout: table
+        query: page.parent.children.filterBy("slug", "time")
+        columns:
+          isoTime:
+            label: ISO time
+            type: time
+            value: "14:30:00"
+          shortTime:
+            label: Short time
+            type: time
+            value: "09:05"

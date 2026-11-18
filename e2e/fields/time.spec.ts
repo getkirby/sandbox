@@ -196,3 +196,21 @@ test("aligns fields by width", async ({ page }) => {
 	await tab(page, "Widths");
 	await expectWidths(page);
 });
+
+test.describe("preview", () => {
+	test.beforeEach(async ({ page }) => {
+		// the "Preview" view button has the same name as the tab
+		await page.goto("/panel/pages/fields+time?tab=preview");
+	});
+
+	const cell = (page: Page, column: string) =>
+		field(page, "columnPreview").locator(`td[data-column-id="${column}"]`);
+
+	test("formats ISO times in table columns", async ({ page }) => {
+		await expect(cell(page, "isoTime")).toHaveText("14:30");
+	});
+
+	test("shows other times in table columns as is", async ({ page }) => {
+		await expect(cell(page, "shortTime")).toHaveText("09:05");
+	});
+});
