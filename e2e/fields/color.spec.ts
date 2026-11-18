@@ -6,6 +6,8 @@ import {
 	field,
 	heading,
 	invalid,
+	readContent,
+	restoreAfterEach,
 	tab,
 	test,
 	textbox
@@ -122,6 +124,31 @@ test.describe("formats", () => {
 		expect(saved.rgbformat).toBe("rgb(255 0 0)");
 		expect(saved.hslformat).toBe("hsl(0 100% 50%)");
 	});
+});
+
+test.describe("save shortcuts", () => {
+	restoreAfterEach("content/fields/color");
+
+	test.beforeEach(async ({ page }) => {
+		// the page can only be saved without invalid fields
+		await enter(page, "required", "#336699");
+	});
+
+	for (const key of ["Enter", "Meta+s", "Control+s"]) {
+		test(`converts the typed color when saving with ${key}`, async ({
+			page
+		}) => {
+			// the field still has focus, so the color has not
+			// been converted on blur before the page is saved
+			await textbox(page, "color").fill("rgb(255 0 0)");
+			await textbox(page, "color").press(key);
+
+			await expect(textbox(page, "color")).toHaveValue("#ff0000");
+			await expect
+				.poll(() => readContent("fields/color/color-field.en.txt").color)
+				.toBe("#ff0000");
+		});
+	}
 });
 
 test.describe("options", () => {
