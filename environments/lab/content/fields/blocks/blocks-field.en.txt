@@ -6,6 +6,10 @@ Disabledwithvalue: [{"content":{"text":"<p>This is a value</p>"},"id":"3d8c63b1-
 
 ----
 
+Autofocus: [{"content":{"text":"<p>First block</p>"},"id":"7c1e5f2a-8b3d-4e6f-9a0b-2c4d6e8f0a01","isHidden":false,"type":"text"},{"content":{"text":"<p>Second block</p>"},"id":"7c1e5f2a-8b3d-4e6f-9a0b-2c4d6e8f0a02","isHidden":false,"type":"text"}]
+
+----
+
 Overmax: [{"content":{},"id":"4b0a2a4e-3c1d-4f7e-9d2a-1a6f8e0c9b01","isHidden":false,"type":"line"},{"content":{},"id":"4b0a2a4e-3c1d-4f7e-9d2a-1a6f8e0c9b02","isHidden":false,"type":"line"}]
 
 ----

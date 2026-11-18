@@ -288,6 +288,24 @@ test.describe("validation", () => {
 	});
 });
 
+test("selects and focuses the first block with autofocus", async ({
+	page
+}) => {
+	await tab(page, "Autofocus");
+
+	await expect(blocks(page, "autofocus").first()).toHaveAttribute(
+		"data-selected",
+		"true"
+	);
+	await expect(blocks(page, "autofocus").nth(1)).toHaveAttribute(
+		"data-selected",
+		"false"
+	);
+	await expect(
+		blocks(page, "autofocus").first().locator(".ProseMirror")
+	).toBeFocused();
+});
+
 test("aligns fields by width", async ({ page }) => {
 	await tab(page, "Widths");
 	await expectWidths(page);

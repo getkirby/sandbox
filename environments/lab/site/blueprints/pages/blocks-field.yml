@@ -73,6 +73,12 @@ tabs:
         type: blocks
         max: 1
 
+  autofocus:
+    fields:
+      autofocus:
+        type: blocks
+        autofocus: true
+
   nested:
     fields:
       nestedBlocks:
