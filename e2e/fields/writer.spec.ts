@@ -1,5 +1,7 @@
 import type { Page } from "@playwright/test";
 import {
+	dialog,
+	discard,
 	expect,
 	expectWidths,
 	field,
@@ -290,6 +292,27 @@ test.describe("validation", () => {
 		await expect(invalid(page, "maxlength")).toBeHidden();
 		await page.keyboard.type(" is awesome");
 		await expect(invalid(page, "maxlength")).toBeVisible();
+	});
+
+	test("clears length errors after discarding changes", async ({
+		changes,
+		page
+	}) => {
+		await write(page, "minlength", "Kirby");
+		await write(page, "maxlength", "Kirby is awesome");
+		await expect(invalid(page, "minlength")).toBeVisible();
+		await expect(invalid(page, "maxlength")).toBeVisible();
+		await changes.settled();
+
+		await discard(page).click();
+		await dialog(page).getByRole("button", { name: "Discard" }).click();
+		await expect(discard(page)).toBeHidden();
+
+		// the values are reset to the empty stored values
+		await expect(editor(page, "minlength")).toHaveText("");
+		await expect(editor(page, "maxlength")).toHaveText("");
+		await expect(invalid(page, "minlength")).toBeHidden();
+		await expect(invalid(page, "maxlength")).toBeHidden();
 	});
 });
 
