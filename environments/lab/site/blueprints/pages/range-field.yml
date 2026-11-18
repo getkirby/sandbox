@@ -70,6 +70,12 @@ tabs:
         type: range
         min: 5
         max: 10
+      belowMin:
+        type: range
+        min: 10
+      aboveMax:
+        type: range
+        max: 10
 
   widths:
     fields:

@@ -6,4 +6,12 @@ Disabledwithvalue: 10
 
 ----
 
+Belowmin: 5
+
+----
+
+Abovemax: 20
+
+----
+
 Uuid: ce322e7QZBBPTXBg

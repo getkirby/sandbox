@@ -111,14 +111,22 @@ test.describe("validation", () => {
 	});
 
 	test("validates required fields", async ({ page }) => {
-		// Known bug: the initial validation runs before the input is
-		// mounted, so empty required ranges are never marked as invalid.
-		// Remove this line once fixed.
-		test.fail();
-
-		await expect(invalid(page, "required")).toBeVisible({ timeout: 1000 });
+		await expect(invalid(page, "required")).toBeVisible();
 		await slider(page, "required").fill("5");
 		await expect(invalid(page, "required")).toBeHidden();
+	});
+
+	test("marks stored values outside min and max as invalid", async ({
+		page
+	}) => {
+		await expect(invalid(page, "belowMin")).toBeVisible();
+		await expect(invalid(page, "aboveMax")).toBeVisible();
+
+		await slider(page, "belowMin").fill("10");
+		await expect(invalid(page, "belowMin")).toBeHidden();
+
+		await slider(page, "aboveMax").fill("10");
+		await expect(invalid(page, "aboveMax")).toBeHidden();
 	});
 
 	test("limits the range to min and max", async ({ page }) => {
