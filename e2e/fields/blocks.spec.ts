@@ -261,6 +261,31 @@ test.describe("validation", () => {
 			field(page, "max").getByRole("button", { name: "Add" }).first()
 		).toBeDisabled();
 	});
+
+	test("pastes no blocks into a field over the maximum", async ({
+		context,
+		page
+	}) => {
+		// the field has two stored blocks, but only allows one
+		await expect(blocks(page, "overMax")).toHaveCount(2);
+
+		await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+		await page.evaluate(() =>
+			navigator.clipboard.writeText("<h2>One</h2><h2>Two</h2><h2>Three</h2>")
+		);
+
+		// paste with a selected block (line blocks have no input)
+		await blocks(page, "overMax").first().click();
+		const pasted = page.waitForResponse(/\/fields\/overmax\/paste/i);
+		await page.keyboard.press("ControlOrMeta+v");
+		await pasted;
+
+		await expect(page.locator(".k-panel-notification")).toBeVisible();
+		await expect(blocks(page, "overMax")).toHaveCount(2);
+		await expect(page.locator(".k-panel-notification")).toHaveText(
+			"0 pasted!"
+		);
+	});
 });
 
 test("aligns fields by width", async ({ page }) => {

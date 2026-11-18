@@ -69,6 +69,9 @@ tabs:
       max:
         type: blocks
         max: 1
+      overMax:
+        type: blocks
+        max: 1
 
   nested:
     fields:
