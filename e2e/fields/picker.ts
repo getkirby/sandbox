@@ -191,10 +191,6 @@ export const pickerTests = (options: Options) => {
 		});
 
 		test("selects a single item for a maximum of one", async ({ page }) => {
-			// Known bug: the picker dialog ignores `max: 1` for its select mode
-			// and allows selecting any number of items. Remove this line once fixed.
-			test.fail();
-
 			await pick(page, "max", first);
 			await pick(page, "max", second);
 
