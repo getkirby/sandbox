@@ -10,10 +10,6 @@ import { content, exists, restoreScenario, url } from "./helpers.ts";
 
 restoreScenario();
 
-// leaving the view under its old URL still sends an unlock
-// request for the old path (see issues/unlock-after-delete.md)
-test.use({ ignoreErrors: [/status of 404/] });
-
 const move = (page: Page) =>
 	dialog(page).getByRole("button", { exact: true, name: "Move" });
 

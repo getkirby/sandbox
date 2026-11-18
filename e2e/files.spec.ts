@@ -183,11 +183,6 @@ test.describe("options", () => {
 test.describe("changes", () => {
 	restoreAfterEach("content/fields/filelist");
 
-	// leaving the view of a renamed or deleted file still sends an
-	// unlock request for the old path, which fails with a 404
-	// (see issues/unlock-after-delete.md)
-	test.use({ ignoreErrors: [/status of 404/] });
-
 	test("renames files", async ({ page }) => {
 		await page.goto(`${base}/kirby.pdf`);
 		await openSettingsDialog(page, "Rename");

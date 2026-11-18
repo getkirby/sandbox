@@ -22,10 +22,6 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe("new URL", () => {
-	// leaving the view under its old URL still sends an unlock
-	// request for the old path (see issues/unlock-after-delete.md)
-	test.use({ ignoreErrors: [/status of 404/] });
-
 	test("changes the URL", async ({ page }) => {
 		await openSettingsDialog(page, "Change URL");
 		await expect(slug(page)).toHaveValue("page-to-change-url");

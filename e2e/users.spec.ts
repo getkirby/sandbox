@@ -350,10 +350,6 @@ test.describe("user view", () => {
 	});
 
 	test.describe("deletion", () => {
-		// leaving the view of the deleted user still sends an unlock
-		// request for its changes, which fails silently with a 404
-		test.use({ ignoreErrors: [/status of 404/] });
-
 		test("deletes the user", async ({ page }) => {
 			await settings(page, "Delete this user");
 

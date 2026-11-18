@@ -10,10 +10,6 @@ import { exists, folders, restoreScenario, url } from "./helpers.ts";
 
 restoreScenario();
 
-// leaving the view of the deleted page still sends an unlock
-// request for it, which fails with a 404 (see issues/unlock-after-delete.md)
-test.use({ ignoreErrors: [/status of 404/] });
-
 const parent = /\/panel\/pages\/other\+page-actions$/;
 
 const remove = (page: Page) =>
@@ -45,7 +41,7 @@ test("cancels the deletion", async ({ page }) => {
 
 test.describe("pages with subpages", () => {
 	// the rejected request is logged to the console by the Panel
-	test.use({ ignoreErrors: [/status of 40[04]|enter the page title/] });
+	test.use({ ignoreErrors: [/status of 400|enter the page title/] });
 
 	test.beforeEach(async ({ page }) => {
 		await page.goto(url("page-with-children-and-files"));
