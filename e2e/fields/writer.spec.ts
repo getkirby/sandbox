@@ -156,21 +156,8 @@ test.describe("toolbar", () => {
 });
 
 test.describe("nodes", () => {
-	// Known bug: the `marker` plugin node in the custom nodes field has
-	// no schema, which breaks the ProseMirror schema since v6 and opens
-	// an error dialog when the tab is opened. Remove once fixed.
-	test.use({ ignoreErrors: [/reading 'group'/] });
-
 	test.beforeEach(async ({ page }) => {
 		await tab(page, "Nodes");
-
-		const error = page
-			.getByRole("dialog")
-			.filter({ hasText: "reading 'group'" });
-
-		await expect(error).toBeVisible();
-		await page.keyboard.press("Escape");
-		await expect(error).toBeHidden();
 	});
 
 	const nodes = async (page: Page, name: string) => {
@@ -218,12 +205,18 @@ test.describe("nodes", () => {
 	});
 
 	test("supports custom nodes from plugins", async ({ page }) => {
-		// Known bug: plugin nodes without schema break the ProseMirror
-		// schema ("Cannot read properties of undefined (reading 'group')").
-		// Remove this line once fixed.
-		test.fail();
+		// the `marker` node has no schema and only adds an inline button
+		await expect(
+			toolbar(page, "customNodes").getByRole("button", { name: "Mark" })
+		).toBeVisible();
 
-		await expect(editor(page, "customNodes")).toBeVisible({ timeout: 1000 });
+		const dialog = await nodes(page, "customNodes");
+		await dialog.getByRole("button", { name: "Advert" }).click();
+
+		await page.keyboard.type("Kirby rocks");
+		await expect(value(page, "customNodes")).toHaveValue(
+			"<blockquote><p>Kirby rocks</p></blockquote>"
+		);
 	});
 });
 
