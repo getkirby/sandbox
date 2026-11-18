@@ -3,6 +3,7 @@ import {
 	type APIRequestContext,
 	test as base,
 	expect,
+	type Locator,
 	type Page
 } from "@playwright/test";
 
@@ -400,6 +401,20 @@ export const restoreAfterEach = (
  */
 export const save = (page: Page) =>
 	page.getByRole("main").getByRole("button", { exact: true, name: "Save" });
+
+/**
+ * Returns the selected text of an input,
+ * e.g. to check the `preselect` option of a field
+ */
+export const selectedText = (input: Locator) =>
+	input.evaluate((input: HTMLInputElement) => {
+		// some input types (e.g. `email`) have no selection range
+		if (input.selectionStart === null) {
+			return document.getSelection()?.toString() ?? "";
+		}
+
+		return input.value.slice(input.selectionStart, input.selectionEnd!);
+	});
 
 /**
  * Selects a tab of the current model view

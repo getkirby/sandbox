@@ -9,6 +9,7 @@ import {
 	heading,
 	restoreAfterEach,
 	save,
+	selectedText,
 	tab,
 	test,
 	titles
@@ -138,6 +139,14 @@ test.describe("content", () => {
 		await expect(heading(page, "Lab Renamed", 1)).toBeVisible();
 		await expect(breadcrumb(page)).toHaveText("Lab Renamed");
 		expect(stored()).toContain("Title: Lab Renamed");
+	});
+
+	test("selects the title when opening the rename dialog", async ({ page }) => {
+		await openRename(page);
+
+		const input = dialog(page).locator("input");
+		await expect(input).toBeFocused();
+		await expect.poll(() => selectedText(input)).toBe("Lab");
 	});
 
 	test("updates the site name in the window title after renaming", async ({

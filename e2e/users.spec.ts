@@ -10,6 +10,7 @@ import {
 	openSettings,
 	restoreAfterEach,
 	save,
+	selectedText,
 	test
 } from "./fixtures.ts";
 
@@ -266,6 +267,26 @@ test.describe("user view", () => {
 		await dialog(page).getByRole("button", { name: "Rename" }).click();
 
 		await expect(heading(page, "Ned Flanders", 1)).toBeVisible();
+	});
+
+	test("selects the name when opening the rename dialog", async ({ page }) => {
+		await page
+			.getByRole("main")
+			.getByRole("heading", { level: 1 })
+			.getByRole("button")
+			.click();
+
+		const input = dialog(page).getByRole("textbox");
+		await expect(input).toBeFocused();
+		await expect.poll(() => selectedText(input)).toBe("editor");
+	});
+
+	test("selects the email when opening the email dialog", async ({ page }) => {
+		await header(page, "editor@getkirby.com").click();
+
+		const input = dialog(page).getByRole("textbox");
+		await expect(input).toBeFocused();
+		await expect.poll(() => selectedText(input)).toBe("editor@getkirby.com");
 	});
 
 	test("changes the email address", async ({ page }) => {

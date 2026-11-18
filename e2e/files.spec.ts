@@ -8,6 +8,7 @@ import {
 	openSettingsDialog,
 	restoreAfterEach,
 	save,
+	selectedText,
 	test
 } from "./fixtures.ts";
 
@@ -202,6 +203,15 @@ test.describe("changes", () => {
 		expect(existsSync(`${target}/kirby-manual.pdf`)).toBe(true);
 		expect(existsSync(`${target}/kirby-manual.pdf.en.txt`)).toBe(true);
 		expect(existsSync(`${target}/kirby.pdf`)).toBe(false);
+	});
+
+	test("selects the name when opening the rename dialog", async ({ page }) => {
+		await page.goto(`${base}/kirby.pdf`);
+		await openSettingsDialog(page, "Rename");
+
+		const input = dialog(page).getByRole("textbox");
+		await expect(input).toBeFocused();
+		await expect.poll(() => selectedText(input)).toBe("kirby");
 	});
 
 	test("deletes files", async ({ page }) => {

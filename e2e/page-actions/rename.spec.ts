@@ -5,6 +5,7 @@ import {
 	heading,
 	invalid,
 	openSettingsDialog,
+	selectedText,
 	test,
 	titles
 } from "../fixtures.ts";
@@ -131,19 +132,5 @@ test("renames translations separately", async ({ page }) => {
 test("selects the title when opening the dialog", async ({ page }) => {
 	await openSettingsDialog(page, "Rename");
 	await expect(title(page)).toBeFocused();
-
-	// Known bug: the `preselect` prop of the field is not exported
-	// by the backend, so the title is not selected.
-	// Remove this line once fixed.
-	test.fail();
-
-	await expect
-		.poll(
-			() =>
-				title(page).evaluate((input: HTMLInputElement) =>
-					input.value.slice(input.selectionStart!, input.selectionEnd!)
-				),
-			{ timeout: 1000 }
-		)
-		.toBe("Page to rename");
+	await expect.poll(() => selectedText(title(page))).toBe("Page to rename");
 });

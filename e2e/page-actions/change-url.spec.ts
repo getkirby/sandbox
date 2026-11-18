@@ -6,6 +6,7 @@ import {
 	invalid,
 	openSettings,
 	openSettingsDialog,
+	selectedText,
 	test
 } from "../fixtures.ts";
 import { content, exists, folders, restoreScenario, url } from "./helpers.ts";
@@ -113,13 +114,9 @@ test("keeps the URL of the home page", async ({ page }) => {
 	).toBeDisabled();
 });
 
-test("focuses the URL when opening the dialog", async ({ page }) => {
+test("selects the URL when opening the dialog", async ({ page }) => {
 	await openSettingsDialog(page, "Change URL");
 
-	// Known bug: the `preselect` prop of the field is not exported
-	// by the backend, so the title is focused instead of the URL.
-	// Remove this line once fixed.
-	test.fail();
-
-	await expect(slug(page)).toBeFocused({ timeout: 1000 });
+	await expect(slug(page)).toBeFocused();
+	await expect.poll(() => selectedText(slug(page))).toBe("page-to-change-url");
 });
