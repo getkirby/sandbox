@@ -221,16 +221,16 @@ test.describe("plugins", () => {
 	});
 
 	test("does not leak cell props as HTML attributes", async ({ page }) => {
-		// Known bug: table cell components render their props
-		// as attributes, e.g. `row="[object Object]"`.
-		// Remove this line once fixed.
-		test.fail();
-
 		const cell = section(page, "Plugins")
 			.locator(".k-table-update-status-cell")
 			.first();
 
 		await expect(cell).toBeVisible();
-		await expect(cell).not.toHaveAttribute("row", { timeout: 1000 });
+
+		// props like `row` or `column` must not
+		// end up as attributes, only the class is rendered
+		expect(await cell.evaluate((el) => el.getAttributeNames())).toEqual([
+			"class"
+		]);
 	});
 });

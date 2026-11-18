@@ -33,12 +33,12 @@ test("aligns lines by width", async ({ page }) => {
 });
 
 test("does not leak field props as HTML attributes", async ({ page }) => {
-	// Known bug: the component lacks `inheritAttrs: false`, so props like
-	// `endpoints` end up as attributes, e.g. `endpoints="[object Object]"`.
-	// Remove this line once fixed.
-	test.fail();
-
 	const element = page.locator(".k-line-field").first();
 	await expect(element).toBeAttached();
-	await expect(element).not.toHaveAttribute("endpoints", { timeout: 1000 });
+
+	// props like `endpoints` or `form-data` must not
+	// end up as attributes, only the class is rendered
+	expect(await element.evaluate((el) => el.getAttributeNames())).toEqual([
+		"class"
+	]);
 });
