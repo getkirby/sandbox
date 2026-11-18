@@ -35,13 +35,8 @@ test("collapses separators", async ({ page }) => {
 });
 
 test("transliterates special characters", async ({ page }) => {
-	// Known bug: `RegExp.escape()` now escapes `|`, which breaks the
-	// alternations in the ascii rules (e.g. `ò|ó|…|ö`), so special
-	// characters are replaced with separators. Remove this line once fixed.
-	test.fail();
-
 	await textbox(page, "slug").pressSequentially("Wörld");
-	await expect(textbox(page, "slug")).toHaveValue("world", { timeout: 1000 });
+	await expect(textbox(page, "slug")).toHaveValue("world");
 });
 
 test("does not store trailing special characters", async ({
