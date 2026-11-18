@@ -43,6 +43,8 @@ tabs:
       required:
         type: url
         required: true
+      invalidValue:
+        type: url
       minlength:
         type: url
         minlength: 10

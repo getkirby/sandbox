@@ -84,6 +84,14 @@ test.describe("validation", () => {
 		await expect(invalid(page, "required")).toBeHidden();
 	});
 
+	test("marks stored invalid URLs as invalid", async ({ page }) => {
+		await expect(textbox(page, "invalidValue")).toHaveValue("https://getkirby");
+		await expect(invalid(page, "invalidValue")).toBeVisible();
+
+		await textbox(page, "invalidValue").fill("https://getkirby.com");
+		await expect(invalid(page, "invalidValue")).toBeHidden();
+	});
+
 	test("validates the minimum length", async ({ page }) => {
 		await textbox(page, "minlength").fill("https://k");
 		await expect(invalid(page, "minlength")).toBeVisible();

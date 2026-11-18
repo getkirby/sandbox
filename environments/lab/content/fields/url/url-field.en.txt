@@ -6,4 +6,8 @@ Disabledwithvalue: https://getkirby.com
 
 ----
 
+Invalidvalue: https://getkirby
+
+----
+
 Uuid: 8RSe5892AebsMTXV
