@@ -1,3 +1,4 @@
+import { existsSync } from "node:fs";
 import type { Page } from "@playwright/test";
 import {
 	dialog,
@@ -6,6 +7,7 @@ import {
 	field,
 	heading,
 	invalid,
+	restoreAfterEach,
 	tab,
 	test,
 	titles
@@ -30,6 +32,112 @@ type Options = {
 	scheme: string;
 	title: string;
 	type: string;
+};
+
+type DeleteOptions = {
+	/**
+	 * Path of the model's delete dialog
+	 */
+	dialog: string;
+	/**
+	 * Path of the deleted model, relative to `public`
+	 */
+	path: string;
+	/**
+	 * Selects the model in the field
+	 */
+	pick: (page: Page) => Promise<void>;
+	/**
+	 * Restores the deleted model (see `restore()`)
+	 */
+	restore: Parameters<typeof restoreAfterEach>;
+	/**
+	 * Title of the model in the field
+	 */
+	title: string;
+	type: string;
+	/**
+	 * Stored value of the model
+	 */
+	value: string;
+};
+
+/**
+ * Registers the tests for models that get deleted
+ * while the picker field is mounted
+ */
+export const deleteTests = (options: DeleteOptions) => {
+	const { type } = options;
+
+	test.describe("deleted models", () => {
+		restoreAfterEach(...options.restore);
+
+		/**
+		 * Deletes the model via its dialog while
+		 * the fields stay mounted in the page view
+		 */
+		const remove = async (page: Page) => {
+			await page.evaluate(
+				(path) =>
+					(
+						window as unknown as {
+							panel: { dialog: { open: (path: string) => void } };
+						}
+					).panel.dialog.open(path),
+				options.dialog
+			);
+
+			await expect(dialog(page)).toBeVisible();
+			await dialog(page).getByRole("button", { name: "Delete" }).click();
+			await expect(dialog(page)).toBeHidden();
+
+			expect(existsSync(`public/${options.path}`)).toBe(false);
+		};
+
+		test("removes deleted models from the value", async ({
+			changes,
+			page
+		}) => {
+			await options.pick(page);
+			await expect(titles(page, type)).toHaveText([options.title]);
+			expect((await changes.saved())[type]).toEqual([options.value]);
+
+			// Known bug: the delete dialogs don't return the deleted model,
+			// so the field keeps it in its value (#8834).
+			// Remove this line once fixed.
+			test.fail();
+
+			await remove(page);
+
+			await expect(field(page, type).locator(".k-empty")).toBeVisible();
+			expect((await changes.saved())[type]).toEqual([]);
+		});
+
+		test("stores no changes when deleting unselected models", async ({
+			changes,
+			page
+		}) => {
+			const saves: string[] = [];
+
+			page.on("request", (request) => {
+				if (request.url().includes("/changes/save")) {
+					saves.push(request.url());
+				}
+			});
+
+			await expect(titles(page, "disabledWithValue")).toHaveCount(1);
+
+			// Known bug: every files field stores its unchanged value
+			// when any file gets deleted (#8834). Pages and users fields
+			// don't listen to deletions at all. Remove this line once fixed.
+			test.fail(type === "filepicker");
+
+			await remove(page);
+			await changes.settled();
+
+			expect(saves).toEqual([]);
+		});
+	});
 };
 
 export const dialogItems = (page: Page) =>
