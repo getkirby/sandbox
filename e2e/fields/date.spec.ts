@@ -139,14 +139,9 @@ test.describe("date & time", () => {
 	});
 
 	test("labels the time dropdown button", async ({ page }) => {
-		// Known bug: the `time.select` translation is missing,
-		// so the button is labelled with the raw key.
-		// Remove this line once fixed.
-		test.fail();
-
 		await expect(
 			field(page, "time").getByRole("button").nth(1)
-		).not.toHaveAccessibleName("time.select", { timeout: 1000 });
+		).toHaveAccessibleName("Select a time");
 	});
 });
 

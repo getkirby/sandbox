@@ -211,13 +211,9 @@ test.describe("plugins", () => {
 	});
 
 	test("labels the license status column", async ({ page }) => {
-		// Known bug: the `license.status` translation is missing.
-		// Remove this line once fixed.
-		test.fail();
-
 		await expect(
 			section(page, "Plugins").locator("thead th").nth(3)
-		).not.toHaveText("license.status", { timeout: 1000 });
+		).toHaveText("License status");
 	});
 
 	test("does not leak cell props as HTML attributes", async ({ page }) => {

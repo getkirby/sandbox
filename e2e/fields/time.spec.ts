@@ -89,14 +89,9 @@ test("hides the times dropdown", async ({ page }) => {
 });
 
 test("labels the dropdown button", async ({ page }) => {
-	// Known bug: the `time.select` translation is missing,
-	// so the button is labelled with the raw key.
-	// Remove this line once fixed.
-	test.fail();
-
-	await expect(
-		field(page, "time").getByRole("button")
-	).not.toHaveAccessibleName("time.select", { timeout: 1000 });
+	await expect(field(page, "time").getByRole("button")).toHaveAccessibleName(
+		"Select a time"
+	);
 });
 
 test.describe("display", () => {
