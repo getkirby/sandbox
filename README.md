@@ -98,6 +98,9 @@ npx playwright install chromium
 # run the tests
 npm run test:e2e
 
+# or only some specs, filtered by file path
+npm run test:e2e -- login users e2e/fields/
+
 # or run them in Playwright's UI mode
 npm run test:e2e:ui
 ```
