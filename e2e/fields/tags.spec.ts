@@ -83,6 +83,16 @@ test("creates custom tags by default", async ({ changes, page }) => {
 	expect((await changes.saved()).simple).toEqual(["zebra"]);
 });
 
+test("creates each tag of a list only once", async ({ changes, page }) => {
+	const list = await open(page, "simple");
+
+	await list.getByRole("searchbox").fill("zebra, lion, zebra");
+	await page.keyboard.press("Enter");
+
+	await expect(tags(page, "simple")).toHaveText(["zebra", "lion"]);
+	expect((await changes.saved()).simple).toEqual(["zebra", "lion"]);
+});
+
 test("does not create duplicates of existing options", async ({ page }) => {
 	const list = await open(page, "simple");
 
@@ -215,6 +225,20 @@ test.describe("validation", () => {
 			"data-can-add",
 			"false"
 		);
+	});
+
+	test("creates tags of a list only up to the maximum", async ({
+		changes,
+		page
+	}) => {
+		const list = await open(page, "max");
+
+		await list.getByRole("searchbox").fill("zebra, lion, tiger");
+		await page.keyboard.press("Enter");
+
+		await expect(tags(page, "max")).toHaveText(["zebra", "lion"]);
+		await expect(invalid(page, "max")).toBeHidden();
+		expect((await changes.saved()).max).toEqual(["zebra", "lion"]);
 	});
 });
 
