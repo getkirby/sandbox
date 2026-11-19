@@ -103,6 +103,19 @@ test.describe("environment", () => {
 		).toHaveAttribute("href", "https://hub.getkirby.com/");
 	});
 
+	test("opens the license details with a button", async ({ page }) => {
+		await expect(
+			page.getByRole("main").locator('a[href=""]')
+		).toHaveCount(0, { timeout: 1000 });
+
+		await expect(stat(page, "license")).toHaveRole("button");
+		await stat(page, "license").press("Enter");
+
+		await expect(
+			dialog(page).getByRole("heading", { name: "License" })
+		).toBeVisible();
+	});
+
 	test("asks before removing the license", async ({ page }) => {
 		await stat(page, "license").click();
 		await dialog(page).getByRole("button", { name: "Remove" }).click();
