@@ -60,6 +60,48 @@ tabs:
             link: https://getkirby.com
             theme: info-icon
 
+  actions:
+    fields:
+      modals:
+        type: buttons
+        buttons:
+          - text: Dialog
+            icon: title
+            dialog: "{{ page.panel.path }}/changeTitle"
+          - text: Drawer
+            icon: book
+            drawer: lab/docs/k-buttons-field
+
+      requests:
+        type: buttons
+        help: The routes are defined in the `button-requests` plugin
+        buttons:
+          - text: Message
+            icon: chat
+            request: button-requests/message/{{ page.id }}
+          - text: Reload
+            icon: refresh
+            request: button-requests/reload
+          - text: DELETE
+            icon: trash
+            request:
+              url: button-requests/delete
+              method: DELETE
+          - text: Without icon
+            request: button-requests/message/{{ page.id }}
+
+      requestErrors:
+        type: buttons
+        buttons:
+          - text: Failing
+            icon: alert
+            theme: negative
+            request: button-requests/error
+          - text: Dot segments
+            icon: cancel
+            theme: negative
+            request: button-requests/../../api/site
+
   widths:
     fields:
       oneHalf1:

@@ -14,6 +14,29 @@ buttons:
     theme: purple
     text: Praise
     praise: Awesome job!
+  sync:
+    icon: refresh
+    text: Sync
+    request: button-requests/message/{{ page.id }}
+  actions:
+    icon: bolt
+    text: Actions
+    options:
+      - text: Sync
+        icon: refresh
+        request: button-requests/message/dropdown
+      - text: Reload
+        icon: refresh
+        request: button-requests/reload
+      - text: Delete
+        icon: trash
+        request:
+          url: button-requests/delete
+          method: DELETE
+      - "-"
+      - text: Failing
+        icon: alert
+        request: button-requests/error
   settings: true
 
 fields:
