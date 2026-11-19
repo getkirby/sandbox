@@ -305,10 +305,5 @@ test("uses the page UUID in custom title and slug", async ({ page }) => {
 	expect(page_).not.toBeNull();
 	expect(page_!.content.title).toBe(`Test ${slug}`);
 	expect(page_!.content.test).toBe(slug);
-
-	// Known bug: the UUID used for title, slug and defaults differs
-	// from the UUID stored for the page. Remove this line once fixed.
-	test.fail();
-
 	expect(page_!.content.uuid).toBe(slug);
 });
