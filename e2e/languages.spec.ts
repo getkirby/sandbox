@@ -91,7 +91,11 @@ test.describe("list", () => {
 	});
 
 	test("opens the language view", async ({ page }) => {
-		await item(page, "English").getByRole("link").click();
+		const link = item(page, "English").getByRole("link");
+
+		// a real link, so it can also be opened in a new tab
+		await expect(link).toHaveAttribute("href", /\/panel\/languages\/en$/);
+		await link.click();
 
 		await expect(page).toHaveURL(/\/panel\/languages\/en$/);
 		await expect(heading(page, "English", 1)).toBeVisible();
