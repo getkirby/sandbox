@@ -89,9 +89,9 @@ tabs:
       timeDisabledDropdowns:
         type: date
         label: Disabled dropdowns
-        time: true
+        time:
+          times: false
         calendar: false
-        times: false
       timeReference:
         label: Date & Time field
         type: date

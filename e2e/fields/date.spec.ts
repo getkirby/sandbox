@@ -128,10 +128,6 @@ test.describe("date & time", () => {
 	});
 
 	test("hides the times dropdown", async ({ page }) => {
-		// Known bug: the `times` option is not passed on by the backend,
-		// so `times: false` has no effect. Remove this line once fixed.
-		test.fail();
-
 		await expect(time(page, "timeDisabledDropdowns")).toBeVisible();
 		await expect(
 			field(page, "timeDisabledDropdowns").getByRole("button")

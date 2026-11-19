@@ -77,10 +77,6 @@ test("disables the input and the dropdown", async ({ page }) => {
 });
 
 test("hides the times dropdown", async ({ page }) => {
-	// Known bug: the `times` option is not passed on by the backend,
-	// so `times: false` has no effect. Remove this line once fixed.
-	test.fail();
-
 	await expect(input(page, "disabledDropdown")).toBeEnabled();
 	await expect(field(page, "disabledDropdown").getByRole("button")).toHaveCount(
 		0,
