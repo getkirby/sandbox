@@ -13,7 +13,7 @@ const text = (page: Page, name: string) =>
 	field(page, name).locator(".k-choice-input-label-text");
 
 const toggle = (page: Page, name: string) =>
-	field(page, name).locator("input.k-toggle-input");
+	field(page, name).locator(".k-toggle-input input");
 
 test.beforeEach(async ({ page }) => {
 	await page.goto("/panel/pages/fields+toggle");
