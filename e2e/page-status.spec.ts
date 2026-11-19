@@ -176,22 +176,19 @@ test.describe("page view", () => {
 	});
 });
 
-test("labels the fallback status in the dialog", async ({ page }) => {
+test("only offers the blueprint statuses for a fallback status", async ({
+	page
+}) => {
 	// the page is listed, but the blueprint has no listed status
 	await page.goto(url("fallback-listed"));
 	await viewButton(page, "Public").click();
 
-	const labels = options(page).locator(".k-choice-input-label-text");
-	await expect(labels).toHaveCount(3);
-	await expect(labels.nth(0)).toHaveText("Idea");
-	await expect(labels.nth(1)).toHaveText("In review");
-
-	// Known bug: the current status is not part of the blueprint's
-	// statuses, so the radio field labels it as "[unknown]" instead of
-	// using the fallback label of the status button. Remove this line once fixed.
-	test.fail();
-
-	await expect(labels.nth(2)).toHaveText("Public", { timeout: 1000 });
+	await expect(
+		options(page).locator(".k-choice-input-label-text")
+	).toHaveText(["Idea", "In review"]);
+	await expect(
+		dialog(page).locator(".k-field-name-status input:checked")
+	).toHaveCount(0);
 });
 
 test.describe("changing the status", () => {
