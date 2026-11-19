@@ -102,11 +102,6 @@ export const deleteTests = (options: DeleteOptions) => {
 			await expect(titles(page, type)).toHaveText([options.title]);
 			expect((await changes.saved())[type]).toEqual([options.value]);
 
-			// Known bug: the delete dialogs don't return the deleted model,
-			// so the field keeps it in its value (#8834).
-			// Remove this line once fixed.
-			test.fail();
-
 			await remove(page);
 
 			await expect(field(page, type).locator(".k-empty")).toBeVisible();
@@ -126,11 +121,6 @@ export const deleteTests = (options: DeleteOptions) => {
 			});
 
 			await expect(titles(page, "disabledWithValue")).toHaveCount(1);
-
-			// Known bug: every files field stores its unchanged value
-			// when any file gets deleted (#8834). Pages and users fields
-			// don't listen to deletions at all. Remove this line once fixed.
-			test.fail(type === "filepicker");
 
 			await remove(page);
 			await changes.settled();
