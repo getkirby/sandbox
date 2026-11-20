@@ -155,6 +155,40 @@ test.describe("options", () => {
 		]);
 	});
 
+	test("does not create custom tags from option labels", async ({ page }) => {
+		const list = await open(page, "optionsFromKeysAndValues");
+
+		await list.getByRole("searchbox").fill("Option B");
+		await expect(list.locator(".k-picklist-input-create")).toHaveCount(0);
+
+		// Enter in the search only creates new tags
+		await page.keyboard.press("Enter");
+
+		await expect(list).toBeVisible();
+		await expect(tags(page, "optionsFromKeysAndValues")).toHaveCount(0);
+	});
+
+	test("does not replace tags with option labels", async ({ page }) => {
+		await pick(page, "optionsFromKeysAndValues", "Option A");
+		await page.keyboard.press("Escape");
+
+		await tags(page, "optionsFromKeysAndValues").dblclick();
+		await expect(dropdown(page)).toBeVisible();
+
+		await dropdown(page).getByRole("searchbox").fill("Option B");
+		await expect(
+			dropdown(page).locator(".k-picklist-input-create")
+		).toHaveCount(0);
+
+		// Enter in the search only replaces with new tags
+		await page.keyboard.press("Enter");
+
+		await expect(dropdown(page)).toBeVisible();
+		await expect(tags(page, "optionsFromKeysAndValues")).toHaveText([
+			"Option A"
+		]);
+	});
+
 	test("escapes HTML in option labels", async ({ page }) => {
 		const list = await open(page, "optionsWithHtmlEscaped");
 		await expect(list.locator(".k-choice-input-label")).toHaveText([
