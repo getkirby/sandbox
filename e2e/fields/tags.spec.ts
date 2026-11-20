@@ -168,6 +168,25 @@ test.describe("options", () => {
 		await expect(tags(page, "optionsFromKeysAndValues")).toHaveCount(0);
 	});
 
+	for (const [name, label] of [
+		["optionsWithHtmlEscaped", "A<b>ppl</b>e"],
+		["optionsWithHtmlAllowed", "Apple"]
+	]) {
+		test(`does not create custom tags from the displayed label of ${name}`, async ({
+			page
+		}) => {
+			const list = await open(page, name);
+
+			await list.getByRole("searchbox").fill(label);
+			await expect(list.locator(".k-picklist-input-create")).toHaveCount(0);
+
+			await page.keyboard.press("Enter");
+
+			await expect(list).toBeVisible();
+			await expect(tags(page, name)).toHaveCount(0);
+		});
+	}
+
 	test("does not replace tags with option labels", async ({ page }) => {
 		await pick(page, "optionsFromKeysAndValues", "Option A");
 		await page.keyboard.press("Escape");
