@@ -134,6 +134,121 @@ test("inserts blocks after the current one", async ({ page }) => {
 	);
 });
 
+test.describe("cursor position", () => {
+	/**
+	 * Moves the cursor and waits until ProseMirror
+	 * has read the changed native selection, which
+	 * happens asynchronously after the key press
+	 */
+	const move = async (page: Page, key: string, steps: number) => {
+		for (let step = 0; step < steps; step++) {
+			await page.keyboard.press(key);
+		}
+
+		await page.evaluate(
+			() =>
+				new Promise((resolve) =>
+					requestAnimationFrame(() => setTimeout(resolve))
+				)
+		);
+	};
+
+	/**
+	 * Adds a heading or text block, types the text
+	 * and moves the cursor back by the given steps
+	 */
+	const prepare = async (
+		page: Page,
+		fieldset: string,
+		text: string,
+		steps = 0
+	) => {
+		await add(page, "blocks", fieldset);
+		await write(page, "blocks", text);
+		await move(page, "ArrowLeft", steps);
+	};
+
+	/**
+	 * Returns the stored HTML of all writers in the field
+	 */
+	const values = (page: Page) =>
+		blocks(page, "blocks")
+			.locator("textarea.input-hidden")
+			.evaluateAll((inputs: HTMLTextAreaElement[]) =>
+				inputs.map((input) => input.value)
+			);
+
+	test("appends a text block on enter at the end of a heading", async ({
+		page
+	}) => {
+		await prepare(page, "Heading", "HelloWorld");
+		await page.keyboard.press("Enter");
+
+		await expect(blocks(page, "blocks")).toHaveCount(2);
+		await expect(blocks(page, "blocks").nth(1)).toHaveClass(
+			/k-block-container-type-text/
+		);
+		await expect.poll(() => values(page)).toStrictEqual(["HelloWorld", ""]);
+	});
+
+	test("splits a heading on enter in the middle", async ({ page }) => {
+		await prepare(page, "Heading", "HelloWorld", 5);
+		await page.keyboard.press("Enter");
+
+		await expect(blocks(page, "blocks")).toHaveCount(2);
+		await expect(blocks(page, "blocks").nth(1)).toHaveClass(
+			/k-block-container-type-heading/
+		);
+		await expect.poll(() => values(page)).toStrictEqual(["Hello", "World"]);
+	});
+
+	test("appends and splits a heading as the cursor moves", async ({
+		page
+	}) => {
+		await prepare(page, "Heading", "HelloWorld");
+		await page.keyboard.press("Enter");
+		await expect(blocks(page, "blocks")).toHaveCount(2);
+
+		// move the cursor into the middle of the heading
+		const heading = blocks(page, "blocks").first().locator(".ProseMirror");
+		await heading.click();
+		await move(page, "ArrowRight", 10);
+		await move(page, "ArrowLeft", 5);
+
+		await page.keyboard.press("Enter");
+
+		await expect(blocks(page, "blocks")).toHaveCount(3);
+		await expect.poll(() => values(page)).toStrictEqual(["Hello", "World", ""]);
+	});
+
+	test("offers to split a text block with the cursor in the middle", async ({
+		page
+	}) => {
+		await prepare(page, "Text", "HelloWorld", 5);
+
+		await options(page, "blocks", 0)
+			.getByRole("button", { name: "More" })
+			.click();
+
+		await expect(
+			dropdown(page).getByRole("button", { name: "Split" })
+		).toBeVisible();
+	});
+
+	test("offers no split with the cursor at the end", async ({ page }) => {
+		await prepare(page, "Text", "HelloWorld");
+
+		await options(page, "blocks", 0)
+			.getByRole("button", { name: "More" })
+			.click();
+
+		await expect(dropdown(page).getByRole("button").first()).toBeVisible();
+		await expect(
+			dropdown(page).getByRole("button", { name: "Split" })
+		).toHaveCount(0);
+	});
+});
+
 test("duplicates blocks", async ({ page }) => {
 	await add(page, "blocks", "Text");
 	await write(page, "blocks", "First");
