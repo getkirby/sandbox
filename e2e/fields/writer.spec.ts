@@ -86,6 +86,75 @@ test("formats the selected text", async ({ page }) => {
 	await expect(value(page, "writer")).toHaveValue("<p>Kirby rocks</p>");
 });
 
+test.describe("clear formatting", () => {
+	const clear = (page: Page) =>
+		toolbar(page, "writer")
+			.getByRole("button", { name: "Clear formatting" })
+			.click();
+
+	const format = (page: Page, name: string) =>
+		toolbar(page, "writer").getByRole("button", { name }).click();
+
+	/**
+	 * Selects the given number of characters
+	 * to the left of the cursor
+	 */
+	const selectLeft = async (page: Page, characters: number) => {
+		for (let i = 0; i < characters; i++) {
+			await page.keyboard.press("Shift+ArrowLeft");
+		}
+	};
+
+	test("clears multiple formats", async ({ page }) => {
+		await write(page, "writer", "Kirby rocks");
+		await selectAll(page);
+		await format(page, "Bold");
+		await format(page, "Italic");
+		await format(page, "Underline");
+
+		await expect(value(page, "writer")).toHaveValue(
+			"<p><strong><em><u>Kirby rocks</u></em></strong></p>"
+		);
+
+		await clear(page);
+		await expect(value(page, "writer")).toHaveValue("<p>Kirby rocks</p>");
+	});
+
+	test("clears formats that cover parts of the selection", async ({ page }) => {
+		await write(page, "writer", "Kirby rocks");
+		await selectLeft(page, 5);
+		await format(page, "Italic");
+		await page.keyboard.press("Home");
+		await page.keyboard.press("Shift+End");
+		await selectLeft(page, 6);
+		await format(page, "Bold");
+
+		await expect(value(page, "writer")).toHaveValue(
+			"<p><strong>Kirby</strong> <em>rocks</em></p>"
+		);
+
+		await selectAll(page);
+		await clear(page);
+		await expect(value(page, "writer")).toHaveValue("<p>Kirby rocks</p>");
+	});
+
+	test("keeps formats outside of the selection", async ({ page }) => {
+		await write(page, "writer", "Kirby rocks");
+		await selectAll(page);
+		await format(page, "Bold");
+		await format(page, "Italic");
+
+		// collapses the selection to its end
+		await page.keyboard.press("ArrowRight");
+		await selectLeft(page, 5);
+		await clear(page);
+
+		await expect(value(page, "writer")).toHaveValue(
+			"<p><strong><em>Kirby </em></strong>rocks</p>"
+		);
+	});
+});
+
 test("creates lists with input rules", async ({ page }) => {
 	await write(page, "writer", "- First");
 	await page.keyboard.press("Enter");
