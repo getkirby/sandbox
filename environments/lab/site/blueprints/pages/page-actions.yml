@@ -15,6 +15,7 @@ fields:
       - page-actions-default
       - page-actions-disabled
       - page-actions-admin-only
+      - page-actions-fixed-slug
     layout: list
     image: false
 

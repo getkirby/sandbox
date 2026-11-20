@@ -6,4 +6,8 @@ Disabledwithvalue: text: This is a value
 
 ----
 
+Disabledwithtoggle: toggle: true
+
+----
+
 Uuid: kQkEqJaCKSsiaiUS

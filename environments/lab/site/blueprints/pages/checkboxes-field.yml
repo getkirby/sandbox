@@ -65,6 +65,11 @@ tabs:
         type: checkboxes
         columns: 2
         batch: true
+      disabledBatch:
+        extends: fields/options/simple
+        type: checkboxes
+        batch: true
+        disabled: true
 
   validation:
     fields:

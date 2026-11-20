@@ -111,6 +111,40 @@ test("disables the field", async ({ page }) => {
 	);
 });
 
+for (const { name, text, type } of [
+	{
+		name: "disabledPage",
+		text: "A page with a very long title to test how previews handle overflow",
+		type: "page"
+	},
+	{
+		name: "disabledFile",
+		text: "this-is-a-file-with-a-very-long-filename-to-test-how-previews-handle-overflow.jpg",
+		type: "file"
+	}
+]) {
+	test(`keeps the ${type} of disabled fields`, async ({ page }) => {
+		const link = field(page, name);
+		const model = link.locator(".k-link-input-model");
+
+		await expect(model).toContainText(text);
+		await expect(model.locator(".k-tag-toggle")).toHaveCount(0);
+
+		// the browser stays closed
+		await model.click();
+		await expect(link.locator(".k-link-input-body")).toHaveCount(0);
+
+		// the delete key does not remove the link
+		await model.locator(".k-tag").focus();
+		await page.keyboard.press("Delete");
+		await expect(model).toContainText(text);
+		await expect(link.locator(".k-label")).toHaveAttribute(
+			"data-has-diff",
+			"false"
+		);
+	});
+}
+
 test("shows the help text", async ({ page }) => {
 	await expect(field(page, "help").locator(".k-field-help")).toHaveText(
 		"Some help text"

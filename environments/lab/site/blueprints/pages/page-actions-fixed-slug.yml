@@ -1,0 +1,9 @@
+title: Page actions (fixed slug)
+
+options:
+  changeSlug: false
+
+fields:
+  info:
+    type: info
+    text: The URL of this page can't be changed, but its title can.

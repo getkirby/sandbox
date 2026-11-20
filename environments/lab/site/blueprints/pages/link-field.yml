@@ -23,6 +23,12 @@ tabs:
       disabledWithValue:
         type: link
         disabled: true
+      disabledPage:
+        type: link
+        disabled: true
+      disabledFile:
+        type: link
+        disabled: true
       overflow:
         type: link
         options:

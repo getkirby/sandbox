@@ -31,6 +31,12 @@ tabs:
       disabledWithValue:
         type: slug
         disabled: true
+      disabledWithWizard:
+        type: slug
+        disabled: true
+        wizard:
+          field: placeholder
+          text: Create from placeholder
       help:
         type: slug
         help: Some help text

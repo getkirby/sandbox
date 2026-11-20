@@ -113,6 +113,17 @@ test("selects and deselects all options in batch mode", async ({ page }) => {
 	await expect(checked).toHaveCount(0);
 });
 
+test("hides the batch buttons when disabled", async ({ page }) => {
+	await tab(page, "Batch");
+
+	const disabled = field(page, "disabledBatch");
+
+	await expect(disabled.locator("input").first()).toBeDisabled();
+	await expect(
+		disabled.getByRole("button", { name: /^(Select|Deselect) all$/ })
+	).toHaveCount(0);
+});
+
 test.describe("validation", () => {
 	test.beforeEach(async ({ page }) => {
 		await tab(page, "Validation");

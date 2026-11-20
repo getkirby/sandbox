@@ -6,6 +6,14 @@ Disabledwithvalue: https://getkirby.com
 
 ----
 
+Disabledpage: page://longTitlePageLnk
+
+----
+
+Disabledfile: file://longFilenameLnk1
+
+----
+
 Overflow: file://longFilenameLnk1
 
 ----

@@ -1,5 +1,6 @@
 import type { Page } from "@playwright/test";
 import {
+	dialog,
 	expect,
 	isolatedSession,
 	openSettings,
@@ -30,6 +31,23 @@ test("disables all actions via blueprint options", async ({ page }) => {
 		  - separator
 		  - button "Delete" [disabled]
 	`);
+});
+
+test("keeps the URL of pages with a fixed slug", async ({ page }) => {
+	const dropdown = await settings(page, "page-with-fixed-slug");
+
+	await expect(
+		dropdown.getByRole("button", { name: "Change URL" })
+	).toBeDisabled();
+
+	await dropdown.getByRole("button", { name: "Rename" }).click();
+	await expect(dialog(page)).toBeVisible();
+
+	await expect(dialog(page).locator(".k-field-name-title input")).toBeEnabled();
+	await expect(dialog(page).locator(".k-field-name-slug input")).toBeDisabled();
+	await expect(
+		dialog(page).getByRole("button", { name: "Create from title" })
+	).toHaveCount(0);
 });
 
 test("allows admins to use admin-only actions", async ({ page }) => {

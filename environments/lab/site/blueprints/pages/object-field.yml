@@ -22,6 +22,12 @@ tabs:
       disabledWithValue:
         extends: fields/object/simple
         disabled: true
+      disabledWithToggle:
+        type: object
+        disabled: true
+        fields:
+          toggle:
+            type: toggle
       help:
         extends: fields/object/simple
         help: Custom help text

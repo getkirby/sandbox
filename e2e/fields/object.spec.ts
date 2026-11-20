@@ -97,6 +97,19 @@ test("disables the field", async ({ page }) => {
 	await expect(field(page, "disabled").getByRole("button")).toHaveCount(0);
 });
 
+test("disables the cells", async ({ page }) => {
+	const toggle = field(page, "disabledWithToggle").locator("td input");
+
+	await expect(toggle).toBeChecked();
+	await expect(toggle).toBeDisabled();
+
+	await toggle.click({ force: true });
+	await expect(toggle).toBeChecked();
+	await expect(
+		field(page, "disabledWithToggle").locator(".k-label")
+	).toHaveAttribute("data-has-diff", "false");
+});
+
 test("shows the help text", async ({ page }) => {
 	await expect(field(page, "help").locator(".k-field-help")).toHaveText(
 		"Custom help text"

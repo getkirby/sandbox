@@ -72,6 +72,15 @@ test("disables the input", async ({ page }) => {
 	);
 });
 
+test("hides the wizard when disabled", async ({ page }) => {
+	await expect(textbox(page, "disabledWithWizard")).toBeDisabled();
+	await expect(
+		field(page, "disabledWithWizard").getByRole("button", {
+			name: "Create from placeholder"
+		})
+	).toHaveCount(0);
+});
+
 test("shows the help text", async ({ page }) => {
 	await expect(field(page, "help").locator(".k-field-help")).toHaveText(
 		"Some help text"
