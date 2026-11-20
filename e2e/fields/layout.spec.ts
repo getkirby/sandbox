@@ -236,3 +236,86 @@ test("aligns fields by width", async ({ page }) => {
 	await tab(page, "Widths");
 	await expectWidths(page);
 });
+
+test.describe("pickers in the row settings", () => {
+	/**
+	 * Adds a row to the `pickers` field
+	 * and opens its settings drawer
+	 */
+	const settings = async (page: Page) => {
+		await add(page, "pickers", "1/1");
+		await rows(page, "pickers")
+			.first()
+			.getByRole("button", { name: "Settings" })
+			.click();
+		await expect(drawer(page)).toBeVisible();
+	};
+
+	const setting = (page: Page, name: string) =>
+		drawer(page).locator(`.k-field-name-${name}`);
+
+	for (const { item, name, scheme } of [
+		{ item: "creatious-labs-1.jpg", name: "files", scheme: "file" },
+		{ item: "Fields", name: "pages", scheme: "page" },
+		{ item: "editor", name: "users", scheme: "user" }
+	]) {
+		test(`selects ${name}`, async ({ changes, page }) => {
+			await settings(page);
+
+			await setting(page, name)
+				.getByRole("button", { exact: true, name: "Select" })
+				.click();
+			await expect(dialog(page)).toBeVisible();
+
+			await dialog(page)
+				.locator(".k-item")
+				.filter({ has: page.getByRole("heading", { exact: true, name: item }) })
+				.click();
+			await dialog(page).getByRole("button", { name: "Ok" }).click();
+			await expect(dialog(page)).toBeHidden();
+
+			await expect(setting(page, name).locator(".k-item-title")).toHaveText([
+				item
+			]);
+
+			const [row] = (await changes.saved()).pickers as {
+				attrs: Record<string, string[]>;
+			}[];
+
+			expect(row.attrs[name]).toHaveLength(1);
+			expect(row.attrs[name][0]).toMatch(new RegExp(`^${scheme}://`));
+		});
+	}
+
+	test("inserts files into the textarea", async ({ changes, page }) => {
+		await settings(page);
+
+		await setting(page, "text")
+			.getByRole("navigation")
+			.getByRole("button", { exact: true, name: "File" })
+			.click();
+		await expect(dialog(page)).toBeVisible();
+
+		await dialog(page)
+			.locator(".k-item")
+			.filter({
+				has: page.getByRole("heading", {
+					exact: true,
+					name: "creatious-labs-1.jpg"
+				})
+			})
+			.click();
+		await dialog(page).getByRole("button", { name: "Ok" }).click();
+		await expect(dialog(page)).toBeHidden();
+
+		const text = /^\(image: file:\/\/.+\)$/;
+
+		await expect(setting(page, "text").getByRole("textbox")).toHaveValue(text);
+
+		const [row] = (await changes.saved()).pickers as {
+			attrs: Record<string, string>;
+		}[];
+
+		expect(row.attrs.text).toMatch(text);
+	});
+});

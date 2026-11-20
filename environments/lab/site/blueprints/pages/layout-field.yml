@@ -16,6 +16,21 @@ tabs:
             id:
               type: text
               width: 1/2
+      pickers:
+        extends: fields/layout/default
+        settings:
+          fields:
+            files:
+              type: filepicker
+              query: site.find("fields/filepicker").files
+            pages:
+              type: pagepicker
+            users:
+              type: userpicker
+            text:
+              type: textarea
+              files: site.find("fields/filepicker").files
+              uploads: false
       empty:
         extends: fields/layout/default
         empty: This is some custom empty text
