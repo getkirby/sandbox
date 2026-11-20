@@ -267,6 +267,14 @@ tabs:
         templates:
           - page
           - undeletable-page
+  empty:
+    fields:
+      empty:
+        type: pagelist
+        help: No children use this template, so the list is empty
+        templates:
+          - template-a
+
   invalid:
     fields:
       invalid:

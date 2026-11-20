@@ -1,3 +1,4 @@
+import type { Page } from "@playwright/test";
 import { expect, field, tab, test, titles } from "../fixtures.ts";
 import { modelListTests } from "./models.ts";
 
@@ -60,4 +61,26 @@ test("filters files by query", async ({ page }) => {
 		"creatious-labs-2.jpg"
 	]);
 	await expect(titles(page, "queryDocuments")).toHaveText(["kirby.pdf"]);
+});
+
+test.describe("empty state", () => {
+	const empty = (page: Page) =>
+		field(page, "empty").getByRole("button", { name: "No files yet" });
+
+	test.beforeEach(async ({ page }) => {
+		await tab(page, "Empty");
+	});
+
+	test("opens the file picker on click", async ({ page }) => {
+		const chooser = page.waitForEvent("filechooser");
+		await empty(page).click();
+		await chooser;
+	});
+
+	test("opens the file picker via keyboard", async ({ page }) => {
+		const chooser = page.waitForEvent("filechooser");
+		await empty(page).focus();
+		await page.keyboard.press("Enter");
+		await chooser;
+	});
 });

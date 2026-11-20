@@ -1,4 +1,5 @@
-import { dialog, expect, field, test } from "../fixtures.ts";
+import type { Page } from "@playwright/test";
+import { dialog, expect, field, tab, test } from "../fixtures.ts";
 import { items, modelListTests } from "./models.ts";
 
 modelListTests({
@@ -45,4 +46,33 @@ test("opens the page creation dialog", async ({ page }) => {
 
 	await dialog(page).getByRole("button", { name: "Cancel" }).click();
 	await expect(dialog(page)).toBeHidden();
+});
+
+test.describe("empty state", () => {
+	const empty = (page: Page) =>
+		field(page, "empty").getByRole("button", { name: "No pages yet" });
+
+	test.beforeEach(async ({ page }) => {
+		await tab(page, "Empty");
+	});
+
+	test("opens the page creation dialog on click", async ({ page }) => {
+		await empty(page).click();
+
+		await expect(dialog(page)).toBeVisible();
+		await expect(dialog(page).getByRole("textbox").first()).toBeVisible();
+
+		await dialog(page).getByRole("button", { name: "Cancel" }).click();
+		await expect(dialog(page)).toBeHidden();
+	});
+
+	test("opens the page creation dialog via keyboard", async ({ page }) => {
+		await empty(page).focus();
+		await page.keyboard.press("Enter");
+
+		await expect(dialog(page)).toBeVisible();
+
+		await dialog(page).getByRole("button", { name: "Cancel" }).click();
+		await expect(dialog(page)).toBeHidden();
+	});
 });

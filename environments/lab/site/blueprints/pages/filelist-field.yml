@@ -161,6 +161,13 @@ tabs:
           ratio: 16/9
           cover: true
 
+  empty:
+    fields:
+      empty:
+        type: filelist
+        help: No files use this template, so the list is empty
+        template: file-template-a
+
   invalid:
     fields:
       invalid:
