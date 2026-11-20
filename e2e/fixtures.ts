@@ -4,7 +4,8 @@ import {
 	test as base,
 	expect,
 	type Locator,
-	type Page
+	type Page,
+	type Request
 } from "@playwright/test";
 
 type Changes = {
@@ -20,6 +21,7 @@ type Changes = {
 type Fixtures = {
 	changes: Changes;
 	errors: string[];
+	idle: () => Promise<void>;
 	ignoreErrors: RegExp[];
 	session: (email?: string) => Promise<APIRequestContext>;
 };
@@ -150,6 +152,50 @@ export const test = base.extend<Fixtures>({
 			);
 
 			expect(unexpected).toEqual([]);
+		},
+		{ auto: true }
+	],
+
+	/**
+	 * Waits until the Panel has no pending requests to the
+	 * backend anymore, e.g. lists that reload in the background
+	 * after sorting. Tracks the requests from the start of the
+	 * test, as they could otherwise already be in flight.
+	 */
+	idle: [
+		async ({ page }, use) => {
+			const pending = new Set<Request>();
+			let last = Date.now();
+
+			const isBackend = (request: Request) =>
+				/^\/(api|panel)\//.test(new URL(request.url()).pathname);
+
+			const done = (request: Request) => {
+				if (pending.delete(request) === true) {
+					last = Date.now();
+				}
+			};
+
+			page.on("request", (request) => {
+				if (isBackend(request) === true) {
+					pending.add(request);
+					last = Date.now();
+				}
+			});
+
+			page.on("requestfailed", done);
+			page.on("requestfinished", done);
+
+			await use(async () => {
+				// a finished request can trigger the next one
+				// (e.g. a sort request triggers the reload of all lists),
+				// so the Panel has to stay quiet for a moment
+				await expect
+					.poll(() => pending.size === 0 && Date.now() - last > 250, {
+						intervals: [50]
+					})
+					.toBe(true);
+			});
 		},
 		{ auto: true }
 	],
@@ -393,7 +439,15 @@ export const restoreAfterEach = (
 	path: string,
 	filter?: (entry: string) => boolean
 ) => {
-	test.afterEach(() => restore(path, filter));
+	test.afterEach(async ({ idle }) => {
+		// requests that are still running on the server would
+		// otherwise write their pages back to the removed folders
+		try {
+			await idle();
+		} finally {
+			restore(path, filter);
+		}
+	});
 };
 
 /**

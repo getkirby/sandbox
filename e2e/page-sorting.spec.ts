@@ -20,6 +20,11 @@ const order = ["Mercury", "Venus", "Earth", "Mars", "Jupiter"];
  * Drags an item by its sort handle onto the position of another item
  */
 const drag = async (page: Page, from: Locator, to: Locator) => {
+	// items close to the edge of the viewport would make the
+	// list scroll during the drag and miss the measured target
+	await from.evaluate((element) =>
+		element.scrollIntoView({ block: "center" })
+	);
 	await from.hover();
 
 	const handle = await from.locator(".k-sort-handle").boundingBox();
@@ -70,10 +75,14 @@ const sorted = (page: Page) =>
 const titles = (page: Page, name: string) =>
 	field(page, name).locator('.k-item-title, td[data-column-id="title"]');
 
-test.beforeEach(async ({ page }) => {
+test.beforeEach(async ({ idle, page }) => {
 	await page.goto("/panel/pages/other+page-sorting");
 	await expect(heading(page, "Page Sorting", 1)).toBeVisible();
 	await expect(items(page, "listed").first()).toBeVisible();
+
+	// all lists have to be loaded, as a list that
+	// re-renders during a drag would cancel it
+	await idle();
 });
 
 test.describe("lists", () => {
