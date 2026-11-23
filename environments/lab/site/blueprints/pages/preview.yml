@@ -1,0 +1,7 @@
+title: Preview
+
+fields:
+  text:
+    label: Text
+    type: text
+    help: Open the preview, change, discard or save this field. Every preview mode must always show the current content.
