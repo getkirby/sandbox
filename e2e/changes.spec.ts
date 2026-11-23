@@ -8,6 +8,7 @@ import {
 	openChanges,
 	restore,
 	save,
+	tab,
 	test
 } from "./fixtures.ts";
 
@@ -55,8 +56,8 @@ const change = async (changes: Changes, model: Model) => {
 	await changes.store(models[model].api, models[model].change);
 };
 
-const open = async (page: Page) => {
-	await page.goto("/panel/site");
+const open = async (page: Page, url = "/panel/site") => {
+	await page.goto(url);
 	return openChanges(page);
 };
 
@@ -111,14 +112,14 @@ test("lists the changed site", async ({ changes, page }) => {
 	await change(changes, "site");
 	await open(page);
 
-	// Known bug: the changes dialog only lists pages, files and
-	// users, so unsaved changes of the site never show up.
-	// Remove this line once fixed.
-	test.fail();
-
-	await expect(page.locator(".k-changes-dialog")).toContainText(
-		models.site.title,
-		{ timeout: 1000 }
+	const items = section(page, "Unsaved site").locator(".k-item");
+	await expect(items.locator(".k-item-title")).toHaveText([models.site.title]);
+	await expect(
+		items.locator(".k-item-title").getByRole("link")
+	).toHaveAttribute("href", new RegExp(`${RegExp.escape(models.site.url)}$`));
+	await expect(items.locator(".k-item-image .k-icon")).toHaveAttribute(
+		"data-type",
+		"home"
 	);
 });
 
@@ -130,11 +131,12 @@ test("groups all changed models", async ({ changes, page }) => {
 	const changesDialog = await open(page);
 
 	await expect(changesDialog.getByRole("heading", { level: 2 })).toHaveText([
+		"Unsaved site",
 		"Unsaved pages",
 		"Unsaved files",
 		"Unsaved accounts"
 	]);
-	await expect(changesDialog.locator(".k-item")).toHaveCount(3);
+	await expect(changesDialog.locator(".k-item")).toHaveCount(4);
 });
 
 test("opens changed models from the dialog", async ({ changes, page }) => {
@@ -153,6 +155,22 @@ test("opens changed models from the dialog", async ({ changes, page }) => {
 	);
 });
 
+test("opens the changed site from the dialog", async ({ changes, page }) => {
+	await change(changes, "site");
+	await open(page, models.page.url);
+
+	await section(page, "Unsaved site")
+		.getByRole("link", { name: models.site.title })
+		.click();
+
+	await expect(page).toHaveURL(/\/panel\/site$/);
+	await expect(heading(page, models.site.title, 1)).toBeVisible();
+	await expect(page.locator(".k-changes-dialog")).toBeHidden();
+
+	await tab(page, "Site Content");
+	await expect(field(page, "text").locator("textarea")).toHaveValue("Changed");
+});
+
 test("lists changes made in the Panel", async ({ changes, page }) => {
 	await page.goto("/panel/pages/fields+text");
 	await field(page, "placeholder").getByRole("textbox").fill("Edited");
@@ -162,6 +180,17 @@ test("lists changes made in the Panel", async ({ changes, page }) => {
 	await expect(
 		section(page, "Unsaved pages").locator(".k-item-title")
 	).toHaveText(["Text"]);
+});
+
+test("lists site changes made in the Panel", async ({ changes, page }) => {
+	await page.goto(`${models.site.url}?tab=content`);
+	await field(page, "text").locator("textarea").fill("Edited");
+	await changes.settled();
+
+	await open(page);
+	await expect(
+		section(page, "Unsaved site").locator(".k-item-title")
+	).toHaveText([models.site.title]);
 });
 
 test("removes discarded changes from the dialog", async ({ changes, page }) => {
@@ -193,4 +222,54 @@ test("removes saved changes from the dialog", async ({ changes, page }) => {
 
 	// restore the original content of the file
 	restore("content/fields/filelist/kirby.pdf.en.txt");
+});
+
+test("removes discarded site changes from the dialog", async ({
+	changes,
+	page
+}) => {
+	await change(changes, "site");
+	await change(changes, "page");
+
+	const before = await open(page);
+	await expect(before.getByRole("heading", { level: 2 })).toHaveText([
+		"Unsaved site",
+		"Unsaved pages"
+	]);
+	await page.keyboard.press("Escape");
+	await expect(before).toBeHidden();
+
+	await discard(page).click();
+	await dialog(page).getByRole("button", { name: "Discard" }).click();
+
+	// wait until the discard is done before leaving the view
+	await expect(discard(page)).toBeHidden();
+
+	const changesDialog = await open(page, models.page.url);
+	await expect(changesDialog.getByRole("heading", { level: 2 })).toHaveText([
+		"Unsaved pages"
+	]);
+});
+
+test("removes saved site changes from the dialog", async ({
+	changes,
+	page
+}) => {
+	await change(changes, "site");
+
+	const before = await open(page);
+	await expect(before.getByRole("heading", { level: 2 })).toHaveText([
+		"Unsaved site"
+	]);
+	await page.keyboard.press("Escape");
+	await expect(before).toBeHidden();
+
+	await save(page).click();
+	await expect(save(page)).toBeHidden();
+
+	const changesDialog = await open(page);
+	await expect(changesDialog).toContainText("There are no unsaved changes");
+
+	// restore the original content of the site
+	restore("content", (file) => /^site\..+\.txt$/.test(file));
 });
