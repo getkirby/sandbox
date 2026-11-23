@@ -16,7 +16,8 @@ const plugins = [
 	"plugins/custom-view-buttons",
 	"plugins/custom-writer-mark",
 	"plugins/custom-writer-node",
-	"plugins/field-dialogs-drawers"
+	"plugins/field-dialogs-drawers",
+	"plugins/unsupported-field"
 ];
 
 const security = [
