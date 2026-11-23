@@ -255,10 +255,6 @@ test.describe("drag and drop", () => {
 	}
 
 	test.describe("around unsortable pages", () => {
-		// the Panel currently sorts the wrong page, which can be
-		// the locked page itself and is then rejected with a 403
-		test.use({ ignoreErrors: [/status of 403|cannot be sorted/] });
-
 		test("moves pages below unsortable pages", async ({ page }) => {
 			const request = sorted(page);
 			await drag(
@@ -267,12 +263,6 @@ test.describe("drag and drop", () => {
 				item(page, "listed", "Mars")
 			);
 			const response = await request;
-
-			// Known bug: the draggable indexes skip the unsortable page,
-			// but are used as indexes of the full list, so the wrong page
-			// (Mars) is moved and Earth is pushed to position 4.
-			// Remove this line once fixed.
-			test.fail();
 
 			expect(response.url()).toContain("other+page-sorting+jupiter/status");
 			expect(folders()).toEqual([
@@ -293,11 +283,6 @@ test.describe("drag and drop", () => {
 			);
 			const response = await request;
 
-			// Known bug: the Panel sends the sort request for Earth
-			// instead of Mars, which the server rejects.
-			// Remove this line once fixed.
-			test.fail();
-
 			expect(response.url()).toContain("other+page-sorting+mars/status");
 			expect(response.ok()).toBe(true);
 			expect(folders()[0]).toBe("1_mars");
@@ -311,9 +296,6 @@ test.describe("drag and drop", () => {
 				item(page, "listed", "Mars")
 			);
 			await request;
-
-			// Known bug: see above. Remove this line once fixed.
-			test.fail();
 
 			expect(folders()).toContain("3_earth");
 		});
