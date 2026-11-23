@@ -1,0 +1,28 @@
+Title: Unsupported plugin
+
+----
+
+Location:
+
+lat: 49.394
+lon: 8.797
+city: Neckargemünd
+
+----
+
+Text: Change me
+
+----
+
+Structure:
+
+-
+  name: A
+  location: Neckargemünd
+-
+  name: B
+  location: Hamburg
+
+----
+
+Uuid: 7hq2mzk4vbn9xw3p

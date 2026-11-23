@@ -1,0 +1,30 @@
+title: Unsupported plugin
+
+fields:
+  usage:
+    label: Usage
+    type: info
+    text: |
+      The fields below with an error belong to a plugin that has not been updated for Kirby 6. Their content must be kept when any other field is saved.
+  storedLocation:
+    label: Stored content of the unsupported field
+    type: info
+    theme: none
+    text: "{{ page.location }}"
+  location:
+    label: Unsupported field
+    type: unsupported
+  text:
+    label: Text
+    type: text
+    help: Change and save this field. The stored content above must still be there after a reload.
+  structure:
+    label: Structure with unsupported field
+    type: structure
+    fields:
+      name:
+        label: Name
+        type: text
+      location:
+        label: Unsupported field
+        type: unsupported
