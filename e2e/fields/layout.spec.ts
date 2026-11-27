@@ -1,4 +1,4 @@
-import type { Page } from "@playwright/test";
+import type { Locator, Page } from "@playwright/test";
 import {
 	dialog,
 	drawer,
@@ -317,5 +317,121 @@ test.describe("pickers in the row settings", () => {
 		}[];
 
 		expect(row.attrs.text).toMatch(text);
+	});
+});
+
+test.describe("drag and drop", () => {
+	const block = (id: string, text: string) => ({
+		content: { level: "h2", text },
+		id,
+		isHidden: false,
+		type: "heading"
+	});
+
+	const blocks = (page: Page, column: number) =>
+		columns(page, "layouts").nth(column).locator(".k-block-container");
+
+	/**
+	 * Drags a block by its sort handle below another block
+	 */
+	const drag = async (page: Page, from: Locator, to: Locator) => {
+		// the sort handle is only shown for the selected block
+		await from.click();
+
+		const handle = await from.locator(".k-sort-handle").boundingBox();
+		const target = await to.boundingBox();
+
+		await page.mouse.move(
+			handle!.x + handle!.width / 2,
+			handle!.y + handle!.height / 2
+		);
+		await page.mouse.down();
+		await page.mouse.move(
+			target!.x + target!.width / 2,
+			target!.y + target!.height - 5,
+			{ steps: 20 }
+		);
+		await page.mouse.up();
+	};
+
+	test.beforeEach(async ({ changes, page }) => {
+		await changes.store("pages/fields+layout", {
+			layouts: [
+				{
+					attrs: [],
+					columns: [
+						{
+							blocks: [block("a", "Block A")],
+							id: "column-a",
+							width: "1/2"
+						},
+						{
+							blocks: [block("b", "Block B")],
+							id: "column-b",
+							width: "1/2"
+						}
+					],
+					id: "row"
+				}
+			]
+		});
+
+		await page.reload();
+		await expect(blocks(page, 0)).toHaveCount(1);
+		await expect(blocks(page, 1)).toHaveCount(1);
+	});
+
+	// https://github.com/getkirby/kirby/issues/8949
+	test("moves the last block of a column into another column", async ({
+		changes,
+		page
+	}) => {
+		await drag(page, blocks(page, 0).first(), blocks(page, 1).first());
+
+		await expect(blocks(page, 0)).toHaveCount(0);
+		await expect(blocks(page, 1)).toHaveCount(2);
+		await expect(blocks(page, 1).locator(".ProseMirror")).toHaveText([
+			"Block B",
+			"Block A"
+		]);
+		await expect(
+			columns(page, "layouts").nth(1).locator('[data-id="a"]')
+		).toHaveCount(1);
+
+		const [row] = (await changes.saved()).layouts as {
+			columns: { blocks: { id: string }[] }[];
+		}[];
+
+		expect(row.columns[0].blocks).toEqual([]);
+		expect(row.columns[1].blocks.map((block) => block.id)).toEqual(["b", "a"]);
+	});
+
+	test("keeps dragging after a column became empty", async ({
+		changes,
+		page
+	}) => {
+		await drag(page, blocks(page, 0).first(), blocks(page, 1).first());
+		await expect(blocks(page, 1)).toHaveCount(2);
+
+		// move block B back into the empty first column
+		await drag(
+			page,
+			blocks(page, 1).first(),
+			columns(page, "layouts").nth(0).locator(".k-blocks")
+		);
+
+		await expect(blocks(page, 0).locator(".ProseMirror")).toHaveText([
+			"Block B"
+		]);
+		await expect(blocks(page, 1).locator(".ProseMirror")).toHaveText([
+			"Block A"
+		]);
+
+		const [row] = (await changes.saved()).layouts as {
+			columns: { blocks: { id: string }[] }[];
+		}[];
+
+		expect(row.columns[0].blocks.map((block) => block.id)).toEqual(["b"]);
+		expect(row.columns[1].blocks.map((block) => block.id)).toEqual(["a"]);
 	});
 });
